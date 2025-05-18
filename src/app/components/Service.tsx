@@ -62,7 +62,7 @@ export default function Service() {
                 <p className="text-gray-400 max-w-xl mx-auto lg:mx-0">
                   {service.description}
                 </p>
-                <button className="w-40 bg-gray-800 text-white px-7 py-3 rounded-full font-semibold text-sm hover:bg-blue-200">
+                <button className="w-40 mx-auto lg:mx-0 bg-gray-800 text-white px-7 py-3 rounded-full font-semibold text-sm hover:bg-blue-200">
                   Learn more
                 </button>
               </div>

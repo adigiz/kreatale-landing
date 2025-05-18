@@ -55,7 +55,7 @@ export default function Testimonials() {
         </h2>
       </div>
       <div className="h-full mx-auto grid md:grid-cols-4 gap-8 items-center lg:px-20">
-        <div className="h-full flex flex-col col-span-3">
+        <div className="overflow-x-hidden h-full flex flex-col col-span-3">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={index}
