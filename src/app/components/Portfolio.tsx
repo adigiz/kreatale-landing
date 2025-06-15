@@ -54,7 +54,7 @@ export default function Portfolio() {
       </div>
 
       {/* Scrollable Work Cards */}
-      <div className="px-12 ">
+      <div>
         <Carousel
           opts={{
             align: "center",

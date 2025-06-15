@@ -17,7 +17,7 @@ export default function Hero() {
                 Software Development Partner
               </p>
               <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold leading-tight max-w-xl">
-                We are a website & app development agency
+                We are a website & app development partner
               </h1>
             </div>
             <button className="bg-white text-black font-semibold px-5 py-2 rounded-full w-max text-sm hover:bg-gray-200 transition">
@@ -42,7 +42,7 @@ export default function Hero() {
                   Our latest work
                 </p>
                 <h2 className="text-2xl sm:text-3xl font-bold text-black">
-                  Fastbank
+                  Gemoedje
                 </h2>
               </div>
               <button className="border w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:bg-black hover:text-white transition">
