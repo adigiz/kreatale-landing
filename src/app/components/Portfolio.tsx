@@ -11,20 +11,20 @@ import Image from "next/image";
 
 const projects = [
   {
-    title: "Bloomy, houseplants store",
+    title: "Gemoedje",
     description: "Website development",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1600&q=80",
   },
   {
-    title: "We-famous, Influencers website",
+    title: "Ar Rent Car",
     description: "Website development",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1600&q=80",
   },
   {
-    title: "Fastbank, Mobile banking UI",
-    description: "Website development",
+    title: "Neon",
+    description: "IOS Development",
     image:
       "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1600&q=80",
   },
@@ -57,12 +57,12 @@ export default function Portfolio() {
       <div>
         <Carousel
           opts={{
-            align: "center",
+            align: "start",
           }}
         >
           <CarouselContent>
             {projects.map((project, i) => (
-              <CarouselItem key={`project-${i}`} className="lg:basis-1/2">
+              <CarouselItem key={`project-${i}`} className="basis-1/2 shrink-0 px-2">
                 <div className="h-full bg-gray-100 rounded-3xl flex flex-col overflow-hidden">
                   <div className="relative aspect-[4/3]">
                     <Image
