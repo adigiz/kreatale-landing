@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="bg-white min-h-[calc(100vh-80px)] flex-1 text-white px-4 sm:px-8 lg:px-16 py-8 flex items-stretch">
+    <section id="hero" className="bg-white min-h-[calc(100vh-80px)] flex-1 text-white px-4 sm:px-8 lg:px-16 py-8 flex items-stretch">
       <div className="flex flex-col md:flex-row gap-8 w-full">
         <div className="relative flex-[3] rounded-3xl overflow-hidden min-h-[50vh] md:min-h-full">
           <Image

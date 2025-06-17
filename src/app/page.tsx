@@ -22,17 +22,14 @@ export default function Home() {
             src="/kreatale-logo-primary.svg"
           />
           <div className="hidden md:flex gap-8 text-black">
-            <a href="#" className="hover:underline">
+            <a href="#works" className="hover:underline">
               Works
             </a>
-            <a href="#" className="hover:underline">
+            <a href="#services" className="hover:underline">
               Services
             </a>
-            <a href="#" className="hover:underline">
+            <a href="#about" className="hover:underline">
               About
-            </a>
-            <a href="#" className="hover:underline">
-              Blog
             </a>
             <a href="#" className="hover:underline">
               Careers
@@ -86,17 +83,14 @@ export default function Home() {
 
         {menuOpen && (
           <div className="text-black absolute top-full left-0 w-full bg-white shadow-md px-6 py-4 flex flex-col gap-4 md:hidden">
-            <a href="#" className="hover:underline">
+            <a href="#works" className="hover:underline">
               Works
             </a>
-            <a href="#" className="hover:underline">
+            <a href="#services" className="hover:underline">
               Services
             </a>
-            <a href="#" className="hover:underline">
+            <a href="#about" className="hover:underline">
               About
-            </a>
-            <a href="#" className="hover:underline">
-              Blog
             </a>
             <a href="#" className="hover:underline">
               Careers

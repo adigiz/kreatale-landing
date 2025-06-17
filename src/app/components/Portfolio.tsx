@@ -32,7 +32,7 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <section className="bg-white w-full flex flex-col px-4 sm:px-8 lg:px-16 py-12 box-border">
+    <section id="works" className="bg-white w-full flex flex-col px-4 sm:px-8 lg:px-16 py-12 box-border">
       <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-8">
         <div className="flex flex-col gap-4">
           <p className="font-bold text-gray-400 uppercase text-sm">Our Work</p>
