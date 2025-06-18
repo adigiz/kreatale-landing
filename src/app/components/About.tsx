@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function About() {
   return (
-    <section className="min-h-screen flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16 py-10 bg-white gap-8">
+    <section id="about" className="min-h-screen flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16 py-10 bg-white gap-8">
       <div className="h-full lg:w-1/2 mb-10 lg:mb-0 lg:px-20">
         <p className="font-bold text-gray-400 uppercase text-sm mb-2">
           About Us

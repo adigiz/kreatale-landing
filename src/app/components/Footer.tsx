@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -32,14 +32,16 @@ export default function Footer() {
           <li className="hover:text-white cursor-pointer">Works</li>
           <li className="hover:text-white cursor-pointer">Services</li>
           <li className="hover:text-white cursor-pointer">About</li>
-          <li className="hover:text-white cursor-pointer">Blog</li>
           <li className="hover:text-white cursor-pointer">Careers</li>
         </ul>
 
         <div className="flex gap-4 text-gray-400">
-          <FaFacebookF className="hover:text-white cursor-pointer" />
-          <FaTwitter className="hover:text-white cursor-pointer" />
-          <FaInstagram className="hover:text-white cursor-pointer" />
+          <a 
+            href="https://www.instagram.com/kreatale"
+            target="_blank"
+            rel="noopener noreferrer">
+            <FaInstagram className="hover:text-white cursor-pointer" />
+          </a>
         </div>
       </div>
 

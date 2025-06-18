@@ -45,7 +45,7 @@ export default function Testimonials() {
   const current = testimonials[index];
 
   return (
-    <section className="py-16 px-4 md:px-16 bg-white">
+    <section id="testimonials" className="py-16 px-4 md:px-16 bg-white">
       <div className="lg:px-20 ">
         <p className="font-bold text-gray-400 uppercase text-sm mb-2">
           Testimonials
