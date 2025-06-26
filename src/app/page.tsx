@@ -31,9 +31,6 @@ export default function Home() {
             <a href="#about" className="hover:underline">
               About
             </a>
-            <a href="#" className="hover:underline">
-              Careers
-            </a>
           </div>
         </div>
 
@@ -91,9 +88,6 @@ export default function Home() {
             </a>
             <a href="#about" className="hover:underline">
               About
-            </a>
-            <a href="#" className="hover:underline">
-              Careers
             </a>
             <button className="bg-blue-50 text-blue-500 px-5 py-3 rounded-full text-sm font-semibold hover:bg-gray-100 transition w-fit">
               Project Estimation

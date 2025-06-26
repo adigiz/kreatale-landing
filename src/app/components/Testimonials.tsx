@@ -46,16 +46,31 @@ export default function Testimonials() {
 
   return (
     <section id="testimonials" className="py-16 px-4 md:px-16 bg-white">
-      <div className="lg:px-20 ">
+      {/* Heading */}
+      <motion.div
+        className="lg:px-20"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         <p className="font-bold text-gray-400 uppercase text-sm mb-2">
           Testimonials
         </p>
         <h2 className="text-black text-4xl lg:text-4xl font-bold mb-6">
           What they say about us
         </h2>
-      </div>
+      </motion.div>
+
       <div className="h-full mx-auto grid md:grid-cols-4 gap-8 items-center lg:px-20">
-        <div className="overflow-x-hidden h-full flex flex-col col-span-3">
+        {/* Testimonial Card Area */}
+        <motion.div
+          className="overflow-x-hidden h-full flex flex-col col-span-3"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+        >
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={index}
@@ -68,6 +83,7 @@ export default function Testimonials() {
               <p className="text-2xl text-black mb-6">“{current.text}”</p>
             </motion.div>
           </AnimatePresence>
+
           <div className="flex items-center justify-between px-12 py-8 bg-gray-50 border border-gray-200 border-t-0 rounded-b-xl">
             <div className="flex items-center gap-4">
               <Image
@@ -123,10 +139,16 @@ export default function Testimonials() {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Estimation Box */}
-        <div className="h-full col-span-3 lg:col-span-1 bg-blue-600 text-white p-16 rounded-xl flex flex-col items-center justify-center gap-32">
+        <motion.div
+          className="h-full col-span-3 lg:col-span-1 bg-blue-600 text-white p-16 rounded-xl flex flex-col items-center justify-center gap-32"
+          initial={{ opacity: 0, x: 80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: "easeOut", delay: 0.4 }}
+        >
           <Image
             src="/calculator.png"
             alt="Calculator Icon"
@@ -142,7 +164,7 @@ export default function Testimonials() {
               Project estimation
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

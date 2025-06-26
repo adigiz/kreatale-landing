@@ -1,11 +1,22 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function About() {
   return (
-    <section id="about" className="min-h-screen flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16 py-10 bg-white gap-8">
-      <div className="h-full lg:w-1/2 mb-10 lg:mb-0 lg:px-20">
+    <section
+      id="about"
+      className="min-h-screen flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16 py-10 bg-white gap-8"
+    >
+      {/* Left: Text + Stats */}
+      <motion.div
+        className="h-full lg:w-1/2 mb-10 lg:mb-0 lg:px-20"
+        initial={{ opacity: 0, x: -60 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
         <p className="font-bold text-gray-400 uppercase text-sm mb-2">
           About Us
         </p>
@@ -22,7 +33,7 @@ export default function About() {
           See all works
         </button>
 
-        {/* Stats Box */}
+        {/* Stats */}
         <div className="text-center mt-10 grid grid-cols-2 gap-16 px-8 py-16 rounded-xl border border-gray-200 w-full">
           <div>
             <p className="text-4xl font-bold text-gray-800">8</p>
@@ -41,9 +52,16 @@ export default function About() {
             <p className="text-sm text-gray-500">Amazing Project</p>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="h-full lg:w-1/2 flex justify-center lg:pr-20">
+      {/* Right: Image */}
+      <motion.div
+        className="h-full lg:w-1/2 flex justify-center lg:pr-20"
+        initial={{ opacity: 0, x: 60 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+      >
         <Image
           src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Developer working"
@@ -51,7 +69,7 @@ export default function About() {
           height={500}
           className="rounded-2xl shadow-lg object-cover w-full"
         />
-      </div>
+      </motion.div>
     </section>
   );
 }

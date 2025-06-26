@@ -8,31 +8,33 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const projects = [
   {
     title: "Gemoedje",
     description: "Website development",
-    image:
-      "/portfolio-1.png",
+    image: "/portfolio-1.png",
   },
   {
     title: "Car Rental",
     description: "Website development",
-    image:
-      "/portfolio-2.png",
+    image: "/portfolio-2.png",
   },
   {
     title: "Clinic",
     description: "Website Development",
-    image:
-      "/portfolio-3.png",
+    image: "/portfolio-3.png",
   },
 ];
 
 export default function Portfolio() {
   return (
-    <section id="works" className="bg-white w-full flex flex-col px-4 sm:px-8 lg:px-16 py-12 box-border">
+    <section
+      id="works"
+      className="bg-white w-full flex flex-col px-4 sm:px-8 lg:px-16 py-12 box-border"
+    >
+      {/* Section Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start gap-8 mb-8">
         <div className="flex flex-col gap-4">
           <p className="font-bold text-gray-400 uppercase text-sm">Our Work</p>
@@ -62,8 +64,21 @@ export default function Portfolio() {
         >
           <CarouselContent>
             {projects.map((project, i) => (
-              <CarouselItem key={`project-${i}`} className="basis-1/2 shrink-0 px-2">
-                <div className="h-full bg-gray-100 rounded-3xl flex flex-col overflow-hidden">
+              <CarouselItem
+                key={`project-${i}`}
+                className="basis-1/2 shrink-0 px-2"
+              >
+                <motion.div
+                  className="h-full bg-gray-100 rounded-3xl flex flex-col overflow-hidden"
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: "easeOut",
+                    delay: i * 0.15,
+                  }}
+                >
                   <div className="relative aspect-[4/3]">
                     <Image
                       src={project.image}
@@ -98,7 +113,7 @@ export default function Portfolio() {
                       </svg>
                     </button>
                   </div>
-                </div>
+                </motion.div>
               </CarouselItem>
             ))}
           </CarouselContent>

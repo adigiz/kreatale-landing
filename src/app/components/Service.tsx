@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -31,7 +32,10 @@ const services = [
 
 export default function Service() {
   return (
-    <section id="services" className="bg-white text-white py-20 px-4 sm:px-6 md:px-16">
+    <section
+      id="services"
+      className="bg-white text-white py-20 px-4 sm:px-6 md:px-16"
+    >
       <div className="bg-black rounded-3xl px-6 md:px-16 py-16 w-full mx-auto flex flex-col items-center gap-16">
         <div className="text-center max-w-3xl mx-auto">
           <p className="font-bold text-gray-400 uppercase text-sm mb-2">
@@ -44,8 +48,12 @@ export default function Service() {
 
         <div className="flex flex-col gap-16 w-full max-w-5xl mx-auto">
           {services.map((service, idx) => (
-            <div
+            <motion.div
               key={idx}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: idx * 0.2, ease: "easeOut" }}
               className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-16"
             >
               <div className="relative w-full lg:w-1/2 aspect-[4/3] rounded-2xl overflow-hidden shadow-md">
@@ -66,7 +74,7 @@ export default function Service() {
                   Learn more
                 </button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

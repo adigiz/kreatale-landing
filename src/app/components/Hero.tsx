@@ -1,10 +1,23 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section id="hero" className="bg-white min-h-[calc(100vh-80px)] flex-1 text-white px-4 sm:px-8 lg:px-16 py-8 flex items-stretch">
+    <section
+      id="hero"
+      className="bg-white min-h-[calc(100vh-80px)] flex-1 text-white px-4 sm:px-8 lg:px-16 py-8 flex items-stretch"
+    >
       <div className="flex flex-col md:flex-row gap-8 w-full">
-        <div className="relative flex-[3] rounded-3xl overflow-hidden min-h-[50vh] md:min-h-full">
+        {/* Left: Main Banner */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="relative flex-[3] rounded-3xl overflow-hidden min-h-[50vh] md:min-h-full"
+        >
           <Image
             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt="Gradient Keyboard"
@@ -20,14 +33,24 @@ export default function Hero() {
                 We are a website & app development partner
               </h1>
             </div>
-            <button className="bg-white text-black font-semibold px-5 py-2 rounded-full w-max text-sm hover:bg-gray-200 transition">
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="bg-white text-black font-semibold px-5 py-2 rounded-full w-max text-sm hover:bg-gray-200 transition"
+            >
               Start a project
-            </button>
+            </motion.button>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Side Card */}
-        <div className="flex-[1] flex justify-center">
+        {/* Right: Side Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="flex-[1] flex justify-center"
+        >
           <div className="bg-white rounded-2xl w-full max-w-sm h-full flex flex-col justify-start">
             <Image
               src="/current-project.png"
@@ -63,7 +86,7 @@ export default function Hero() {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
