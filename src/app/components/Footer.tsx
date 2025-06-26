@@ -28,13 +28,6 @@ export default function Footer() {
           />
         </div>
 
-        <ul className="flex flex-wrap justify-center gap-6 text-gray-400">
-          <li className="hover:text-white cursor-pointer">Works</li>
-          <li className="hover:text-white cursor-pointer">Services</li>
-          <li className="hover:text-white cursor-pointer">About</li>
-          <li className="hover:text-white cursor-pointer">Careers</li>
-        </ul>
-
         <div className="flex gap-4 text-gray-400">
           <a 
             href="https://www.instagram.com/kreatale"
