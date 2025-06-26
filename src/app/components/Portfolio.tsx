@@ -14,19 +14,19 @@ const projects = [
     title: "Gemoedje",
     description: "Website development",
     image:
-      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1600&q=80",
+      "/portfolio-1.png",
   },
   {
-    title: "Ar Rent Car",
+    title: "Car Rental",
     description: "Website development",
     image:
-      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1600&q=80",
+      "/portfolio-2.png",
   },
   {
-    title: "Neon",
-    description: "IOS Development",
+    title: "Clinic",
+    description: "Website Development",
     image:
-      "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=1600&q=80",
+      "/portfolio-3.png",
   },
 ];
 

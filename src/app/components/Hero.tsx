@@ -30,8 +30,8 @@ export default function Hero() {
         <div className="flex-[1] flex justify-center">
           <div className="bg-white rounded-2xl w-full max-w-sm h-full flex flex-col justify-start">
             <Image
-              src="https://images.unsplash.com/photo-1608303588026-884930af2559?q=80&w=3403&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Fastbank Preview"
+              src="/current-project.png"
+              alt="Gemoedje"
               width={400}
               height={250}
               className="rounded-2xl mb-4 w-full object-cover"
