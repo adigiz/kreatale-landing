@@ -15,6 +15,8 @@ type FormData = {
   deadline: string;
 };
 
+type FormFieldKey = keyof FormData;
+
 export default function EstimationModal({ show, onClose }: Props) {
   const [formData, setFormData] = useState<FormData>({
     projectType: "",
@@ -56,13 +58,32 @@ export default function EstimationModal({ show, onClose }: Props) {
     else if (data.deadline === "urgent") multiplier = 1.25;
 
     const total = base * multiplier;
-    const duration = Math.ceil(total / 150) * 1;
+    const duration = Math.ceil(total / 150);
 
     return {
       startingFrom: `$${Math.round(total)}`,
       duration: `${duration} week${duration > 1 ? "s" : ""}`,
     };
   };
+
+  const fields: { key: FormFieldKey; label: string; options: string[] }[] = [
+    {
+      key: "projectType",
+      label: "Project Type",
+      options: ["Website", "Mobile", "SaaS"],
+    },
+    {
+      key: "features",
+      label: "Features",
+      options: ["Small", "Medium", "Large"],
+    },
+    { key: "design", label: "Design", options: ["Basic", "Custom", "Premium"] },
+    {
+      key: "deadline",
+      label: "Deadline",
+      options: ["Flexible", "Normal", "Urgent"],
+    },
+  ];
 
   return (
     <AnimatePresence>
@@ -95,11 +116,17 @@ export default function EstimationModal({ show, onClose }: Props) {
                 stroke="currentColor"
                 strokeWidth={2}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
 
-            <h3 className="text-xl font-bold text-gray-800 mb-6">Estimate Your Project</h3>
+            <h3 className="text-xl font-bold text-gray-800 mb-6">
+              Estimate Your Project
+            </h3>
 
             <form
               onSubmit={(e) => {
@@ -109,18 +136,15 @@ export default function EstimationModal({ show, onClose }: Props) {
               }}
               className="space-y-4"
             >
-              {[
-                { key: "projectType", label: "Project Type", options: ["Website", "Mobile", "SaaS"] },
-                { key: "features", label: "Features", options: ["Small", "Medium", "Large"] },
-                { key: "design", label: "Design", options: ["Basic", "Custom", "Premium"] },
-                { key: "deadline", label: "Deadline", options: ["Flexible", "Normal", "Urgent"] },
-              ].map(({ key, label, options }) => (
+              {fields.map(({ key, label, options }) => (
                 <div key={key} className="space-y-1">
-                  <label className="block text-sm text-gray-700 font-medium">{label}</label>
+                  <label className="block text-sm text-gray-700 font-medium">
+                    {label}
+                  </label>
                   <div className="relative">
                     <select
                       required
-                      value={(formData as any)[key]}
+                      value={formData[key]}
                       onChange={(e) =>
                         setFormData({ ...formData, [key]: e.target.value })
                       }
@@ -128,7 +152,10 @@ export default function EstimationModal({ show, onClose }: Props) {
                     >
                       <option value="">Select {label}</option>
                       {options.map((opt) => (
-                        <option key={opt.toLowerCase()} value={opt.toLowerCase()}>
+                        <option
+                          key={opt.toLowerCase()}
+                          value={opt.toLowerCase()}
+                        >
                           {opt}
                         </option>
                       ))}
@@ -164,7 +191,10 @@ export default function EstimationModal({ show, onClose }: Props) {
             {estimation && (
               <div className="mt-6 p-4 rounded-lg bg-gray-50 text-center border">
                 <p className="text-gray-800 font-semibold">
-                  💸 Starts From: <span className="text-blue-600">{estimation.startingFrom}</span>
+                  💸 Starts From:{" "}
+                  <span className="text-blue-600">
+                    {estimation.startingFrom}
+                  </span>
                 </p>
                 <p className="text-gray-600 mt-1">
                   ⏱ Estimated Duration: {estimation.duration}
