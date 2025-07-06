@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import EstimationModal from "./EstimationModal";
 
 type Testimonial = {
   text: string;
@@ -32,6 +33,7 @@ const testimonials: Testimonial[] = [
 export default function Testimonials() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
+  const [showEstimator, setShowEstimator] = useState(false);
 
   const paginate = (newDirection: "left" | "right") => {
     setDirection(newDirection);
@@ -45,7 +47,7 @@ export default function Testimonials() {
   const current = testimonials[index];
 
   return (
-    <section id="testimonials" className="py-16 px-4 md:px-16 bg-white">
+    <section id="testimonials" className="flex flex-col py-16 px-4 md:px-16 bg-white min-h-screen">
       {/* Heading */}
       <motion.div
         className="lg:px-20"
@@ -57,15 +59,14 @@ export default function Testimonials() {
         <p className="font-bold text-gray-400 uppercase text-sm mb-2">
           Testimonials
         </p>
-        <h2 className="text-black text-4xl lg:text-4xl font-bold mb-6">
+        <h2 className="text-black text-4xl font-bold mb-6">
           What they say about us
         </h2>
       </motion.div>
 
-      <div className="h-full mx-auto grid md:grid-cols-4 gap-8 items-center lg:px-20">
-        {/* Testimonial Card Area */}
+      <div className="flex-1 h-full mx-auto grid md:grid-cols-4 gap-8 items-center lg:px-20">
         <motion.div
-          className="overflow-x-hidden h-full flex flex-col col-span-3"
+          className="h-full overflow-x-hidden flex flex-col col-span-3"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -78,7 +79,7 @@ export default function Testimonials() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: direction === "right" ? -100 : 100 }}
               transition={{ duration: 0.4 }}
-              className="h-full md:col-span- bg-white px-12 py-8 rounded-t-xl border border-gray-200 border-b-0"
+              className="h-full bg-white px-12 py-8 rounded-t-xl border border-gray-200 border-b-0"
             >
               <p className="text-2xl text-black mb-6">“{current.text}”</p>
             </motion.div>
@@ -143,7 +144,7 @@ export default function Testimonials() {
 
         {/* Estimation Box */}
         <motion.div
-          className="h-full col-span-3 lg:col-span-1 bg-blue-600 text-white p-16 rounded-xl flex flex-col items-center justify-center gap-32"
+          className="h-full col-span-3 lg:col-span-1 bg-blue-600 text-white p-16 rounded-xl flex flex-col items-center justify-center gap-10"
           initial={{ opacity: 0, x: 80 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -156,16 +157,21 @@ export default function Testimonials() {
             height={220}
             className="w-18 h-24"
           />
-          <div className="flex flex-col justify-center items-center gap-8">
-            <p className="text-3xl font-semibold text-center">
+          <div className="text-center">
+            <p className="text-2xl font-semibold mb-4">
               Want to estimate your project?
             </p>
-            <button className="w-40 bg-white text-blue-600 px-2 py-2 rounded-full font-medium hover:bg-blue-100 transition">
+            <button
+              onClick={() => setShowEstimator(true)}
+              className="w-full bg-white text-blue-600 px-4 py-2 rounded-full font-medium hover:bg-blue-100 transition"
+            >
               Project Estimation
             </button>
           </div>
         </motion.div>
       </div>
+
+      <EstimationModal show={showEstimator} onClose={() => setShowEstimator(false)}/>
     </section>
   );
 }
