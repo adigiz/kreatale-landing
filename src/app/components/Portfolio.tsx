@@ -4,27 +4,35 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const projects = [
   {
     title: "Gemoedje",
     description: "Website development",
     image: "/portfolio-1.png",
+    link: "/projects/gemoedje",
   },
   {
     title: "Car Rental",
     description: "Website development",
     image: "/portfolio-2.png",
+    link: "/projects/car-rental",
   },
   {
     title: "Clinic",
     description: "Website Development",
     image: "/portfolio-3.png",
+    link: "/projects/clinic",
+  },
+  {
+    title: "JDM vs Euro",
+    description: "Wordpress Customization",
+    image: "/portfolio-4.png",
+    link: "/projects/jdm-vs-euro",
   },
 ];
 
@@ -57,68 +65,84 @@ export default function Portfolio() {
 
       {/* Scrollable Work Cards */}
       <div>
+        
+      </div>
+      <div>
         <Carousel
           opts={{
             align: "start",
           }}
+          className="w-full"
         >
-          <CarouselContent>
+          <CarouselContent className="-ml-2 md:-ml-4">
             {projects.map((project, i) => (
               <CarouselItem
                 key={`project-${i}`}
-                className="basis-1/2 shrink-0 px-2"
+                className="basis-[42%] shrink-0 pl-2 md:pl-4"
               >
                 <motion.div
-                  className="h-full bg-gray-100 rounded-3xl flex flex-col overflow-hidden"
+                  className="h-full bg-gray-100 rounded-3xl flex flex-col overflow-hidden cursor-pointer"
                   initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  whileHover={{ 
+                    scale: 1.02, 
+                    y: -5,
+                    transition: { duration: 0.3, ease: "easeOut" }
+                  }}
                   transition={{
                     duration: 0.6,
                     ease: "easeOut",
                     delay: i * 0.15,
                   }}
                 >
-                  <div className="relative aspect-[4/3]">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="p-3 lg:p-6 flex h-full justify-between gap-3 items-center bg-white">
-                    <div className="max-w-[60%]">
-                      <h3 className="text-lg sm:text-xl font-bold text-black">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-gray-500">
-                        {project.description}
-                      </p>
-                    </div>
-                    <button className="border w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:bg-black hover:text-white transition">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-5 h-5"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M9 5l7 7-7 7"
+                  <Link href={project.link} className="block h-full">
+                    <div className="h-full flex flex-col">
+                      <div className="relative aspect-[4/3]">
+                        <Image
+                          src={project.image}
+                          alt={project.title}
+                          fill
+                          className="object-cover"
                         />
-                      </svg>
-                    </button>
-                  </div>
+                      </div>
+                      <div className="p-3 lg:p-6 flex justify-between gap-3 items-center bg-white flex-1">
+                        <div className="max-w-[60%]">
+                          <h3 className="text-lg sm:text-xl font-bold text-black">
+                            {project.title}
+                          </h3>
+                          <p className="text-sm text-gray-500">
+                            {project.description}
+                          </p>
+                        </div>
+
+                        <motion.button 
+                          className="border w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:bg-black hover:text-white transition"
+                          whileHover={{ scale: 1.1 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-5 h-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
+                        </motion.button>
+                      </div>
+                    </div>
+                  </Link>
                 </motion.div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
+          
         </Carousel>
       </div>
     </section>

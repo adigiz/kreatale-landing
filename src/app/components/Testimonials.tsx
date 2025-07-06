@@ -160,8 +160,8 @@ export default function Testimonials() {
             <p className="text-3xl font-semibold text-center">
               Want to estimate your project?
             </p>
-            <button className="w-40 bg-white text-blue-600 px-4 py-2 rounded-full font-medium hover:bg-blue-100 transition">
-              Project estimation
+            <button className="w-40 bg-white text-blue-600 px-2 py-2 rounded-full font-medium hover:bg-blue-100 transition">
+              Project Estimation
             </button>
           </div>
         </motion.div>

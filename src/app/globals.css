@@ -41,6 +41,8 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --breakpoint-2xsm: 375px;
+  --breakpoint-xsm: 425px;
 }
 
 :root {
@@ -124,3 +126,5 @@
 html {
   scroll-behavior: smooth;
 }
+
+

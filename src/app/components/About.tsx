@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
+import CountryMap from "./CountryMap";
 
 export default function About() {
   return (
@@ -40,36 +40,27 @@ export default function About() {
             <p className="text-sm text-gray-500">Operated Years</p>
           </div>
           <div>
-            <p className="text-4xl font-bold text-gray-800">200+</p>
+            <p className="text-4xl font-bold text-gray-800">10+</p>
             <p className="text-sm text-gray-500">Happy Clients</p>
           </div>
           <div>
-            <p className="text-4xl font-bold text-gray-800">40+</p>
+            <p className="text-4xl font-bold text-gray-800">6+</p>
             <p className="text-sm text-gray-500">Professionals</p>
           </div>
           <div>
-            <p className="text-4xl font-bold text-gray-800">650+</p>
+            <p className="text-4xl font-bold text-gray-800">8+</p>
             <p className="text-sm text-gray-500">Amazing Project</p>
           </div>
         </div>
       </motion.div>
-
-      {/* Right: Image */}
-      <motion.div
-        className="h-full lg:w-1/2 flex justify-center lg:pr-20"
-        initial={{ opacity: 0, x: 60 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-      >
-        <Image
-          src="https://images.unsplash.com/photo-1618477388954-7852f32655ec?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          alt="Developer working"
-          width={600}
-          height={500}
-          className="rounded-2xl shadow-lg object-cover w-full"
-        />
-      </motion.div>
+      <div className="flex-1 px-4 py-6 my-6 rounded-2xl dark:border-gray-800 dark:bg-gray-900 sm:px-6">
+        <div
+          id="mapOne"
+          className="mapOne map-btn -mx-4 -my-6 h-[600px] w-[668px] 2xsm:w-[307px] 2xsm:h-[307px] xsm:w-[358px] sm:h-[400px] sm:w-[400px] md:w-[500px] md:h-[500px] lg:w-[668px]"
+        >
+          <CountryMap />
+        </div>
+      </div>
     </section>
   );
 }
