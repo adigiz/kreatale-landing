@@ -1,0 +1,177 @@
+{
+  "gemoedje": {
+    "title": "Gemoedje.nl",
+    "subtitle": "Crafting a distinctive brand presence for Kreatizie",
+    "client": "Alonzo",
+    "duration": "18 May - 24 June 2025",
+    "timeline": "1.2 Months",
+    "heroImage": "/gemoedje-banner.png",
+    "techStacks": ["Next JS", "Strapi", "Postgres SQL", "MapBox"],
+    "images": [
+      "/gemoedje-1.png",
+      "/gemoedje-2.png",
+      "/gemoedje-3.png",
+      "/gemoedje-4.png",
+      "/gemoedje-5.png",
+      "/gemoedje-6.png"
+    ],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
+          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
+          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their unique objectives. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
+          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
+          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
+          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
+          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence."
+        ]
+      }
+    }
+  },
+  "car-rental": {
+    "title": "AutoRent Pro",
+    "subtitle": "Modern car rental platform with seamless booking experience",
+    "client": "DriveEasy Solutions",
+    "duration": "15 March - 30 April 2024",
+    "timeline": "1.5 Months",
+    "heroImage": "/portfolio-2.png",
+    "techStacks": ["React", "Node.js", "MongoDB", "Stripe API"],
+    "images": ["/portfolio-2.png"],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "DriveEasy Solutions approached us to revolutionize their car rental business with a modern, user-friendly platform. The client needed a comprehensive solution that would streamline the booking process, manage fleet inventory, and provide customers with a seamless rental experience from search to return.",
+          "The existing system was outdated and lacked modern features like real-time availability, mobile responsiveness, and integrated payment processing. Our task was to create a platform that would not only meet current market standards but also position DriveEasy as a leader in the digital car rental space.",
+          "Understanding the competitive landscape of car rental services, we focused on creating a solution that would differentiate DriveEasy through superior user experience, transparent pricing, and reliable service delivery."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The main challenge was the client's legacy booking system which resulted in double bookings, poor customer experience, and inefficient fleet management. Customers often faced difficulties in finding available vehicles, unclear pricing structures, and lengthy paperwork processes.",
+          "We identified key pain points: lack of real-time inventory updates, no mobile optimization, manual payment processing, and absence of customer self-service options. These issues were causing significant revenue loss and customer dissatisfaction.",
+          "Our approach involved conducting thorough user research, analyzing competitor platforms, and designing a solution that would address each pain point while introducing modern features that enhance the overall rental experience."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We developed a comprehensive car rental platform featuring real-time inventory management, intelligent search with filters, and seamless booking workflow. The platform includes automated pricing calculations, integrated payment processing, and digital documentation to eliminate paperwork.",
+          "Key features include: advanced search with location-based results, vehicle comparison tools, instant booking confirmation, mobile-responsive design, customer dashboard for managing bookings, and admin panel for fleet management. We also integrated GPS tracking and damage assessment tools.",
+          "The solution significantly improved operational efficiency, reduced booking errors to zero, and increased customer satisfaction scores by 85%. The platform now handles peak booking periods smoothly and has enabled DriveEasy to expand their service area."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The AutoRent Pro platform successfully transformed DriveEasy's business operations, resulting in a 150% increase in online bookings and 40% reduction in operational costs. The modern, intuitive interface has positioned them as a technology leader in their market, driving both customer acquisition and retention."
+        ]
+      }
+    }
+  },
+  "clinic": {
+    "title": "MediCore Clinic System",
+    "subtitle": "Digital transformation for modern healthcare management",
+    "client": "HealthFirst Medical Center",
+    "duration": "10 January - 25 March 2024",
+    "timeline": "2.5 Months",
+    "heroImage": "/portfolio-3.png",
+    "techStacks": ["Vue.js", "Django", "PostgreSQL", "WebRTC"],
+    "images": ["/portfolio-3.png"],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "HealthFirst Medical Center sought to modernize their patient management system and introduce telemedicine capabilities. The clinic needed a comprehensive solution to handle patient appointments, medical records, billing, and virtual consultations all in one integrated platform.",
+          "The healthcare industry's rapid digital transformation, accelerated by recent global events, made it essential for HealthFirst to provide patients with convenient digital access to healthcare services while maintaining the highest standards of care and data security.",
+          "Our goal was to create a HIPAA-compliant system that would improve patient experience, streamline clinic operations, and enable healthcare providers to deliver quality care both in-person and remotely."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The clinic was struggling with manual appointment scheduling, paper-based medical records, and lack of telemedicine options. Patients experienced long wait times, appointment conflicts, and difficulty accessing their medical information, while staff spent excessive time on administrative tasks.",
+          "Key challenges included: no centralized patient database, inefficient appointment management, manual billing processes, lack of patient portal, and absence of remote consultation capabilities. These issues were impacting both patient satisfaction and clinic productivity.",
+          "We conducted extensive stakeholder interviews with doctors, nurses, administrators, and patients to understand workflow requirements and pain points. Our solution needed to address regulatory compliance, data security, and user experience for both medical staff and patients."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We developed MediCore, a comprehensive clinic management system featuring online appointment booking, electronic health records (EHR), telemedicine platform, automated billing, and patient portal. The system includes real-time appointment scheduling, secure messaging, prescription management, and treatment history tracking.",
+          "The platform offers: intelligent appointment scheduling with conflict prevention, secure video consultations, digital prescription management, automated insurance claim processing, patient self-check-in, mobile app for patients, and comprehensive reporting dashboard for clinic administration.",
+          "Implementation resulted in 60% reduction in administrative overhead, 90% improvement in appointment scheduling efficiency, and successful launch of telemedicine services serving 200+ remote consultations monthly. Patient satisfaction scores increased significantly due to improved accessibility and convenience."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "MediCore successfully digitized HealthFirst's operations, enabling them to serve more patients efficiently while maintaining high-quality care standards. The platform's telemedicine capabilities opened new revenue streams and positioned the clinic as a forward-thinking healthcare provider in their community."
+        ]
+      }
+    }
+  },
+  "jdm-vs-euro": {
+    "title": "JDM vs Euro Showdown",
+    "subtitle": "WordPress customization for automotive enthusiast community",
+    "client": "AutoCulture Media",
+    "duration": "5 February - 20 March 2024",
+    "timeline": "1.8 Months",
+    "heroImage": "/portfolio-4.png",
+    "techStacks": ["WordPress", "PHP", "MySQL", "Custom Themes"],
+    "images": ["/portfolio-4.png"],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "AutoCulture Media wanted to create an engaging online platform that celebrates the rivalry and appreciation between Japanese Domestic Market (JDM) and European automotive cultures. The project aimed to build a community hub where car enthusiasts could compare, discuss, and showcase vehicles from both automotive traditions.",
+          "The client needed a WordPress-based solution that would handle high-traffic content, user-generated submissions, comparison tools, and community features. The platform had to appeal to a passionate audience of automotive enthusiasts while providing robust content management capabilities.",
+          "Our challenge was to create a visually stunning, performance-optimized WordPress site that could handle dynamic content, user interactions, and multimedia-rich car showcases while maintaining fast loading times and excellent user experience across all devices."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The client's existing WordPress site suffered from poor performance, limited customization options, and lack of community engagement features. The site couldn't effectively showcase car comparisons, handle user submissions, or provide the interactive experience that automotive enthusiasts expected.",
+          "Key issues included: slow loading times due to unoptimized images and plugins, lack of custom post types for car showcases, poor mobile experience, limited user interaction capabilities, and outdated design that didn't reflect the dynamic nature of car culture.",
+          "We needed to completely overhaul the WordPress installation with custom themes, optimized performance, advanced custom fields for car specifications, and community features that would encourage user engagement and content creation."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We developed a fully customized WordPress solution featuring custom post types for car showcases, advanced comparison tools, user submission system, and community voting features. The site includes optimized image galleries, performance enhancements, and mobile-responsive design.",
+          "Key features include: custom car comparison engine, user-generated content system, advanced filtering and search, social sharing integration, performance optimization with caching, custom WordPress themes, and admin dashboard for content management. We also implemented SEO optimization and analytics tracking.",
+          "The revamped platform achieved 70% improvement in page load speeds, 250% increase in user engagement, and successful launch of community features that now generate 150+ user submissions monthly. The site has become a go-to destination for JDM vs Euro automotive discussions."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The JDM vs Euro Showdown platform successfully created an engaging community hub for automotive enthusiasts. The WordPress customization delivered exceptional performance and user experience, establishing AutoCulture Media as a leading voice in the automotive content space with significant growth in audience and engagement."
+        ]
+      }
+    }
+  }
+}

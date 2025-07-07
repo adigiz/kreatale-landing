@@ -8,33 +8,43 @@ import {
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import projectsData from "@/lib/projectsData.json";
+import { PortfolioProject } from "@/lib/types";
 
-const projects = [
-  {
-    title: "Gemoedje",
-    description: "Website development",
-    image: "/portfolio-1.png",
-    link: "/projects/gemoedje",
-  },
-  {
-    title: "Car Rental",
-    description: "Website development",
-    image: "/portfolio-2.png",
-    link: "/projects/car-rental",
-  },
-  {
-    title: "Clinic",
-    description: "Website Development",
-    image: "/portfolio-3.png",
-    link: "/projects/clinic",
-  },
-  {
-    title: "JDM vs Euro",
-    description: "Wordpress Customization",
-    image: "/portfolio-4.png",
-    link: "/projects/jdm-vs-euro",
-  },
-];
+// Map the JSON data to the portfolio format
+const projects: PortfolioProject[] = Object.entries(projectsData).map(
+  ([slug, data]) => ({
+    title: data.title,
+    description: getProjectType(slug),
+    image: getPortfolioImage(slug),
+    link: `/projects/${slug}`,
+  })
+);
+
+function getProjectType(slug: string): string {
+  switch (slug) {
+    case "gemoedje":
+      return "Website development";
+    case "car-rental":
+      return "Website development";
+    case "clinic":
+      return "Website Development";
+    case "jdm-vs-euro":
+      return "Wordpress Customization";
+    default:
+      return "Web Development";
+  }
+}
+
+function getPortfolioImage(slug: string): string {
+  const imageMap: { [key: string]: string } = {
+    gemoedje: "/portfolio-1.png",
+    "car-rental": "/portfolio-2.png",
+    clinic: "/portfolio-3.png",
+    "jdm-vs-euro": "/portfolio-4.png",
+  };
+  return imageMap[slug] || "/portfolio-1.png";
+}
 
 export default function Portfolio() {
   return (
@@ -64,9 +74,7 @@ export default function Portfolio() {
       </div>
 
       {/* Scrollable Work Cards */}
-      <div>
-        
-      </div>
+      <div></div>
       <div>
         <Carousel
           opts={{
@@ -84,10 +92,10 @@ export default function Portfolio() {
                   className="h-full bg-gray-100 rounded-3xl flex flex-col overflow-hidden cursor-pointer"
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  whileHover={{ 
-                    scale: 1.02, 
+                  whileHover={{
+                    scale: 1.02,
                     y: -5,
-                    transition: { duration: 0.3, ease: "easeOut" }
+                    transition: { duration: 0.3, ease: "easeOut" },
                   }}
                   transition={{
                     duration: 0.6,
@@ -115,7 +123,7 @@ export default function Portfolio() {
                           </p>
                         </div>
 
-                        <motion.button 
+                        <motion.button
                           className="border w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:bg-black hover:text-white transition"
                           whileHover={{ scale: 1.1 }}
                           whileTap={{ scale: 0.95 }}
@@ -142,7 +150,6 @@ export default function Portfolio() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          
         </Carousel>
       </div>
     </section>

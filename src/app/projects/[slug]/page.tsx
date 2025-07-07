@@ -5,85 +5,8 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Calendar, Clock, User, Loader2, Computer } from "lucide-react";
-
-interface ProjectSection {
-  title: string;
-  content: string[];
-}
-
-interface ProjectData {
-  title: string;
-  subtitle: string;
-  client: string;
-  duration: string;
-  timeline: string;
-  heroImage: string;
-  images: string[];
-  techStacks: string[];
-  sections: {
-    [key: string]: ProjectSection;
-  };
-}
-
-interface ProjectsDatabase {
-  [key: string]: ProjectData;
-}
-
-const fetchProjectData = (slug: string): ProjectData | null => {
-  const projectsData: ProjectsDatabase = {
-    gemoedje: {
-      title: "Gemoedje.nl",
-      subtitle: "Crafting a distinctive brand presence for Kreatizie",
-      client: "Alonzo",
-      duration: "18 May - 24 June 2025",
-      timeline: "1.2 Months",
-      heroImage: "/gemoedje-hero.png",
-      techStacks: ["Next JS", "Strapi", "Postgres SQL", "MapBox"],
-      images: [
-        "/gemoedje-1.png",
-        "/gemoedje-2.png",
-        "/gemoedje-3.png",
-        "/gemoedje-4.png",
-        "/gemoedje-5.png",
-        "/gemoedje-6.png",
-      ],
-      sections: {
-        background: {
-          title: "Background Project",
-          content: [
-            "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-            "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-            "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their unique objectives. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations.",
-          ],
-        },
-        problem: {
-          title: "Problem and how to tackle it",
-          content: [
-            "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-            "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-            "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations.",
-          ],
-        },
-        solution: {
-          title: "Solution",
-          content: [
-            "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-            "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-            "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations.",
-          ],
-        },
-        conclusion: {
-          title: "Conclusion",
-          content: [
-            "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          ],
-        },
-      },
-    },
-  };
-
-  return projectsData[slug] || null;
-};
+import projectsData from "@/lib/projectsData.json";
+import { ProjectData, ProjectsDatabase } from "@/lib/types";
 
 // Animation variants
 const fadeInUp = {
@@ -98,6 +21,11 @@ const stagger = {
       staggerChildren: 0.1,
     },
   },
+};
+
+const fetchProjectData = (slug: string): ProjectData | null => {
+  const typedProjectsData = projectsData as ProjectsDatabase;
+  return typedProjectsData[slug] || null;
 };
 
 export default function ProjectDetailPage() {
@@ -209,7 +137,7 @@ export default function ProjectDetailPage() {
       >
         <div className="relative w-screen h-64 md:h-96 lg:h-[500px] rounded-xl">
           <Image
-            src="/gemoedje-banner.png"
+            src={project.heroImage}
             alt={`${project.title} Hero`}
             fill
             className="object-cover"
