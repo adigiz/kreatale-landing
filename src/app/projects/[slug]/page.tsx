@@ -29,12 +29,12 @@ interface ProjectsDatabase {
   [key: string]: ProjectData;
 }
 
-const fetchProjectData = (slug: string): (ProjectData | null) => {
+const fetchProjectData = (slug: string): ProjectData | null => {
   const projectsData: ProjectsDatabase = {
     gemoedje: {
       title: "Gemoedje.nl",
       subtitle: "Crafting a distinctive brand presence for Kreatizie",
-      client: "Kreatizie",
+      client: "Alonzo",
       duration: "18 May - 24 June 2025",
       timeline: "1.2 Months",
       heroImage: "/gemoedje-hero.png",
@@ -198,7 +198,6 @@ export default function ProjectDetailPage() {
           >
             {project.subtitle}
           </motion.p>
-
         </div>
       </motion.header>
 
@@ -304,11 +303,11 @@ export default function ProjectDetailPage() {
             viewport={{ once: true, amount: 0.1 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4 px-4 sm:px-0">
               {project.images.map((image: string, index: number) => (
                 <motion.div
                   key={index}
-                  className="relative aspect-[4/3] rounded-xl overflow-hidden shadow-lg bg-gray-100"
+                  className="w-full mb-4 break-inside-avoid overflow-hidden rounded-x"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
@@ -318,8 +317,9 @@ export default function ProjectDetailPage() {
                   <Image
                     src={image}
                     alt={`${project.title} Screenshot ${index + 1}`}
-                    fill
-                    className="object-cover hover:scale-105 transition-transform duration-500"
+                    width={800}
+                    height={600}
+                    className="w-full h-auto object-cover transition-transform duration-500 hover:scale-105"
                   />
                 </motion.div>
               ))}
