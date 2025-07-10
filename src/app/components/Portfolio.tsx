@@ -23,10 +23,14 @@ const projects: PortfolioProject[] = Object.entries(projectsData).map(
 
 function getProjectType(slug: string): string {
   switch (slug) {
+    case "neon":
+      return "Mobile Development";
+    case "pescheck":
+      return "Wordpress Customization";  
     case "gemoedje":
-      return "Website development";
+      return "Website Development";
     case "car-rental":
-      return "Website development";
+      return "Website Development";
     case "clinic":
       return "Website Development";
     case "jdm-vs-euro":
@@ -38,9 +42,11 @@ function getProjectType(slug: string): string {
 
 function getPortfolioImage(slug: string): string {
   const imageMap: { [key: string]: string } = {
-    gemoedje: "/portfolio-1.png",
+    "neon": "/portfolio-5.png",
+    "pescheck": "/portfolio-6.png",
+    "gemoedje": "/portfolio-1.png",
     "car-rental": "/portfolio-2.png",
-    clinic: "/portfolio-3.png",
+    "clinic": "/portfolio-3.png",
     "jdm-vs-euro": "/portfolio-4.png",
   };
   return imageMap[slug] || "/portfolio-1.png";
