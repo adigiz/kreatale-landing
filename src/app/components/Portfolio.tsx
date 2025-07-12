@@ -109,7 +109,7 @@ export default function Portfolio() {
                     delay: i * 0.15,
                   }}
                 >
-                  <Link href={project.link} className="block h-full">
+                  <Link href="#" className="block h-full">
                     <div className="h-full flex flex-col">
                       <div className="relative aspect-[4/3]">
                         <Image
