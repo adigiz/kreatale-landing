@@ -15,18 +15,18 @@ type Testimonial = {
 
 const testimonials: Testimonial[] = [
   {
-    text: "It has been an honor to work with Reemax; they are an absolutely fantastic team. Every piece of work they've completed is flawless. Many users were amazed with the work's quality.",
-    author: "Aaron Mario",
+    text: "Really nice working with Giz. He was communicative and proactive. He brainstorm with me about how the features should look like and not always open for feedback",
+    author: "Alonzo",
     role: "CEO",
-    company: "We-famous",
-    image: "https://i.pravatar.cc/300?img=1",
+    company: "Gemoedje",
+    image: "/alonzo.png",
   },
   {
-    text: "Reemax delivered beyond expectations. Their attention to detail and user experience is top-notch. I'd recommend them to anyone!",
-    author: "Jane Doe",
-    role: "CTO",
-    company: "TechNova",
-    image: "https://i.pravatar.cc/300?img=5",
+    text: "The work looks great. Huge improvement over the default templates.  The apple layout limitations were something unexpected but Giz still made it look good. We are very happy with his work",
+    author: "Austin",
+    role: "Event Manager",
+    company: "JDM VS Euro",
+    image: "/austin.webp",
   },
 ];
 
