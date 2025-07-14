@@ -6,6 +6,7 @@ export interface ProjectSection {
 export interface ProjectData {
   title: string;
   subtitle: string;
+  country: string;
   client: string;
   duration: string;
   timeline: string;
@@ -25,5 +26,6 @@ export interface PortfolioProject {
   title: string;
   description: string;
   image: string;
+  country: string;
   link: string;
 }

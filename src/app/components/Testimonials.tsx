@@ -47,7 +47,10 @@ export default function Testimonials() {
   const current = testimonials[index];
 
   return (
-    <section id="testimonials" className="flex flex-col py-16 px-4 md:px-16 bg-white min-h-screen">
+    <section
+      id="testimonials"
+      className="flex flex-col py-8 sm:py-12 lg:py-16 px-4 sm:px-8 lg:px-16 bg-white min-h-screen overflow-hidden"
+    >
       {/* Heading */}
       <motion.div
         className="lg:px-20"
@@ -56,17 +59,17 @@ export default function Testimonials() {
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
-        <p className="font-bold text-gray-400 uppercase text-sm mb-2">
+        <p className="font-bold text-gray-400 uppercase text-xs sm:text-sm mb-2">
           Testimonials
         </p>
-        <h2 className="text-black text-4xl font-bold mb-6">
+        <h2 className="text-black text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">
           What they say about us
         </h2>
       </motion.div>
 
-      <div className="flex-1 h-full mx-auto grid md:grid-cols-4 gap-8 items-center lg:px-20">
+      <div className="flex-1 h-full mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 items-center lg:px-20">
         <motion.div
-          className="h-full overflow-x-hidden flex flex-col col-span-3"
+          className="h-full overflow-hidden flex flex-col lg:col-span-3"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -75,39 +78,43 @@ export default function Testimonials() {
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: direction === "right" ? 100 : -100 }}
+              initial={{ opacity: 0, x: direction === "right" ? 50 : -50 }}
               animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: direction === "right" ? -100 : 100 }}
-              transition={{ duration: 0.4 }}
-              className="h-full bg-white px-12 py-8 rounded-t-xl border border-gray-200 border-b-0"
+              exit={{ opacity: 0, x: direction === "right" ? -50 : 50 }}
+              transition={{ duration: 0.3 }}
+              className="h-full bg-white px-4 sm:px-6 lg:px-12 py-6 lg:py-8 rounded-t-xl border border-gray-200 border-b-0"
             >
-              <p className="text-2xl text-black mb-6">“{current.text}”</p>
+              <p className="text-base sm:text-lg lg:text-2xl text-black mb-4 sm:mb-6 leading-relaxed">
+                {current.text}
+              </p>
             </motion.div>
           </AnimatePresence>
 
-          <div className="flex items-center justify-between px-12 py-8 bg-gray-50 border border-gray-200 border-t-0 rounded-b-xl">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between px-4 sm:px-6 lg:px-12 py-4 sm:py-6 lg:py-8 bg-gray-50 border border-gray-200 border-t-0 rounded-b-xl gap-4 sm:gap-0">
+            <div className="flex items-center gap-3 sm:gap-4">
               <Image
                 src={current.image}
                 alt={current.author}
                 width={48}
                 height={48}
-                className="rounded-full object-cover w-12 h-12"
+                className="rounded-full object-cover w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0"
               />
-              <div>
-                <p className="font-semibold text-gray-800">
+              <div className="min-w-0">
+                <p className="font-semibold text-gray-800 text-sm sm:text-base truncate">
                   {current.author}, {current.role}
                 </p>
-                <p className="text-gray-500 text-sm">{current.company}</p>
+                <p className="text-gray-500 text-xs sm:text-sm truncate">
+                  {current.company}
+                </p>
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 self-end sm:self-auto">
               <button
                 onClick={() => paginate("left")}
-                className="p-2 rounded-full bg-white border border-gray-200 hover:bg-gray-300"
+                className="p-2 rounded-full bg-white border border-gray-200 hover:bg-gray-100 transition-colors"
               >
                 <svg
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -122,10 +129,10 @@ export default function Testimonials() {
               </button>
               <button
                 onClick={() => paginate("right")}
-                className="p-2 rounded-full bg-white border border-gray-200 hover:bg-gray-300"
+                className="p-2 rounded-full bg-white border border-gray-200 hover:bg-gray-100 transition-colors"
               >
                 <svg
-                  className="w-6 h-6"
+                  className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -144,8 +151,8 @@ export default function Testimonials() {
 
         {/* Estimation Box */}
         <motion.div
-          className="h-full col-span-3 lg:col-span-1 bg-blue-600 text-white p-16 rounded-xl flex flex-col items-center justify-center gap-10"
-          initial={{ opacity: 0, x: 80 }}
+          className="h-full lg:col-span-1 bg-blue-600 text-white p-6 sm:p-8 lg:p-12 xl:p-16 rounded-xl flex flex-col items-center justify-center gap-6 lg:gap-8 xl:gap-10 min-h-[300px] lg:min-h-0"
+          initial={{ opacity: 0, x: 30 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.4 }}
@@ -155,15 +162,15 @@ export default function Testimonials() {
             alt="Calculator Icon"
             width={180}
             height={220}
-            className="w-18 h-24"
+            className="w-16 h-20 sm:w-20 sm:h-24 lg:w-18 lg:h-24"
           />
           <div className="text-center">
-            <p className="text-2xl font-semibold mb-4">
+            <p className="text-lg sm:text-xl lg:text-2xl font-semibold mb-3 sm:mb-4 leading-tight">
               Want to estimate your project?
             </p>
             <button
               onClick={() => setShowEstimator(true)}
-              className="w-full bg-white text-blue-600 px-4 py-2 rounded-full font-medium hover:bg-blue-100 transition"
+              className="w-full bg-white text-blue-600 px-4 py-2 sm:px-6 sm:py-3 rounded-full font-medium hover:bg-blue-50 transition-colors text-sm sm:text-base"
             >
               Project Estimation
             </button>
@@ -171,7 +178,10 @@ export default function Testimonials() {
         </motion.div>
       </div>
 
-      <EstimationModal show={showEstimator} onClose={() => setShowEstimator(false)}/>
+      <EstimationModal
+        show={showEstimator}
+        onClose={() => setShowEstimator(false)}
+      />
     </section>
   );
 }
