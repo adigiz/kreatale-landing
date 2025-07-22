@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ExternalLink } from "lucide-react";
+import { ChevronDown, ExternalLink, MessageCircle } from "lucide-react";
 import projectsData from "@/lib/projectsData.json";
 import { ProjectsDatabase } from "@/lib/types";
 
@@ -45,6 +45,10 @@ export default function Header() {
 
   const typedProjectsData = projectsData as ProjectsDatabase;
   const projects = Object.entries(typedProjectsData);
+
+  const whatsappNumber = "+628111545314"; 
+  const whatsappMessage = encodeURIComponent("Hi! I'm interested in your services. Let's discuss my project!");
+  const whatsappUrl = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${whatsappMessage}`;
 
   return (
     <nav className="bg-white shadow-sm px-6 py-4 md:px-16 flex items-center justify-between relative z-50">
@@ -158,7 +162,7 @@ export default function Header() {
                       className="mt-2 pt-2 border-t border-gray-100"
                     >
                       <Link
-                        href="/projects"
+                        href="#"
                         className="flex items-center justify-center gap-2 p-3 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200 font-medium text-sm"
                       >
                         View All Projects
@@ -174,9 +178,16 @@ export default function Header() {
       </div>
 
       <div className="flex items-center gap-4">
-        <button className="hidden md:flex bg-blue-50 text-blue-500 px-5 py-3 rounded-full text-sm font-semibold hover:bg-gray-100 transition">
-          Project Estimation
-        </button>
+        {/* Desktop WhatsApp CTA */}
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden md:flex items-center gap-2 bg-blue-500 text-white px-5 py-3 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+        >
+          <MessageCircle size={16} />
+          WhatsApp Us
+        </a>
 
         <button
           className="md:hidden text-black"
@@ -238,7 +249,7 @@ export default function Header() {
             </a>
 
             {/* Mobile Projects Menu */}
-            <div className="border-t pt-4">
+            {/* <div className="border-t pt-4">
               <Link
                 href="/projects"
                 className="block font-medium text-blue-600 mb-3"
@@ -256,11 +267,18 @@ export default function Header() {
                   </Link>
                 ))}
               </div>
-            </div>
+            </div> */}
 
-            <button className="bg-blue-50 text-blue-500 px-5 py-3 rounded-full text-sm font-semibold hover:bg-gray-100 transition w-fit">
-              Project Estimation
-            </button>
+            {/* Mobile WhatsApp CTA */}
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 bg-blue-500 text-white px-5 py-3 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors duration-200 w-fit shadow-lg"
+            >
+              <MessageCircle size={16} />
+              WhatsApp Us
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
