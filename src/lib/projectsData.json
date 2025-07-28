@@ -1,6 +1,7 @@
 {
   "captloui": {
     "title": "Capt Loui",
+    "demoUrl": "https://capt-loui.vercel.app/",
     "country": "United States",
     "subtitle": "Refining Capt Loui Website from Good to Great",
     "client": "Seung Park",
@@ -46,6 +47,7 @@
   },
   "plumbing": {
     "title": "Plumbing",
+    "demoUrl": "https://plumbing-landing.vercel.app/",
     "country": "Australia",
     "subtitle": "Plumbing website template for plumbing business in australia",
     "client": "Anthony W.",
@@ -183,6 +185,7 @@
   },
   "pescheck": {
     "title": "Pescheck",
+    "demoUrl": "https://pescheck.io/blog/",
     "country": "Netherlands",
     "subtitle": "Make blogging feels easier to see and easy to use",
     "client": "Dennis Klappe",
@@ -223,6 +226,7 @@
   },
   "gemoedje": {
     "title": "Gemoedje.nl",
+    "demoUrl": "https://gemoedje-web-app.vercel.app/",
     "country": "Netherlands",
     "subtitle": "Simplifying therapist search in netherlands to tailored the user needs",
     "client": "Alonzo O",
@@ -267,6 +271,7 @@
   },
   "car-rental": {
     "title": "AR RentCar",
+    "demoUrl": "https://car-rental-eta-one.vercel.app/",
     "country": "Indonesia",
     "subtitle": "Modern car rental platform with seamless booking experience",
     "client": "DriveEasy Solutions",
@@ -310,6 +315,7 @@
   },
   "clinic": {
     "title": "MediCore Clinic System",
+    "demoUrl": "https://clinic-landing-eight.vercel.app/",
     "country": "Indonesia",
     "subtitle": "Digital transformation for modern healthcare management",
     "client": "HealthFirst Medical Center",
@@ -353,6 +359,7 @@
   },
   "jdm-vs-euro": {
     "title": "JDM vs Euro Showdown",
+    "demoUrl": "https://jdmvseuro.com/",
     "country": "United States",
     "subtitle": "WordPress customization for automotive enthusiast community",
     "client": "SPARQ",

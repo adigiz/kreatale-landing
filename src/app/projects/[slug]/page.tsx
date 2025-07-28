@@ -4,7 +4,15 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Calendar, Clock, User, Loader2, Computer } from "lucide-react";
+import {
+  Calendar,
+  Clock,
+  User,
+  Loader2,
+  Computer,
+  ExternalLink,
+  Play,
+} from "lucide-react";
 import projectsData from "@/lib/projectsData.json";
 import { ProjectData, ProjectsDatabase } from "@/lib/types";
 
@@ -72,6 +80,12 @@ export default function ProjectDetailPage() {
     }
   };
 
+  const handleDemoClick = (): void => {
+    if (project?.demoUrl) {
+      window.open(project.demoUrl, "_blank", "noopener,noreferrer");
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-blue-50/30 to-white flex items-center justify-center">
@@ -126,6 +140,24 @@ export default function ProjectDetailPage() {
           >
             {project.subtitle}
           </motion.p>
+
+          {/* Demo button in header */}
+          {project.demoUrl && (
+            <motion.div
+              className="mb-4"
+              {...fadeInUp}
+              transition={{ delay: 0.4 }}
+            >
+              <button
+                onClick={handleDemoClick}
+                className="hover:cursor-pointer group bg-blue-600 text-white px-8 py-4 rounded-full font-semibold text-md shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-3 mx-auto"
+              >
+                <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                View Live Demo
+                <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </motion.div>
+          )}
         </div>
       </motion.header>
 
