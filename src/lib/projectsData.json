@@ -1,150 +1,134 @@
 {
-  "plumbing": {
-    "title": "Plumbing",
-    "country": "Australia",
-    "subtitle": "Crafting a distinctive brand presence for Kreatizie",
-    "client": "Bader",
-    "duration": "18 May - 30 August 2025",
-    "timeline": "3.5 Months",
-    "heroImage": "/gemoedje-banner.png",
-    "techStacks": ["Next JS", "Strapi", "Postgres SQL", "MapBox"],
-    "images": [
-      "/gemoedje-1.png",
-      "/gemoedje-2.png",
-      "/gemoedje-3.png",
-      "/gemoedje-4.png",
-      "/gemoedje-5.png",
-      "/gemoedje-6.png"
-    ],
-    "sections": {
-      "background": {
-        "title": "Background Project",
-        "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their unique objectives. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
-        ]
-      },
-      "problem": {
-        "title": "Problem and how to tackle it",
-        "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
-        ]
-      },
-      "solution": {
-        "title": "Solution",
-        "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
-        ]
-      },
-      "conclusion": {
-        "title": "Conclusion",
-        "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence."
-        ]
-      }
-    }
-  },
   "captloui": {
     "title": "Capt Loui",
     "country": "United States",
-    "subtitle": "Crafting a distinctive brand presence for Kreatizie",
-    "client": "Bader",
-    "duration": "18 May - 30 August 2025",
-    "timeline": "3.5 Months",
-    "heroImage": "/gemoedje-banner.png",
-    "techStacks": ["Next JS", "Strapi", "Postgres SQL", "MapBox"],
+    "subtitle": "Refining Capt Loui Website from Good to Great",
+    "client": "Seung Park",
+    "duration": "9 July 2025 - 30 July 2025",
+    "timeline": "21 Days",
+    "heroImage": "/capt-loui/capt-loui-banner.png",
+    "techStacks": ["Next JS", "Google Maps", "MailGun", "Cloudinary"],
     "images": [
-      "/gemoedje-1.png",
-      "/gemoedje-2.png",
-      "/gemoedje-3.png",
-      "/gemoedje-4.png",
-      "/gemoedje-5.png",
-      "/gemoedje-6.png"
+      "/capt-loui/capt-1.png",
+      "/capt-loui/capt-2.png",
+      "/capt-loui/capt-3.png",
+      "/capt-loui/capt-4.png",
+      "/capt-loui/capt-5.png",
+      "/capt-loui/capt-6.png"
     ],
     "sections": {
-      "background": {
-        "title": "Background Project",
-        "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their unique objectives. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
-        ]
-      },
-      "problem": {
-        "title": "Problem and how to tackle it",
-        "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
-        ]
-      },
-      "solution": {
-        "title": "Solution",
-        "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
-        ]
-      },
-      "conclusion": {
-        "title": "Conclusion",
-        "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence."
-        ]
-      }
+    "background": {
+      "title": "Background Project",
+      "content": [
+        "Capt Loui aimed to revamp their existing website by creating a faster, more optimized platform that would support their growing operational needs. In addition to improving performance and user experience, they required several new features, including a location discovery system, a store detail page for each location, a search functionality for locations, and a career page. The career page needed to include a form submission system that would route each application directly to the email address of the respective store."
+      ]
+    },
+    "problem": {
+      "title": "Problem",
+      "content": [
+        "Capt Loui’s existing website was built on WordPress, and while functional, it was no longer meeting performance expectations. They needed to migrate to a new technology stack without compromising their current SEO ranking. Page speed was a top priority, along with maintaining existing search visibility. Additionally, their desired features — such as dynamic location search and conditional email routing — were not easily achievable within their current platform."
+      ]
+    },
+    "solution": {
+      "title": "Solution",
+      "content": [
+        "To address these challenges, we proposed a modern tech stack built with Next.js and deployed on Vercel for optimal speed and scalability. The website integrates Google Maps for accurate location discovery and includes a custom-built search logic to help users find the nearest store efficiently. Each store has its own detail page, dynamically generated based on location data. For the career page, we implemented a form system integrated with Mailgun, allowing form submissions to be routed to the correct store email address based on user selection.",
+        "This architecture ensured a fast, responsive, and SEO-friendly website while providing the advanced functionality Capt Loui required to support their operations and recruitment process."
+      ]
+    },
+    "conclusion": {
+      "title": "Conclusion",
+      "content": [
+        "Through a strategic migration from WordPress to a modern Next.js architecture, we delivered a high-performance website that retained SEO value and introduced advanced features such as store discovery, location search, and dynamic form handling. The new system provides a scalable foundation for Capt Loui’s digital presence while improving user experience, operational efficiency, and recruitment workflow."
+      ]
     }
+  }
+  },
+  "plumbing": {
+    "title": "Plumbing",
+    "country": "Australia",
+    "subtitle": "Plumbing website template for plumbing business in australia",
+    "client": "Anthony W.",
+    "duration": "10 July 2025 - 12 July 2025",
+    "timeline": "3 Days",
+    "heroImage": "/plumbing/plumbing-banner.png",
+    "techStacks": ["Next JS", "Strapi"],
+    "images": [
+      "/plumbing/plumbing-1.png",
+      "/plumbing/plumbing-2.png",
+      "/plumbing/plumbing-3.png",
+      "/plumbing/plumbing-4.png"
+    ],
+    "sections": {
+    "background": {
+      "title": "Background Project",
+      "content": [
+        "The client is a digital agency based in Australia looking to expand their services by targeting niche industries. Their first target is the plumbing sector, where they plan to offer tailored websites to plumbing businesses across the country. To support this initiative, they reached out to Kreatale for a collaboration. In this partnership, the client is responsible for sales and marketing, while Kreatale handles all aspects of development."
+      ]
+    },
+    "problem": {
+      "title": "Problem",
+      "content": [
+        "The client already had a reference website in mind. They wanted to follow a similar structure to one of their competitors but with a unique and distinct design. However, there were several constraints. First, they had a limited budget that made WordPress development impractical, especially considering the need for custom design. Second, they did not have any spare hosting available to support a WordPress setup. Despite these challenges, they still required the website to be customizable, maintain high quality, and serve as a professional landing page to launch their offering."
+      ]
+    },
+    "solution": {
+      "title": "Solution",
+      "content": [
+        "To meet the client's technical and budgetary requirements, Kreatale proposed using a modern and scalable tech stack. The frontend would be developed using Next.js and deployed on Vercel, allowing for excellent performance, easy scalability, and zero server maintenance costs. For content management, the site would integrate with Strapi, hosted on Strapi Cloud. This setup enables the client to update content easily while avoiding the need for dedicated hosting infrastructure.",
+        "This solution provides a fast, lightweight, and editable landing page that satisfies the client’s need for flexibility and quality. It also lays the groundwork for future scalability, should the client decide to expand the website beyond a single landing page."
+      ]
+    },
+    "conclusion": {
+      "title": "Conclusion",
+      "content": [
+        "By leveraging technologies like Next.js, Vercel, and Strapi Cloud, Kreatale delivered a high-quality, scalable landing page tailored to the client’s needs and constraints. The project serves as a strong starting point for future growth and demonstrates the effectiveness of a lean but powerful tech stack. This collaboration not only fulfilled the client's immediate goals but also positioned them well for further outreach within the plumbing sector and beyond."
+      ]
+    }
+  }
   },
   "ayobareng": {
     "title": "Ayo Bareng",
     "country": "Indonesia",
-    "subtitle": "Crafting a distinctive brand presence for Kreatizie",
-    "client": "Bader",
-    "duration": "18 May - 30 August 2025",
+    "subtitle": "Being together, sometimes can lead to financial saving",
+    "client": "Adityo",
+    "duration": "18 May 2025 - 30 August 2025",
     "timeline": "3.5 Months",
-    "heroImage": "/gemoedje-banner.png",
-    "techStacks": ["Next JS", "Strapi", "Postgres SQL", "MapBox"],
+    "heroImage": "/ayobareng/bareng-banner.png",
+    "techStacks": ["Next JS", "Golang", "Postgres SQL", "OAuth"],
     "images": [
-      "/gemoedje-1.png",
-      "/gemoedje-2.png",
-      "/gemoedje-3.png",
-      "/gemoedje-4.png",
-      "/gemoedje-5.png",
-      "/gemoedje-6.png"
+      "/ayobareng/bareng-1.png",
+      "/ayobareng/bareng-2.png",
+      "/ayobareng/bareng-3.png",
+      "/ayobareng/bareng-4.png",
+      "/ayobareng/bareng-5.png",
+      "/ayobareng/bareng-6.png",
+      "/ayobareng/bareng-7.png"
     ],
     "sections": {
       "background": {
         "title": "Background Project",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their unique objectives. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+          "This project is a passion-driven initiative aimed at creating a platform that enables people to form digital 'families' and share subscription plans for services like Netflix, Spotify, and more. Beyond shared subscriptions, the platform is also designed to foster financial support among users, creating a community where people can help each other manage and reduce expenses. The core idea is to promote collaboration and affordability through shared digital services and mutual financial aid."
         ]
       },
       "problem": {
-        "title": "Problem and how to tackle it",
+        "title": "Problem",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+          "The project had to be built entirely from scratch, with no initial funding or external resources. Speed and efficiency were critical, both in terms of development and performance. With limited time and no budget, the technical solution had to be lightweight, secure, and scalable while still delivering a seamless user experience from day one."
         ]
       },
       "solution": {
         "title": "Solution",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+          "To meet these challenges, we selected a modern, efficient tech stack built around Next.js for the frontend and Golang for the backend. PostgreSQL was chosen as the database for its reliability and performance. Authentication and user access are managed via OAuth to ensure a smooth and secure login process. This architecture allows rapid development, easy scalability, and performance optimization — all essential for a bootstrapped product with no margin for inefficiency.",
+          "The platform is now well-positioned to grow organically while offering real value to users looking for affordable digital services and financial cooperation."
         ]
       },
       "conclusion": {
         "title": "Conclusion",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence."
+          "By combining a strong technical foundation with a clear mission, we successfully launched a fast, scalable, and secure platform despite having no initial funding. The project not only allows users to form digital families for shared subscriptions but also builds a community rooted in financial cooperation. It’s a meaningful step toward making digital services more accessible and collaborative for everyone."
         ]
       }
     }
@@ -152,49 +136,47 @@
   "neon": {
     "title": "Neon",
     "country": "Kuwait",
-    "subtitle": "Crafting a distinctive brand presence for Kreatizie",
-    "client": "Bader",
-    "duration": "18 May - 30 August 2025",
+    "subtitle": "Look for creative people or agency easily using one app",
+    "client": "Bader A.",
+    "duration": "18 May 2025 - 30 August 2025",
     "timeline": "3.5 Months",
-    "heroImage": "/gemoedje-banner.png",
-    "techStacks": ["Next JS", "Strapi", "Postgres SQL", "MapBox"],
+    "heroImage": "/neon/neon-banner.png",
+    "techStacks": ["Swift UI", "Next JS", "Postgres SQL", "AWS"],
     "images": [
-      "/gemoedje-1.png",
-      "/gemoedje-2.png",
-      "/gemoedje-3.png",
-      "/gemoedje-4.png",
-      "/gemoedje-5.png",
-      "/gemoedje-6.png"
+      "/neon/neon-1.png",
+      "/neon/neon-2.png",
+      "/neon/neon-3.png",
+      "/neon/neon-4.png",
+      "/neon/neon-5.png",
+      "/neon/neon-6.png",
+      "/neon/neon-7.png",
+      "/neon/neon-8.png",
+      "/neon/neon-9.png",
+      "/neon/neon-10.png"
     ],
-    "sections": {
+     "sections": {
       "background": {
         "title": "Background Project",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their unique objectives. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+          "The client wanted to develop an iOS application that serves as a centralized platform for discovering and booking creative professionals and agencies — including photographers, designers, wedding planners, and similar services. The platform would allow users to browse service providers, view portfolios, and make bookings seamlessly within the app. A smooth integration with a payment gateway was also required to complete the user journey efficiently."
         ]
       },
       "problem": {
-        "title": "Problem and how to tackle it",
+        "title": "Problem",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+          "The project had to support multiple device types, including both iPhones and iPads, requiring a responsive and adaptive UI. It also needed to include secure file storage for storing deliverables like images and documents. Usability was a top priority, with a strong focus on intuitive UI and smooth UX for both customers and service providers. Additionally, a web-based admin dashboard was necessary for managing users, bookings, payments, and services. The mobile app had to support dual roles, allowing both users and service providers to log in and manage their respective experiences from a single application."
         ]
       },
       "solution": {
         "title": "Solution",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+          "The mobile application was built using SwiftUI to deliver a responsive, high-performance user experience across both iPhone and iPad devices. A single app architecture was implemented to support both user and service provider roles, using conditional UI logic to separate the flows. The admin panel was developed with Next.js, providing a modern, fast, and secure interface for backend management. PostgreSQL was chosen for the database due to its reliability and scalability. File storage and backend services are powered by AWS, ensuring secure handling of media and other data. Payment integration was handled through a local Kuwait-based payment gateway to ensure seamless and secure transactions."
         ]
       },
       "conclusion": {
         "title": "Conclusion",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence."
+          "This project successfully delivered an all-in-one platform for creative service discovery and booking, optimized for both iPhone and iPad. With a dual-role mobile app, a fully-featured admin dashboard, robust file storage, and local payment integration, the solution meets both user expectations and operational demands. The result is a flexible, scalable ecosystem that empowers users and service providers alike, while giving administrators full control from a centralized dashboard."
         ]
       }
     }
@@ -202,49 +184,39 @@
   "pescheck": {
     "title": "Pescheck",
     "country": "Netherlands",
-    "subtitle": "Crafting a distinctive brand presence for Kreatizie",
+    "subtitle": "Make blogging feels easier to see and easy to use",
     "client": "Dennis Klappe",
     "duration": "30 June - 2 July 2025",
     "timeline": "3 Days",
-    "heroImage": "/gemoedje-banner.png",
-    "techStacks": ["Next JS", "Strapi", "Postgres SQL", "MapBox"],
+    "heroImage": "/pescheck/pescheck-banner.png",
+    "techStacks": ["Wordpress", "Elementor"],
     "images": [
-      "/gemoedje-1.png",
-      "/gemoedje-2.png",
-      "/gemoedje-3.png",
-      "/gemoedje-4.png",
-      "/gemoedje-5.png",
-      "/gemoedje-6.png"
+      "/pescheck/pescheck-1.png",
+      "/pescheck/pescheck-2.png"
     ],
     "sections": {
       "background": {
         "title": "Background Project",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their unique objectives. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+          "The client, based in the Netherlands, wanted to refresh the design of their blog section to make it more visually appealing and easier for visitors to browse and read content. The goal was to improve readability and user experience without making drastic changes to the rest of the website."
         ]
       },
       "problem": {
-        "title": "Problem and how to tackle it",
+        "title": "Problem",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+          "The new blog design had to be integrated into the client's existing website, which was built using WordPress and Elementor. This meant the solution needed to maintain the existing look and feel of the site while enhancing the blog layout. Compatibility with Elementor and seamless blending with the current theme were essential to preserve the brand consistency and site structure."
         ]
       },
       "solution": {
         "title": "Solution",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+          "We designed and implemented a custom blog layout within the existing WordPress and Elementor setup. The new design prioritized clarity, typography, and content hierarchy to improve readability. Care was taken to match the visual style of the existing site, ensuring the blog update felt like a natural extension of the original design. The changes were implemented directly within Elementor for full compatibility and future flexibility."
         ]
       },
       "conclusion": {
         "title": "Conclusion",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence."
+          "The updated blog design successfully enhanced the visual appeal and readability of the client's content while maintaining consistency with the existing website. By working within the WordPress and Elementor framework, we ensured the update was smooth, non-disruptive, and easy to maintain going forward."
         ]
       }
     }
@@ -252,62 +224,56 @@
   "gemoedje": {
     "title": "Gemoedje.nl",
     "country": "Netherlands",
-    "subtitle": "Crafting a distinctive brand presence for Kreatizie",
-    "client": "Alonzo",
+    "subtitle": "Simplifying therapist search in netherlands to tailored the user needs",
+    "client": "Alonzo O",
     "duration": "18 May - 24 June 2025",
     "timeline": "1.2 Months",
-    "heroImage": "/gemoedje-banner.png",
-    "techStacks": ["Next JS", "Strapi", "Postgres SQL", "MapBox"],
+    "heroImage": "/gemoedje/gemoedje-banner.png",
+    "techStacks": ["Next JS", "Stripe", "Postgres SQL", "MapBox", "Strapi"],
     "images": [
-      "/gemoedje-1.png",
-      "/gemoedje-2.png",
-      "/gemoedje-3.png",
-      "/gemoedje-4.png",
-      "/gemoedje-5.png",
-      "/gemoedje-6.png"
+      "/gemoedje/gemoedje-1.png",
+      "/gemoedje/gemoedje-2.png",
+      "/gemoedje/gemoedje-3.png",
+      "/gemoedje/gemoedje-4.png",
+      "/gemoedje/gemoedje-5.png",
+      "/gemoedje/gemoedje-6.png"
     ],
     "sections": {
       "background": {
         "title": "Background Project",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their unique objectives. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+          "The client, based in the Netherlands, wanted to create a digital platform to help users easily find and connect with therapists. The goal was to provide a user-friendly directory of therapy professionals with advanced filtering options, so users could find the most suitable therapist based on their specific needs and preferences."
         ]
       },
       "problem": {
-        "title": "Problem and how to tackle it",
+        "title": "Problem",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+          "Existing platforms in the space often lacked the depth of filters and customization needed to truly match users with the right therapist. The client wanted to solve this by building a system that allowed users to narrow down results using multiple criteria — such as specialization, language, location, therapy type, and availability — all while keeping the interface simple and accessible. The challenge was to manage and display a large volume of dynamic data while maintaining performance and usability."
         ]
       },
       "solution": {
         "title": "Solution",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence.",
-          "Our team of experts brings a wealth of experience in various fields, including web development, digital marketing, and e-commerce solutions. We understand the unique challenges faced by SMEs and are committed to delivering customized strategies that drive growth and enhance brand visibility. By leveraging cutting-edge technology, we help our clients stay ahead of the curve.",
-          "At Kreatizie, we believe in fostering strong partnerships with our clients. We work closely with each business to understand their specific needs and goals, ensuring that our solutions align perfectly with their vision. Our collaborative approach not only builds trust but also leads to successful outcomes that exceed expectations."
+          "The platform was developed using Next.js for a fast and SEO-friendly frontend, integrated with Strapi as the headless CMS to manage therapist profiles and filter metadata. Mapbox was used to provide an interactive map interface, allowing users to visually locate therapists by geography. Custom filtering logic was implemented to handle multi-criteria searches efficiently while keeping response times low. The combination of these tools enabled a smooth, modern user experience tailored to helping users quickly find the right therapist."
         ]
       },
       "conclusion": {
         "title": "Conclusion",
         "content": [
-          "Kreatizie is revolutionizing the digital landscape, providing innovative solutions tailored for small and medium enterprises. Our mission is to empower businesses across Indonesia, enabling them to thrive in a competitive market. With a focus on quality and customer satisfaction, we ensure that every project we undertake meets the highest standards of excellence."
+          "The final product delivered a robust and highly usable therapist discovery platform, complete with powerful filtering options and intuitive location-based search. By leveraging modern technologies like Next.js, Strapi, and Mapbox, we were able to meet the client’s expectations and provide users with a valuable tool for finding mental health professionals more effectively."
         ]
       }
     }
   },
   "car-rental": {
-    "title": "AutoRent Pro",
+    "title": "AR RentCar",
     "country": "Indonesia",
     "subtitle": "Modern car rental platform with seamless booking experience",
     "client": "DriveEasy Solutions",
-    "duration": "15 March - 30 April 2024",
-    "timeline": "1.5 Months",
+    "duration": "15 May 2025 - 16 May 2025",
+    "timeline": "2 Days",
     "heroImage": "/portfolio-2.png",
-    "techStacks": ["React", "Node.js", "MongoDB", "Stripe API"],
+    "techStacks": ["Next JS"],
     "images": ["/portfolio-2.png"],
     "sections": {
       "background": {
@@ -350,7 +316,7 @@
     "duration": "10 January - 25 March 2024",
     "timeline": "2.5 Months",
     "heroImage": "/portfolio-3.png",
-    "techStacks": ["Vue.js", "Django", "PostgreSQL", "WebRTC"],
+    "techStacks": ["Next JS"],
     "images": ["/portfolio-3.png"],
     "sections": {
       "background": {
@@ -393,7 +359,7 @@
     "duration": "5 February - 20 March 2024",
     "timeline": "1.8 Months",
     "heroImage": "/portfolio-4.png",
-    "techStacks": ["WordPress", "PHP", "MySQL", "Custom Themes"],
+    "techStacks": ["WordPress"],
     "images": ["/portfolio-4.png"],
     "sections": {
       "background": {

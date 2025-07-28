@@ -82,7 +82,7 @@ export default function Header() {
           </a>
 
           {/* Projects Dropdown */}
-          {/* <div
+          <div
             className="relative"
             onMouseEnter={() => setProjectsDropdownOpen(true)}
             onMouseLeave={() => setProjectsDropdownOpen(false)}
@@ -173,7 +173,7 @@ export default function Header() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </div> */}
+          </div>
         </div>
       </div>
 

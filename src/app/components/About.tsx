@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import CountryMap from "./CountryMap";
+import Link from "next/link";
 
 export default function About() {
   return (
@@ -29,9 +30,11 @@ export default function About() {
           applications that are simple to use can increase your market
           competitiveness.
         </p>
-        <button className="bg-blue-100 text-blue-600 px-7 py-3 rounded-full font-semibold text-sm hover:bg-blue-200">
-          See all works
-        </button>
+        <Link href="/projects">
+          <button className="hover:cursor-pointer bg-blue-100 text-blue-600 px-7 py-3 rounded-full font-semibold text-sm hover:bg-blue-200">
+            See all works
+          </button>
+        </Link>
 
         {/* Stats */}
         <div className="text-center mt-10 grid grid-cols-2 gap-16 px-8 py-16 rounded-xl border border-gray-200 w-full">

@@ -28,7 +28,7 @@ function getProjectType(slug: string): string {
     case "neon":
       return "Mobile Development";
     case "pescheck":
-      return "Wordpress Customization";  
+      return "Wordpress Customization";
     case "gemoedje":
       return "Web App Development";
     case "car-rental":
@@ -37,12 +37,12 @@ function getProjectType(slug: string): string {
       return "Website Development";
     case "jdm-vs-euro":
       return "Wordpress Customization";
-    case "plumbing": 
+    case "plumbing":
       return "Website Development";
     case "captloui":
       return "Website Development";
     case "ayobareng":
-      return "Web App Development"   
+      return "Web App Development";
     default:
       return "Web Development";
   }
@@ -50,35 +50,35 @@ function getProjectType(slug: string): string {
 
 function getPortfolioImage(slug: string): string {
   const imageMap: { [key: string]: string } = {
-    "neon": "/portfolio-5.png",
-    "pescheck": "/portfolio-6.png",
-    "gemoedje": "/portfolio-1.png",
+    neon: "/portfolio-5.png",
+    pescheck: "/portfolio-6.png",
+    gemoedje: "/portfolio-1.png",
     "car-rental": "/portfolio-2.png",
-    "clinic": "/portfolio-3.png",
+    clinic: "/portfolio-3.png",
     "jdm-vs-euro": "/portfolio-4.png",
-    "plumbing": "/portfolio-7.png",
-    "ayobareng": "/portfolio-8.png",
-    "captloui": "/portfolio-9.png",
+    plumbing: "/portfolio-7.png",
+    ayobareng: "/portfolio-8.png",
+    captloui: "/portfolio-9.png",
   };
   return imageMap[slug] || "/portfolio-1.png";
 }
 
 // Image Modal Component
-function ImageModal({ 
-  isOpen, 
-  onClose, 
-  imageSrc, 
-  title 
-}: { 
-  isOpen: boolean; 
-  onClose: () => void; 
-  imageSrc: string; 
-  title: string; 
+function ImageModal({
+  isOpen,
+  onClose,
+  imageSrc,
+  title,
+}: {
+  isOpen: boolean;
+  onClose: () => void;
+  imageSrc: string;
+  title: string;
 }) {
   if (!isOpen) return null;
 
   return (
-    <div 
+    <div
       className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-2 sm:p-4"
       onClick={onClose}
     >
@@ -156,7 +156,9 @@ export default function Portfolio() {
       {/* Section Header */}
       <div className="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-8 mb-8 lg:mb-8">
         <div className="flex flex-col gap-3 lg:gap-4">
-          <p className="font-bold text-gray-400 uppercase text-xs sm:text-sm">Our Work</p>
+          <p className="font-bold text-gray-400 uppercase text-xs sm:text-sm">
+            Our Work
+          </p>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black leading-tight">
             We help businesses to make their <br className="hidden sm:block" />
             product come to life, worldwide.
@@ -167,9 +169,11 @@ export default function Portfolio() {
           digital arena throughout the years. Take a look at some of our
           greatest work.
           <div className="mt-3 lg:mt-4">
-            <button className="bg-blue-100 text-blue-600 px-4 sm:px-6 py-2 rounded-full font-semibold text-xs sm:text-sm hover:bg-blue-200 transition-colors">
-              See all works
-            </button>
+            <Link href="/projects">
+              <button className="hover:cursor-pointer bg-blue-100 text-blue-600 px-4 sm:px-6 py-2 rounded-full font-semibold text-xs sm:text-sm hover:bg-blue-200 transition-colors">
+                See all works
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -206,7 +210,7 @@ export default function Portfolio() {
                 >
                   <div className="h-full flex flex-col">
                     {/* Clickable Image */}
-                    <div 
+                    <div
                       className="relative aspect-[4/3] cursor-pointer"
                       onClick={() => openModal(project.image, project.title)}
                     >
@@ -217,10 +221,13 @@ export default function Portfolio() {
                         className="object-cover hover:scale-105 transition-transform duration-300"
                       />
                     </div>
-                    
+
                     {/* Content with Links */}
                     <div className="p-2 sm:p-3 lg:p-6 flex justify-between gap-2 sm:gap-3 items-center bg-white flex-1">
-                      <Link href="#" className="max-w-[60%] hover:opacity-80 transition">
+                      <Link
+                        href={project.link}
+                        className="max-w-[60%] hover:opacity-80 transition"
+                      >
                         <h3 className="text-base sm:text-lg lg:text-xl font-bold text-black">
                           {project.title}
                         </h3>
@@ -234,7 +241,7 @@ export default function Portfolio() {
                         </div>
                       </Link>
 
-                      <Link href="#">
+                      <Link href={project.link}>
                         <motion.button
                           className="border w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white text-black flex items-center justify-center hover:bg-black hover:text-white transition"
                           whileHover={{ scale: 1.1 }}
