@@ -46,9 +46,14 @@ export default function Header() {
   const typedProjectsData = projectsData as ProjectsDatabase;
   const projects = Object.entries(typedProjectsData);
 
-  const whatsappNumber = "+628111545314"; 
-  const whatsappMessage = encodeURIComponent("Hi! I'm interested in your services. Let's discuss my project!");
-  const whatsappUrl = `https://wa.me/${whatsappNumber.replace('+', '')}?text=${whatsappMessage}`;
+  const whatsappNumber = "+628111545314";
+  const whatsappMessage = encodeURIComponent(
+    "Hi! I'm interested in your services. Let's discuss my project!"
+  );
+  const whatsappUrl = `https://wa.me/${whatsappNumber.replace(
+    "+",
+    ""
+  )}?text=${whatsappMessage}`;
 
   return (
     <nav className="bg-white shadow-sm px-6 py-4 md:px-16 flex items-center justify-between relative z-50">
@@ -64,19 +69,19 @@ export default function Header() {
         <div className="hidden md:flex gap-8 text-black">
           <a
             href="#works"
-            className="hover:text-blue-600 hover:font-bold transition-colors duration-200"
+            className="hover:text-blue-600 transition-colors duration-200"
           >
             Our Works
           </a>
           <a
             href="#services"
-            className="hover:text-blue-600 hover:font-bold transition-colors duration-200"
+            className="hover:text-blue-600 transition-colors duration-200"
           >
             Services
           </a>
           <a
             href="#about"
-            className="hover:text-blue-600 hover:font-bold transition-colors duration-200"
+            className="hover:text-blue-600 transition-colors duration-200"
           >
             About
           </a>
@@ -89,7 +94,7 @@ export default function Header() {
           >
             <Link
               href="/projects"
-              className="flex items-center gap-1 hover:text-blue-600 hover:font-bold transition-colors duration-200"
+              className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-200"
             >
               Projects
               <motion.div
@@ -183,7 +188,7 @@ export default function Header() {
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden md:flex items-center gap-2 bg-blue-500 text-white px-5 py-3 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
+          className="hidden md:flex items-center gap-2 bg-[#0061FF] text-white px-5 py-3 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
         >
           <MessageCircle size={16} />
           WhatsApp Us
@@ -249,7 +254,7 @@ export default function Header() {
             </a>
 
             {/* Mobile Projects Menu */}
-            {/* <div className="border-t pt-4">
+            <div className="border-t pt-4">
               <Link
                 href="/projects"
                 className="block font-medium text-blue-600 mb-3"
@@ -267,14 +272,14 @@ export default function Header() {
                   </Link>
                 ))}
               </div>
-            </div> */}
+            </div>
 
             {/* Mobile WhatsApp CTA */}
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-blue-500 text-white px-5 py-3 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors duration-200 w-fit shadow-lg"
+              className="flex items-center justify-center gap-2 bg-[#0061FF] text-white px-5 py-3 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors duration-200 w-fit shadow-lg"
             >
               <MessageCircle size={16} />
               WhatsApp Us

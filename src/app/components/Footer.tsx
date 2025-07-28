@@ -1,19 +1,34 @@
 "use client";
 
+import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 import { FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
+  const whatsappNumber = "+628111545314";
+  const whatsappMessage = encodeURIComponent(
+    "Hi! I'm interested in your services. Let's discuss my project!"
+  );
+  const whatsappUrl = `https://wa.me/${whatsappNumber.replace(
+    "+",
+    ""
+  )}?text=${whatsappMessage}`;
   return (
     <section className="bg-black text-white rounded-t-[2rem] px-6 sm:px-12 lg:px-20 py-16 mt-24">
-      <div className="text-center mb-16">
+      <div className="text-center mb-16 flex flex-col">
         <p className="uppercase text-sm text-gray-400 mb-2">Contact Us</p>
         <h2 className="text-3xl sm:text-4xl font-bold mb-6">
           You have got this far. <br /> Ready to get started?
         </h2>
-        <button className="bg-blue-600 hover:bg-blue-700 transition text-white px-8 py-3 rounded-full font-semibold text-sm">
-          Get in touch
-        </button>
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex self-center items-center justify-center gap-2 bg-[#0061FF] text-white px-5 py-3 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors duration-200 w-fit shadow-lg"
+        >
+          <MessageCircle size={16} />
+          WhatsApp Us
+        </a>
       </div>
 
       <div className="border-t border-gray-800 pt-10 flex flex-col lg:flex-row justify-between items-center gap-8 text-sm">
@@ -29,10 +44,11 @@ export default function Footer() {
         </div>
 
         <div className="flex gap-4 text-gray-400">
-          <a 
+          <a
             href="https://www.instagram.com/kreatale"
             target="_blank"
-            rel="noopener noreferrer">
+            rel="noopener noreferrer"
+          >
             <FaInstagram className="hover:text-white cursor-pointer" />
           </a>
         </div>
