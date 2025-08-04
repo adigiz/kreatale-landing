@@ -5,7 +5,7 @@ import Image from "next/image";
 import { FaInstagram } from "react-icons/fa";
 
 export default function Footer() {
-  const whatsappNumber = "+628111545314";
+  const whatsappNumber = "+6287852819078";
   const whatsappMessage = encodeURIComponent(
     "Hi! I'm interested in your services. Let's discuss my project!"
   );

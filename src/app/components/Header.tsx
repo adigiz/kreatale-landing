@@ -46,7 +46,7 @@ export default function Header() {
   const typedProjectsData = projectsData as ProjectsDatabase;
   const projects = Object.entries(typedProjectsData);
 
-  const whatsappNumber = "+628111545314";
+  const whatsappNumber = "+6287852819078";
   const whatsappMessage = encodeURIComponent(
     "Hi! I'm interested in your services. Let's discuss my project!"
   );
