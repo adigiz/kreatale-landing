@@ -11,7 +11,6 @@ export default function Hero() {
       className="bg-white min-h-[calc(100vh-80px)] flex-1 text-white px-4 sm:px-8 lg:px-16 py-8 flex items-stretch"
     >
       <div className="flex flex-col md:flex-row gap-8 w-full">
-        {/* Left: Main Banner */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -20,7 +19,7 @@ export default function Hero() {
           className="relative flex-[3] rounded-3xl overflow-hidden min-h-[50vh] md:min-h-full"
         >
           <Image
-            src="/banner-3.jpg"
+            src="/banner-2.png"
             alt="Gradient Keyboard"
             fill
             className="object-cover"
@@ -50,7 +49,7 @@ export default function Hero() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="flex-[1] flex justify-center"
+          className="hidden flex-[1] lg:flex justify-center"
         >
           <Link href="https://www.captloui.com/">
             <div className="bg-white rounded-2xl w-full max-w-sm h-full flex flex-col justify-start">
