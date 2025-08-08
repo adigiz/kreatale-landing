@@ -67,24 +67,24 @@ export default function Header() {
           />
         </Link>
         <div className="hidden md:flex gap-8 text-black">
-          <a
-            href="#works"
+          <Link
+            href="/#works"
             className="hover:text-blue-600 transition-colors duration-200"
           >
             Our Works
-          </a>
-          <a
-            href="#services"
+          </Link>
+          <Link
+            href="/#services"
             className="hover:text-blue-600 transition-colors duration-200"
           >
             Services
-          </a>
-          <a
-            href="#about"
+          </Link>
+          <Link
+            href="/#about"
             className="hover:text-blue-600 transition-colors duration-200"
           >
             About
-          </a>
+          </Link>
 
           {/* Projects Dropdown */}
           <div
@@ -167,7 +167,7 @@ export default function Header() {
                       className="mt-2 pt-2 border-t border-gray-100"
                     >
                       <Link
-                        href="#"
+                        href="/projects"
                         className="flex items-center justify-center gap-2 p-3 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200 font-medium text-sm"
                       >
                         View All Projects
@@ -243,15 +243,15 @@ export default function Header() {
             transition={{ duration: 0.2 }}
             className="text-black absolute top-full left-0 w-full bg-white shadow-md px-6 py-4 flex flex-col gap-4 md:hidden"
           >
-            <a href="#works" className="hover:underline">
+            <Link href="#works" className="hover:underline">
               Works
-            </a>
-            <a href="#services" className="hover:underline">
+            </Link>
+            <Link href="#services" className="hover:underline">
               Services
-            </a>
-            <a href="#about" className="hover:underline">
+            </Link>
+            <Link href="#about" className="hover:underline">
               About
-            </a>
+            </Link>
 
             {/* Mobile Projects Menu */}
             <div className="border-t pt-4">

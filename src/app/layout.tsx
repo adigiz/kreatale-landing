@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +15,40 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kreatale | Development Done Right",
-  description: "Elevate your business with us",
+  title: "Kreatale | Web Development & Digital Solutions Agency",
+  description:
+    "Kreatale is a web development agency that builds fast, modern, and scalable websites & apps. We help businesses grow with custom solutions, clean design, and top-tier code.",
+  keywords: [
+    "web development agency",
+    "website design",
+    "custom web apps",
+    "Next.js development",
+    "React development",
+    "UI/UX design",
+    "digital solutions",
+    "Indonesia web development"
+  ],
+  authors: [{ name: "Kreatale" }],
+  openGraph: {
+    title: "Kreatale | Web Development & Digital Solutions Agency",
+    description:
+      "We create high-performance websites, web apps, and digital solutions tailored to your business needs.",
+    url: "https://kreatale.com",
+    siteName: "Kreatale",
+    images: [
+      {
+        url: "https://kreatale.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Kreatale - Web Development Agency",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  alternates: {
+    canonical: "https://kreatale.com",
+  },
 };
 
 export default function RootLayout({
@@ -24,11 +58,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <Header/>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>
+      <Footer/>
     </html>
   );
 }
