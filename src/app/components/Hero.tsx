@@ -19,7 +19,7 @@ export default function Hero() {
           className="relative flex-[3] rounded-3xl overflow-hidden min-h-[50vh] md:min-h-full"
         >
           <Image
-            src="/banner-2.png"
+            src="/banner.png"
             alt="Gradient Keyboard"
             fill
             className="object-cover"
