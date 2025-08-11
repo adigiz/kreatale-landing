@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import CountryMap from "./CountryMap";
 import Link from "next/link";
+import { aboutStats } from "@/lib/aboutData";
 
 export default function About() {
   return (
@@ -38,22 +39,12 @@ export default function About() {
 
         {/* Stats */}
         <div className="text-center mt-10 grid grid-cols-2 gap-16 px-8 py-16 rounded-xl border border-gray-200 w-full">
-          <div>
-            <p className="text-4xl font-bold text-gray-800">8</p>
-            <p className="text-sm text-gray-500">Operated Years</p>
-          </div>
-          <div>
-            <p className="text-4xl font-bold text-gray-800">10+</p>
-            <p className="text-sm text-gray-500">Happy Clients</p>
-          </div>
-          <div>
-            <p className="text-4xl font-bold text-gray-800">6+</p>
-            <p className="text-sm text-gray-500">Professionals</p>
-          </div>
-          <div>
-            <p className="text-4xl font-bold text-gray-800">8+</p>
-            <p className="text-sm text-gray-500">Amazing Project</p>
-          </div>
+          {aboutStats.map((stat, index) => (
+            <div key={index}>
+              <p className="text-4xl font-bold text-gray-800">{stat.value}</p>
+              <p className="text-sm text-gray-500">{stat.label}</p>
+            </div>
+          ))}
         </div>
       </motion.div>
       <div className="flex-1 px-4 py-6 my-6 rounded-2xl dark:border-gray-800 dark:bg-gray-900 sm:px-6">

@@ -277,9 +277,9 @@
     "client": "DriveEasy Solutions",
     "duration": "15 May 2025 - 16 May 2025",
     "timeline": "2 Days",
-    "heroImage": "/portfolio-2.png",
+    "heroImage": "/portfolio-2.webp",
     "techStacks": ["Next JS"],
-    "images": ["/portfolio-2.png"],
+    "images": ["/portfolio-2.webp"],
     "sections": {
       "background": {
         "title": "Background Project",
@@ -321,9 +321,9 @@
     "client": "HealthFirst Medical Center",
     "duration": "10 January - 25 March 2024",
     "timeline": "2.5 Months",
-    "heroImage": "/portfolio-3.png",
+    "heroImage": "/portfolio-3.webp",
     "techStacks": ["Next JS"],
-    "images": ["/portfolio-3.png"],
+    "images": ["/portfolio-3.webp"],
     "sections": {
       "background": {
         "title": "Background Project",
@@ -365,9 +365,9 @@
     "client": "SPARQ",
     "duration": "5 February - 20 March 2024",
     "timeline": "1.8 Months",
-    "heroImage": "/portfolio-4.png",
+    "heroImage": "/portfolio-4.webp",
     "techStacks": ["WordPress"],
-    "images": ["/portfolio-4.png"],
+    "images": ["/portfolio-4.webp"],
     "sections": {
       "background": {
         "title": "Background Project",

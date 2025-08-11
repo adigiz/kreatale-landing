@@ -41,7 +41,8 @@ const CountryMap: React.FC<CountryMapProps> = ({ mapColor }) => {
               NL: 1,
               ID: 1,
               US: 1,
-              AU: 1
+              AU: 1,
+              JP: 1
             },
             scale: {
               1: "#155dfc",

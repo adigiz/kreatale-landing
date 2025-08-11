@@ -50,17 +50,17 @@ function getProjectType(slug: string): string {
 
 function getPortfolioImage(slug: string): string {
   const imageMap: { [key: string]: string } = {
-    neon: "/portfolio-5.png",
-    pescheck: "/portfolio-6.png",
-    gemoedje: "/portfolio-1.png",
-    "car-rental": "/portfolio-2.png",
-    clinic: "/portfolio-3.png",
-    "jdm-vs-euro": "/portfolio-4.png",
-    plumbing: "/portfolio-7.png",
-    ayobareng: "/portfolio-8.png",
-    captloui: "/portfolio-9.png",
+    neon: "/portfolio-5.webp",
+    pescheck: "/portfolio-6.webp",
+    gemoedje: "/portfolio-1.webp",
+    "car-rental": "/portfolio-2.webp",
+    clinic: "/portfolio-3.webp",
+    "jdm-vs-euro": "/portfolio-4.webp",
+    plumbing: "/portfolio-7.webp",
+    ayobareng: "/portfolio-8.webp",
+    captloui: "/portfolio-9.webp",
   };
-  return imageMap[slug] || "/portfolio-1.png";
+  return imageMap[slug] || "/portfolio-1.webp";
 }
 
 // Image Modal Component

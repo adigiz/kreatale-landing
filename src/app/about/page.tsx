@@ -2,7 +2,29 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { MessageCircle, Users, Award, Globe, Code, Heart } from "lucide-react";
+import {
+  aboutHero,
+  companyStory,
+  coreValues,
+  processSteps,
+  aboutStats,
+} from "@/lib/aboutData";
+import { Code, Heart, Users, Globe, Award, MessageCircle } from "lucide-react";
+
+// Icon mapping function
+const getIcon = (iconName: string) => {
+  const iconMap = {
+    Code: <Code className="w-8 h-8" />,
+    Heart: <Heart className="w-8 h-8" />,
+    Users: <Users className="w-8 h-8" />,
+    Globe: <Globe className="w-8 h-8" />,
+    Award: <Award className="w-8 h-8" />,
+    MessageCircle: <MessageCircle className="w-8 h-8" />,
+  };
+  return (
+    iconMap[iconName as keyof typeof iconMap] || <Code className="w-8 h-8" />
+  );
+};
 
 export default function AboutPage() {
   return (
@@ -16,16 +38,13 @@ export default function AboutPage() {
           className="max-w-4xl mx-auto text-center"
         >
           <p className="font-bold text-blue-100 uppercase text-xs sm:text-sm mb-4">
-            About Kreatale
+            {aboutHero.subtitle}
           </p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-            We turn ideas into
-            <br className="hidden sm:block" />
-            digital reality
+            {aboutHero.title}
           </h1>
           <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-            A team of passionate developers, designers, and strategists creating
-            innovative digital solutions that drive business growth.
+            {aboutHero.description}
           </p>
         </motion.div>
       </section>
@@ -60,20 +79,10 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
             >
               <h3 className="text-2xl font-bold text-black mb-4">
-                From Startup to Success
+                {companyStory.title}
               </h3>
-              <p className="text-gray-600 mb-6">
-                We&apos;ve helped over 50+ businesses launch their digital
-                presence, from local startups to international corporations. Our
-                journey has been marked by continuous learning, adaptation to
-                new technologies, and unwavering commitment to client success.
-              </p>
-              <p className="text-gray-600">
-                Today, we&apos;re proud to be a trusted partner for businesses
-                seeking to establish a strong online presence, optimize their
-                digital operations, and drive meaningful growth through
-                technology.
-              </p>
+              <p className="text-gray-600 mb-6">{companyStory.description1}</p>
+              <p className="text-gray-600">{companyStory.description2}</p>
             </motion.div>
 
             <motion.div
@@ -85,34 +94,14 @@ export default function AboutPage() {
             >
               <div className="bg-gray-100 rounded-2xl p-8">
                 <div className="grid grid-cols-2 gap-6">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-[#0061FF] mb-2">
-                      8+
+                  {aboutStats.map((stat, index) => (
+                    <div key={index} className="text-center">
+                      <div className="text-3xl font-bold text-[#0061FF] mb-2">
+                        {stat.value}
+                      </div>
+                      <div className="text-sm text-gray-600">{stat.label}</div>
                     </div>
-                    <div className="text-sm text-gray-600">
-                      Years Experience
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-[#0061FF] mb-2">
-                      50+
-                    </div>
-                    <div className="text-sm text-gray-600">
-                      Projects Delivered
-                    </div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-[#0061FF] mb-2">
-                      10+
-                    </div>
-                    <div className="text-sm text-gray-600">Happy Clients</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-[#0061FF] mb-2">
-                      6+
-                    </div>
-                    <div className="text-sm text-gray-600">Team Members</div>
-                  </div>
+                  ))}
                 </div>
               </div>
             </motion.div>
@@ -140,44 +129,7 @@ export default function AboutPage() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <Code className="w-8 h-8" />,
-                title: "Technical Excellence",
-                description:
-                  "We write clean, maintainable code and stay current with the latest technologies to deliver robust solutions.",
-              },
-              {
-                icon: <Heart className="w-8 h-8" />,
-                title: "Client-Centric Approach",
-                description:
-                  "Your success is our success. We listen, understand, and deliver solutions that exceed your expectations.",
-              },
-              {
-                icon: <Users className="w-8 h-8" />,
-                title: "Collaboration",
-                description:
-                  "We believe in working closely with our clients, fostering open communication and transparency throughout the process.",
-              },
-              {
-                icon: <Globe className="w-8 h-8" />,
-                title: "Innovation",
-                description:
-                  "We constantly explore new technologies and approaches to provide cutting-edge solutions for your business.",
-              },
-              {
-                icon: <Award className="w-8 h-8" />,
-                title: "Quality Assurance",
-                description:
-                  "Every project undergoes rigorous testing to ensure it meets our high standards and your requirements.",
-              },
-              {
-                icon: <MessageCircle className="w-8 h-8" />,
-                title: "Transparent Communication",
-                description:
-                  "We keep you informed at every step, providing regular updates and clear explanations of our progress.",
-              },
-            ].map((value, index) => (
+            {coreValues.map((value, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -186,7 +138,9 @@ export default function AboutPage() {
                 transition={{ duration: 0.4, delay: index * 0.1 }}
                 className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200"
               >
-                <div className="text-[#0061FF] mb-4">{value.icon}</div>
+                <div className="text-[#0061FF] mb-4">
+                  {getIcon(value.iconName)}
+                </div>
                 <h3 className="text-xl font-semibold text-black mb-3">
                   {value.title}
                 </h3>
@@ -217,32 +171,7 @@ export default function AboutPage() {
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Discovery & Planning",
-                description:
-                  "We start by understanding your business goals, target audience, and project requirements.",
-              },
-              {
-                step: "02",
-                title: "Design & Prototyping",
-                description:
-                  "Our designers create wireframes and prototypes to visualize the user experience.",
-              },
-              {
-                step: "03",
-                title: "Development & Testing",
-                description:
-                  "We build your solution using modern technologies and conduct thorough testing.",
-              },
-              {
-                step: "04",
-                title: "Launch & Support",
-                description:
-                  "We deploy your project and provide ongoing support and maintenance.",
-              },
-            ].map((process, index) => (
+            {processSteps.map((process, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}

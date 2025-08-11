@@ -68,38 +68,8 @@ export default function Header() {
             src="/kreatale-logo-primary.svg"
           />
         </Link>
-        <div className="hidden md:flex gap-8 text-black">
-          <Link
-            href="/services"
-            className={`transition-colors duration-200 ${
-              pathname === "/services"
-                ? "text-blue-600 font-semibold"
-                : "hover:text-blue-600"
-            }`}
-          >
-            Services
-          </Link>
-          <Link
-            href="/about"
-            className={`transition-colors duration-200 ${
-              pathname === "/about"
-                ? "text-blue-600 font-semibold"
-                : "hover:text-blue-600"
-            }`}
-          >
-            About
-          </Link>
-          <Link
-            href="/faq"
-            className={`transition-colors duration-200 ${
-              pathname === "/faq"
-                ? "text-blue-600 font-semibold"
-                : "hover:text-blue-600"
-            }`}
-          >
-            FAQ
-          </Link>
 
+        <div className="hidden md:flex gap-8 text-black">
           {/* Projects Dropdown */}
           <div
             className="relative"
@@ -197,6 +167,36 @@ export default function Header() {
               )}
             </AnimatePresence>
           </div>
+          <Link
+            href="/services"
+            className={`transition-colors duration-200 ${
+              pathname === "/services"
+                ? "text-blue-600 font-semibold"
+                : "hover:text-blue-600"
+            }`}
+          >
+            Services
+          </Link>
+          <Link
+            href="/about"
+            className={`transition-colors duration-200 ${
+              pathname === "/about"
+                ? "text-blue-600 font-semibold"
+                : "hover:text-blue-600"
+            }`}
+          >
+            About
+          </Link>
+          <Link
+            href="/faq"
+            className={`transition-colors duration-200 ${
+              pathname === "/faq"
+                ? "text-blue-600 font-semibold"
+                : "hover:text-blue-600"
+            }`}
+          >
+            FAQ
+          </Link>
         </div>
       </div>
 
