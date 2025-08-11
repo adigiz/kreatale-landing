@@ -47,6 +47,34 @@ export default function Footer() {
           </Link>
         </div>
 
+        {/* Navigation Links */}
+        <div className="flex flex-wrap gap-6 text-gray-400">
+          <Link
+            href="/services"
+            className="hover:text-white transition-colors duration-200"
+          >
+            Services
+          </Link>
+          <Link
+            href="/about"
+            className="hover:text-white transition-colors duration-200"
+          >
+            About
+          </Link>
+          <Link
+            href="/projects"
+            className="hover:text-white transition-colors duration-200"
+          >
+            Projects
+          </Link>
+          <Link
+            href="/faq"
+            className="hover:text-white transition-colors duration-200"
+          >
+            FAQ
+          </Link>
+        </div>
+
         <div className="flex gap-4 text-gray-400">
           <Link
             href="https://www.instagram.com/kreatale"
@@ -78,7 +106,12 @@ export default function Footer() {
           <span className="hover:text-white cursor-pointer">
             Privacy Policy
           </span>
-          <span className="hover:text-white cursor-pointer">FAQ</span>
+          <Link
+            href="/faq"
+            className="hover:text-white transition-colors duration-200"
+          >
+            FAQ
+          </Link>
           <span className="hover:text-white cursor-pointer">
             Terms of service
           </span>

@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, ExternalLink, MessageCircle } from "lucide-react";
 import projectsData from "@/lib/projectsData.json";
 import { ProjectsDatabase } from "@/lib/types";
+import { usePathname } from "next/navigation";
 
 // Animation variants
 const dropdownVariants = {
@@ -42,6 +43,7 @@ const itemVariants = {
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [projectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
+  const pathname = usePathname();
 
   const typedProjectsData = projectsData as ProjectsDatabase;
   const projects = Object.entries(typedProjectsData);
@@ -68,22 +70,34 @@ export default function Header() {
         </Link>
         <div className="hidden md:flex gap-8 text-black">
           <Link
-            href="/#works"
-            className="hover:text-blue-600 transition-colors duration-200"
-          >
-            Our Works
-          </Link>
-          <Link
-            href="/#services"
-            className="hover:text-blue-600 transition-colors duration-200"
+            href="/services"
+            className={`transition-colors duration-200 ${
+              pathname === "/services"
+                ? "text-blue-600 font-semibold"
+                : "hover:text-blue-600"
+            }`}
           >
             Services
           </Link>
           <Link
-            href="/#about"
-            className="hover:text-blue-600 transition-colors duration-200"
+            href="/about"
+            className={`transition-colors duration-200 ${
+              pathname === "/about"
+                ? "text-blue-600 font-semibold"
+                : "hover:text-blue-600"
+            }`}
           >
             About
+          </Link>
+          <Link
+            href="/faq"
+            className={`transition-colors duration-200 ${
+              pathname === "/faq"
+                ? "text-blue-600 font-semibold"
+                : "hover:text-blue-600"
+            }`}
+          >
+            FAQ
           </Link>
 
           {/* Projects Dropdown */}
@@ -94,7 +108,11 @@ export default function Header() {
           >
             <Link
               href="/projects"
-              className="flex items-center gap-1 hover:text-blue-600 transition-colors duration-200"
+              className={`flex items-center gap-1 transition-colors duration-200 ${
+                pathname === "/projects"
+                  ? "text-blue-600 font-semibold"
+                  : "hover:text-blue-600"
+              }`}
             >
               Projects
               <motion.div
@@ -194,96 +212,172 @@ export default function Header() {
           WhatsApp Us
         </a>
 
-        <button
-          className="md:hidden text-black"
+        <motion.button
+          className="md:hidden text-black p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
+          whileTap={{ scale: 0.95 }}
         >
-          {menuOpen ? (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          ) : (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          )}
-        </button>
+          <motion.div
+            animate={menuOpen ? "open" : "closed"}
+            variants={{
+              open: { rotate: 180 },
+              closed: { rotate: 0 },
+            }}
+            transition={{ duration: 0.3 }}
+          >
+            {menuOpen ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            )}
+          </motion.div>
+        </motion.button>
       </div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="text-black absolute top-full left-0 w-full bg-white shadow-md px-6 py-4 flex flex-col gap-4 md:hidden"
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-md shadow-2xl border-t border-gray-100 px-6 py-6 md:hidden overflow-hidden"
           >
-            <Link href="#works" className="hover:underline">
-              Works
-            </Link>
-            <Link href="#services" className="hover:underline">
-              Services
-            </Link>
-            <Link href="#about" className="hover:underline">
-              About
-            </Link>
-
-            {/* Mobile Projects Menu */}
-            <div className="border-t pt-4">
-              <Link
-                href="/projects"
-                className="block font-medium text-blue-600 mb-3"
-              >
-                Projects
-              </Link>
-              <div className="pl-4 space-y-2">
-                {projects.map(([slug, project]) => (
+            {/* Main Navigation Links */}
+            <div className="space-y-1 mb-6 pt-2">
+              {[
+                {
+                  href: "/services",
+                  label: "Services",
+                  isActive: pathname === "/services",
+                },
+                {
+                  href: "/about",
+                  label: "About",
+                  isActive: pathname === "/about",
+                },
+                { href: "/faq", label: "FAQ", isActive: pathname === "/faq" },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 + index * 0.05, duration: 0.3 }}
+                >
                   <Link
-                    key={slug}
-                    href={`/projects/${slug}`}
-                    className="block text-sm text-gray-600 hover:text-blue-600 transition-colors duration-200"
+                    href={item.href}
+                    className={`block py-3 px-4 rounded-xl transition-all duration-200 ${
+                      item.isActive
+                        ? "bg-blue-50 text-[#0061FF] font-semibold border-l-4 border-[#0061FF]"
+                        : "text-gray-700 hover:bg-gray-50 hover:text-[#0061FF]"
+                    }`}
                   >
-                    {project.title}
+                    {item.label}
                   </Link>
-                ))}
-              </div>
+                </motion.div>
+              ))}
             </div>
 
-            {/* Mobile WhatsApp CTA */}
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 bg-[#0061FF] text-white px-5 py-3 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors duration-200 w-fit shadow-lg"
+            {/* Projects Section */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3, duration: 0.3 }}
+              className="mb-6"
             >
-              <MessageCircle size={16} />
-              WhatsApp Us
-            </a>
+              <div className="border-t border-gray-200 pt-4">
+                <Link
+                  href="/projects"
+                  className={`block font-semibold mb-3 px-4 py-2 rounded-xl transition-all duration-200 ${
+                    pathname === "/projects"
+                      ? "bg-blue-50 text-[#0061FF] border-l-4 border-[#0061FF]"
+                      : "text-[#0061FF] hover:bg-blue-50"
+                  }`}
+                >
+                  Projects
+                </Link>
+                <div className="pl-4 space-y-2">
+                  {projects.map(([slug, project], index) => (
+                    <motion.div
+                      key={slug}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.35 + index * 0.03, duration: 0.3 }}
+                    >
+                      <Link
+                        href={`/projects/${slug}`}
+                        className="block text-sm text-gray-600 hover:text-[#0061FF] transition-all duration-200 py-2 px-4 rounded-lg hover:bg-gray-50 group"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 relative rounded-lg overflow-hidden flex-shrink-0">
+                            <Image
+                              src={project.heroImage}
+                              alt={project.title}
+                              fill
+                              className="object-cover group-hover:scale-110 transition-transform duration-300"
+                            />
+                          </div>
+                          <div>
+                            <div className="font-medium text-gray-900 group-hover:text-[#0061FF] transition-colors duration-200">
+                              {project.title}
+                            </div>
+                            <div className="text-xs text-gray-500">
+                              {project.client}
+                            </div>
+                          </div>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+            {/* WhatsApp CTA */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.3 }}
+              className="border-t border-gray-200 pt-4"
+            >
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-3 bg-gradient-to-r from-[#0061FF] to-blue-600 text-white px-6 py-4 rounded-2xl text-sm font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-300 w-full shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                <MessageCircle size={18} />
+                Start a Project on WhatsApp
+              </a>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://kreatale.com"),
   title: "Kreatale | Web Development & Digital Solutions Agency",
   description:
     "Kreatale is a web development agency that builds fast, modern, and scalable websites & apps. We help businesses grow with custom solutions, clean design, and top-tier code.",
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     "React development",
     "UI/UX design",
     "digital solutions",
-    "Indonesia web development"
+    "Indonesia web development",
   ],
   authors: [{ name: "Kreatale" }],
   openGraph: {
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
     siteName: "Kreatale",
     images: [
       {
-        url: "https://kreatale.com/og-image.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Kreatale - Web Development Agency",
@@ -58,13 +59,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Header/>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <Header />
         {children}
+        <Footer />
       </body>
-      <Footer/>
     </html>
   );
 }

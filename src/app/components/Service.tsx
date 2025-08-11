@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 const services = [
   {
@@ -70,9 +71,11 @@ export default function Service() {
                 <p className="text-gray-400 max-w-xl mx-auto lg:mx-0">
                   {service.description}
                 </p>
-                <button className="w-40 mx-auto lg:mx-0 bg-gray-800 text-white px-7 py-3 rounded-full font-semibold text-sm hover:bg-blue-600">
-                  Learn more
-                </button>
+                <Link href="/services">
+                  <button className="w-40 mx-auto lg:mx-0 bg-gray-800 text-white px-7 py-3 rounded-full font-semibold text-sm hover:bg-blue-600 transition-colors duration-200">
+                    Learn more
+                  </button>
+                </Link>
               </div>
             </motion.div>
           ))}
