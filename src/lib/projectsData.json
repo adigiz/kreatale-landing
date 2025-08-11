@@ -400,5 +400,49 @@
         ]
       }
     }
+  },
+  "activenet": {
+    "title": "ActiveNet",
+    "demoUrl": "https://activenet.jp/%E6%96%B0%E3%81%97%E3%81%84%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8/",
+    "country": "Japan",
+    "subtitle": "WordPress Elementor website for Japanese technology company",
+    "client": "Takebe",
+    "duration": "5 August 2025 - 8 August 2025",
+    "timeline": "3 Days",
+    "heroImage": "/portfolio-10.webp",
+    "techStacks": ["WordPress", "Elementor"],
+    "images": ["/portfolio-10.webp"],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "ActiveNet, a technology company based in Japan, approached us to create a modern, professional website that would showcase their services and establish a strong online presence in the Japanese market. The client needed a website that would be easy to manage and update while maintaining high performance and SEO standards.",
+          "As a Japanese company, the website needed to reflect local business culture and provide a seamless user experience for both Japanese and international visitors. The project required careful attention to cultural nuances, language considerations, and local market expectations.",
+          "Our goal was to deliver a WordPress-based solution using Elementor that would provide ActiveNet with a professional, scalable website that could grow with their business needs."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "ActiveNet needed a website that could effectively communicate their technology services to a Japanese audience while maintaining international accessibility. The main challenges included creating a design that resonated with Japanese business culture, ensuring fast loading times for the Japanese market, and implementing a content management system that their team could easily use.",
+          "Key requirements included: professional design that builds trust with Japanese clients, fast loading times for optimal user experience, easy content management for non-technical staff, SEO optimization for Japanese search engines, and responsive design for all devices.",
+          "We needed to balance modern web design principles with Japanese business aesthetics, implement efficient WordPress optimization, and create a user-friendly admin interface that would empower the ActiveNet team to manage their content effectively."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We developed a custom WordPress website using Elementor page builder, creating a professional design that reflects Japanese business culture while maintaining modern web standards. The solution included custom page templates, optimized performance, and intuitive content management capabilities.",
+          "Key features include: custom Elementor widgets and templates, performance optimization with caching and image optimization, SEO-friendly structure with Japanese market considerations, responsive design for all devices, easy-to-use admin interface, and integration with Japanese hosting and CDN services for optimal local performance.",
+          "The website achieved excellent performance scores, with page load times under 2 seconds for Japanese users. The Elementor-based solution provides ActiveNet with an intuitive content management system that allows their team to easily update content, add new pages, and maintain their online presence without technical assistance."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The ActiveNet website successfully established a strong online presence for the company in the Japanese market. The WordPress Elementor solution delivered a professional, high-performance website that meets both business and technical requirements. The project demonstrates our ability to create culturally appropriate solutions while maintaining modern web development standards and providing clients with easy-to-manage platforms."
+        ]
+      }
+    }
   }
 }

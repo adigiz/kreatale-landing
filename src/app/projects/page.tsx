@@ -50,7 +50,34 @@ const hoverVariants = {
 
 export default function ProjectsPage() {
   const typedProjectsData = projectsData as ProjectsDatabase;
-  const projects = Object.entries(typedProjectsData);
+  const projects = Object.entries(typedProjectsData).sort(
+    ([slugA], [slugB]) => {
+      // Custom sorting order: ActiveNet, CaptLoui, Plumbing, Gemoedje, Neon, Pescheck, then rest
+      const order = [
+        "activenet",
+        "captloui",
+        "plumbing",
+        "gemoedje",
+        "neon",
+        "pescheck",
+      ];
+
+      const aIndex = order.indexOf(slugA);
+      const bIndex = order.indexOf(slugB);
+
+      // If both are in the custom order, sort by their position
+      if (aIndex !== -1 && bIndex !== -1) {
+        return aIndex - bIndex;
+      }
+
+      // If only one is in the custom order, prioritize it
+      if (aIndex !== -1) return -1;
+      if (bIndex !== -1) return 1;
+
+      // For the rest, sort alphabetically
+      return slugA.localeCompare(slugB);
+    }
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50/30 to-white">

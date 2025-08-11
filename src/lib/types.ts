@@ -29,4 +29,5 @@ export interface PortfolioProject {
   image: string;
   country: string;
   link: string;
+  slug: string;
 }

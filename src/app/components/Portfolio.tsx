@@ -12,16 +12,42 @@ import { useState } from "react";
 import projectsData from "@/lib/projectsData.json";
 import { PortfolioProject } from "@/lib/types";
 
-// Map the JSON data to the portfolio format
-const projects: PortfolioProject[] = Object.entries(projectsData).map(
-  ([slug, data]) => ({
+// Map the JSON data to the portfolio format and reorder to show ActiveNet first
+const projects: PortfolioProject[] = Object.entries(projectsData)
+  .map(([slug, data]) => ({
     title: data.title,
     description: getProjectType(slug),
     country: data.country || "Unknown", // Add country from data
     image: getPortfolioImage(slug),
     link: `/projects/${slug}`,
-  })
-);
+    slug: slug, // Add slug for sorting
+  }))
+  .sort((a, b) => {
+    // Custom sorting order: ActiveNet, CaptLoui, Plumbing, Gemoedje, Neon, Pescheck, then rest
+    const order = [
+      "activenet",
+      "captloui",
+      "plumbing",
+      "gemoedje",
+      "neon",
+      "pescheck",
+    ];
+
+    const aIndex = order.indexOf(a.slug);
+    const bIndex = order.indexOf(b.slug);
+
+    // If both are in the custom order, sort by their position
+    if (aIndex !== -1 && bIndex !== -1) {
+      return aIndex - bIndex;
+    }
+
+    // If only one is in the custom order, prioritize it
+    if (aIndex !== -1) return -1;
+    if (bIndex !== -1) return 1;
+
+    // For the rest, sort alphabetically
+    return a.slug.localeCompare(b.slug);
+  });
 
 function getProjectType(slug: string): string {
   switch (slug) {
@@ -43,6 +69,8 @@ function getProjectType(slug: string): string {
       return "Website Development";
     case "ayobareng":
       return "Web App Development";
+    case "activenet":
+      return "Wordpress Development";
     default:
       return "Web Development";
   }
@@ -59,6 +87,7 @@ function getPortfolioImage(slug: string): string {
     plumbing: "/portfolio-7.webp",
     ayobareng: "/portfolio-8.webp",
     captloui: "/portfolio-9.webp",
+    activenet: "/portfolio-10.webp",
   };
   return imageMap[slug] || "/portfolio-1.webp";
 }
