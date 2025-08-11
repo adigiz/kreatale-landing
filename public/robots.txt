@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://kreatale.com/sitemap.xml
+
+# Crawl-delay
+Crawl-delay: 1
+
+# Disallow admin areas and Next.js internal files
+Disallow: /admin/
+Disallow: /api/
+Disallow: /_next/
+Disallow: /static/
+Disallow: /sw.js
+Disallow: /manifest.json
+
+# Allow important paths
+Allow: /projects/
+Allow: /about
+Allow: /services
+Allow: /faq

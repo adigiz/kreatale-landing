@@ -149,6 +149,7 @@ function ImageModal({
             className="object-contain"
             sizes="95vw"
             priority
+            quality={85}
           />
         </div>
 
@@ -224,17 +225,17 @@ export default function Portfolio() {
               >
                 <motion.div
                   className="h-full bg-gray-100 rounded-3xl flex flex-col overflow-hidden"
-                  initial={{ opacity: 0, y: 40 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   whileHover={{
                     scale: 1.02,
-                    y: -5,
-                    transition: { duration: 0.3, ease: "easeOut" },
+                    y: -3,
+                    transition: { duration: 0.2, ease: "easeOut" },
                   }}
                   transition={{
-                    duration: 0.6,
+                    duration: 0.5,
                     ease: "easeOut",
-                    delay: i * 0.15,
+                    delay: i * 0.1,
                   }}
                 >
                   <div className="h-full flex flex-col">
@@ -242,12 +243,23 @@ export default function Portfolio() {
                     <div
                       className="relative aspect-[4/3] cursor-pointer"
                       onClick={() => openModal(project.image, project.title)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          openModal(project.image, project.title);
+                        }
+                      }}
+                      tabIndex={0}
+                      role="button"
+                      aria-label={`View ${project.title} project details`}
                     >
                       <Image
                         src={project.image}
                         alt={project.title}
                         fill
                         className="object-cover hover:scale-105 transition-transform duration-300"
+                        sizes="(max-width: 640px) 85vw, (max-width: 768px) 60vw, (max-width: 1024px) 50vw, 42vw"
+                        quality={80}
                       />
                     </div>
 

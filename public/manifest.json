@@ -1,0 +1,21 @@
+{
+  "name": "Kreatale - Web Development Agency",
+  "short_name": "Kreatale",
+  "description": "Web Development & Digital Solutions Agency",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0061FF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/kreatale-logo-primary.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "en",
+  "dir": "ltr"
+}

@@ -15,57 +15,57 @@ export interface ProcessStep {
   description: string;
 }
 
-// Stats data - using the home page version for consistency
+// Stats data - updated to reflect new company story
 export const aboutStats: AboutStats[] = [
   {
     value: "1",
-    label: "Operated Years"
+    label: "Year Founded"
   },
   {
-    value: "12+",
+    value: "2",
+    label: "Months Active"
+  },
+  {
+    value: "Many",
+    label: "New Clients"
+  },
+  {
+    value: "100%",
     label: "Happy Clients"
-  },
-  {
-    value: "6+",
-    label: "Professionals"
-  },
-  {
-    value: "12+",
-    label: "Amazing Project"
   }
 ];
 
 // Core values data
 export const coreValues: CoreValue[] = [
   {
-    iconName: "Code",
-    title: "Technical Excellence",
-    description: "We write clean, maintainable code and stay current with the latest technologies to deliver robust solutions."
+    iconName: "Heart",
+    title: "Dream Realization",
+    description: "Our core mission is to help businesses realize their dreams through technology. We believe every business has a vision, and we're here to make it a digital reality."
   },
   {
-    iconName: "Heart",
-    title: "Client-Centric Approach",
-    description: "Your success is our success. We listen, understand, and deliver solutions that exceed your expectations."
+    iconName: "Code",
+    title: "Technical Excellence",
+    description: "We write clean, maintainable code and stay current with the latest technologies to deliver robust solutions that bring your dreams to life."
   },
   {
     iconName: "Users",
-    title: "Collaboration",
-    description: "We believe in working closely with our clients, fostering open communication and transparency throughout the process."
+    title: "Client Partnership",
+    description: "We work as true partners with our clients, understanding their dreams and collaborating closely to turn them into successful digital solutions."
   },
   {
     iconName: "Globe",
-    title: "Innovation",
-    description: "We constantly explore new technologies and approaches to provide cutting-edge solutions for your business."
+    title: "Innovation & Growth",
+    description: "As a growing company ourselves, we constantly explore new technologies and approaches to provide cutting-edge solutions for your business growth."
   },
   {
     iconName: "Award",
-    title: "Quality Assurance",
-    description: "Every project undergoes rigorous testing to ensure it meets our high standards and your requirements."
+    title: "Quality & Satisfaction",
+    description: "Every project undergoes rigorous testing to ensure it meets our high standards and exceeds your expectations, making your dreams come true."
   },
   {
     iconName: "MessageCircle",
     title: "Transparent Communication",
-    description: "We keep you informed at every step, providing regular updates and clear explanations of our progress."
+    description: "We keep you informed at every step, providing regular updates and clear explanations as we work together to realize your business dreams."
   }
 ];
 
@@ -95,14 +95,14 @@ export const processSteps: ProcessStep[] = [
 
 // Company story data
 export const companyStory = {
-  title: "From Startup to Success",
-  description1: "We've helped over 50+ businesses launch their digital presence, from local startups to international corporations. Our journey has been marked by continuous learning, adaptation to new technologies, and unwavering commitment to client success.",
-  description2: "Today, we're proud to be a trusted partner for businesses seeking to establish a strong online presence, optimize their digital operations, and drive meaningful growth through technology."
+  title: "New Beginnings, Rapid Growth",
+  description1: "Founded last year, Kreatale has quickly established itself as a dynamic force in the digital landscape. While we're a relatively new company, our passion for technology and commitment to client success has enabled us to secure many new clients in just the past 2 months.",
+  description2: "Despite being a young company, we've managed to build a strong foundation of satisfied clients who are all happy with our services. The company is still growing rapidly, and we're excited about the future as we continue to help businesses realize their dreams through technology."
 };
 
 // Hero section data
 export const aboutHero = {
   subtitle: "About Kreatale",
-  title: "We turn ideas into digital reality",
-  description: "A team of passionate developers, designers, and strategists creating innovative digital solutions that drive business growth."
+  title: "We turn dreams into digital reality",
+  description: "A young, dynamic team passionate about helping businesses realize their dreams through innovative technology solutions."
 };

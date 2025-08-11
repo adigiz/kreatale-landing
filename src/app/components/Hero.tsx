@@ -12,10 +12,10 @@ export default function Hero() {
     >
       <div className="flex flex-col md:flex-row gap-8 w-full">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="relative flex-[3] rounded-3xl overflow-hidden min-h-[50vh] md:min-h-full"
         >
           <Image
@@ -23,6 +23,9 @@ export default function Hero() {
             alt="Gradient Keyboard"
             fill
             className="object-cover"
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            quality={85}
           />
           <div className="absolute bottom-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 py-8 px-6 sm:px-10 md:px-16 bg-gradient-to-t from-black/60 to-transparent w-full">
             <div className="flex flex-col">
@@ -36,7 +39,8 @@ export default function Hero() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-white text-black font-semibold px-5 py-2 rounded-full w-max text-sm hover:bg-gray-200 transition"
+              className="bg-white text-black font-semibold px-5 py-2 rounded-full w-max text-sm hover:bg-gray-200 transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+              aria-label="Start a new project with Kreatale"
             >
               Start a project
             </motion.button>
@@ -45,10 +49,10 @@ export default function Hero() {
 
         {/* Right: Side Card */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="hidden flex-[1] lg:flex justify-center"
         >
           <Link href="https://www.captloui.com/">
@@ -59,6 +63,8 @@ export default function Hero() {
                 width={400}
                 height={250}
                 className="rounded-2xl mb-4 w-full object-cover"
+                sizes="(max-width: 1024px) 100vw, 400px"
+                quality={85}
               />
 
               <div className="flex justify-between items-center">

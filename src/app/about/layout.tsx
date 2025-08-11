@@ -4,11 +4,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://kreatale.com"),
   title: "About Us - Kreatale Digital Agency | Web Development & Design",
   description:
-    "Learn about Kreatale, a digital agency founded in 2017. We turn ideas into digital reality with expert web development, mobile apps, and innovative digital solutions.",
+    "Learn about Kreatale, a young digital agency founded last year. We turn dreams into digital reality with expert web development, mobile apps, and innovative digital solutions.",
   openGraph: {
     title: "About Us - Kreatale Digital Agency | Web Development & Design",
     description:
-      "Learn about Kreatale, a digital agency founded in 2017. We turn ideas into digital reality with expert web development, mobile apps, and innovative digital solutions.",
+      "Learn about Kreatale, a young digital agency founded last year. We turn dreams into digital reality with expert web development, mobile apps, and innovative digital solutions.",
     type: "website",
     url: "https://kreatale.com/about",
     images: [
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "About Us - Kreatale Digital Agency | Web Development & Design",
     description:
-      "Learn about Kreatale, a digital agency founded in 2017. We turn ideas into digital reality with expert web development, mobile apps, and innovative digital solutions.",
+      "Learn about Kreatale, a young digital agency founded last year. We turn dreams into digital reality with expert web development, mobile apps, and innovative digital solutions.",
     images: ["/og-image.png"],
   },
 };

@@ -63,10 +63,10 @@ export default function AboutPage() {
               Our Story
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Founded in 2017, Kreatale began with a simple mission: to help
-              businesses thrive in the digital age through innovative web
+              Founded last year, Kreatale began with a simple mission: to help
+              businesses realize their dreams through innovative technology
               solutions. What started as a small team of passionate developers
-              has grown into a full-service digital agency serving clients
+              has quickly grown into a dynamic digital agency serving clients
               worldwide.
             </p>
           </motion.div>
@@ -151,6 +151,80 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Dream Realization Section */}
+      <section className="py-20 px-4 sm:px-8 lg:px-16 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6">
+              Realizing Dreams Through Technology
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              At Kreatale, we believe every business has a dream. Whether
+              it&apos;s launching a new product, expanding to new markets, or
+              revolutionizing an industry, we&apos;re here to turn those dreams
+              into digital reality.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h3 className="text-2xl font-bold text-black mb-6">
+                From Vision to Victory
+              </h3>
+              <div className="space-y-4 text-gray-600">
+                <p>
+                  We understand that behind every business idea lies a dream - a
+                  vision of what could be. Our mission is to bridge the gap
+                  between imagination and implementation.
+                </p>
+                <p>
+                  Through cutting-edge technology and creative problem-solving,
+                  we transform your business dreams into powerful digital
+                  solutions that drive real results.
+                </p>
+                <p>
+                  Every project we undertake is more than just code - it&apos;s
+                  a step toward realizing your business dreams and achieving
+                  your goals.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-gradient-to-br from-blue-50 to-indigo-100 p-8 rounded-2xl"
+            >
+              <div className="text-center">
+                <div className="w-20 h-20 bg-[#0061FF] text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                  ✨
+                </div>
+                <h4 className="text-xl font-semibold text-black mb-4">
+                  Your Dreams, Our Mission
+                </h4>
+                <p className="text-gray-600">
+                  We don&apos;t just build websites and apps - we build the
+                  digital foundation that makes your business dreams come true.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Our Process */}
       <section className="py-20 px-4 sm:px-8 lg:px-16">
         <div className="max-w-6xl mx-auto">
@@ -203,11 +277,11 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Ready to work with us?
+              Ready to realize your dreams?
             </h2>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Let&apos;s discuss how we can help bring your digital vision to
-              life and drive real business results.
+              Let&apos;s discuss how we can help turn your business dreams into
+              digital reality and drive real business results.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
