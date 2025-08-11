@@ -34,17 +34,7 @@ export const metadata: Metadata = {
     "Indonesia web development",
   ],
   authors: [{ name: "Kreatale" }],
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
+
   openGraph: {
     title: "Kreatale | Web Development & Digital Solutions Agency",
     description:
@@ -72,9 +62,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://kreatale.com",
   },
-  other: {
-    "theme-color": "#0061FF",
-  },
 };
 
 export default function RootLayout({
@@ -86,27 +73,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preload" href="/banner.webp" as="image" type="image/webp" />
-        <link
-          rel="preload"
-          href="/current-project.png"
-          as="image"
-          type="image/png"
-        />
-        <link rel="dns-prefetch" href="https://images.unsplash.com" />
-        <link rel="dns-prefetch" href="https://cdn.pixabay.com" />
-        <link rel="manifest" href="/manifest.json" />
-        <meta name="theme-color" content="#0061FF" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                  navigator.serviceWorker.register('/sw.js');
-                });
-              }
-            `,
-          }}
-        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

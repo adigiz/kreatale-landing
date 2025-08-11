@@ -12,10 +12,10 @@ export default function Hero() {
     >
       <div className="flex flex-col md:flex-row gap-8 w-full">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4 }}
           className="relative flex-[3] rounded-3xl overflow-hidden min-h-[50vh] md:min-h-full"
         >
           <Image
@@ -24,8 +24,8 @@ export default function Hero() {
             fill
             className="object-cover"
             priority
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            quality={85}
+            sizes="100vw"
+            quality={75}
           />
           <div className="absolute bottom-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 py-8 px-6 sm:px-10 md:px-16 bg-gradient-to-t from-black/60 to-transparent w-full">
             <div className="flex flex-col">
@@ -49,10 +49,10 @@ export default function Hero() {
 
         {/* Right: Side Card */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.1 }}
           className="hidden flex-[1] lg:flex justify-center"
         >
           <Link href="https://www.captloui.com/">
@@ -63,8 +63,8 @@ export default function Hero() {
                 width={400}
                 height={250}
                 className="rounded-2xl mb-4 w-full object-cover"
-                sizes="(max-width: 1024px) 100vw, 400px"
-                quality={85}
+                sizes="400px"
+                quality={75}
               />
 
               <div className="flex justify-between items-center">

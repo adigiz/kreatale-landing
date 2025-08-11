@@ -149,7 +149,7 @@ function ImageModal({
             className="object-contain"
             sizes="95vw"
             priority
-            quality={85}
+            quality={75}
           />
         </div>
 
@@ -225,17 +225,15 @@ export default function Portfolio() {
               >
                 <motion.div
                   className="h-full bg-gray-100 rounded-3xl flex flex-col overflow-hidden"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
                   whileHover={{
                     scale: 1.02,
-                    y: -3,
-                    transition: { duration: 0.2, ease: "easeOut" },
+                    transition: { duration: 0.2 },
                   }}
                   transition={{
-                    duration: 0.5,
-                    ease: "easeOut",
-                    delay: i * 0.1,
+                    duration: 0.4,
+                    delay: i * 0.05,
                   }}
                 >
                   <div className="h-full flex flex-col">
@@ -252,14 +250,15 @@ export default function Portfolio() {
                       tabIndex={0}
                       role="button"
                       aria-label={`View ${project.title} project details`}
+                      aria-describedby={`project-${i}-description`}
                     >
                       <Image
                         src={project.image}
                         alt={project.title}
                         fill
                         className="object-cover hover:scale-105 transition-transform duration-300"
-                        sizes="(max-width: 640px) 85vw, (max-width: 768px) 60vw, (max-width: 1024px) 50vw, 42vw"
-                        quality={80}
+                        sizes="(max-width: 768px) 85vw, 50vw"
+                        quality={75}
                       />
                     </div>
 
@@ -272,7 +271,10 @@ export default function Portfolio() {
                         <h3 className="text-base sm:text-lg lg:text-xl font-bold text-black">
                           {project.title}
                         </h3>
-                        <div className="space-y-1">
+                        <div
+                          id={`project-${i}-description`}
+                          className="space-y-1"
+                        >
                           <p className="text-xs sm:text-sm text-gray-500">
                             {project.description}
                           </p>
