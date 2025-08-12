@@ -55,11 +55,11 @@ export default function Hero() {
           transition={{ duration: 0.4, delay: 0.1 }}
           className="hidden flex-[1] lg:flex justify-center"
         >
-          <Link href="https://www.captloui.com/">
+          <Link href="https://gemoedje-web-app.vercel.app/">
             <div className="bg-white rounded-2xl w-full max-w-sm h-full flex flex-col justify-start">
               <Image
                 src="/current-project.png"
-                alt="Capt Loui"
+                alt="Gemoedje"
                 width={400}
                 height={250}
                 className="rounded-2xl mb-4 w-full object-cover"
@@ -73,7 +73,7 @@ export default function Hero() {
                     Our latest work
                   </p>
                   <h2 className="text-2xl sm:text-3xl font-bold text-black">
-                    Capt Loui
+                    Gemoedje
                   </h2>
                 </div>
 
