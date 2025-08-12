@@ -45,6 +45,11 @@ export default function Header() {
   const [projectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
   const pathname = usePathname();
 
+  // Function to close mobile menu
+  const closeMobileMenu = () => {
+    setMenuOpen(false);
+  };
+
   const typedProjectsData = projectsData as ProjectsDatabase;
   const projects = Object.entries(typedProjectsData).sort(
     ([slugA], [slugB]) => {
@@ -321,6 +326,7 @@ export default function Header() {
                 >
                   <Link
                     href={item.href}
+                    onClick={closeMobileMenu}
                     className={`block py-3 px-4 rounded-xl transition-all duration-200 ${
                       item.isActive
                         ? "bg-blue-50 text-[#0061FF] font-semibold border-l-4 border-[#0061FF]"
@@ -343,6 +349,7 @@ export default function Header() {
               <div className="border-t border-gray-200 pt-4">
                 <Link
                   href="/projects"
+                  onClick={closeMobileMenu}
                   className={`block font-semibold mb-3 px-4 py-2 rounded-xl transition-all duration-200 ${
                     pathname === "/projects"
                       ? "bg-blue-50 text-[#0061FF] border-l-4 border-[#0061FF]"
@@ -361,6 +368,7 @@ export default function Header() {
                     >
                       <Link
                         href={`/projects/${slug}`}
+                        onClick={closeMobileMenu}
                         className="block text-sm text-gray-600 hover:text-[#0061FF] transition-all duration-200 py-2 px-4 rounded-lg hover:bg-gray-50 group"
                       >
                         <div className="flex items-center gap-3">
@@ -399,6 +407,7 @@ export default function Header() {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={closeMobileMenu}
                 className="flex items-center justify-center gap-3 bg-gradient-to-r from-[#0061FF] to-blue-600 text-white px-6 py-4 rounded-2xl text-sm font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-300 w-full shadow-lg hover:shadow-xl transform hover:scale-105"
               >
                 <MessageCircle size={18} />

@@ -136,7 +136,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200"
+                className="bg-white p-6 rounded-2xl transition-colors duration-200"
               >
                 <div className="text-[#0061FF] mb-4">
                   {getIcon(value.iconName)}
@@ -252,7 +252,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="text-center"
+                className="text-center bg-white border border-gray-200 rounded-2xl p-6 hover:border-gray-300 transition-colors duration-200"
               >
                 <div className="w-16 h-16 bg-[#0061FF] text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                   {process.step}
@@ -288,7 +288,7 @@ export default function AboutPage() {
                 href="https://wa.me/6287852819078?text=Hi!%20I'd%20like%20to%20discuss%20a%20project%20with%20your%20team"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 bg-[#0061FF] text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors duration-200 shadow-lg hover:shadow-xl"
+                className="flex items-center justify-center gap-2 bg-[#0061FF] text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors duration-200"
               >
                 Start a Project
               </a>

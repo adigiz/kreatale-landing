@@ -25,7 +25,7 @@ export default function Hero() {
             className="object-cover"
             priority
             sizes="100vw"
-            quality={75}
+            quality={100}
           />
           <div className="absolute bottom-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 py-8 px-6 sm:px-10 md:px-16 bg-gradient-to-t from-black/60 to-transparent w-full">
             <div className="flex flex-col">

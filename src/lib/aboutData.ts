@@ -26,7 +26,7 @@ export const aboutStats: AboutStats[] = [
     label: "Months Active"
   },
   {
-    value: "Many",
+    value: "12+",
     label: "New Clients"
   },
   {

@@ -131,7 +131,7 @@ export default function FAQPage() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
                   selectedCategory === category
-                    ? "bg-blue-600 text-white shadow-lg"
+                    ? "bg-blue-600 text-white"
                     : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                 }`}
               >
@@ -152,7 +152,7 @@ export default function FAQPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.2, delay: index * 0.05 }}
-                className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200"
+                className="bg-white border border-gray-200 rounded-xl transition-colors duration-200"
               >
                 <button
                   onClick={() => toggleItem(index)}
@@ -210,7 +210,7 @@ export default function FAQPage() {
                 rel="noopener noreferrer"
                 className="inline-block"
               >
-                <button className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200 shadow-lg hover:shadow-xl">
+                <button className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
                   WhatsApp Us
                 </button>
               </a>

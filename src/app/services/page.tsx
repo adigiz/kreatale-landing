@@ -127,7 +127,7 @@ export default function ServicesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="bg-white border border-gray-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+                className="bg-white border border-gray-200 rounded-3xl overflow-hidden transition-all duration-300"
               >
                 <div className="p-8">
                   <div className="text-center mb-6">
@@ -136,7 +136,7 @@ export default function ServicesPage() {
                     </h3>
                   </div>
 
-                  <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden shadow-md mb-6">
+                  <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-6">
                     <Image
                       src={service.image}
                       alt={service.title}
@@ -242,7 +242,7 @@ export default function ServicesPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow duration-200"
+                className="bg-white p-6 rounded-2xl transition-colors duration-200"
               >
                 <div className="text-[#0061FF] mb-4">{benefit.icon}</div>
                 <h3 className="text-xl font-semibold text-black mb-3">
@@ -276,7 +276,7 @@ export default function ServicesPage() {
                 href="https://wa.me/6287852819078?text=Hi!%20I'd%20like%20to%20discuss%20a%20project%20with%20your%20team"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 bg-[#0061FF] text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors duration-200 shadow-lg hover:shadow-xl"
+                className="flex items-center justify-center gap-2 bg-[#0061FF] text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors duration-200"
               >
                 Start a Project
               </a>
