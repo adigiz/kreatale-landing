@@ -19,8 +19,8 @@ export default function Hero() {
           className="relative flex-[3] rounded-3xl overflow-hidden min-h-[50vh] md:min-h-full"
         >
           <Image
-            src="/banner.webp"
-            alt="Gradient Keyboard"
+            src="/banner.jpg"
+            alt="Kreatale Banner"
             fill
             className="object-cover"
             priority
@@ -36,14 +36,6 @@ export default function Hero() {
                 We are a website & app development partner
               </h1>
             </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-black font-semibold px-5 py-2 rounded-full w-max text-sm hover:bg-gray-200 transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              aria-label="Start a new project with Kreatale"
-            >
-              Start a project
-            </motion.button>
           </div>
         </motion.div>
 
