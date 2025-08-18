@@ -181,7 +181,7 @@ export default function ProjectDetailPage() {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl bg-slate-50">
         <motion.div
-          className="flex justify-between gap-8 text-md text-gray-500 px-8 py-8"
+          className="flex flex-col sm:flex-row justify-between gap-8 text-md text-gray-500 px-8 py-8"
           variants={stagger}
           initial="initial"
           animate="animate"
