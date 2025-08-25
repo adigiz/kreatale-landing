@@ -8,6 +8,7 @@ import { ChevronDown, ExternalLink, MessageCircle } from "lucide-react";
 import projectsData from "@/lib/projectsData.json";
 import { ProjectsDatabase } from "@/lib/types";
 import { usePathname } from "next/navigation";
+import { WHATSAPP_NUMBER, WHATSAPP_BASE_URL } from "@/lib/constants";
 
 // Animation variants
 const dropdownVariants = {
@@ -80,11 +81,10 @@ export default function Header() {
     }
   );
 
-  const whatsappNumber = "+6287852819078";
   const whatsappMessage = encodeURIComponent(
     "Hi! I'm interested in your services. Let's discuss my project!"
   );
-  const whatsappUrl = `https://wa.me/${whatsappNumber.replace(
+  const whatsappUrl = `${WHATSAPP_BASE_URL}/${WHATSAPP_NUMBER.replace(
     "+",
     ""
   )}?text=${whatsappMessage}`;

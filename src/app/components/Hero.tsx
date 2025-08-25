@@ -39,7 +39,6 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Right: Side Card */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}

@@ -12,6 +12,11 @@ import {
   Code,
   Globe,
 } from "lucide-react";
+import {
+  WHATSAPP_NUMBER,
+  WHATSAPP_BASE_URL,
+  WHATSAPP_MESSAGES,
+} from "@/lib/constants";
 
 export default function ServicesPage() {
   const services = [
@@ -161,7 +166,12 @@ export default function ServicesPage() {
                   </div>
 
                   <a
-                    href="https://wa.me/6287852819078?text=Hi!%20I'm%20interested%20in%20your%20services%20for%20web%20development"
+                    href={`${WHATSAPP_BASE_URL}/${WHATSAPP_NUMBER.replace(
+                      "+",
+                      ""
+                    )}?text=${encodeURIComponent(
+                      WHATSAPP_MESSAGES.SERVICES_INTEREST
+                    )}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block"
@@ -273,7 +283,12 @@ export default function ServicesPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://wa.me/6287852819078?text=Hi!%20I'd%20like%20to%20discuss%20a%20project%20with%20your%20team"
+                href={`${WHATSAPP_BASE_URL}/${WHATSAPP_NUMBER.replace(
+                  "+",
+                  ""
+                )}?text=${encodeURIComponent(
+                  WHATSAPP_MESSAGES.PROJECT_DISCUSSION
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 bg-[#0061FF] text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors duration-200"

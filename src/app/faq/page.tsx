@@ -4,6 +4,11 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
+import {
+  WHATSAPP_NUMBER,
+  WHATSAPP_BASE_URL,
+  WHATSAPP_MESSAGES,
+} from "@/lib/constants";
 
 interface FAQItem {
   question: string;
@@ -205,7 +210,12 @@ export default function FAQPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://wa.me/6287852819078?text=Hi!%20I%20have%20a%20question%20about%20your%20services"
+                href={`${WHATSAPP_BASE_URL}/${WHATSAPP_NUMBER.replace(
+                  "+",
+                  ""
+                )}?text=${encodeURIComponent(
+                  WHATSAPP_MESSAGES.GENERAL_INQUIRY
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block"

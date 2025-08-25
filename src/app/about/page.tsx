@@ -10,6 +10,11 @@ import {
   aboutStats,
 } from "@/lib/aboutData";
 import { Code, Heart, Users, Globe, Award, MessageCircle } from "lucide-react";
+import {
+  WHATSAPP_NUMBER,
+  WHATSAPP_BASE_URL,
+  WHATSAPP_MESSAGES,
+} from "@/lib/constants";
 
 // Icon mapping function
 const getIcon = (iconName: string) => {
@@ -285,7 +290,12 @@ export default function AboutPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="https://wa.me/6287852819078?text=Hi!%20I'd%20like%20to%20discuss%20a%20project%20with%20your%20team"
+                href={`${WHATSAPP_BASE_URL}/${WHATSAPP_NUMBER.replace(
+                  "+",
+                  ""
+                )}?text=${encodeURIComponent(
+                  WHATSAPP_MESSAGES.PROJECT_DISCUSSION
+                )}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 bg-[#0061FF] text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors duration-200"

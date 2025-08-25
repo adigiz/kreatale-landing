@@ -4,13 +4,13 @@ import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { FaInstagram, FaLinkedin, FaTiktok } from "react-icons/fa";
+import { WHATSAPP_NUMBER, WHATSAPP_BASE_URL } from "@/lib/constants";
 
 export default function Footer() {
-  const whatsappNumber = "+6287852819078";
   const whatsappMessage = encodeURIComponent(
     "Hi! I'm interested in your services. Let's discuss my project!"
   );
-  const whatsappUrl = `https://wa.me/${whatsappNumber.replace(
+  const whatsappUrl = `${WHATSAPP_BASE_URL}/${WHATSAPP_NUMBER.replace(
     "+",
     ""
   )}?text=${whatsappMessage}`;
