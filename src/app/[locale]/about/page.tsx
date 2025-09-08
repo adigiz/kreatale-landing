@@ -2,19 +2,15 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-  aboutHero,
-  companyStory,
-  coreValues,
-  processSteps,
-  aboutStats,
-} from "@/lib/aboutData";
+import { coreValues, processSteps, aboutStats } from "@/lib/aboutData";
 import { Code, Heart, Users, Globe, Award, MessageCircle } from "lucide-react";
 import {
   WHATSAPP_NUMBER,
   WHATSAPP_BASE_URL,
   WHATSAPP_MESSAGES,
 } from "@/lib/constants";
+import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 
 // Icon mapping function
 const getIcon = (iconName: string) => {
@@ -32,6 +28,17 @@ const getIcon = (iconName: string) => {
 };
 
 export default function AboutPage() {
+  const t = useTranslations();
+  const pathname = usePathname();
+
+  // Extract current locale from pathname
+  const currentLocale = pathname.split("/")[1] || "en";
+
+  // Helper function to create locale-aware paths
+  const createLocalizedPath = (path: string) => {
+    return `/${currentLocale}${path}`;
+  };
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Header */}
@@ -43,13 +50,13 @@ export default function AboutPage() {
           className="max-w-4xl mx-auto text-center"
         >
           <p className="font-bold text-blue-100 uppercase text-xs sm:text-sm mb-4">
-            {aboutHero.subtitle}
+            {t("about.hero.subtitle")}
           </p>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-            {aboutHero.title}
+            {t("about.hero.title")}
           </h1>
           <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-            {aboutHero.description}
+            {t("about.hero.description")}
           </p>
         </motion.div>
       </section>
@@ -65,14 +72,10 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6">
-              Our Story
+              {t("about.story.title")}
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Founded last year, Kreatale began with a simple mission: to help
-              businesses realize their dreams through innovative technology
-              solutions. What started as a small team of passionate developers
-              has quickly grown into a dynamic digital agency serving clients
-              worldwide.
+              {t("about.story.description")}
             </p>
           </motion.div>
 
@@ -84,10 +87,12 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
             >
               <h3 className="text-2xl font-bold text-black mb-4">
-                {companyStory.title}
+                {t("about.story.sectionTitle")}
               </h3>
-              <p className="text-gray-600 mb-6">{companyStory.description1}</p>
-              <p className="text-gray-600">{companyStory.description2}</p>
+              <p className="text-gray-600 mb-6">
+                {t("about.story.description1")}
+              </p>
+              <p className="text-gray-600">{t("about.story.description2")}</p>
             </motion.div>
 
             <motion.div
@@ -125,11 +130,10 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6">
-              Our Core Values
+              {t("about.values.title")}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              These principles guide everything we do, from how we approach
-              projects to how we build relationships with our clients.
+              {t("about.values.description")}
             </p>
           </motion.div>
 
@@ -167,13 +171,10 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6">
-              Realizing Dreams Through Technology
+              {t("about.dreams.title")}
             </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              At Kreatale, we believe every business has a dream. Whether
-              it&apos;s launching a new product, expanding to new markets, or
-              revolutionizing an industry, we&apos;re here to turn those dreams
-              into digital reality.
+              {t("about.dreams.description")}
             </p>
           </motion.div>
 
@@ -185,24 +186,12 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
             >
               <h3 className="text-2xl font-bold text-black mb-6">
-                From Vision to Victory
+                {t("about.dreams.sectionTitle")}
               </h3>
               <div className="space-y-4 text-gray-600">
-                <p>
-                  We understand that behind every business idea lies a dream - a
-                  vision of what could be. Our mission is to bridge the gap
-                  between imagination and implementation.
-                </p>
-                <p>
-                  Through cutting-edge technology and creative problem-solving,
-                  we transform your business dreams into powerful digital
-                  solutions that drive real results.
-                </p>
-                <p>
-                  Every project we undertake is more than just code - it&apos;s
-                  a step toward realizing your business dreams and achieving
-                  your goals.
-                </p>
+                <p>{t("about.dreams.description1")}</p>
+                <p>{t("about.dreams.description2")}</p>
+                <p>{t("about.dreams.description3")}</p>
               </div>
             </motion.div>
 
@@ -218,11 +207,10 @@ export default function AboutPage() {
                   ✨
                 </div>
                 <h4 className="text-xl font-semibold text-black mb-4">
-                  Your Dreams, Our Mission
+                  {t("about.dreams.cardTitle")}
                 </h4>
                 <p className="text-gray-600">
-                  We don&apos;t just build websites and apps - we build the
-                  digital foundation that makes your business dreams come true.
+                  {t("about.dreams.cardDescription")}
                 </p>
               </div>
             </motion.div>
@@ -241,11 +229,10 @@ export default function AboutPage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6">
-              How We Work
+              {t("about.process.title")}
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Our proven development process ensures your project is delivered
-              on time, within budget, and exceeds expectations.
+              {t("about.process.description")}
             </p>
           </motion.div>
 
@@ -282,11 +269,10 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Ready to realize your dreams?
+              {t("about.cta.title")}
             </h2>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Let&apos;s discuss how we can help turn your business dreams into
-              digital reality and drive real business results.
+              {t("about.cta.description")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -300,11 +286,11 @@ export default function AboutPage() {
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 bg-[#0061FF] text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition-colors duration-200"
               >
-                Start a Project
+                {t("about.cta.startProject")}
               </a>
-              <Link href="/faq">
+              <Link href={createLocalizedPath("/faq")}>
                 <button className="border-2 border-[#0061FF] text-[#0061FF] px-8 py-3 rounded-full font-semibold hover:bg-[#0061FF] hover:text-white transition-colors duration-200">
-                  Learn More
+                  {t("about.cta.learnMore")}
                 </button>
               </Link>
             </div>

@@ -1,0 +1,374 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "services": "Layanan",
+    "about": "Tentang",
+    "projects": "Proyek",
+    "faq": "FAQ",
+    "contact": "Kontak"
+  },
+  "hero": {
+    "subtitle": "Mitra Pengembangan Software",
+    "title": "Kami adalah mitra pengembangan website & aplikasi",
+    "latestWork": "Pekerjaan terbaru kami",
+    "projectName": "Gemoedje"
+  },
+  "services": {
+    "title": "Layanan Kami",
+    "subtitle": "Apa yang kami lakukan",
+    "description": "Kami menyediakan solusi digital yang komprehensif untuk membantu bisnis Anda tumbuh dan sukses secara online.",
+    "hero": {
+      "title": "Solusi digital yang mendorong hasil",
+      "description": "Dari konsep hingga deployment, kami menyediakan layanan digital yang komprehensif yang membantu bisnis tumbuh dan sukses secara online."
+    },
+    "overview": {
+      "title": "Apa yang Kami Tawarkan",
+      "description": "Rangkaian layanan digital kami yang komprehensif dirancang untuk memenuhi kebutuhan bisnis modern yang terus berkembang. Kami menggabungkan keahlian teknis dengan inovasi kreatif untuk memberikan solusi yang membuat perbedaan."
+    },
+    "whyChoose": {
+      "title": "Mengapa Memilih Kreatale?",
+      "description": "Kami tidak hanya membangun website dan aplikasi – kami menciptakan pengalaman digital yang mendorong hasil bisnis nyata.",
+      "expertTeam": {
+        "title": "Tim Ahli",
+        "description": "Tim kami yang terdiri dari developer, designer, dan strategist berpengalaman membawa keahlian industri bertahun-tahun ke setiap proyek."
+      },
+      "qualityAssurance": {
+        "title": "Jaminan Kualitas",
+        "description": "Setiap proyek menjalani pengujian yang ketat untuk memastikan memenuhi standar tinggi kami dan melampaui ekspektasi Anda."
+      },
+      "fastDelivery": {
+        "title": "Pengiriman Cepat",
+        "description": "Kami bekerja efisien untuk mengirimkan proyek Anda tepat waktu, tanpa mengorbankan kualitas atau perhatian detail."
+      },
+      "modernTechnology": {
+        "title": "Teknologi Modern",
+        "description": "Kami menggunakan teknologi terbaru dan best practices untuk memastikan solusi Anda future-proof dan scalable."
+      },
+      "globalReach": {
+        "title": "Jangkauan Global",
+        "description": "Kami telah melayani klien dari seluruh dunia, membawa perspektif beragam dan solusi inovatif."
+      },
+      "ongoingSupport": {
+        "title": "Dukungan Berkelanjutan",
+        "description": "Hubungan kami tidak berakhir saat launch. Kami menyediakan dukungan dan maintenance berkelanjutan untuk menjaga solusi Anda berjalan lancar."
+      }
+    },
+    "cta": {
+      "title": "Siap untuk memulai?",
+      "description": "Mari diskusikan kebutuhan proyek Anda dan bagaimana kami dapat membantu mewujudkan visi digital Anda.",
+      "startProject": "Mulai Proyek",
+      "learnAbout": "Pelajari Tentang Kami"
+    },
+    "website": {
+      "title": "Pengembangan Website",
+      "description": "Kami merancang dan membangun website yang responsif dan user-friendly yang mencerminkan brand Anda dan meningkatkan engagement. Dari landing page hingga website korporat lengkap, kami memastikan performa, aksesibilitas, dan standar desain modern.",
+      "features": [
+        "Desain responsif untuk semua perangkat",
+        "Optimasi SEO",
+        "Waktu loading yang cepat",
+        "Sistem manajemen konten",
+        "Integrasi analytics",
+        "Implementasi keamanan"
+      ]
+    },
+    "webapp": {
+      "title": "Pengembangan Web App",
+      "description": "Tim kami mengembangkan aplikasi web yang robust dan scalable yang disesuaikan dengan kebutuhan bisnis Anda. Menggunakan framework modern dan best practices, kami menciptakan solusi yang aman dan berperforma tinggi untuk segala hal mulai dari dashboard hingga platform SaaS yang kompleks.",
+      "features": [
+        "Fungsionalitas kustom",
+        "Autentikasi pengguna",
+        "Integrasi database",
+        "Pengembangan API",
+        "Update real-time",
+        "Optimasi performa"
+      ]
+    },
+    "mobile": {
+      "title": "Pengembangan Mobile",
+      "description": "Kami membangun aplikasi mobile cross-platform dan native yang memberikan pengalaman pengguna yang smooth di iOS dan Android. Baik untuk penggunaan internal atau rilis publik, kami mengubah ide Anda menjadi solusi mobile yang powerful dan intuitif.",
+      "features": [
+        "Native dan cross-platform",
+        "Fungsionalitas offline",
+        "Push notifications",
+        "Optimasi app store",
+        "Monitoring performa",
+        "Update reguler"
+      ]
+    },
+    "training": {
+      "title": "Pelatihan",
+      "description": "Kami menyediakan pelatihan IT hands-on dan real-world yang disesuaikan untuk tim dan individu. Mencakup topik dari pengembangan web dan mobile hingga administrasi sistem dan keamanan, program kami memberdayakan peserta untuk membangun keterampilan praktis dan siap kerja.",
+      "features": [
+        "Pembelajaran hands-on",
+        "Proyek real-world",
+        "Pelatihan pengembangan web",
+        "Pelatihan pengembangan mobile",
+        "Administrasi sistem",
+        "Pelatihan keamanan"
+      ]
+    },
+    "cta": "Mulai Sekarang",
+    "discussProject": "Mari diskusikan proyek Anda"
+  },
+  "about": {
+    "title": "Tentang Kreatale",
+    "subtitle": "Siapa kami",
+    "description": "Kami adalah tim yang passionate terdiri dari developer, designer, dan digital strategist yang berdedikasi untuk menciptakan solusi inovatif yang mendorong pertumbuhan bisnis.",
+    "hero": {
+      "subtitle": "Tentang Kami",
+      "title": "Mewujudkan Impian Menjadi Realitas Digital",
+      "description": "Kami adalah tim yang passionate terdiri dari developer, designer, dan digital strategist yang berdedikasi untuk menciptakan solusi inovatif yang mendorong pertumbuhan bisnis."
+    },
+    "story": {
+      "title": "Cerita Kami",
+      "description": "Didirikan tahun lalu, Kreatale dimulai dengan misi sederhana: membantu bisnis mewujudkan impian mereka melalui solusi teknologi inovatif. Yang dimulai sebagai tim kecil developer yang passionate telah berkembang menjadi agensi digital yang dinamis melayani klien di seluruh dunia.",
+      "sectionTitle": "Dari Visi Menuju Kemenangan",
+      "description1": "Kami memahami bahwa di balik setiap ide bisnis ada impian - visi tentang apa yang bisa terjadi. Misi kami adalah menjembatani kesenjangan antara imajinasi dan implementasi.",
+      "description2": "Melalui teknologi cutting-edge dan pemecahan masalah kreatif, kami mengubah impian bisnis Anda menjadi solusi digital yang powerful yang mendorong hasil nyata."
+    },
+    "values": {
+      "title": "Nilai-nilai Inti Kami",
+      "description": "Prinsip-prinsip ini memandu segala yang kami lakukan, dari cara kami mendekati proyek hingga cara kami membangun hubungan dengan klien.",
+      "innovation": {
+        "title": "Inovasi",
+        "description": "Kami selalu mengikuti tren teknologi untuk memberikan solusi yang cutting-edge."
+      },
+      "quality": {
+        "title": "Kualitas",
+        "description": "Setiap proyek dibuat dengan perhatian detail dan keunggulan."
+      },
+      "collaboration": {
+        "title": "Kolaborasi",
+        "description": "Kami bekerja erat dengan klien untuk memastikan visi mereka menjadi kenyataan."
+      },
+      "integrity": {
+        "title": "Integritas",
+        "description": "Komunikasi yang jujur dan proses yang transparan membangun hubungan yang langgeng."
+      }
+    },
+    "dreams": {
+      "title": "Mewujudkan Impian Melalui Teknologi",
+      "description": "Di Kreatale, kami percaya setiap bisnis memiliki impian. Baik itu meluncurkan produk baru, memperluas ke pasar baru, atau merevolusi industri, kami di sini untuk mengubah impian tersebut menjadi realitas digital.",
+      "sectionTitle": "Dari Visi Menuju Kemenangan",
+      "description1": "Kami memahami bahwa di balik setiap ide bisnis ada impian - visi tentang apa yang bisa terjadi. Misi kami adalah menjembatani kesenjangan antara imajinasi dan implementasi.",
+      "description2": "Melalui teknologi cutting-edge dan pemecahan masalah kreatif, kami mengubah impian bisnis Anda menjadi solusi digital yang powerful yang mendorong hasil nyata.",
+      "description3": "Setiap proyek yang kami tangani lebih dari sekadar kode - ini adalah langkah menuju mewujudkan impian bisnis Anda dan mencapai tujuan Anda.",
+      "cardTitle": "Impian Anda, Misi Kami",
+      "cardDescription": "Kami tidak hanya membangun website dan aplikasi - kami membangun fondasi digital yang membuat impian bisnis Anda menjadi kenyataan."
+    },
+    "process": {
+      "title": "Cara Kami Bekerja",
+      "description": "Proses pengembangan yang terbukti kami memastikan proyek Anda dikirim tepat waktu, sesuai anggaran, dan melampaui ekspektasi."
+    },
+    "cta": {
+      "title": "Siap mewujudkan impian Anda?",
+      "description": "Mari diskusikan bagaimana kami dapat membantu mengubah impian bisnis Anda menjadi realitas digital dan mendorong hasil bisnis nyata.",
+      "startProject": "Mulai Proyek",
+      "learnMore": "Pelajari Lebih Lanjut"
+    },
+    "stats": [
+      { "value": "50+", "label": "Proyek Selesai" },
+      { "value": "30+", "label": "Klien Bahagia" },
+      { "value": "24/7", "label": "Dukungan Tersedia" },
+      { "value": "100%", "label": "Kepuasan Klien" }
+    ]
+  },
+  "portfolio": {
+    "title": "Portfolio Kami",
+    "subtitle": "Pekerjaan Terbaru",
+    "description": "Jelajahi proyek terbaru kami dan lihat bagaimana kami membantu bisnis mencapai tujuan digital mereka.",
+    "viewAll": "Lihat Semua Proyek",
+    "categories": {
+      "all": "Semua",
+      "website": "Website",
+      "mobile": "Mobile App",
+      "webapp": "Web App",
+      "design": "Desain"
+    }
+  },
+  "testimonials": {
+    "title": "Apa Kata Klien Kami",
+    "subtitle": "Testimoni",
+    "description": "Jangan hanya percaya kata-kata kami. Berikut adalah apa yang dikatakan klien kami tentang bekerja dengan kami."
+  },
+  "faq": {
+    "title": "Pertanyaan yang Sering Diajukan",
+    "subtitle": "FAQ",
+    "description": "Temukan jawaban untuk pertanyaan umum tentang layanan dan proses kami.",
+    "categories": {
+      "all": "Semua",
+      "services": "Layanan",
+      "timeline": "Timeline",
+      "process": "Proses",
+      "support": "Dukungan",
+      "technology": "Teknologi",
+      "communication": "Komunikasi",
+      "company": "Perusahaan",
+      "security": "Keamanan"
+    },
+    "questions": [
+      {
+        "question": "Layanan apa yang ditawarkan Kreatale?",
+        "answer": "Kami mengkhususkan diri dalam pengembangan web, pengembangan aplikasi mobile, aplikasi web kustom, kustomisasi WordPress, dan desain UI/UX. Kami menciptakan solusi digital yang cepat, modern, dan scalable yang disesuaikan dengan kebutuhan bisnis Anda.",
+        "category": "Layanan"
+      },
+      {
+        "question": "Berapa lama waktu yang dibutuhkan untuk menyelesaikan proyek?",
+        "answer": "Timeline proyek bervariasi tergantung kompleksitas. Website sederhana biasanya membutuhkan 2-4 minggu, sementara aplikasi web yang kompleks bisa memakan waktu 2-6 bulan. Kami akan memberikan timeline detail selama konsultasi awal.",
+        "category": "Timeline"
+      },
+      {
+        "question": "Apa proses pengembangan Anda?",
+        "answer": "Proses kami meliputi discovery & perencanaan, desain & prototyping, pengembangan & testing, dan deployment & maintenance. Kami menjaga komunikasi yang jelas di setiap fase dan memberikan update reguler.",
+        "category": "Proses"
+      },
+      {
+        "question": "Apakah Anda menyediakan dukungan berkelanjutan setelah launch?",
+        "answer": "Ya, kami menawarkan berbagai paket dukungan termasuk maintenance, update, monitoring keamanan, dan optimasi performa. Kami juga dapat memberikan pelatihan untuk tim Anda untuk mengelola website.",
+        "category": "Dukungan"
+      },
+      {
+        "question": "Teknologi apa yang Anda gunakan?",
+        "answer": "Kami menggunakan teknologi modern termasuk Next.js, React, TypeScript, Tailwind CSS, dan tools cutting-edge lainnya. Kami memilih stack teknologi terbaik berdasarkan kebutuhan dan tujuan proyek Anda.",
+        "category": "Teknologi"
+      },
+      {
+        "question": "Bisakah Anda bekerja dengan website yang sudah ada?",
+        "answer": "Tentu saja! Kami dapat mendesain ulang, membangun ulang, atau meningkatkan website yang sudah ada. Kami akan menganalisis website Anda saat ini dan merekomendasikan perbaikan untuk meningkatkan performa, user experience, dan conversion rate.",
+        "category": "Layanan"
+      },
+      {
+        "question": "Bagaimana Anda menangani komunikasi proyek?",
+        "answer": "Kami menggunakan project management tools, video call reguler, dan laporan progress detail. Anda akan memiliki project manager khusus dan akses langsung ke tim development kami sepanjang proyek.",
+        "category": "Komunikasi"
+      },
+      {
+        "question": "Apa yang membuat Kreatale berbeda dari agensi lain?",
+        "answer": "Kami fokus pada penciptaan solusi berperforma tinggi dan scalable dengan kode yang bersih dan desain modern. Tim kami menggabungkan keahlian teknis dengan pemahaman bisnis untuk memberikan solusi yang mendorong hasil nyata.",
+        "category": "Perusahaan"
+      },
+      {
+        "question": "Apakah Anda menyediakan layanan hosting dan domain?",
+        "answer": "Ya, kami dapat membantu dengan setup hosting, registrasi domain, sertifikat SSL, dan manajemen server berkelanjutan. Kami merekomendasikan provider hosting yang dapat diandalkan yang memastikan performa optimal.",
+        "category": "Layanan"
+      },
+      {
+        "question": "Bagaimana Anda memastikan keamanan website?",
+        "answer": "Kami mengimplementasikan best practices keamanan termasuk HTTPS, autentikasi aman, update reguler, dan monitoring keamanan. Kami juga menyediakan audit keamanan dan rekomendasi untuk perlindungan berkelanjutan.",
+        "category": "Keamanan"
+      }
+    ],
+    "cta": "Masih ada pertanyaan?",
+    "contactUs": "Hubungi kami di WhatsApp"
+  },
+  "footer": {
+    "contactUs": "Hubungi Kami",
+    "readyToStart": "Anda sudah sampai sejauh ini. Siap untuk memulai?",
+    "whatsappUs": "WhatsApp Kami",
+    "navigation": {
+      "services": "Layanan",
+      "about": "Tentang",
+      "projects": "Proyek",
+      "faq": "FAQ"
+    }
+  },
+  "estimation": {
+    "title": "Estimator Proyek",
+    "subtitle": "Dapatkan estimasi instan untuk proyek Anda",
+    "progress": "pertanyaan selesai",
+    "projectType": {
+      "label": "Jenis proyek apa?",
+      "website": {
+        "label": "Website",
+        "description": "Landing page, portfolio, atau website bisnis"
+      },
+      "mobile": {
+        "label": "Mobile App",
+        "description": "iOS/Android native atau cross-platform"
+      },
+      "saas": {
+        "label": "Platform SaaS",
+        "description": "Aplikasi web dengan fitur kompleks"
+      }
+    },
+    "features": {
+      "label": "Seberapa kompleks fitur-fiturnya?",
+      "small": {
+        "label": "Sederhana",
+        "description": "Fungsionalitas dasar, sedikit integrasi"
+      },
+      "medium": {
+        "label": "Sedang",
+        "description": "Beberapa fitur, beberapa integrasi"
+      },
+      "large": {
+        "label": "Kompleks",
+        "description": "Fitur canggih, banyak integrasi"
+      }
+    },
+    "design": {
+      "label": "Tingkat desain apa yang Anda butuhkan?",
+      "basic": {
+        "label": "Standar",
+        "description": "Template bersih dan profesional"
+      },
+      "custom": {
+        "label": "Kustom",
+        "description": "Desain unik yang disesuaikan dengan brand Anda"
+      },
+      "premium": {
+        "label": "Premium",
+        "description": "Desain kustom high-end dengan animasi"
+      }
+    },
+    "deadline": {
+      "label": "Apa timeline Anda?",
+      "flexible": {
+        "label": "Fleksibel",
+        "description": "Tidak terburu-buru, kualitas adalah prioritas"
+      },
+      "normal": {
+        "label": "Standar",
+        "description": "Timeline wajar, pendekatan seimbang"
+      },
+      "urgent": {
+        "label": "Terburu-buru",
+        "description": "Butuh ASAP, pengiriman dipercepat"
+      }
+    },
+    "getEstimate": "Dapatkan Estimasi Saya",
+    "calculating": "Menghitung...",
+    "yourEstimate": "Estimasi Proyek Anda",
+    "startingFrom": "Mulai Dari",
+    "duration": "Durasi",
+    "roughEstimate": "Estimasi kasar. Harga final mungkin bervariasi.",
+    "letsDiscuss": "Mari Diskusikan Proyek Anda",
+    "whatsapp": {
+      "title": "Detail Estimasi Proyek",
+      "projectType": "Jenis Proyek",
+      "features": "Kompleksitas Fitur",
+      "design": "Tingkat Desain",
+      "timeline": "Timeline",
+      "estimatedCost": "Estimasi Biaya",
+      "estimatedDuration": "Estimasi Durasi",
+      "message": "Hai! Saya ingin mendiskusikan proyek saya. Berikut adalah detail dari estimator."
+    }
+  },
+  "common": {
+    "learnMore": "Pelajari Lebih Lanjut",
+    "getStarted": "Mulai Sekarang",
+    "contactUs": "Hubungi Kami",
+    "viewProject": "Lihat Proyek",
+    "readMore": "Baca Lebih Lanjut",
+    "close": "Tutup",
+    "loading": "Memuat proyek...",
+    "goBack": "Kembali",
+    "viewDemo": "Lihat Demo Langsung",
+    "client": "Klien",
+    "techStacks": "Teknologi",
+    "timeline": "Timeline",
+    "duration": "Durasi",
+    "readyToStart": "Siap memulai proyek Anda?",
+    "viewMoreWork": "Lihat Pekerjaan Lainnya"
+  }
+}

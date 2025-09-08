@@ -4,8 +4,21 @@ import { motion } from "framer-motion";
 import CountryMap from "./CountryMap";
 import Link from "next/link";
 import { aboutStats } from "@/lib/aboutData";
+import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 
 export default function About() {
+  const t = useTranslations();
+  const pathname = usePathname();
+
+  // Extract current locale from pathname
+  const currentLocale = pathname.split("/")[1] || "en";
+
+  // Helper function to create locale-aware paths
+  const createLocalizedPath = (path: string) => {
+    return `/${currentLocale}${path}`;
+  };
+
   return (
     <section
       id="about"
@@ -20,20 +33,15 @@ export default function About() {
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
         <p className="font-bold text-gray-400 uppercase text-sm mb-2">
-          About Us
+          {t("about.subtitle")}
         </p>
         <h2 className="text-black text-4xl lg:text-5xl font-bold mb-6">
-          The team will turn your <br /> ideas into reality
+          {t("about.title")}
         </h2>
-        <p className="text-gray-600 mb-6">
-          We feel that in this digital age, connection is required to develop a
-          successful corporate empire. Having user-focused websites or mobile
-          applications that are simple to use can increase your market
-          competitiveness.
-        </p>
-        <Link href="/projects">
+        <p className="text-gray-600 mb-6">{t("about.description")}</p>
+        <Link href={createLocalizedPath("/projects")}>
           <button className="hover:cursor-pointer bg-blue-100 text-blue-600 px-7 py-3 rounded-full font-semibold text-sm hover:bg-blue-200">
-            See all works
+            {t("common.viewProject")}
           </button>
         </Link>
 

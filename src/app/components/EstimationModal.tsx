@@ -11,6 +11,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { WHATSAPP_NUMBER, WHATSAPP_BASE_URL } from "@/lib/constants";
+import { useTranslations } from "next-intl";
 
 interface Props {
   show: boolean;
@@ -27,6 +28,8 @@ type FormData = {
 type FormFieldKey = keyof FormData;
 
 export default function EstimationModal({ show, onClose }: Props) {
+  const t = useTranslations();
+
   const [formData, setFormData] = useState<FormData>({
     projectType: "",
     features: "",
@@ -115,85 +118,85 @@ export default function EstimationModal({ show, onClose }: Props) {
   }[] = [
     {
       key: "projectType",
-      label: "What type of project?",
+      label: t("estimation.projectType.label"),
       options: [
         {
           value: "website",
-          label: "Website",
-          description: "Landing page, portfolio, or business site",
+          label: t("estimation.projectType.website.label"),
+          description: t("estimation.projectType.website.description"),
         },
         {
           value: "mobile",
-          label: "Mobile App",
-          description: "iOS/Android native or cross-platform",
+          label: t("estimation.projectType.mobile.label"),
+          description: t("estimation.projectType.mobile.description"),
         },
         {
           value: "saas",
-          label: "SaaS Platform",
-          description: "Web application with complex features",
+          label: t("estimation.projectType.saas.label"),
+          description: t("estimation.projectType.saas.description"),
         },
       ],
     },
     {
       key: "features",
-      label: "How complex are the features?",
+      label: t("estimation.features.label"),
       options: [
         {
           value: "small",
-          label: "Simple",
-          description: "Basic functionality, few integrations",
+          label: t("estimation.features.small.label"),
+          description: t("estimation.features.small.description"),
         },
         {
           value: "medium",
-          label: "Medium",
-          description: "Multiple features, some integrations",
+          label: t("estimation.features.medium.label"),
+          description: t("estimation.features.medium.description"),
         },
         {
           value: "large",
-          label: "Complex",
-          description: "Advanced features, many integrations",
+          label: t("estimation.features.large.label"),
+          description: t("estimation.features.large.description"),
         },
       ],
     },
     {
       key: "design",
-      label: "What level of design do you need?",
+      label: t("estimation.design.label"),
       options: [
         {
           value: "basic",
-          label: "Standard",
-          description: "Clean, professional templates",
+          label: t("estimation.design.basic.label"),
+          description: t("estimation.design.basic.description"),
         },
         {
           value: "custom",
-          label: "Custom",
-          description: "Unique design tailored to your brand",
+          label: t("estimation.design.custom.label"),
+          description: t("estimation.design.custom.description"),
         },
         {
           value: "premium",
-          label: "Premium",
-          description: "High-end custom design with animations",
+          label: t("estimation.design.premium.label"),
+          description: t("estimation.design.premium.description"),
         },
       ],
     },
     {
       key: "deadline",
-      label: "What's your timeline?",
+      label: t("estimation.deadline.label"),
       options: [
         {
           value: "flexible",
-          label: "Flexible",
-          description: "No rush, quality is priority",
+          label: t("estimation.deadline.flexible.label"),
+          description: t("estimation.deadline.flexible.description"),
         },
         {
           value: "normal",
-          label: "Standard",
-          description: "Reasonable timeline, balanced approach",
+          label: t("estimation.deadline.normal.label"),
+          description: t("estimation.deadline.normal.description"),
         },
         {
           value: "urgent",
-          label: "Rush",
-          description: "Need it ASAP, expedited delivery",
+          label: t("estimation.deadline.urgent.label"),
+          description: t("estimation.deadline.urgent.description"),
         },
       ],
     },
@@ -223,17 +226,29 @@ export default function EstimationModal({ show, onClose }: Props) {
       return option?.label || value;
     };
 
-    const projectDetails = `*Project Estimation Details*
+    const projectDetails = `*${t("estimation.whatsapp.title")}*
 
-*Project Type:* ${getOptionLabel("projectType", formData.projectType)}
-*Features Complexity:* ${getOptionLabel("features", formData.features)}
-*Design Level:* ${getOptionLabel("design", formData.design)}
-*Timeline:* ${getOptionLabel("deadline", formData.deadline)}
+*${t("estimation.whatsapp.projectType")}:* ${getOptionLabel(
+      "projectType",
+      formData.projectType
+    )}
+*${t("estimation.whatsapp.features")}:* ${getOptionLabel(
+      "features",
+      formData.features
+    )}
+*${t("estimation.whatsapp.design")}:* ${getOptionLabel(
+      "design",
+      formData.design
+    )}
+*${t("estimation.whatsapp.timeline")}:* ${getOptionLabel(
+      "deadline",
+      formData.deadline
+    )}
 
-*Estimated Cost:* ${estimation?.startingFrom}
-*Estimated Duration:* ${estimation?.duration}
+*${t("estimation.whatsapp.estimatedCost")}:* ${estimation?.startingFrom}
+*${t("estimation.whatsapp.estimatedDuration")}:* ${estimation?.duration}
 
-Hi! I'd like to discuss my project. Here are the details from the estimator.`;
+${t("estimation.whatsapp.message")}`;
 
     const encodedMessage = encodeURIComponent(projectDetails);
     const whatsappUrl = `${WHATSAPP_BASE_URL}/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
@@ -276,10 +291,10 @@ Hi! I'd like to discuss my project. Here are the details from the estimator.`;
 
               <div className="flex items-center gap-2 mb-2">
                 <Calculator className="w-5 h-5" />
-                <h3 className="text-lg font-bold">Project Estimator</h3>
+                <h3 className="text-lg font-bold">{t("estimation.title")}</h3>
               </div>
               <p className="text-blue-100 text-sm mb-3">
-                Get an instant estimate for your project
+                {t("estimation.subtitle")}
               </p>
 
               {/* Progress bar */}
@@ -292,7 +307,7 @@ Hi! I'd like to discuss my project. Here are the details from the estimator.`;
                 />
               </div>
               <p className="text-xs text-blue-100 mt-1">
-                {completedFields} of {fields.length} questions completed
+                {completedFields} {t("estimation.progress")}
               </p>
             </div>
 
@@ -377,12 +392,12 @@ Hi! I'd like to discuss my project. Here are the details from the estimator.`;
                           }}
                           className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"
                         />
-                        Calculating...
+                        {t("estimation.calculating")}
                       </>
                     ) : (
                       <>
                         <Sparkles className="w-4 h-4" />
-                        Get My Estimate
+                        {t("estimation.getEstimate")}
                       </>
                     )}
                   </motion.button>
@@ -422,7 +437,7 @@ Hi! I'd like to discuss my project. Here are the details from the estimator.`;
                       </motion.div>
 
                       <h4 className="text-xl font-bold text-white mb-6">
-                        Your Project Estimate
+                        {t("estimation.yourEstimate")}
                       </h4>
 
                       <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
@@ -430,7 +445,7 @@ Hi! I'd like to discuss my project. Here are the details from the estimator.`;
                           <div className="flex items-center justify-center gap-2 mb-2">
                             <DollarSign className="w-5 h-5 text-white" />
                             <span className="text-sm font-medium text-blue-100">
-                              Starting From
+                              {t("estimation.startingFrom")}
                             </span>
                           </div>
                           <div className="text-3xl font-bold text-white">
@@ -442,7 +457,7 @@ Hi! I'd like to discuss my project. Here are the details from the estimator.`;
                           <div className="flex items-center justify-center gap-2 mb-2">
                             <Clock className="w-5 h-5 text-white" />
                             <span className="text-sm font-medium text-blue-100">
-                              Duration
+                              {t("estimation.duration")}
                             </span>
                           </div>
                           <div className="text-3xl font-bold text-white">
@@ -453,7 +468,7 @@ Hi! I'd like to discuss my project. Here are the details from the estimator.`;
 
                       <div className="mt-4 p-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-lg">
                         <p className="text-xs text-blue-100">
-                          Rough estimate. Final pricing may vary.
+                          {t("estimation.roughEstimate")}
                         </p>
                       </div>
 
@@ -463,7 +478,7 @@ Hi! I'd like to discuss my project. Here are the details from the estimator.`;
                         onClick={openWhatsApp}
                         className="mt-4 w-full px-4 py-3 bg-white text-blue-600 rounded-lg font-semibold shadow-md hover:shadow-lg transition-all duration-300"
                       >
-                        Let&apos;s Discuss Your Project
+                        {t("estimation.letsDiscuss")}
                       </motion.button>
                     </div>
                   </motion.div>

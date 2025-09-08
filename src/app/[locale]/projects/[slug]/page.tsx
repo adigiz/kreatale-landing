@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import projectsData from "@/lib/projectsData.json";
 import { ProjectData, ProjectsDatabase } from "@/lib/types";
+import { useTranslations } from "next-intl";
 
 // Animation variants
 const fadeInUp = {
@@ -37,6 +38,7 @@ const fetchProjectData = (slug: string): ProjectData | null => {
 };
 
 export default function ProjectDetailPage() {
+  const t = useTranslations();
   const params = useParams<{ slug: string }>();
   const [project, setProject] = useState<ProjectData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -91,7 +93,7 @@ export default function ProjectDetailPage() {
       <div className="min-h-screen bg-gradient-to-b from-blue-50/30 to-white flex items-center justify-center">
         <div className="text-center">
           <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4 text-blue-600" />
-          <p className="text-gray-600">Loading project...</p>
+          <p className="text-gray-600">{t("common.loading")}</p>
         </div>
       </div>
     );
@@ -111,7 +113,7 @@ export default function ProjectDetailPage() {
             onClick={handleGoBack}
             className="bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors"
           >
-            Go Back
+            {t("common.goBack")}
           </button>
         </div>
       </div>
@@ -153,7 +155,7 @@ export default function ProjectDetailPage() {
                 className="hover:cursor-pointer group bg-blue-600 text-white px-8 py-4 rounded-full font-semibold text-md shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center gap-3 mx-auto"
               >
                 <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                View Live Demo
+                {t("common.viewDemo")}
                 <ExternalLink className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </motion.div>
@@ -190,7 +192,7 @@ export default function ProjectDetailPage() {
             className="flex flex-col items-left gap-2"
             variants={fadeInUp}
           >
-            <p>Client</p>
+            <p>{t("common.client")}</p>
             <div className="flex gap-2 font-bold text-black items-center">
               <User size={16} />
               <span className="text-lg">{project.client}</span>
@@ -200,7 +202,7 @@ export default function ProjectDetailPage() {
             className="flex flex-col items-left gap-2"
             variants={fadeInUp}
           >
-            <p>Tech Stacks</p>
+            <p>{t("common.techStacks")}</p>
             <div className="flex gap-2 font-bold text-black items-center">
               <Computer size={16} />
               {project.techStacks.map((stack, id) => (
@@ -217,7 +219,7 @@ export default function ProjectDetailPage() {
             className="flex flex-col items-left gap-2"
             variants={fadeInUp}
           >
-            <p>Timeline</p>
+            <p>{t("common.timeline")}</p>
             <div className="flex gap-2 font-bold text-black items-center">
               <Calendar size={16} />
               <span className="text-lg">{project.duration}</span>
@@ -227,7 +229,7 @@ export default function ProjectDetailPage() {
             className="flex flex-col items-left gap-2"
             variants={fadeInUp}
           >
-            <p>Duration</p>
+            <p>{t("common.duration")}</p>
             <div className="flex gap-2 font-bold text-black items-center">
               <Clock size={16} />
               <span className="text-lg">{project.timeline}</span>
@@ -296,7 +298,7 @@ export default function ProjectDetailPage() {
         >
           <div className="border-t border-gray-200 pt-12">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">
-              Ready to start your project?
+              {t("common.readyToStart")}
             </h3>
             <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
               Lets work together to create something amazing for your business.
@@ -306,14 +308,14 @@ export default function ProjectDetailPage() {
                 className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors"
                 type="button"
               >
-                Start a Project
+                {t("common.getStarted")}
               </button>
               <button
                 onClick={handleGoBack}
                 className="border border-gray-300 text-gray-700 px-8 py-3 rounded-full font-semibold hover:bg-gray-50 transition-colors"
                 type="button"
               >
-                View More Work
+                {t("common.viewMoreWork")}
               </button>
             </div>
           </div>

@@ -11,43 +11,46 @@ import Link from "next/link";
 import { useState } from "react";
 import projectsData from "@/lib/projectsData.json";
 import { PortfolioProject } from "@/lib/types";
+import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 
-// Map the JSON data to the portfolio format and reorder to show ActiveNet first
-const projects: PortfolioProject[] = Object.entries(projectsData)
-  .map(([slug, data]) => ({
-    title: data.title,
-    description: getProjectType(slug),
-    country: data.country || "Unknown", // Add country from data
-    image: getPortfolioImage(slug),
-    link: `/projects/${slug}`,
-    slug: slug, // Add slug for sorting
-  }))
-  .sort((a, b) => {
-    // Custom sorting order: ActiveNet, CaptLoui, Plumbing, Gemoedje, Neon, Pescheck, then rest
-    const order = [
-      "activenet",
-      "captloui",
-      "plumbing",
-      "gemoedje",
-      "neon",
-      "pescheck",
-    ];
+// Function to create projects array with locale-aware links
+const createProjectsArray = (locale: string): PortfolioProject[] =>
+  Object.entries(projectsData)
+    .map(([slug, data]) => ({
+      title: data.title,
+      description: getProjectType(slug),
+      country: data.country || "Unknown", // Add country from data
+      image: getPortfolioImage(slug),
+      link: `/${locale}/projects/${slug}`,
+      slug: slug, // Add slug for sorting
+    }))
+    .sort((a, b) => {
+      // Custom sorting order: ActiveNet, CaptLoui, Plumbing, Gemoedje, Neon, Pescheck, then rest
+      const order = [
+        "activenet",
+        "captloui",
+        "plumbing",
+        "gemoedje",
+        "neon",
+        "pescheck",
+      ];
 
-    const aIndex = order.indexOf(a.slug);
-    const bIndex = order.indexOf(b.slug);
+      const aIndex = order.indexOf(a.slug);
+      const bIndex = order.indexOf(b.slug);
 
-    // If both are in the custom order, sort by their position
-    if (aIndex !== -1 && bIndex !== -1) {
-      return aIndex - bIndex;
-    }
+      // If both are in the custom order, sort by their position
+      if (aIndex !== -1 && bIndex !== -1) {
+        return aIndex - bIndex;
+      }
 
-    // If only one is in the custom order, prioritize it
-    if (aIndex !== -1) return -1;
-    if (bIndex !== -1) return 1;
+      // If only one is in the custom order, prioritize it
+      if (aIndex !== -1) return -1;
+      if (bIndex !== -1) return 1;
 
-    // For the rest, sort alphabetically
-    return a.slug.localeCompare(b.slug);
-  });
+      // For the rest, sort alphabetically
+      return a.slug.localeCompare(b.slug);
+    });
 
 function getProjectType(slug: string): string {
   switch (slug) {
@@ -165,6 +168,15 @@ function ImageModal({
 }
 
 export default function Portfolio() {
+  const t = useTranslations();
+  const pathname = usePathname();
+
+  // Extract current locale from pathname
+  const currentLocale = pathname.split("/")[1] || "en";
+
+  // Create projects array with locale-aware links
+  const projects = createProjectsArray(currentLocale);
+
   const [modalImage, setModalImage] = useState<{
     src: string;
     title: string;
@@ -187,21 +199,18 @@ export default function Portfolio() {
       <div className="flex flex-col lg:flex-row justify-between items-start gap-6 lg:gap-8 mb-8 lg:mb-8">
         <div className="flex flex-col gap-3 lg:gap-4">
           <p className="font-bold text-gray-400 uppercase text-xs sm:text-sm">
-            Our Work
+            {t("portfolio.subtitle")}
           </p>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-black leading-tight">
-            We help businesses to make their <br className="hidden sm:block" />
-            product come to life, worldwide.
+            {t("portfolio.title")}
           </h2>
         </div>
         <div className="text-sm sm:text-base lg:text-lg text-gray-500 max-w-2xl">
-          Our experience has helped our clients launch new companies in the
-          digital arena throughout the years. Take a look at some of our
-          greatest work.
+          {t("portfolio.description")}
           <div className="mt-3 lg:mt-4">
-            <Link href="/projects">
+            <Link href={`/${currentLocale}/projects`}>
               <button className="hover:cursor-pointer bg-blue-100 text-blue-600 px-4 sm:px-6 py-2 rounded-full font-semibold text-xs sm:text-sm hover:bg-blue-200 transition-colors">
-                See all works
+                {t("portfolio.viewAll")}
               </button>
             </Link>
           </div>

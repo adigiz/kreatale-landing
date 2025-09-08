@@ -1,0 +1,376 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "projects": "Projects",
+    "faq": "FAQ",
+    "contact": "Contact"
+  },
+  "hero": {
+    "subtitle": "Software Development Partner",
+    "title": "We are a website & app development partner",
+    "latestWork": "Our latest work",
+    "projectName": "Gemoedje"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "What we do",
+    "description": "We provide comprehensive digital solutions to help your business grow and succeed online.",
+    "hero": {
+      "title": "Digital solutions that drive results",
+      "description": "From concept to deployment, we provide comprehensive digital services that help businesses grow and succeed online."
+    },
+    "overview": {
+      "title": "What We Offer",
+      "description": "Our comprehensive suite of digital services is designed to meet the evolving needs of modern businesses. We combine technical expertise with creative innovation to deliver solutions that make a difference."
+    },
+    "whyChoose": {
+      "title": "Why Choose Kreatale?",
+      "description": "We don't just build websites and apps – we create digital experiences that drive real business results.",
+      "expertTeam": {
+        "title": "Expert Team",
+        "description": "Our team of experienced developers, designers, and strategists bring years of industry expertise to every project."
+      },
+      "qualityAssurance": {
+        "title": "Quality Assurance",
+        "description": "Every project undergoes rigorous testing to ensure it meets our high standards and exceeds your expectations."
+      },
+      "fastDelivery": {
+        "title": "Fast Delivery",
+        "description": "We work efficiently to deliver your project on time, without compromising on quality or attention to detail."
+      },
+      "modernTechnology": {
+        "title": "Modern Technology",
+        "description": "We use the latest technologies and best practices to ensure your solution is future-proof and scalable."
+      },
+      "globalReach": {
+        "title": "Global Reach",
+        "description": "We've served clients from around the world, bringing diverse perspectives and innovative solutions."
+      },
+      "ongoingSupport": {
+        "title": "Ongoing Support",
+        "description": "Our relationship doesn't end at launch. We provide ongoing support and maintenance to keep your solution running smoothly."
+      }
+    },
+    "cta": {
+      "title": "Ready to get started?",
+      "description": "Let's discuss your project requirements and how we can help bring your digital vision to life.",
+      "startProject": "Start a Project",
+      "learnAbout": "Learn About Us"
+    },
+    "website": {
+      "title": "Website Development",
+      "description": "We design and build responsive, user-friendly websites that reflect your brand and drive engagement. From landing pages to full corporate sites, we ensure performance, accessibility, and modern design standards.",
+      "features": [
+        "Responsive design for all devices",
+        "SEO optimization",
+        "Fast loading times",
+        "Content management system",
+        "Analytics integration",
+        "Security implementation"
+      ]
+    },
+    "webapp": {
+      "title": "Web App Development",
+      "description": "Our team develops robust and scalable web applications tailored to your business needs. Using modern frameworks and best practices, we create secure, high-performance solutions for everything from dashboards to complex SaaS platforms.",
+      "features": [
+        "Custom functionality",
+        "User authentication",
+        "Database integration",
+        "API development",
+        "Real-time updates",
+        "Performance optimization"
+      ]
+    },
+    "mobile": {
+      "title": "Mobile Development",
+      "description": "We build cross-platform and native mobile apps that deliver smooth user experiences on both iOS and Android. Whether for internal use or public release, we turn your ideas into powerful, intuitive mobile solutions.",
+      "features": [
+        "Native and cross-platform",
+        "Offline functionality",
+        "Push notifications",
+        "App store optimization",
+        "Performance monitoring",
+        "Regular updates"
+      ]
+    },
+    "training": {
+      "title": "Training",
+      "description": "We provide hands-on, real-world IT training tailored to teams and individuals. Covering topics from web and mobile development to system administration and security, our programs empower learners to build practical, job-ready skills.",
+      "features": [
+        "Hands-on learning",
+        "Real-world projects",
+        "Web development training",
+        "Mobile development training",
+        "System administration",
+        "Security training"
+      ]
+    },
+    "cta": "Get Started",
+    "discussProject": "Let's discuss your project"
+  },
+  "about": {
+    "title": "About Kreatale",
+    "subtitle": "Who we are",
+    "description": "We are a passionate team of developers, designers, and digital strategists dedicated to creating innovative solutions that drive business growth.",
+    "hero": {
+      "subtitle": "About Us",
+      "title": "Turning Dreams Into Digital Reality",
+      "description": "We are a passionate team of developers, designers, and digital strategists dedicated to creating innovative solutions that drive business growth."
+    },
+    "story": {
+      "title": "Our Story",
+      "description": "Founded last year, Kreatale began with a simple mission: to help businesses realize their dreams through innovative technology solutions. What started as a small team of passionate developers has quickly grown into a dynamic digital agency serving clients worldwide.",
+      "sectionTitle": "From Vision to Victory",
+      "description1": "We understand that behind every business idea lies a dream - a vision of what could be. Our mission is to bridge the gap between imagination and implementation.",
+      "description2": "Through cutting-edge technology and creative problem-solving, we transform your business dreams into powerful digital solutions that drive real results."
+    },
+    "values": {
+      "title": "Our Core Values",
+      "description": "These principles guide everything we do, from how we approach projects to how we build relationships with our clients.",
+      "innovation": {
+        "title": "Innovation",
+        "description": "We stay ahead of technology trends to deliver cutting-edge solutions."
+      },
+      "quality": {
+        "title": "Quality",
+        "description": "Every project is crafted with attention to detail and excellence."
+      },
+      "collaboration": {
+        "title": "Collaboration",
+        "description": "We work closely with our clients to ensure their vision becomes reality."
+      },
+      "integrity": {
+        "title": "Integrity",
+        "description": "Honest communication and transparent processes build lasting relationships."
+      }
+    },
+    "dreams": {
+      "title": "Realizing Dreams Through Technology",
+      "description": "At Kreatale, we believe every business has a dream. Whether it's launching a new product, expanding to new markets, or revolutionizing an industry, we're here to turn those dreams into digital reality.",
+      "sectionTitle": "From Vision to Victory",
+      "description1": "We understand that behind every business idea lies a dream - a vision of what could be. Our mission is to bridge the gap between imagination and implementation.",
+      "description2": "Through cutting-edge technology and creative problem-solving, we transform your business dreams into powerful digital solutions that drive real results.",
+      "description3": "Every project we undertake is more than just code - it's a step toward realizing your business dreams and achieving your goals.",
+      "cardTitle": "Your Dreams, Our Mission",
+      "cardDescription": "We don't just build websites and apps - we build the digital foundation that makes your business dreams come true."
+    },
+    "process": {
+      "title": "How We Work",
+      "description": "Our proven development process ensures your project is delivered on time, within budget, and exceeds expectations."
+    },
+    "cta": {
+      "title": "Ready to realize your dreams?",
+      "description": "Let's discuss how we can help turn your business dreams into digital reality and drive real business results.",
+      "startProject": "Start a Project",
+      "learnMore": "Learn More"
+    },
+    "stats": [
+      { "value": "50+", "label": "Projects Completed" },
+      { "value": "30+", "label": "Happy Clients" },
+      { "value": "24/7", "label": "Support Available" },
+      { "value": "100%", "label": "Client Satisfaction" }
+    ]
+  },
+  "portfolio": {
+    "title": "Our Portfolio",
+    "subtitle": "Recent Work",
+    "description": "Explore our latest projects and see how we've helped businesses achieve their digital goals.",
+    "viewAll": "View All Projects",
+    "categories": {
+      "all": "All",
+      "website": "Website",
+      "mobile": "Mobile App",
+      "webapp": "Web App",
+      "design": "Design"
+    }
+  },
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "subtitle": "Testimonials",
+    "description": "Don't just take our word for it. Here's what our clients have to say about working with us."
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "FAQ",
+    "description": "Find answers to common questions about our services and processes.",
+    "categories": {
+      "all": "All",
+      "services": "Services",
+      "timeline": "Timeline",
+      "process": "Process",
+      "support": "Support",
+      "technology": "Technology",
+      "communication": "Communication",
+      "company": "Company",
+      "security": "Security"
+    },
+    "questions": [
+      {
+        "question": "What services does Kreatale offer?",
+        "answer": "We specialize in web development, mobile app development, custom web applications, WordPress customization, and UI/UX design. We create fast, modern, and scalable digital solutions tailored to your business needs.",
+        "category": "Services"
+      },
+      {
+        "question": "How long does it take to complete a project?",
+        "answer": "Project timelines vary depending on complexity. A simple website typically takes 2-4 weeks, while complex web applications can take 2-6 months. We'll provide a detailed timeline during our initial consultation.",
+        "category": "Timeline"
+      },
+      {
+        "question": "What is your development process?",
+        "answer": "Our process includes discovery & planning, design & prototyping, development & testing, and deployment & maintenance. We maintain clear communication throughout each phase and provide regular updates.",
+        "category": "Process"
+      },
+      {
+        "question": "Do you provide ongoing support after launch?",
+        "answer": "Yes, we offer various support packages including maintenance, updates, security monitoring, and performance optimization. We can also provide training for your team to manage the website.",
+        "category": "Support"
+      },
+      {
+        "question": "What technologies do you use?",
+        "answer": "We use modern technologies including Next.js, React, TypeScript, Tailwind CSS, and other cutting-edge tools. We choose the best technology stack based on your project requirements and goals.",
+        "category": "Technology"
+      },
+      {
+        "question": "Can you work with existing websites?",
+        "answer": "Absolutely! We can redesign, rebuild, or enhance existing websites. We'll analyze your current site and recommend improvements to enhance performance, user experience, and conversion rates.",
+        "category": "Services"
+      },
+      {
+        "question": "How do you handle project communication?",
+        "answer": "We use project management tools, regular video calls, and detailed progress reports. You'll have a dedicated project manager and direct access to our development team throughout the project.",
+        "category": "Communication"
+      },
+      {
+        "question": "What makes Kreatale different from other agencies?",
+        "answer": "We focus on creating high-performance, scalable solutions with clean code and modern design. Our team combines technical expertise with business understanding to deliver solutions that drive real results.",
+        "category": "Company"
+      },
+      {
+        "question": "Do you provide hosting and domain services?",
+        "answer": "Yes, we can help with hosting setup, domain registration, SSL certificates, and ongoing server management. We recommend reliable hosting providers that ensure optimal performance.",
+        "category": "Services"
+      },
+      {
+        "question": "How do you ensure website security?",
+        "answer": "We implement security best practices including HTTPS, secure authentication, regular updates, and security monitoring. We also provide security audits and recommendations for ongoing protection.",
+        "category": "Security"
+      }
+    ],
+    "cta": "Still have questions?",
+    "contactUs": "Contact us on WhatsApp"
+  },
+  "footer": {
+    "contactUs": "Contact Us",
+    "readyToStart": "You have got this far. Ready to get started?",
+    "whatsappUs": "WhatsApp Us",
+    "navigation": {
+      "services": "Services",
+      "about": "About",
+      "projects": "Projects",
+      "faq": "FAQ"
+    }
+  },
+  "estimation": {
+    "title": "Project Estimator",
+    "subtitle": "Get an instant estimate for your project",
+    "progress": "questions completed",
+    "projectType": {
+      "label": "What type of project?",
+      "website": {
+        "label": "Website",
+        "description": "Landing page, portfolio, or business site"
+      },
+      "mobile": {
+        "label": "Mobile App",
+        "description": "iOS/Android native or cross-platform"
+      },
+      "saas": {
+        "label": "SaaS Platform",
+        "description": "Web application with complex features"
+      }
+    },
+    "features": {
+      "label": "How complex are the features?",
+      "small": {
+        "label": "Simple",
+        "description": "Basic functionality, few integrations"
+      },
+      "medium": {
+        "label": "Medium",
+        "description": "Multiple features, some integrations"
+      },
+      "large": {
+        "label": "Complex",
+        "description": "Advanced features, many integrations"
+      }
+    },
+    "design": {
+      "label": "What level of design do you need?",
+      "basic": {
+        "label": "Standard",
+        "description": "Clean, professional templates"
+      },
+      "custom": {
+        "label": "Custom",
+        "description": "Unique design tailored to your brand"
+      },
+      "premium": {
+        "label": "Premium",
+        "description": "High-end custom design with animations"
+      }
+    },
+    "deadline": {
+      "label": "What's your timeline?",
+      "flexible": {
+        "label": "Flexible",
+        "description": "No rush, quality is priority"
+      },
+      "normal": {
+        "label": "Standard",
+        "description": "Reasonable timeline, balanced approach"
+      },
+      "urgent": {
+        "label": "Rush",
+        "description": "Need it ASAP, expedited delivery"
+      }
+    },
+    "getEstimate": "Get My Estimate",
+    "calculating": "Calculating...",
+    "yourEstimate": "Your Project Estimate",
+    "startingFrom": "Starting From",
+    "duration": "Duration",
+    "roughEstimate": "Rough estimate. Final pricing may vary.",
+    "letsDiscuss": "Let's Discuss Your Project",
+    "whatsapp": {
+      "title": "Project Estimation Details",
+      "projectType": "Project Type",
+      "features": "Features Complexity",
+      "design": "Design Level",
+      "timeline": "Timeline",
+      "estimatedCost": "Estimated Cost",
+      "estimatedDuration": "Estimated Duration",
+      "message": "Hi! I'd like to discuss my project. Here are the details from the estimator."
+    }
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "viewProject": "View Project",
+    "readMore": "Read More",
+    "close": "Close",
+    "loading": "Loading project...",
+    "goBack": "Go Back",
+    "viewDemo": "View Live Demo",
+    "client": "Client",
+    "techStacks": "Tech Stacks",
+    "timeline": "Timeline",
+    "duration": "Duration",
+    "readyToStart": "Ready to start your project?",
+    "viewMoreWork": "View More Work"
+  }
+}
+
+

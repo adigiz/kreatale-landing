@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import EstimationModal from "./EstimationModal";
+import { useTranslations } from "next-intl";
 
 type Testimonial = {
   text: string;
@@ -31,6 +32,7 @@ const testimonials: Testimonial[] = [
 ];
 
 export default function Testimonials() {
+  const t = useTranslations();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState<"left" | "right">("right");
   const [showEstimator, setShowEstimator] = useState(false);
@@ -60,10 +62,10 @@ export default function Testimonials() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         <p className="font-bold text-gray-400 uppercase text-xs sm:text-sm mb-2">
-          Testimonials
+          {t("testimonials.subtitle")}
         </p>
         <h2 className="text-black text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">
-          What they say about us
+          {t("testimonials.title")}
         </h2>
       </motion.div>
 
@@ -166,13 +168,13 @@ export default function Testimonials() {
           />
           <div className="text-center">
             <p className="text-lg sm:text-xl lg:text-2xl font-semibold mb-3 sm:mb-4 leading-tight">
-              Want to estimate your project?
+              {t("estimation.subtitle")}
             </p>
             <button
               onClick={() => setShowEstimator(true)}
               className="w-full bg-white text-blue-600 px-4 py-2 sm:px-6 sm:py-3 rounded-full font-medium hover:bg-blue-50 transition-colors text-sm sm:text-base"
             >
-              Project Estimation
+              {t("estimation.title")}
             </button>
           </div>
         </motion.div>

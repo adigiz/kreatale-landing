@@ -9,6 +9,8 @@ import {
   WHATSAPP_BASE_URL,
   WHATSAPP_MESSAGES,
 } from "@/lib/constants";
+import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 
 interface FAQItem {
   question: string;
@@ -16,82 +18,18 @@ interface FAQItem {
   category: string;
 }
 
-const faqData: FAQItem[] = [
-  {
-    question: "What services does Kreatale offer?",
-    answer:
-      "We specialize in web development, mobile app development, custom web applications, WordPress customization, and UI/UX design. We create fast, modern, and scalable digital solutions tailored to your business needs.",
-    category: "Services",
-  },
-  {
-    question: "How long does it take to complete a project?",
-    answer:
-      "Project timelines vary depending on complexity. A simple website typically takes 2-4 weeks, while complex web applications can take 2-6 months. We'll provide a detailed timeline during our initial consultation.",
-    category: "Timeline",
-  },
-  {
-    question: "What is your development process?",
-    answer:
-      "Our process includes discovery & planning, design & prototyping, development & testing, and deployment & maintenance. We maintain clear communication throughout each phase and provide regular updates.",
-    category: "Process",
-  },
-  {
-    question: "Do you provide ongoing support after launch?",
-    answer:
-      "Yes, we offer various support packages including maintenance, updates, security monitoring, and performance optimization. We can also provide training for your team to manage the website.",
-    category: "Support",
-  },
-  {
-    question: "What technologies do you use?",
-    answer:
-      "We use modern technologies including Next.js, React, TypeScript, Tailwind CSS, and other cutting-edge tools. We choose the best technology stack based on your project requirements and goals.",
-    category: "Technology",
-  },
-  {
-    question: "Can you work with existing websites?",
-    answer:
-      "Absolutely! We can redesign, rebuild, or enhance existing websites. We'll analyze your current site and recommend improvements to enhance performance, user experience, and conversion rates.",
-    category: "Services",
-  },
-  {
-    question: "How do you handle project communication?",
-    answer:
-      "We use project management tools, regular video calls, and detailed progress reports. You'll have a dedicated project manager and direct access to our development team throughout the project.",
-    category: "Communication",
-  },
-  {
-    question: "What makes Kreatale different from other agencies?",
-    answer:
-      "We focus on creating high-performance, scalable solutions with clean code and modern design. Our team combines technical expertise with business understanding to deliver solutions that drive real results.",
-    category: "Company",
-  },
-  {
-    question: "Do you provide hosting and domain services?",
-    answer:
-      "Yes, we can help with hosting setup, domain registration, SSL certificates, and ongoing server management. We recommend reliable hosting providers that ensure optimal performance.",
-    category: "Services",
-  },
-  {
-    question: "How do you ensure website security?",
-    answer:
-      "We implement security best practices including HTTPS, secure authentication, regular updates, and security monitoring. We also provide security audits and recommendations for ongoing protection.",
-    category: "Security",
-  },
-];
-
-const categories = [
-  "All",
-  "Services",
-  "Timeline",
-  "Process",
-  "Support",
-  "Technology",
-  "Communication",
-  "Company",
-  "Security",
-];
-
 export default function FAQPage() {
+  const t = useTranslations();
+  const pathname = usePathname();
+
+  // Extract current locale from pathname
+  const currentLocale = pathname.split("/")[1] || "en";
+
+  // Helper function to create locale-aware paths
+  const createLocalizedPath = (path: string) => {
+    return `/${currentLocale}${path}`;
+  };
+
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [openItems, setOpenItems] = useState<number[]>([]);
 
@@ -100,6 +38,12 @@ export default function FAQPage() {
       prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
     );
   };
+
+  // Get FAQ data from translations
+  const faqData: FAQItem[] = t.raw("faq.questions") as FAQItem[];
+  const categories = Object.values(
+    t.raw("faq.categories") as Record<string, string>
+  );
 
   const filteredFAQs =
     selectedCategory === "All"
@@ -117,11 +61,10 @@ export default function FAQPage() {
           className="max-w-4xl mx-auto text-center"
         >
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
-            Frequently Asked Questions
+            {t("faq.title")}
           </h1>
           <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-            Find answers to common questions about our web development services,
-            process, and what makes us different.
+            {t("faq.description")}
           </p>
         </motion.div>
       </div>
@@ -202,7 +145,7 @@ export default function FAQPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Still have questions?
+              {t("faq.cta")}
             </h2>
             <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
               Can&apos;t find what you&apos;re looking for? Get in touch with
@@ -221,12 +164,12 @@ export default function FAQPage() {
                 className="inline-block"
               >
                 <button className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors duration-200">
-                  WhatsApp Us
+                  {t("faq.contactUs")}
                 </button>
               </a>
-              <Link href="/#contact">
+              <Link href={createLocalizedPath("/#contact")}>
                 <button className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-200">
-                  Contact Us
+                  {t("common.contactUs")}
                 </button>
               </Link>
             </div>

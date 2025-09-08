@@ -9,6 +9,8 @@ import projectsData from "@/lib/projectsData.json";
 import { ProjectsDatabase } from "@/lib/types";
 import { usePathname } from "next/navigation";
 import { WHATSAPP_NUMBER, WHATSAPP_BASE_URL } from "@/lib/constants";
+import { useTranslations } from "next-intl";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 // Animation variants
 const dropdownVariants = {
@@ -45,6 +47,15 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [projectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
   const pathname = usePathname();
+  const t = useTranslations();
+
+  // Extract current locale from pathname
+  const currentLocale = pathname.split("/")[1] || "en";
+
+  // Helper function to create locale-aware paths
+  const createLocalizedPath = (path: string) => {
+    return `/${currentLocale}${path}`;
+  };
 
   // Function to close mobile menu
   const closeMobileMenu = () => {
@@ -92,7 +103,7 @@ export default function Header() {
   return (
     <nav className="bg-white shadow-sm px-6 py-4 md:px-16 flex items-center justify-between relative z-50">
       <div className="flex items-center gap-6 md:gap-16">
-        <Link href="/">
+        <Link href={createLocalizedPath("/")}>
           <Image
             alt="logo"
             height={150}
@@ -109,14 +120,14 @@ export default function Header() {
             onMouseLeave={() => setProjectsDropdownOpen(false)}
           >
             <Link
-              href="/projects"
+              href={createLocalizedPath("/projects")}
               className={`flex items-center gap-1 transition-colors duration-200 ${
-                pathname === "/projects"
+                pathname === createLocalizedPath("/projects")
                   ? "text-blue-600 font-semibold"
                   : "hover:text-blue-600"
               }`}
             >
-              Projects
+              {t("nav.projects")}
               <motion.div
                 animate={{ rotate: projectsDropdownOpen ? 180 : 0 }}
                 transition={{ duration: 0.2 }}
@@ -141,7 +152,7 @@ export default function Header() {
                       transition={{ delay: 0.1 }}
                       className="px-3 py-2 text-sm text-gray-500 font-medium border-b border-gray-100 mb-1"
                     >
-                      Featured Projects
+                      {t("portfolio.title")}
                     </motion.div>
                     {projects.map(([slug, project], index) => (
                       <motion.div
@@ -152,7 +163,7 @@ export default function Header() {
                         transition={{ delay: index * 0.05 + 0.1 }}
                       >
                         <Link
-                          href={`/projects/${slug}`}
+                          href={createLocalizedPath(`/projects/${slug}`)}
                           className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 group"
                         >
                           <div className="w-12 h-12 relative rounded-lg overflow-hidden flex-shrink-0">
@@ -187,10 +198,10 @@ export default function Header() {
                       className="mt-2 pt-2 border-t border-gray-100"
                     >
                       <Link
-                        href="/projects"
+                        href={createLocalizedPath("/projects")}
                         className="flex items-center justify-center gap-2 p-3 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors duration-200 font-medium text-sm"
                       >
-                        View All Projects
+                        {t("portfolio.viewAll")}
                         <ExternalLink size={14} />
                       </Link>
                     </motion.div>
@@ -200,39 +211,42 @@ export default function Header() {
             </AnimatePresence>
           </div>
           <Link
-            href="/services"
+            href={createLocalizedPath("/services")}
             className={`transition-colors duration-200 ${
-              pathname === "/services"
+              pathname === createLocalizedPath("/services")
                 ? "text-blue-600 font-semibold"
                 : "hover:text-blue-600"
             }`}
           >
-            Services
+            {t("nav.services")}
           </Link>
           <Link
-            href="/about"
+            href={createLocalizedPath("/about")}
             className={`transition-colors duration-200 ${
-              pathname === "/about"
+              pathname === createLocalizedPath("/about")
                 ? "text-blue-600 font-semibold"
                 : "hover:text-blue-600"
             }`}
           >
-            About
+            {t("nav.about")}
           </Link>
           <Link
-            href="/faq"
+            href={createLocalizedPath("/faq")}
             className={`transition-colors duration-200 ${
-              pathname === "/faq"
+              pathname === createLocalizedPath("/faq")
                 ? "text-blue-600 font-semibold"
                 : "hover:text-blue-600"
             }`}
           >
-            FAQ
+            {t("nav.faq")}
           </Link>
         </div>
       </div>
 
       <div className="flex items-center gap-4">
+        {/* Language Switcher */}
+        <LanguageSwitcher />
+
         {/* Desktop WhatsApp CTA */}
         <a
           href={whatsappUrl}
@@ -241,7 +255,7 @@ export default function Header() {
           className="hidden md:flex items-center gap-2 bg-[#0061FF] text-white px-5 py-3 rounded-full text-sm font-semibold hover:bg-blue-600 transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
         >
           <MessageCircle size={16} />
-          WhatsApp Us
+          {t("footer.whatsappUs")}
         </a>
 
         <motion.button
@@ -307,16 +321,20 @@ export default function Header() {
             <div className="space-y-1 mb-6 pt-2">
               {[
                 {
-                  href: "/services",
-                  label: "Services",
-                  isActive: pathname === "/services",
+                  href: createLocalizedPath("/services"),
+                  label: t("nav.services"),
+                  isActive: pathname === createLocalizedPath("/services"),
                 },
                 {
-                  href: "/about",
-                  label: "About",
-                  isActive: pathname === "/about",
+                  href: createLocalizedPath("/about"),
+                  label: t("nav.about"),
+                  isActive: pathname === createLocalizedPath("/about"),
                 },
-                { href: "/faq", label: "FAQ", isActive: pathname === "/faq" },
+                {
+                  href: createLocalizedPath("/faq"),
+                  label: t("nav.faq"),
+                  isActive: pathname === createLocalizedPath("/faq"),
+                },
               ].map((item, index) => (
                 <motion.div
                   key={item.href}
@@ -348,15 +366,15 @@ export default function Header() {
             >
               <div className="border-t border-gray-200 pt-4">
                 <Link
-                  href="/projects"
+                  href={createLocalizedPath("/projects")}
                   onClick={closeMobileMenu}
                   className={`block font-semibold mb-3 px-4 py-2 rounded-xl transition-all duration-200 ${
-                    pathname === "/projects"
+                    pathname === createLocalizedPath("/projects")
                       ? "bg-blue-50 text-[#0061FF] border-l-4 border-[#0061FF]"
                       : "text-[#0061FF] hover:bg-blue-50"
                   }`}
                 >
-                  Projects
+                  {t("nav.projects")}
                 </Link>
                 <div className="pl-4 space-y-2">
                   {projects.map(([slug, project], index) => (
@@ -367,7 +385,7 @@ export default function Header() {
                       transition={{ delay: 0.35 + index * 0.03, duration: 0.3 }}
                     >
                       <Link
-                        href={`/projects/${slug}`}
+                        href={createLocalizedPath(`/projects/${slug}`)}
                         onClick={closeMobileMenu}
                         className="block text-sm text-gray-600 hover:text-[#0061FF] transition-all duration-200 py-2 px-4 rounded-lg hover:bg-gray-50 group"
                       >
@@ -411,7 +429,7 @@ export default function Header() {
                 className="flex items-center justify-center gap-3 bg-gradient-to-r from-[#0061FF] to-blue-600 text-white px-6 py-4 rounded-2xl text-sm font-semibold hover:from-blue-600 hover:to-blue-700 transition-all duration-300 w-full shadow-lg hover:shadow-xl transform hover:scale-105"
               >
                 <MessageCircle size={18} />
-                Start a Project on WhatsApp
+                {t("common.getStarted")}
               </a>
             </motion.div>
           </motion.div>
