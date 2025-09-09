@@ -203,16 +203,18 @@ export default function ProjectDetailPage() {
             variants={fadeInUp}
           >
             <p>{t("common.techStacks")}</p>
-            <div className="flex gap-2 font-bold text-black items-center">
-              <Computer size={16} />
-              {project.techStacks.map((stack, id) => (
-                <span
-                  key={id}
-                  className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full"
-                >
-                  {stack}
-                </span>
-              ))}
+            <div className="flex flex-wrap gap-2 font-bold text-black items-start">
+              <Computer size={16} className="mt-1 flex-shrink-0" />
+              <div className="flex flex-wrap gap-2">
+                {project.techStacks.map((stack, id) => (
+                  <span
+                    key={id}
+                    className="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full whitespace-nowrap"
+                  >
+                    {stack}
+                  </span>
+                ))}
+              </div>
             </div>
           </motion.div>
           <motion.div
