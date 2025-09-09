@@ -4,9 +4,22 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
+import projectsData from "@/lib/projectsData.json";
+import { sortProjects } from "@/lib/utils";
 
 export default function Hero() {
   const t = useTranslations();
+  const pathname = usePathname();
+
+  // Get current locale and first project
+  const currentLocale = pathname.split("/")[1] || "en";
+  const projects = sortProjects(Object.entries(projectsData));
+  const firstProject = projects[0];
+  const [projectSlug, projectData] = firstProject;
+
+  // Create localized path for the project
+  const projectPath = `/${currentLocale}/projects/${projectSlug}`;
 
   return (
     <section
@@ -116,8 +129,8 @@ export default function Hero() {
           className="hidden flex-[1] lg:flex justify-center"
         >
           <Link
-            href="https://gemoedje-web-app.vercel.app/"
-            aria-label={`View ${t("hero.projectName")} project - ${t(
+            href={projectPath}
+            aria-label={`View ${projectData.title} project - ${t(
               "hero.latestWork"
             )}`}
             className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-2xl"
@@ -134,25 +147,21 @@ export default function Hero() {
                 transition: { duration: 0.3, ease: "easeOut" },
               }}
               whileTap={{ scale: 0.98 }}
-              className="bg-white rounded-2xl w-full max-w-sm h-full flex flex-col justify-start"
+              className="bg-white rounded-2xl w-full h-full flex flex-col justify-start"
             >
               <motion.div
                 initial={{ scale: 1.1, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="overflow-hidden rounded-2xl mb-4"
+                className="relative overflow-hidden rounded-2xl mb-4 w-[400px] h-[550px]"
               >
                 <Image
-                  src="/current-project.png"
-                  alt={`Screenshot of ${t(
-                    "hero.projectName"
-                  )} project showing the main interface`}
-                  width={400}
-                  height={250}
-                  className="w-full object-cover hover:scale-105 transition-transform duration-500"
-                  sizes="400px"
-                  quality={75}
+                  src={projectData.portfolioImage}
+                  alt={`Screenshot of ${projectData.title} project showing the main interface`}
+                  fill
+                  className="object-cover hover:scale-105 transition-transform duration-500"
+                  quality={100}
                 />
               </motion.div>
 
@@ -180,7 +189,7 @@ export default function Hero() {
                     transition={{ duration: 0.5, delay: 0.9 }}
                     className="text-2xl sm:text-3xl font-bold text-black"
                   >
-                    {t("hero.projectName")}
+                    {projectData.title}
                   </motion.h2>
                 </div>
 
@@ -193,7 +202,7 @@ export default function Hero() {
                   }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.2 }}
-                  aria-label={`View ${t("hero.projectName")} project details`}
+                  aria-label={`View ${projectData.title} project details`}
                   className="border w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   <motion.svg

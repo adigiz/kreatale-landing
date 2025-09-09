@@ -370,5 +370,12 @@
     "duration": "Durasi",
     "readyToStart": "Siap memulai proyek Anda?",
     "viewMoreWork": "Lihat Pekerjaan Lainnya"
+  },
+  "404": {
+    "title": "Halaman Tidak Ditemukan",
+    "description": "Maaf, kami tidak dapat menemukan halaman yang Anda cari. Halaman mungkin telah dipindahkan, dihapus, atau tidak ada.",
+    "goHome": "Kembali ke Beranda",
+    "goBack": "Kembali",
+    "help": "Jika Anda merasa ini adalah kesalahan, silakan hubungi kami."
   }
 }

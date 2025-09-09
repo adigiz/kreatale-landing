@@ -13,87 +13,22 @@ import projectsData from "@/lib/projectsData.json";
 import { PortfolioProject } from "@/lib/types";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
+import { sortProjects } from "@/lib/utils";
 
 // Function to create projects array with locale-aware links
-const createProjectsArray = (locale: string): PortfolioProject[] =>
-  Object.entries(projectsData)
-    .map(([slug, data]) => ({
-      title: data.title,
-      description: getProjectType(slug),
-      country: data.country || "Unknown", // Add country from data
-      image: getPortfolioImage(slug),
-      link: `/${locale}/projects/${slug}`,
-      slug: slug, // Add slug for sorting
-    }))
-    .sort((a, b) => {
-      // Custom sorting order: ActiveNet, CaptLoui, Plumbing, Gemoedje, Neon, Pescheck, then rest
-      const order = [
-        "activenet",
-        "captloui",
-        "plumbing",
-        "gemoedje",
-        "neon",
-        "pescheck",
-      ];
+const createProjectsArray = (locale: string): PortfolioProject[] => {
+  const projectEntries = Object.entries(projectsData);
+  const sortedEntries = sortProjects(projectEntries);
 
-      const aIndex = order.indexOf(a.slug);
-      const bIndex = order.indexOf(b.slug);
-
-      // If both are in the custom order, sort by their position
-      if (aIndex !== -1 && bIndex !== -1) {
-        return aIndex - bIndex;
-      }
-
-      // If only one is in the custom order, prioritize it
-      if (aIndex !== -1) return -1;
-      if (bIndex !== -1) return 1;
-
-      // For the rest, sort alphabetically
-      return a.slug.localeCompare(b.slug);
-    });
-
-function getProjectType(slug: string): string {
-  switch (slug) {
-    case "neon":
-      return "Mobile Development";
-    case "pescheck":
-      return "Wordpress Customization";
-    case "gemoedje":
-      return "Web App Development";
-    case "car-rental":
-      return "Website Development";
-    case "clinic":
-      return "Website Development";
-    case "jdm-vs-euro":
-      return "Wordpress Customization";
-    case "plumbing":
-      return "Website Development";
-    case "captloui":
-      return "Website Development";
-    case "ayobareng":
-      return "Web App Development";
-    case "activenet":
-      return "Wordpress Development";
-    default:
-      return "Web Development";
-  }
-}
-
-function getPortfolioImage(slug: string): string {
-  const imageMap: { [key: string]: string } = {
-    neon: "/portfolio-5.webp",
-    pescheck: "/portfolio-6.webp",
-    gemoedje: "/portfolio-1.webp",
-    "car-rental": "/portfolio-2.webp",
-    clinic: "/portfolio-3.webp",
-    "jdm-vs-euro": "/portfolio-4.webp",
-    plumbing: "/portfolio-7.webp",
-    ayobareng: "/portfolio-8.webp",
-    captloui: "/portfolio-9.webp",
-    activenet: "/portfolio-10.webp",
-  };
-  return imageMap[slug] || "/portfolio-1.webp";
-}
+  return sortedEntries.map(([slug, data]) => ({
+    title: data.title,
+    description: data.projectType || "Web Development",
+    country: data.country || "Unknown",
+    image: data.portfolioImage || "/portfolio-1.webp",
+    link: `/${locale}/projects/${slug}`,
+    slug: slug,
+  }));
+};
 
 // Image Modal Component
 function ImageModal({

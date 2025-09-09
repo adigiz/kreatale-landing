@@ -167,7 +167,7 @@ export default function FAQPage() {
                   {t("faq.contactUs")}
                 </button>
               </a>
-              <Link href={createLocalizedPath("/#contact")}>
+              <Link href={createLocalizedPath("/")}>
                 <button className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-blue-50 transition-colors duration-200">
                   {t("common.contactUs")}
                 </button>

@@ -1,5 +1,6 @@
 import { NextIntlClientProvider } from "next-intl";
 import { Geist, Geist_Mono } from "next/font/google";
+import { notFound } from "next/navigation";
 import "../globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -35,7 +36,7 @@ export default async function LocaleLayout({
 
   // Validate that the incoming `locale` parameter is valid
   if (!locales.includes(locale)) {
-    return <div>Invalid locale</div>;
+    notFound();
   }
 
   // Load messages for the current locale

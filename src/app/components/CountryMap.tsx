@@ -10,6 +10,7 @@ const VectorMap = dynamic(
 // Define the component props
 interface CountryMapProps {
   mapColor?: string;
+  countryCodes?: string[];
 }
 
 type MarkerStyle = {
@@ -19,7 +20,7 @@ type MarkerStyle = {
   };
 };
 
-const CountryMap: React.FC<CountryMapProps> = ({ mapColor }) => {
+const CountryMap: React.FC<CountryMapProps> = ({ mapColor, countryCodes = [] }) => {
   return (
     <VectorMap
       map={worldMill}
@@ -36,14 +37,10 @@ const CountryMap: React.FC<CountryMapProps> = ({ mapColor }) => {
       series={{
         regions: [
           {
-            values: {
-              KW: 1,
-              NL: 1,
-              ID: 1,
-              US: 1,
-              AU: 1,
-              JP: 1
-            },
+            values: countryCodes.reduce((acc, code) => {
+              acc[code] = 1;
+              return acc;
+            }, {} as Record<string, number>),
             scale: {
               1: "#155dfc",
             },

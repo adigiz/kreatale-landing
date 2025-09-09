@@ -2,7 +2,14 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { coreValues, processSteps, aboutStats } from "@/lib/aboutData";
+import {
+  coreValues,
+  processSteps,
+  getAboutStats,
+  getCountriesFromProjects,
+} from "@/lib/aboutData";
+import { getCountryCodeMapping } from "@/lib/countryMapping";
+import projectsData from "@/lib/projectsData.json";
 import { Code, Heart, Users, Globe, Award, MessageCircle } from "lucide-react";
 import {
   WHATSAPP_NUMBER,
@@ -38,6 +45,16 @@ export default function AboutPage() {
   const createLocalizedPath = (path: string) => {
     return `/${currentLocale}${path}`;
   };
+
+  // Get dynamic stats and country data
+  const aboutStats = getAboutStats(projectsData);
+  const countries = getCountriesFromProjects(projectsData);
+  const countryCodeMapping = getCountryCodeMapping();
+
+  // Create country codes for map highlighting
+  const countryCodes = countries
+    .map((country) => countryCodeMapping[country])
+    .filter(Boolean);
 
   return (
     <div className="min-h-screen bg-white">

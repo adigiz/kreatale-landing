@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import CountryMap from "./CountryMap";
 import Link from "next/link";
-import { aboutStats } from "@/lib/aboutData";
+import { getAboutStats, getCountriesFromProjects } from "@/lib/aboutData";
+import { getCountryCodeMapping } from "@/lib/countryMapping";
+import projectsData from "@/lib/projectsData.json";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 
@@ -18,6 +20,16 @@ export default function About() {
   const createLocalizedPath = (path: string) => {
     return `/${currentLocale}${path}`;
   };
+
+  // Get dynamic stats and country data
+  const aboutStats = getAboutStats(projectsData);
+  const countries = getCountriesFromProjects(projectsData);
+  const countryCodeMapping = getCountryCodeMapping();
+
+  // Create country codes for map highlighting
+  const countryCodes = countries
+    .map((country) => countryCodeMapping[country])
+    .filter(Boolean);
 
   return (
     <section
@@ -60,7 +72,7 @@ export default function About() {
           id="mapOne"
           className="mapOne map-btn -mx-4 -my-6 h-[600px] w-[668px] 2xsm:w-[307px] 2xsm:h-[307px] xsm:w-[358px] sm:h-[400px] sm:w-[400px] md:w-[500px] md:h-[500px] lg:w-[668px]"
         >
-          <CountryMap />
+          <CountryMap countryCodes={countryCodes} />
         </div>
       </div>
     </section>

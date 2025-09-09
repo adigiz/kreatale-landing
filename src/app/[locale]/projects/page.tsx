@@ -6,6 +6,8 @@ import Image from "next/image";
 import { Calendar, Clock, User, ArrowRight, Code } from "lucide-react";
 import projectsData from "@/lib/projectsData.json";
 import { ProjectsDatabase } from "@/lib/types";
+import { sortProjects } from "@/lib/utils";
+import { usePathname } from "next/navigation";
 
 // Animation variants
 const containerVariants = {
@@ -49,35 +51,15 @@ const hoverVariants = {
 };
 
 export default function ProjectsPage() {
+  const pathname = usePathname();
+  const currentLocale = pathname.split("/")[1] || "en";
+
+  const createLocalizedPath = (path: string) => {
+    return `/${currentLocale}${path}`;
+  };
+
   const typedProjectsData = projectsData as ProjectsDatabase;
-  const projects = Object.entries(typedProjectsData).sort(
-    ([slugA], [slugB]) => {
-      // Custom sorting order: ActiveNet, CaptLoui, Plumbing, Gemoedje, Neon, Pescheck, then rest
-      const order = [
-        "activenet",
-        "captloui",
-        "plumbing",
-        "gemoedje",
-        "neon",
-        "pescheck",
-      ];
-
-      const aIndex = order.indexOf(slugA);
-      const bIndex = order.indexOf(slugB);
-
-      // If both are in the custom order, sort by their position
-      if (aIndex !== -1 && bIndex !== -1) {
-        return aIndex - bIndex;
-      }
-
-      // If only one is in the custom order, prioritize it
-      if (aIndex !== -1) return -1;
-      if (bIndex !== -1) return 1;
-
-      // For the rest, sort alphabetically
-      return slugA.localeCompare(slugB);
-    }
-  );
+  const projects = sortProjects(Object.entries(typedProjectsData));
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50/30 to-white">
@@ -134,7 +116,7 @@ export default function ProjectsPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           {projects.map(([slug, project]) => (
             <motion.div key={slug} variants={cardVariants} className="group">
-              <Link href={`/projects/${slug}`}>
+              <Link href={createLocalizedPath(`/projects/${slug}`)}>
                 <motion.div
                   variants={hoverVariants}
                   initial="rest"

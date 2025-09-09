@@ -11,6 +11,7 @@ import { usePathname } from "next/navigation";
 import { WHATSAPP_NUMBER, WHATSAPP_BASE_URL } from "@/lib/constants";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
+import { sortProjects } from "@/lib/utils";
 
 // Animation variants
 const dropdownVariants = {
@@ -63,34 +64,7 @@ export default function Header() {
   };
 
   const typedProjectsData = projectsData as ProjectsDatabase;
-  const projects = Object.entries(typedProjectsData).sort(
-    ([slugA], [slugB]) => {
-      // Custom sorting order: ActiveNet, CaptLoui, Plumbing, Gemoedje, Neon, Pescheck, then rest
-      const order = [
-        "activenet",
-        "captloui",
-        "plumbing",
-        "gemoedje",
-        "neon",
-        "pescheck",
-      ];
-
-      const aIndex = order.indexOf(slugA);
-      const bIndex = order.indexOf(slugB);
-
-      // If both are in the custom order, sort by their position
-      if (aIndex !== -1 && bIndex !== -1) {
-        return aIndex - bIndex;
-      }
-
-      // If only one is in the custom order, prioritize it
-      if (aIndex !== -1) return -1;
-      if (bIndex !== -1) return 1;
-
-      // For the rest, sort alphabetically
-      return slugA.localeCompare(slugB);
-    }
-  );
+  const projects = sortProjects(Object.entries(typedProjectsData));
 
   const whatsappMessage = encodeURIComponent(
     "Hi! I'm interested in your services. Let's discuss my project!"

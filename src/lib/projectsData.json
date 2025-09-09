@@ -1,4 +1,106 @@
 {
+  "allora-diamonds": {
+    "title": "Allora Diamonds",
+    "demoUrl": "https://allora-diamonds.com.au/",
+    "country": "Australia",
+    "subtitle": "Luxury diamond jewelry e-commerce platform with elegant design",
+    "client": "Allora Diamonds Inc.",
+    "duration": "25 August 2025 - 26 August 2025",
+    "timeline": "2 Days",
+    "heroImage": "/allora/allora-banner.png",
+    "projectType": "Wordpress Customization",
+    "portfolioImage": "/portfolio-12.webp",
+    "techStacks": ["WordPress", "WooCommerce", "Elementor", "Stripe"],
+    "images": [
+      "/portfolio-1.webp",
+      "/portfolio-2.webp",
+      "/portfolio-3.webp",
+      "/portfolio-4.webp"
+    ],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "Allora Diamonds, a luxury jewelry retailer specializing in high-end diamond pieces, approached us to redesign their existing WordPress website. The client needed a complete visual overhaul that would better showcase their premium diamond collection while improving the online shopping experience for their discerning customers.",
+          "The existing website had an outdated design that didn't reflect the luxury and elegance of their products. With a growing online presence and increasing competition in the luxury jewelry market, Allora Diamonds needed a modern, sophisticated platform that would attract high-value customers and drive sales.",
+          "Our goal was to create a visually stunning e-commerce platform that would capture the essence of luxury while providing seamless functionality for browsing, comparing, and purchasing diamond jewelry online."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The main challenge was transforming a basic WordPress site into a luxury e-commerce platform that could effectively showcase high-value diamond jewelry. The existing site lacked visual appeal, had poor product presentation, and didn't provide the premium shopping experience expected by luxury jewelry customers.",
+          "Key issues included: outdated design that didn't convey luxury, poor product photography presentation, lack of detailed product specifications for diamonds, limited filtering options for jewelry categories, and absence of trust-building elements like certifications and customer reviews.",
+          "We needed to redesign the entire user experience while maintaining WordPress functionality, implement advanced WooCommerce features for jewelry sales, and create a design system that would consistently convey luxury and trustworthiness across all pages."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We completely redesigned the Allora Diamonds website using WordPress with Elementor page builder, creating a sophisticated, luxury-focused design. The solution included custom WooCommerce integration with specialized features for jewelry sales, high-quality product galleries, and advanced filtering options.",
+          "Key features include: elegant product showcase with high-resolution images, detailed diamond specifications and certifications, advanced filtering by carat, cut, color, and clarity, secure payment processing with Stripe, customer reviews and testimonials, mobile-responsive luxury design, and SEO optimization for jewelry-related keywords.",
+          "The redesigned platform achieved a 180% increase in average session duration, 95% improvement in mobile user experience, and 40% increase in online sales within the first quarter. The luxury-focused design successfully attracted high-value customers and improved conversion rates significantly."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The Allora Diamonds website redesign successfully transformed their online presence into a luxury e-commerce platform that effectively showcases their premium diamond collection. The WordPress-based solution provides excellent performance while maintaining the sophisticated user experience expected by luxury jewelry customers, resulting in significant business growth and improved customer satisfaction."
+        ]
+      }
+    }
+  },
+  "rizz-solutions": {
+    "title": "Rizz Solutions",
+    "demoUrl": "https://rizzsolutions.com/",
+    "country": "Netherlands",
+    "subtitle": "Next.js e-book platform for dating success and social skills",
+    "client": "Rizz Solutions LLC",
+    "duration": "12 August 2025 - 15 August 2025",
+    "timeline": "3 Days",
+    "heroImage": "/rizz-solutions/rizz-solutions-banner.png",
+    "projectType": "Website Development",
+    "portfolioImage": "/portfolio-11.webp",
+    "techStacks": ["Next.js", "Stripe", "PostgreSQL", "Tailwind CSS"],
+    "images": [
+      "/portfolio-5.webp",
+      "/portfolio-6.webp",
+      "/portfolio-7.webp",
+      "/portfolio-8.webp"
+    ],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "Rizz Solutions approached us to create a modern e-book platform focused on dating advice and social skills development. The client wanted to build a comprehensive digital platform where users could purchase and access educational content about improving their dating success and social interactions.",
+          "The project aimed to create a subscription-based platform that would provide valuable content to users looking to improve their dating life and social skills. The platform needed to handle digital product sales, user accounts, content delivery, and payment processing while maintaining a modern, engaging user experience.",
+          "Our challenge was to build a scalable platform that could handle growing user base, secure content delivery, and provide an intuitive learning experience for users seeking to improve their social and dating skills."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The main challenge was creating a platform that could effectively deliver educational content while maintaining user engagement and providing value. The platform needed to handle sensitive content appropriately while building trust with users and ensuring secure payment processing for digital products.",
+          "Key requirements included: secure user authentication and account management, digital product delivery system, subscription management, payment processing for e-books and courses, mobile-responsive design for learning on-the-go, and content protection to prevent unauthorized sharing.",
+          "We needed to build a modern, fast platform using Next.js that could handle dynamic content delivery, user management, and e-commerce functionality while providing an excellent user experience for learning and purchasing digital products."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We developed a comprehensive Next.js platform featuring user authentication, digital product management, and secure content delivery. The solution includes a custom e-commerce system integrated with Stripe for payments, user dashboard for accessing purchased content, and mobile-optimized reading experience.",
+          "Key features include: secure user registration and login, digital product catalog with detailed descriptions, one-time and subscription payment options, protected content delivery system, user progress tracking, mobile-responsive design, SEO optimization for dating advice content, and admin dashboard for content management.",
+          "The platform successfully launched with 500+ registered users in the first month, achieved 85% user retention rate, and generated significant revenue through digital product sales. The modern, fast platform provides users with an excellent learning experience while ensuring secure content delivery and payment processing."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "Rizz Solutions platform successfully created a modern, scalable e-book platform that effectively delivers dating and social skills education to users. The Next.js-based solution provides excellent performance, security, and user experience, enabling the client to build a successful digital education business while helping users improve their social and dating skills."
+        ]
+      }
+    }
+  },
   "plumbing": {
     "title": "Plumbing",
     "demoUrl": "https://plumbing-landing.vercel.app/",
@@ -8,6 +110,8 @@
     "duration": "10 July 2025 - 12 July 2025",
     "timeline": "3 Days",
     "heroImage": "/plumbing/plumbing-banner.png",
+    "projectType": "Website Development",
+    "portfolioImage": "/portfolio-7.webp",
     "techStacks": ["Next JS", "Strapi"],
     "images": [
       "/plumbing/plumbing-1.png",
@@ -51,6 +155,8 @@
     "duration": "18 May 2025 - 30 August 2025",
     "timeline": "3.5 Months",
     "heroImage": "/ayobareng/bareng-banner.png",
+    "projectType": "Web App Development",
+    "portfolioImage": "/portfolio-8.webp",
     "techStacks": ["Next JS", "Golang", "Postgres SQL", "OAuth"],
     "images": [
       "/ayobareng/bareng-1.png",
@@ -97,6 +203,8 @@
     "duration": "18 May 2025 - 30 August 2025",
     "timeline": "3.5 Months",
     "heroImage": "/neon/neon-banner.png",
+    "projectType": "Mobile Development",
+    "portfolioImage": "/portfolio-5.webp",
     "techStacks": ["Swift UI", "Next JS", "Postgres SQL", "AWS"],
     "images": [
       "/neon/neon-1.png",
@@ -146,6 +254,8 @@
     "duration": "30 June - 2 July 2025",
     "timeline": "3 Days",
     "heroImage": "/pescheck/pescheck-banner.png",
+    "projectType": "Wordpress Customization",
+    "portfolioImage": "/portfolio-6.webp",
     "techStacks": ["Wordpress", "Elementor"],
     "images": [
       "/pescheck/pescheck-1.png",
@@ -180,13 +290,15 @@
   },
   "gemoedje": {
     "title": "Gemoedje.nl",
-    "demoUrl": "https://gemoedje-web-app.vercel.app/",
+    "demoUrl": "https://gemoedje.nl/",
     "country": "Netherlands",
     "subtitle": "Simplifying therapist search in netherlands to tailored the user needs",
     "client": "Alonzo O",
     "duration": "18 May - 24 June 2025",
     "timeline": "1.2 Months",
     "heroImage": "/gemoedje/gemoedje-banner.png",
+    "projectType": "Web App Development",
+    "portfolioImage": "/portfolio-1.webp",
     "techStacks": ["Next JS", "Stripe", "Postgres SQL", "MapBox", "Strapi"],
     "images": [
       "/gemoedje/gemoedje-1.png",
@@ -232,6 +344,8 @@
     "duration": "15 May 2025 - 16 May 2025",
     "timeline": "2 Days",
     "heroImage": "/portfolio-2.webp",
+    "projectType": "Website Development",
+    "portfolioImage": "/portfolio-2.webp",
     "techStacks": ["Next JS"],
     "images": ["/portfolio-2.webp"],
     "sections": {
@@ -276,6 +390,8 @@
     "duration": "10 January - 25 March 2024",
     "timeline": "2.5 Months",
     "heroImage": "/portfolio-3.webp",
+    "projectType": "Website Development",
+    "portfolioImage": "/portfolio-3.webp",
     "techStacks": ["Next JS"],
     "images": ["/portfolio-3.webp"],
     "sections": {
@@ -320,6 +436,8 @@
     "duration": "5 February - 20 March 2024",
     "timeline": "1.8 Months",
     "heroImage": "/portfolio-4.webp",
+    "projectType": "Wordpress Customization",
+    "portfolioImage": "/portfolio-4.webp",
     "techStacks": ["WordPress"],
     "images": ["/portfolio-4.webp"],
     "sections": {
@@ -364,6 +482,8 @@
     "duration": "5 August 2025 - 8 August 2025",
     "timeline": "3 Days",
     "heroImage": "/portfolio-10.webp",
+    "projectType": "Wordpress Development",
+    "portfolioImage": "/portfolio-10.webp",
     "techStacks": ["WordPress", "Elementor"],
     "images": ["/portfolio-10.webp"],
     "sections": {
