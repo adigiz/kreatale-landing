@@ -2,13 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import {
-  coreValues,
-  processSteps,
-  getAboutStats,
-  getCountriesFromProjects,
-} from "@/lib/aboutData";
-import { getCountryCodeMapping } from "@/lib/countryMapping";
+import { coreValues, processSteps, getAboutStats } from "@/lib/aboutData";
 import projectsData from "@/lib/projectsData.json";
 import { Code, Heart, Users, Globe, Award, MessageCircle } from "lucide-react";
 import {
@@ -46,15 +40,8 @@ export default function AboutPage() {
     return `/${currentLocale}${path}`;
   };
 
-  // Get dynamic stats and country data
+  // Get dynamic stats
   const aboutStats = getAboutStats(projectsData);
-  const countries = getCountriesFromProjects(projectsData);
-  const countryCodeMapping = getCountryCodeMapping();
-
-  // Create country codes for map highlighting
-  const countryCodes = countries
-    .map((country) => countryCodeMapping[country])
-    .filter(Boolean);
 
   return (
     <div className="min-h-screen bg-white">

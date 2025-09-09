@@ -2,12 +2,9 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Home, Search } from "lucide-react";
 
 export default function NotFound() {
-  const pathname = usePathname();
-
   // Simple translations object (default to English for root 404)
   const t = {
     "404.title": "Page Not Found",

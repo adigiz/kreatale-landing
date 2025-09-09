@@ -28,11 +28,14 @@ export const PROJECT_SORT_ORDER = [
  * @param projects - Array of project entries [slug, data]
  * @returns Sorted array of project entries
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function sortProjects<T extends Record<string, any>>(
   projects: [string, T][]
 ): [string, T][] {
   return projects.sort(([slugA], [slugB]) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const indexA = PROJECT_SORT_ORDER.indexOf(slugA as any);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const indexB = PROJECT_SORT_ORDER.indexOf(slugB as any);
 
     // If both projects are in the order array, sort by their position
