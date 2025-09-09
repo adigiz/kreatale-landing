@@ -4,18 +4,15 @@
     "demoUrl": "https://allora-diamonds.com.au/",
     "country": "Australia",
     "subtitle": "Luxury diamond jewelry e-commerce platform with elegant design",
-    "client": "Allora Diamonds Inc.",
+    "client": "Anthony W.",
     "duration": "25 August 2025 - 26 August 2025",
     "timeline": "2 Days",
     "heroImage": "/allora/allora-diamonds-banner.webp",
     "projectType": "Wordpress Customization",
     "portfolioImage": "/portfolio-12.webp",
-    "techStacks": ["WordPress", "WooCommerce", "Elementor", "Stripe"],
+    "techStacks": ["WordPress"],
     "images": [
-      "/portfolio-1.webp",
-      "/portfolio-2.webp",
-      "/portfolio-3.webp",
-      "/portfolio-4.webp"
+      "/portfolio-12.webp"
     ],
     "sections": {
       "background": {
@@ -55,18 +52,15 @@
     "demoUrl": "https://rizzsolutions.com/",
     "country": "Netherlands",
     "subtitle": "Next.js e-book platform for dating success and social skills",
-    "client": "Rizz Solutions LLC",
+    "client": "Alonzo O",
     "duration": "12 August 2025 - 15 August 2025",
     "timeline": "3 Days",
     "heroImage": "/rizz-solutions/rizz-solutions-banner.webp",
     "projectType": "Website Development",
     "portfolioImage": "/portfolio-11.webp",
-    "techStacks": ["Next.js", "Stripe", "PostgreSQL", "Tailwind CSS"],
+    "techStacks": ["Next.js", "Stripe"],
     "images": [
-      "/portfolio-5.webp",
-      "/portfolio-6.webp",
-      "/portfolio-7.webp",
-      "/portfolio-8.webp"
+      "/portfolio-11.webp"
     ],
     "sections": {
       "background": {
