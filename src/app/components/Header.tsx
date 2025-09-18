@@ -64,7 +64,7 @@ export default function Header() {
   };
 
   const typedProjectsData = projectsData as ProjectsDatabase;
-  const projects = sortProjects(Object.entries(typedProjectsData));
+  const projects = sortProjects(Object.entries(typedProjectsData)).slice(0, 5);
 
   const whatsappMessage = encodeURIComponent(
     "Hi! I'm interested in your services. Let's discuss my project!"

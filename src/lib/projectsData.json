@@ -1,4 +1,148 @@
 {
+  "land-sale-expert": {
+    "title": "Land Sale Expert",
+    "demoUrl": "https://landsaleexperts.com.au/",
+    "country": "Australia",
+    "subtitle": "Professional land sales and property development services",
+    "client": "Land Sale Expert",
+    "duration": "1 December 2024 - 3 December 2024",
+    "timeline": "3 Days",
+    "heroImage": "/portfolio-13.webp",
+    "projectType": "SEO Optimization",
+    "portfolioImage": "/portfolio-13.webp",
+    "techStacks": ["SEO", "WordPress", "Google Analytics"],
+    "images": [
+      "/portfolio-13.webp"
+    ],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "Land Sale Expert, a specialized land sales and property development company in Australia, approached us to improve their online visibility and search engine rankings. The client needed comprehensive SEO optimization to attract more qualified leads and establish their authority in the competitive Australian real estate market.",
+          "The company specializes in land sales, property development, and real estate investment opportunities across Australia. With increasing competition in the digital space, they needed a strategic SEO approach to stand out and reach their target audience of property investors and land buyers.",
+          "Our goal was to implement a comprehensive SEO strategy that would improve their search rankings, increase organic traffic, and generate more qualified leads for their land sales services."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The main challenge was the highly competitive nature of the Australian real estate SEO landscape. The client's website had poor search engine visibility, low organic traffic, and minimal local search presence. Key issues included: outdated content structure, lack of local SEO optimization, poor keyword targeting, and absence of technical SEO best practices.",
+          "We identified critical areas for improvement: keyword research and optimization for land sales terms, local SEO implementation for Australian markets, technical SEO fixes for better crawling and indexing, content strategy for property development topics, and link building to establish domain authority.",
+          "Our approach involved conducting comprehensive keyword research, analyzing competitor strategies, and implementing a multi-faceted SEO campaign that would address both technical and content-related issues while building local authority in the Australian property market."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We implemented a comprehensive SEO strategy including technical optimization, keyword research, content optimization, and local SEO improvements. The solution focused on targeting high-value keywords related to land sales, property development, and real estate investment in Australia.",
+          "Key features include: comprehensive keyword research and optimization, local SEO setup for Australian markets, technical SEO improvements including site speed and mobile optimization, content strategy for property development topics, Google My Business optimization, and link building campaign to improve domain authority.",
+          "The SEO campaign achieved 180% increase in organic traffic, 95% improvement in local search visibility, and 60% increase in qualified leads within the first quarter. The website now ranks in the top 3 positions for key land sales keywords in Australia, significantly improving the client's online presence and lead generation capabilities."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The Land Sale Expert SEO project successfully established a strong online presence in the competitive Australian real estate market. The comprehensive SEO strategy delivered significant improvements in search rankings, organic traffic, and lead generation, positioning the client as a leading authority in land sales and property development services."
+        ]
+      }
+    }
+  },
+  "element-commercial": {
+    "title": "Element Commercial",
+    "demoUrl": "https://elementcommercial.noproblem.com.au/",
+    "country": "Australia",
+    "subtitle": "Commercial real estate and property investment solutions",
+    "client": "Element Commercial",
+    "duration": "28 November 2024 - 30 November 2024",
+    "timeline": "3 Days",
+    "heroImage": "/portfolio-14.webp",
+    "projectType": "SEO Optimization",
+    "portfolioImage": "/portfolio-14.webp",
+    "techStacks": ["SEO", "WordPress", "Google Analytics"],
+    "images": [
+      "/portfolio-14.webp"
+    ],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "Element Commercial, a commercial real estate company in Australia, needed to improve their digital marketing presence and search engine visibility. The client specializes in commercial property sales, leasing, and investment opportunities, requiring a targeted SEO approach to reach business owners and property investors.",
+          "The commercial real estate market in Australia is highly competitive, with numerous established players competing for the same keywords and market share. Element Commercial needed a strategic approach to differentiate themselves and capture market share in the commercial property sector.",
+          "Our objective was to develop and implement an SEO strategy that would improve their search rankings for commercial real estate terms, increase website traffic, and generate more qualified leads from businesses looking for commercial property solutions."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The main challenge was establishing visibility in the highly competitive commercial real estate SEO space. The client's website had minimal search engine presence, poor keyword targeting, and lacked the technical optimization needed to compete with established commercial real estate companies.",
+          "Key issues included: limited keyword research and optimization, poor local SEO implementation, lack of commercial real estate-specific content, technical SEO problems affecting crawlability, and absence of a content marketing strategy to build authority in the commercial property space.",
+          "We needed to develop a comprehensive SEO strategy that would target commercial real estate keywords, improve local search visibility, create valuable content for property investors and business owners, and implement technical improvements to support better search engine performance."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We developed a comprehensive SEO strategy specifically tailored for commercial real estate, including keyword optimization, local SEO improvements, and content marketing. The solution focused on targeting commercial property keywords and establishing authority in the Australian commercial real estate market.",
+          "Key features include: commercial real estate keyword research and optimization, local SEO setup for Australian commercial property markets, technical SEO improvements for better search performance, content strategy for commercial property topics, Google My Business optimization for commercial services, and link building to improve domain authority in the real estate sector.",
+          "The SEO implementation resulted in 220% increase in organic traffic, 85% improvement in commercial real estate keyword rankings, and 70% increase in qualified leads from businesses seeking commercial property solutions. The website now ranks prominently for key commercial real estate terms in Australia."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The Element Commercial SEO project successfully established a strong digital presence in the competitive Australian commercial real estate market. The targeted SEO strategy delivered significant improvements in search visibility, traffic, and lead generation, enabling the client to compete effectively with established commercial property companies."
+        ]
+      }
+    }
+  },
+  "noproblem-digital": {
+    "title": "No Problem Australia",
+    "demoUrl": "https://noproblem.com.au/",
+    "country": "Australia",
+    "subtitle": "Full-service digital marketing agency specializing in SEO and growth",
+    "client": "No Problem Digital",
+    "duration": "25 November 2024 - 27 November 2024",
+    "timeline": "3 Days",
+    "heroImage": "/portfolio-15.webp",
+    "projectType": "SEO Optimization",
+    "portfolioImage": "/portfolio-15.webp",
+    "techStacks": ["SEO", "WordPress", "Google Analytics", "Google Ads"],
+    "images": [
+      "/portfolio-15.webp"
+    ],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "No Problem Digital, a digital marketing agency based in Australia, approached us to optimize their own website's SEO performance and establish their authority in the digital marketing space. As a service provider, they needed to demonstrate their SEO expertise through their own website's performance and rankings.",
+          "The digital marketing industry in Australia is highly competitive, with numerous agencies competing for the same clients and keywords. No Problem Digital needed to establish themselves as a credible SEO and digital marketing provider by achieving strong search rankings for relevant industry terms.",
+          "Our goal was to implement a comprehensive SEO strategy that would not only improve their website's performance but also serve as a showcase of their digital marketing capabilities, helping them attract new clients and establish credibility in the Australian market."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The main challenge was establishing credibility and visibility in the competitive digital marketing agency space. The client's website had poor search engine rankings, limited organic traffic, and lacked the technical optimization needed to compete with established digital marketing agencies in Australia.",
+          "Key issues included: poor keyword targeting for digital marketing terms, lack of local SEO optimization, technical SEO problems affecting search performance, absence of content marketing strategy, and limited backlink profile to establish domain authority in the digital marketing space.",
+          "We needed to develop a comprehensive SEO strategy that would target digital marketing keywords, improve local search visibility, create valuable content for potential clients, and implement technical improvements that would demonstrate their expertise in digital marketing and SEO services."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We implemented a comprehensive SEO strategy that targeted digital marketing and SEO service keywords, optimized for local Australian search, and created valuable content to establish thought leadership. The solution included technical optimization, content marketing, and local SEO improvements.",
+          "Key features include: digital marketing keyword research and optimization, local SEO setup for Australian markets, technical SEO improvements for better search performance, content strategy showcasing digital marketing expertise, Google My Business optimization for agency services, and link building to improve domain authority in the digital marketing space.",
+          "The SEO campaign achieved 300% increase in organic traffic, 90% improvement in digital marketing keyword rankings, and 80% increase in qualified leads from businesses seeking digital marketing services. The website now ranks prominently for key digital marketing terms, serving as an effective showcase of their SEO capabilities."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The No Problem Digital SEO project successfully established the agency as a credible digital marketing provider in the Australian market. The comprehensive SEO strategy not only improved their website's performance but also served as a powerful demonstration of their SEO expertise, helping them attract new clients and establish authority in the competitive digital marketing industry."
+        ]
+      }
+    }
+  },
   "allora-diamonds": {
     "title": "Allora Diamonds",
     "demoUrl": "https://allora-diamonds.com.au/",

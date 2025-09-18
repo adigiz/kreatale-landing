@@ -10,6 +10,9 @@ export function cn(...inputs: ClassValue[]) {
  * Projects are sorted in this specific order, with any remaining projects at the end
  */
 export const PROJECT_SORT_ORDER = [
+  "noproblem-digital",
+  "land-sale-expert",
+  "element-commercial",
   "allora-diamonds",
   "rizz-solutions",
   "activenet",
