@@ -52,7 +52,7 @@ export default function About() {
         </h2>
         <p className="text-gray-600 mb-6">{t("about.description")}</p>
         <Link href={createLocalizedPath("/projects")}>
-          <button className="hover:cursor-pointer bg-blue-100 text-blue-600 px-7 py-3 rounded-full font-semibold text-sm hover:bg-blue-200">
+          <button className="hover:cursor-pointer border-2 border-[#0061FF] text-[#0061FF] bg-white hover:bg-[#0061FF] hover:text-white px-6 py-3 rounded-full text-sm font-semibold transition-colors duration-200 hover:shadow-xl transform">
             {t("common.viewProject")}
           </button>
         </Link>

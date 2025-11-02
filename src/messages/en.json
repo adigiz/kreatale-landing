@@ -107,7 +107,6 @@
         "Security training"
       ]
     },
-    "cta": "Get Started",
     "discussProject": "Let's discuss your project"
   },
   "about": {
@@ -264,7 +263,7 @@
   "footer": {
     "contactUs": "Contact Us",
     "readyToStart": "You have got this far. Ready to get started?",
-    "whatsappUs": "WhatsApp Us",
+    "whatsappUs": "Contact Us",
     "navigation": {
       "services": "Services",
       "about": "About",
@@ -379,5 +378,3 @@
     "help": "If you think this is an error, please contact us."
   }
 }
-
-

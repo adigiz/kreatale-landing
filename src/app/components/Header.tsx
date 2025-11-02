@@ -75,7 +75,7 @@ export default function Header() {
   )}?text=${whatsappMessage}`;
 
   return (
-    <nav className="bg-white shadow-sm px-6 py-4 md:px-16 flex items-center justify-between relative z-50">
+    <nav className="sticky top-0 bg-white shadow-sm px-6 py-4 md:px-16 flex items-center justify-between z-50">
       <div className="flex items-center gap-6 md:gap-16">
         <Link href={createLocalizedPath("/")}>
           <Image

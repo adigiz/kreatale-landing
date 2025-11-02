@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://kreatale.com"),
   title: "Kreatale | Web Development & Digital Solutions Agency",
   description:
-    "Kreatale is a web development agency that builds fast, modern, and scalable websites & apps. We help businesses grow with custom solutions, clean design, and top-tier code.",
+    "Kreatale is a web development agency that builds fast, modern, and scalable websites & apps.",
   keywords: [
     "web development agency",
     "website design",

@@ -1,4 +1,251 @@
 {
+  "kei-truck-hub": {
+    "title": "Kei Truck Hub",
+    "country": "Japan",
+    "subtitle": "WordPress website for Japanese truck services platform",
+    "client": "Takebe",
+    "duration": "23 September 2025 - 30 September 2025",
+    "timeline": "1 Week",
+    "heroImage": "/portfolio-16.webp",
+    "projectType": "Wordpress Development",
+    "portfolioImage": "/portfolio-16.webp",
+    "techStacks": ["WordPress", "Elementor"],
+    "images": ["/portfolio-16.webp"],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "Kei Truck Hub, a truck services platform based in Japan, approached us to develop a professional WordPress website that would connect truck owners and businesses needing transportation services. The client needed a modern, user-friendly platform to showcase their services and facilitate connections in the Japanese commercial vehicle market.",
+          "The project required creating a platform that would serve the Japanese market, with attention to local business culture and user expectations. As a service connecting truck providers with businesses, the website needed to be clear, professional, and easy to navigate for both service providers and potential clients."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The main challenge was creating a WordPress website that effectively communicated the platform's value proposition to a Japanese audience while ensuring fast performance and easy content management. The website needed to build trust with both truck service providers and businesses seeking transportation solutions."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We developed a custom WordPress website using Elementor that showcases Kei Truck Hub's services with a clean, professional design tailored for the Japanese market. The solution includes optimized performance, SEO-friendly structure, and intuitive content management capabilities.",
+          "The website provides a clear presentation of services, easy navigation, and professional appearance that builds trust with potential clients and service providers in the Japanese commercial vehicle sector."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The Kei Truck Hub website successfully established a professional online presence for the platform, enabling them to connect truck service providers with businesses in Japan. The WordPress solution delivered a high-performance website that meets both business and technical requirements."
+        ]
+      }
+    }
+  },
+  "zushino": {
+    "title": "Zushino",
+    "country": "Japan",
+    "subtitle": "WordPress website for Japanese supplement brand",
+    "client": "Takebe",
+    "duration": "10 September 2025 - 22 September 2025",
+    "timeline": "2 Weeks",
+    "heroImage": "/portfolio-17.webp",
+    "projectType": "Wordpress Development",
+    "portfolioImage": "/portfolio-17.webp",
+    "techStacks": ["WordPress", "WooCommerce"],
+    "images": ["/portfolio-17.webp"],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "Zushino, a Japanese supplement brand, needed a professional WordPress website to showcase their products and enable online sales. The client required an e-commerce platform that would present their supplements effectively to the Japanese market while providing a seamless shopping experience for customers.",
+          "The project aimed to create a modern, trustworthy online presence for the supplement brand, with attention to product presentation, health and wellness messaging, and compliance with Japanese e-commerce standards."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The challenge was creating an e-commerce WordPress website that would effectively market health supplements to a Japanese audience while ensuring product information is clear, trust-building elements are present, and the shopping experience is smooth and secure."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We developed a WordPress e-commerce website using WooCommerce that showcases Zushino supplements with professional product presentation, detailed product information, and secure online purchasing capabilities. The solution includes SEO optimization, mobile responsiveness, and integration with Japanese payment methods.",
+          "The platform features high-quality product imagery, detailed supplement information, customer testimonials, and a streamlined checkout process designed specifically for the Japanese market."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The Zushino website successfully established an online presence for the supplement brand in Japan. The WordPress WooCommerce solution enabled them to reach customers online and grow their business through digital channels."
+        ]
+      }
+    }
+  },
+  "study-gorilla": {
+    "title": "Study Gorilla",
+    "country": "Netherlands",
+    "subtitle": "Next.js e-learning web application for students",
+    "client": "Alonzo",
+    "duration": "1 September 2025 - 26 September 2025",
+    "timeline": "3.5 Weeks",
+    "heroImage": "/portfolio-18.webp",
+    "projectType": "Web App Development",
+    "portfolioImage": "/portfolio-18.webp",
+    "techStacks": ["Next.js", "PostgreSQL"],
+    "images": ["/portfolio-18.webp"],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "Study Gorilla, an e-learning platform based in the Netherlands, approached us to build a comprehensive Next.js web application that would provide students with an engaging learning experience. The platform needed to support course content delivery, user progress tracking, and interactive learning features.",
+          "The project required creating a modern, scalable web application that could handle multiple users, course management, and provide an excellent user experience for students accessing educational content online."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The main challenge was building a Next.js web application that could effectively deliver educational content while maintaining fast performance, supporting user authentication, progress tracking, and providing an intuitive learning experience for students in the Netherlands."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We developed a comprehensive Next.js e-learning web application featuring user authentication, course management, progress tracking, and interactive learning features. The solution includes PostgreSQL database for reliable data storage, responsive design for all devices, and optimized performance for fast content delivery.",
+          "Key features include: user registration and authentication, course catalog and enrollment, progress tracking and certificates, interactive learning modules, mobile-responsive design, and admin dashboard for course management."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The Study Gorilla platform successfully launched as a modern e-learning web application, enabling students in the Netherlands to access educational content effectively. The Next.js solution delivered excellent performance and user experience, supporting the platform's mission to make learning accessible and engaging."
+        ]
+      }
+    }
+  },
+  "sy-grace": {
+    "title": "Sy Grace",
+    "country": "United States",
+    "subtitle": "Next.js website for American supermarket chain",
+    "client": "James",
+    "duration": "20 September 2025 - 27 September 2025",
+    "timeline": "1 Week",
+    "heroImage": "/portfolio-19.webp",
+    "projectType": "Website Development",
+    "portfolioImage": "/portfolio-19.webp",
+    "techStacks": ["Next.js"],
+    "images": ["/portfolio-19.webp"],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "Sy Grace, a supermarket chain located in America, needed a modern Next.js website to showcase their stores, products, and services. The client required a professional online presence that would help them connect with customers and provide information about their locations, offerings, and special promotions.",
+          "The project aimed to create a fast, modern website that would represent the supermarket brand effectively and provide customers with easy access to store information, weekly specials, and shopping-related content."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The challenge was creating a Next.js website that would effectively showcase the supermarket brand, provide store information, and create an engaging online experience for customers looking for grocery shopping information and local store details."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We developed a modern Next.js website for Sy Grace featuring store locator functionality, product showcases, promotional content, and responsive design optimized for all devices. The solution includes SEO optimization, fast loading times, and an intuitive user interface.",
+          "The website provides customers with easy access to store locations, weekly specials, product information, and brand messaging that reflects the quality and service of the Sy Grace supermarket chain."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The Sy Grace website successfully established a strong online presence for the American supermarket chain. The Next.js solution delivered a modern, fast website that effectively communicates the brand and provides customers with valuable information about stores and services."
+        ]
+      }
+    }
+  },
+  "max-up": {
+    "title": "Max Up",
+    "country": "United States",
+    "subtitle": "React Native mobile app for AI-powered photo transformation",
+    "client": "Mac",
+    "duration": "12 September 2025 - 10 October 2025",
+    "timeline": "4 Weeks",
+    "heroImage": "/portfolio-20.webp",
+    "projectType": "Mobile Development",
+    "portfolioImage": "/portfolio-20.webp",
+    "techStacks": ["React Native", "AI Integration"],
+    "images": ["/portfolio-20.webp"],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "The client, Mac, approached us to develop a React Native mobile application that uses AI technology to transform user photos into date-ready images. The app needed to help users enhance their photos using artificial intelligence, making them more attractive and suitable for dating profiles or social media.",
+          "The project required building a mobile application available in America that would provide users with powerful AI image enhancement tools, easy photo upload, and seamless image processing capabilities."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The main challenge was creating a React Native mobile app that could integrate AI image generation technology, provide fast image processing, and deliver an intuitive user experience for photo enhancement. The app needed to handle image uploads, AI processing, and deliver high-quality transformed images efficiently."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We developed a React Native mobile application featuring AI-powered image transformation, intuitive photo upload interface, and real-time image processing. The solution includes seamless AI integration for photo enhancement, user-friendly interface for selecting and processing photos, and high-quality output delivery.",
+          "Key features include: photo selection from device gallery, AI-powered image enhancement algorithms, preview and download functionality, user-friendly interface optimized for mobile devices, and secure image processing and storage."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The AI Image Generator mobile app successfully launched in America, providing users with powerful tools to transform their photos using artificial intelligence. The React Native solution delivered excellent performance and user experience, enabling users to create date-ready photos with ease."
+        ]
+      }
+    }
+  },
+  "gala-club": {
+    "title": "Gala Club",
+    "demoUrl": "https://galaclub.com.au/",
+    "country": "Australia",
+    "subtitle": "WordPress website redesign for gaming and internet cafe",
+    "client": "Gala Club",
+    "duration": "6 October 2025 - 20 October 2025",
+    "timeline": "2 Weeks",
+    "heroImage": "/portfolio-21.webp",
+    "projectType": "Wordpress Customization",
+    "portfolioImage": "/portfolio-21.webp",
+    "techStacks": ["WordPress", "Elementor"],
+    "images": ["/portfolio-21.webp"],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "Gala Club, a gaming giveaway platform and internet cafe based in Australia, needed a complete website redesign to modernize their online presence and better showcase their gaming services and internet cafe facilities. The client wanted to revitalize their website to attract more gamers and visitors to their physical location.",
+          "The project required redesigning the existing WordPress website to reflect the vibrant gaming culture, highlight giveaway opportunities, and promote their internet cafe services to the Australian gaming community."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The existing website had an outdated design that didn't effectively communicate the exciting gaming atmosphere or showcase the giveaway opportunities and internet cafe services. The website needed a modern redesign that would appeal to gamers and create excitement around their events and services."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We completed a comprehensive WordPress website redesign using Elementor, creating a modern, gaming-focused design that highlights giveaway opportunities, showcases the internet cafe facilities, and provides an engaging user experience. The solution includes performance optimization, mobile responsiveness, and intuitive navigation.",
+          "Key features include: vibrant gaming-themed design, prominent giveaway announcements, internet cafe information and booking, event calendar and promotions, mobile-responsive layout, and optimized performance for fast loading."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The Gaming Giveaway website redesign successfully modernized Gala Club's online presence, creating an engaging platform that effectively showcases their gaming giveaways and internet cafe services. The WordPress Elementor solution delivered a vibrant, performance-optimized website that appeals to the Australian gaming community."
+        ]
+      }
+    }
+  },
   "land-sale-expert": {
     "title": "Land Sale Expert",
     "demoUrl": "https://landsaleexperts.com.au/",
@@ -11,9 +258,7 @@
     "projectType": "SEO Optimization",
     "portfolioImage": "/portfolio-13.webp",
     "techStacks": ["SEO", "WordPress", "Google Analytics"],
-    "images": [
-      "/portfolio-13.webp"
-    ],
+    "images": ["/portfolio-13.webp"],
     "sections": {
       "background": {
         "title": "Background Project",
@@ -59,9 +304,7 @@
     "projectType": "SEO Optimization",
     "portfolioImage": "/portfolio-14.webp",
     "techStacks": ["SEO", "WordPress", "Google Analytics"],
-    "images": [
-      "/portfolio-14.webp"
-    ],
+    "images": ["/portfolio-14.webp"],
     "sections": {
       "background": {
         "title": "Background Project",
@@ -107,9 +350,7 @@
     "projectType": "SEO Optimization",
     "portfolioImage": "/portfolio-15.webp",
     "techStacks": ["SEO", "WordPress", "Google Analytics", "Google Ads"],
-    "images": [
-      "/portfolio-15.webp"
-    ],
+    "images": ["/portfolio-15.webp"],
     "sections": {
       "background": {
         "title": "Background Project",
@@ -155,9 +396,7 @@
     "projectType": "Wordpress Customization",
     "portfolioImage": "/portfolio-12.webp",
     "techStacks": ["WordPress"],
-    "images": [
-      "/portfolio-12.webp"
-    ],
+    "images": ["/portfolio-12.webp"],
     "sections": {
       "background": {
         "title": "Background Project",
@@ -203,9 +442,7 @@
     "projectType": "Website Development",
     "portfolioImage": "/portfolio-11.webp",
     "techStacks": ["Next.js", "Stripe"],
-    "images": [
-      "/portfolio-11.webp"
-    ],
+    "images": ["/portfolio-11.webp"],
     "sections": {
       "background": {
         "title": "Background Project",
@@ -258,32 +495,32 @@
       "/plumbing/plumbing-4.png"
     ],
     "sections": {
-    "background": {
-      "title": "Background Project",
-      "content": [
-        "The client is a digital agency based in Australia looking to expand their services by targeting niche industries. Their first target is the plumbing sector, where they plan to offer tailored websites to plumbing businesses across the country. To support this initiative, they reached out to Kreatale for a collaboration. In this partnership, the client is responsible for sales and marketing, while Kreatale handles all aspects of development."
-      ]
-    },
-    "problem": {
-      "title": "Problem",
-      "content": [
-        "The client already had a reference website in mind. They wanted to follow a similar structure to one of their competitors but with a unique and distinct design. However, there were several constraints. First, they had a limited budget that made WordPress development impractical, especially considering the need for custom design. Second, they did not have any spare hosting available to support a WordPress setup. Despite these challenges, they still required the website to be customizable, maintain high quality, and serve as a professional landing page to launch their offering."
-      ]
-    },
-    "solution": {
-      "title": "Solution",
-      "content": [
-        "To meet the client's technical and budgetary requirements, Kreatale proposed using a modern and scalable tech stack. The frontend would be developed using Next.js and deployed on Vercel, allowing for excellent performance, easy scalability, and zero server maintenance costs. For content management, the site would integrate with Strapi, hosted on Strapi Cloud. This setup enables the client to update content easily while avoiding the need for dedicated hosting infrastructure.",
-        "This solution provides a fast, lightweight, and editable landing page that satisfies the client’s need for flexibility and quality. It also lays the groundwork for future scalability, should the client decide to expand the website beyond a single landing page."
-      ]
-    },
-    "conclusion": {
-      "title": "Conclusion",
-      "content": [
-        "By leveraging technologies like Next.js, Vercel, and Strapi Cloud, Kreatale delivered a high-quality, scalable landing page tailored to the client’s needs and constraints. The project serves as a strong starting point for future growth and demonstrates the effectiveness of a lean but powerful tech stack. This collaboration not only fulfilled the client's immediate goals but also positioned them well for further outreach within the plumbing sector and beyond."
-      ]
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "The client is a digital agency based in Australia looking to expand their services by targeting niche industries. Their first target is the plumbing sector, where they plan to offer tailored websites to plumbing businesses across the country. To support this initiative, they reached out to Kreatale for a collaboration. In this partnership, the client is responsible for sales and marketing, while Kreatale handles all aspects of development."
+        ]
+      },
+      "problem": {
+        "title": "Problem",
+        "content": [
+          "The client already had a reference website in mind. They wanted to follow a similar structure to one of their competitors but with a unique and distinct design. However, there were several constraints. First, they had a limited budget that made WordPress development impractical, especially considering the need for custom design. Second, they did not have any spare hosting available to support a WordPress setup. Despite these challenges, they still required the website to be customizable, maintain high quality, and serve as a professional landing page to launch their offering."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "To meet the client's technical and budgetary requirements, Kreatale proposed using a modern and scalable tech stack. The frontend would be developed using Next.js and deployed on Vercel, allowing for excellent performance, easy scalability, and zero server maintenance costs. For content management, the site would integrate with Strapi, hosted on Strapi Cloud. This setup enables the client to update content easily while avoiding the need for dedicated hosting infrastructure.",
+          "This solution provides a fast, lightweight, and editable landing page that satisfies the client’s need for flexibility and quality. It also lays the groundwork for future scalability, should the client decide to expand the website beyond a single landing page."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "By leveraging technologies like Next.js, Vercel, and Strapi Cloud, Kreatale delivered a high-quality, scalable landing page tailored to the client’s needs and constraints. The project serves as a strong starting point for future growth and demonstrates the effectiveness of a lean but powerful tech stack. This collaboration not only fulfilled the client's immediate goals but also positioned them well for further outreach within the plumbing sector and beyond."
+        ]
+      }
     }
-  }
   },
   "ayobareng": {
     "title": "Ayo Bareng",
@@ -356,7 +593,7 @@
       "/neon/neon-9.png",
       "/neon/neon-10.png"
     ],
-     "sections": {
+    "sections": {
       "background": {
         "title": "Background Project",
         "content": [
@@ -395,10 +632,7 @@
     "projectType": "Wordpress Customization",
     "portfolioImage": "/portfolio-6.webp",
     "techStacks": ["Wordpress", "Elementor"],
-    "images": [
-      "/pescheck/pescheck-1.png",
-      "/pescheck/pescheck-2.png"
-    ],
+    "images": ["/pescheck/pescheck-1.png", "/pescheck/pescheck-2.png"],
     "sections": {
       "background": {
         "title": "Background Project",

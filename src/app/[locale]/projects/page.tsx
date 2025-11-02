@@ -3,13 +3,12 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, Clock, User, ArrowRight, Code } from "lucide-react";
+import { Calendar, Clock, User } from "lucide-react";
 import projectsData from "@/lib/projectsData.json";
 import { ProjectsDatabase } from "@/lib/types";
 import { sortProjects } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 
-// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -88,21 +87,6 @@ export default function ProjectsPage() {
             Explore our portfolio of innovative digital solutions crafted for
             businesses across various industries
           </motion.p>
-          <motion.div
-            className="flex justify-center items-center gap-4 text-sm text-gray-500"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
-            <span className="flex items-center gap-1">
-              <Code size={16} />
-              {projects.length} Projects
-            </span>
-            <span>•</span>
-            <span>Multiple Technologies</span>
-            <span>•</span>
-            <span>Satisfied Clients</span>
-          </motion.div>
         </div>
       </motion.section>
 
@@ -113,18 +97,25 @@ export default function ProjectsPage() {
         initial="hidden"
         animate="visible"
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {projects.map(([slug, project]) => (
-            <motion.div key={slug} variants={cardVariants} className="group">
-              <Link href={createLocalizedPath(`/projects/${slug}`)}>
+            <motion.div
+              key={slug}
+              variants={cardVariants}
+              className="group h-full"
+            >
+              <Link
+                href={createLocalizedPath(`/projects/${slug}`)}
+                className="block h-full"
+              >
                 <motion.div
                   variants={hoverVariants}
                   initial="rest"
                   whileHover="hover"
-                  className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden transition-shadow duration-300 group-hover:shadow-xl"
+                  className="bg-white rounded-2xl border border-gray-200 overflow-hidden transition-shadow duration-300 group-hover:shadow-xl h-full flex flex-col"
                 >
                   {/* Project Image */}
-                  <div className="relative h-64 overflow-hidden">
+                  <div className="relative h-64 overflow-hidden flex-shrink-0">
                     <Image
                       src={project.heroImage}
                       alt={project.title}
@@ -135,7 +126,7 @@ export default function ProjectsPage() {
                   </div>
 
                   {/* Project Content */}
-                  <div className="p-6">
+                  <div className="p-6 flex flex-col flex-1">
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.techStacks.slice(0, 3).map((tech, i) => (
                         <span
@@ -173,19 +164,12 @@ export default function ProjectsPage() {
                     </div>
 
                     {/* Call to Action */}
-                    <div className="flex items-center justify-between">
+                    <div className="flex items-center justify-between mt-auto">
                       <div className="flex items-center gap-1">
                         <Calendar size={14} className="text-gray-400" />
                         <span className="text-sm text-gray-500">
                           {project.duration.split(" - ")[0]}
                         </span>
-                      </div>
-                      <div className="flex items-center gap-2 text-blue-600 font-medium group-hover:gap-3 transition-all duration-300">
-                        <span>View Project</span>
-                        <ArrowRight
-                          size={16}
-                          className="group-hover:translate-x-1 transition-transform duration-300"
-                        />
                       </div>
                     </div>
                   </div>

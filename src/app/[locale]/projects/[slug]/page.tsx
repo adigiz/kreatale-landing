@@ -17,7 +17,6 @@ import projectsData from "@/lib/projectsData.json";
 import { ProjectData, ProjectsDatabase } from "@/lib/types";
 import { useTranslations } from "next-intl";
 
-// Animation variants
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
   animate: { opacity: 1, y: 0 },
