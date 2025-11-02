@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
 import {
@@ -49,6 +49,42 @@ export default function FAQPage() {
     selectedCategory === "All"
       ? faqData
       : faqData.filter((faq) => faq.category === selectedCategory);
+
+  // Add FAQPage structured data
+  useEffect(() => {
+    const faqSchema = {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqData.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    };
+
+    // Remove existing script if any
+    const existingScript = document.getElementById("faq-schema");
+    if (existingScript) {
+      existingScript.remove();
+    }
+
+    // Add new script
+    const script = document.createElement("script");
+    script.id = "faq-schema";
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(faqSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      const scriptToRemove = document.getElementById("faq-schema");
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
+  }, [faqData]);
 
   return (
     <div className="min-h-screen bg-white">

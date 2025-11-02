@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -32,7 +33,58 @@ export default function ServicesPage() {
     return `/${currentLocale}${path}`;
   };
 
-  const serviceKeys = ["website", "webapp", "mobile", "training"];
+  const serviceKeys = useMemo(() => ["website", "webapp", "mobile", "training"], []);
+
+  // Add Service schema
+  useEffect(() => {
+    const baseUrl = "https://kreatale.com";
+    const services = serviceKeys.map((key) => ({
+      "@type": "Service",
+      serviceType: t(`services.${key}.title`),
+      description: t(`services.${key}.description`),
+      provider: {
+        "@type": "Organization",
+        name: "Kreatale",
+      },
+      areaServed: "Worldwide",
+    }));
+
+    const serviceSchema = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      name: "Kreatale",
+      url: baseUrl,
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: t("services.title"),
+        itemListElement: services.map((service, index) => ({
+          "@type": "Offer",
+          itemOffered: service,
+          position: index + 1,
+        })),
+      },
+    };
+
+    // Remove existing script if any
+    const existingScript = document.getElementById("service-schema");
+    if (existingScript) {
+      existingScript.remove();
+    }
+
+    // Add new script
+    const script = document.createElement("script");
+    script.id = "service-schema";
+    script.type = "application/ld+json";
+    script.textContent = JSON.stringify(serviceSchema);
+    document.head.appendChild(script);
+
+    return () => {
+      const scriptToRemove = document.getElementById("service-schema");
+      if (scriptToRemove) {
+        scriptToRemove.remove();
+      }
+    };
+  }, [serviceKeys, t]);
 
   return (
     <div className="min-h-screen bg-white">
