@@ -136,16 +136,10 @@ export default async function ProjectLayout({
     creator: {
       "@type": "Organization",
       name: "Kreatale",
+      url: baseUrl,
     },
     dateCreated: project.duration,
     image: project.heroImage ? `${baseUrl}${project.heroImage}` : undefined,
-    aggregateRating: project.demoUrl
-      ? {
-          "@type": "AggregateRating",
-          ratingValue: "5",
-          bestRating: "5",
-        }
-      : undefined,
   };
 
   return (

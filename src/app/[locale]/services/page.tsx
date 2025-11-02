@@ -33,7 +33,10 @@ export default function ServicesPage() {
     return `/${currentLocale}${path}`;
   };
 
-  const serviceKeys = useMemo(() => ["website", "webapp", "mobile", "training"], []);
+  const serviceKeys = useMemo(
+    () => ["website", "webapp", "mobile", "training"],
+    []
+  );
 
   // Add Service schema
   useEffect(() => {
@@ -60,6 +63,8 @@ export default function ServicesPage() {
         itemListElement: services.map((service, index) => ({
           "@type": "Offer",
           itemOffered: service,
+          priceRange: "Contact for pricing",
+          availability: "https://schema.org/InStock",
           position: index + 1,
         })),
       },
