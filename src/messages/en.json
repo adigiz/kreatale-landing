@@ -272,7 +272,7 @@
     }
   },
   "estimation": {
-    "title": "Project Estimator",
+    "title": "Estimate",
     "subtitle": "Get an instant estimate for your project",
     "progress": "questions completed",
     "projectType": {
