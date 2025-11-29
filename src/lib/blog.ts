@@ -20,13 +20,13 @@ export function transformPlasmicRowToBlogPost(row: PlasmicCMSRow): BlogPost {
     createdAt: row.createdAt,
     updatedAt: row.updatedAt,
     identifier: row.identifier,
-    title: row.data.title || "",
-    slug: row.data.slug || "",
-    content: row.data.content || "",
-    excerpt: row.data.excerpt || "",
-    featuredImage: row.data.featuredImage || "",
-    publishedDate: row.data.publishedDate || row.createdAt,
-    author: row.data.author || "",
+    title: (row.data.title as string) || "",
+    slug: (row.data.slug as string) || "",
+    content: (row.data.content as string) || "",
+    excerpt: (row.data.excerpt as string) || "",
+    featuredImage: (row.data.featuredImage as string) || "",
+    publishedDate: (row.data.publishedDate as string) || row.createdAt,
+    author: (row.data.author as string) || "",
   };
 }
 

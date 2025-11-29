@@ -170,6 +170,9 @@
   .animate-marquee-vertical-reverse {
     animation: marquee-vertical-reverse var(--duration, 40s) linear infinite !important;
   }
+  .marquee-pause-on-hover:hover .marquee-item {
+    animation-play-state: paused !important;
+  }
 }
 
 @layer base {

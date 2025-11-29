@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { getAllBlogPosts } from "@/lib/plasmic-cms";
-import { transformPlasmicRowToBlogPost, formatBlogDate, getBlogPostUrl } from "@/lib/blog";
+import {
+  transformPlasmicRowToBlogPost,
+  formatBlogDate,
+  getBlogPostUrl,
+  type BlogPost,
+} from "@/lib/blog";
 
 const baseUrl = "https://kreatale.com";
 
@@ -62,7 +66,7 @@ export default async function BlogPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "blog" });
 
-  let blogPosts = [];
+  let blogPosts: BlogPost[] = [];
   try {
     // Fetch blog posts with locale parameter for Plasmic's localization system
     const rows = await getAllBlogPosts(locale);

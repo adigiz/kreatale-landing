@@ -12,7 +12,7 @@ export interface PlasmicCMSRow {
   createdAt: string;
   updatedAt: string;
   identifier: string;
-  data: Record<string, any>;
+  data: Record<string, unknown>;
 }
 
 function mapLocaleToPlasmic(locale: string): string {

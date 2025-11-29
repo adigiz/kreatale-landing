@@ -84,12 +84,12 @@ export async function generateMetadata({
   for (const altLocale of otherLocales) {
     try {
       const altRow = await getBlogPostByIdentifier(post.identifier, altLocale);
-      if (altRow && altRow.data.slug) {
+      if (altRow && altRow.data.slug && typeof altRow.data.slug === "string") {
         alternateSlugs[altLocale] = altRow.data.slug;
       } else {
         alternateSlugs[altLocale] = slug;
       }
-    } catch (error) {
+    } catch {
       alternateSlugs[altLocale] = slug;
     }
   }
