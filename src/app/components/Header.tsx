@@ -185,6 +185,16 @@ export default function Header() {
             </AnimatePresence>
           </div>
           <Link
+            href={createLocalizedPath("/blog")}
+            className={`transition-colors duration-200 ${
+              pathname?.startsWith(createLocalizedPath("/blog"))
+                ? "text-blue-600 font-semibold"
+                : "hover:text-blue-600"
+            }`}
+          >
+            Blog
+          </Link>
+          <Link
             href={createLocalizedPath("/services")}
             className={`transition-colors duration-200 ${
               pathname === createLocalizedPath("/services")
@@ -294,6 +304,11 @@ export default function Header() {
             {/* Main Navigation Links */}
             <div className="space-y-1 mb-6 pt-2">
               {[
+                {
+                  href: createLocalizedPath("/blog"),
+                  label: "Blog",
+                  isActive: pathname?.startsWith(createLocalizedPath("/blog")),
+                },
                 {
                   href: createLocalizedPath("/services"),
                   label: t("nav.services"),
