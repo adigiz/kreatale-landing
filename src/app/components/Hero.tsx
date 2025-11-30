@@ -44,18 +44,7 @@ export default function Hero() {
       />
 
       <div className="flex flex-col md:flex-row gap-8 w-full relative z-10">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 20 }}
-          whileInView={{ opacity: 1, scale: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{
-            duration: 0.8,
-            ease: "easeOut",
-            type: "spring",
-            stiffness: 100,
-          }}
-          className="relative flex-[3] rounded-3xl overflow-hidden aspect-[4/3] md:aspect-[16/10]"
-        >
+        <div className="relative flex-[3] rounded-3xl overflow-hidden aspect-[4/3] md:aspect-[16/10]">
           <Image
             src="/banner.jpg"
             alt={`${t("hero.title")} - ${t("hero.subtitle")}`}
@@ -66,13 +55,7 @@ export default function Hero() {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"
             quality={85}
           />
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            className="absolute bottom-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 py-8 px-6 sm:px-10 md:px-16 bg-gradient-to-t from-black/60 to-transparent w-full"
-          >
+          <div className="absolute bottom-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 py-8 px-6 sm:px-10 md:px-16 bg-gradient-to-t from-black/60 to-transparent w-full">
             <div className="flex flex-col">
               <motion.p
                 initial={{ opacity: 0, x: -20, y: 10 }}
@@ -101,22 +84,10 @@ export default function Hero() {
                 </motion.span>
               </motion.h1>
             </div>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, x: 50, scale: 0.9 }}
-          whileInView={{ opacity: 1, x: 0, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{
-            duration: 0.8,
-            delay: 0.2,
-            ease: "easeOut",
-            type: "spring",
-            stiffness: 80,
-          }}
-          className="hidden flex-[1] lg:flex justify-center"
-        >
+        <div className="hidden flex-[1] lg:flex justify-center">
           <Link
             href={projectPath}
             aria-label={`View ${projectData.title} project - ${t(
@@ -124,27 +95,8 @@ export default function Hero() {
             )}`}
             className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-2xl"
           >
-            <motion.div
-              animate={{
-                y: [0, -5, 0],
-                rotate: [0, 0.5, 0],
-              }}
-              whileHover={{
-                scale: 1.02,
-                y: -8,
-                rotate: 0,
-                transition: { duration: 0.3, ease: "easeOut" },
-              }}
-              whileTap={{ scale: 0.98 }}
-              className="bg-white rounded-2xl w-full h-full flex flex-col justify-start"
-            >
-              <motion.div
-                initial={{ scale: 1.1, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="relative overflow-hidden rounded-2xl mb-4 w-[400px] h-[550px] aspect-[400/550]"
-              >
+            <div className="bg-white rounded-2xl w-full h-full flex flex-col justify-start">
+              <div className="relative overflow-hidden rounded-2xl mb-4 w-[400px] h-[550px] aspect-[400/550]">
                 <Image
                   src={projectData.portfolioImage}
                   alt={`Screenshot of ${projectData.title} project showing the main interface`}
@@ -154,7 +106,7 @@ export default function Hero() {
                   loading="lazy"
                   className="object-cover hover:scale-105 transition-transform duration-500"
                 />
-              </motion.div>
+              </div>
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -215,9 +167,9 @@ export default function Hero() {
                   </motion.svg>
                 </motion.button>
               </motion.div>
-            </motion.div>
+            </div>
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
