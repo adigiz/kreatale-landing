@@ -24,7 +24,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="bg-white min-h-[calc(100vh-80px)] flex-1 text-white px-4 sm:px-8 lg:px-16 py-8 flex items-stretch relative overflow-hidden"
+      className="bg-white min-h-[calc(100vh-80px)] flex-1 text-white px-4 sm:px-8 lg:px-16 pb-8 pt-3 flex items-stretch relative overflow-hidden"
       style={{ minHeight: "calc(100vh - 80px)" }}
     >
       {/* Floating background elements */}
