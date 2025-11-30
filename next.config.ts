@@ -4,7 +4,14 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
-  images: {
+    images: {
+      remotePatterns: [
+        {
+          protocol: "https",
+          hostname: "s3.kreatale.com",
+          pathname: "/**",
+        },
+      ],
     remotePatterns: [
       {
         protocol: "https",
@@ -29,6 +36,11 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "morpheus.kreatale.com",
+      },
+      {
+        protocol: "https",
+        hostname: "s3.kreatale.com",
+        pathname: "/**",
       },
     ],
     formats: ["image/webp"],
