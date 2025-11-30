@@ -161,8 +161,10 @@ export default function ServicesPage() {
                         src={images[index]}
                         alt={t(`services.${serviceKey}.title`)}
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        quality={70}
+                        loading="lazy"
                         className="object-cover"
-                        sizes="(max-width: 1024px) 100vw, 50vw"
                       />
                     </div>
 

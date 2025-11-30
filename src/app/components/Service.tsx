@@ -61,8 +61,10 @@ export default function Service() {
                     src={images[idx]}
                     alt={t(`services.${serviceKey}.title`)}
                     fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    quality={70}
+                    loading="lazy"
                     className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                 </div>
                 <div className="lg:w-1/2 flex flex-col gap-4 text-center lg:text-left">

@@ -150,7 +150,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <head>
-        <link rel="preload" href="/banner.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/banner.jpg" as="image" fetchPriority="high" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

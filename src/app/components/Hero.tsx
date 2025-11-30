@@ -25,6 +25,7 @@ export default function Hero() {
     <section
       id="hero"
       className="bg-white min-h-[calc(100vh-80px)] flex-1 text-white px-4 sm:px-8 lg:px-16 py-8 flex items-stretch relative overflow-hidden"
+      style={{ minHeight: "calc(100vh - 80px)" }}
     >
       {/* Floating background elements */}
       <motion.div
@@ -53,29 +54,18 @@ export default function Hero() {
             type: "spring",
             stiffness: 100,
           }}
-          className="relative flex-[3] rounded-3xl overflow-hidden min-h-[50vh] md:min-h-full"
+          className="relative flex-[3] rounded-3xl overflow-hidden aspect-[4/3] md:aspect-[16/10]"
         >
-          <motion.div
-            initial={{ scale: 1.1 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="w-full h-full"
-          >
-            <div className="w-full h-full">
-              <Image
-                src="/banner.jpg"
-                alt={`${t("hero.title")} - ${t("hero.subtitle")}`}
-                fill
-                className="object-cover"
-                priority
-                fetchPriority="high"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"
-                quality={100}
-                unoptimized={true}
-              />
-            </div>
-          </motion.div>
+          <Image
+            src="/banner.jpg"
+            alt={`${t("hero.title")} - ${t("hero.subtitle")}`}
+            fill
+            className="object-cover"
+            priority
+            fetchPriority="high"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"
+            quality={85}
+          />
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -153,14 +143,16 @@ export default function Hero() {
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="relative overflow-hidden rounded-2xl mb-4 w-[400px] h-[550px]"
+                className="relative overflow-hidden rounded-2xl mb-4 w-[400px] h-[550px] aspect-[400/550]"
               >
                 <Image
                   src={projectData.portfolioImage}
                   alt={`Screenshot of ${projectData.title} project showing the main interface`}
                   fill
+                  sizes="(max-width: 768px) 100vw, 400px"
+                  quality={75}
+                  loading="lazy"
                   className="object-cover hover:scale-105 transition-transform duration-500"
-                  quality={100}
                 />
               </motion.div>
 

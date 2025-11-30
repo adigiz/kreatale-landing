@@ -67,8 +67,9 @@ export default function Portfolio() {
               alt={project.title}
               fill
               className="object-cover hover:scale-105 transition-transform duration-300"
-              sizes="(max-width: 768px) 85vw, 50vw"
-              quality={75}
+              sizes="(max-width: 375px) 55vw, (max-width: 640px) 55vw, (max-width: 768px) 35vw, (max-width: 1024px) 28vw, 24vw"
+              quality={60}
+              loading="lazy"
             />
           </div>
 

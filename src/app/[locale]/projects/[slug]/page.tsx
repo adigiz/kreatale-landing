@@ -173,9 +173,10 @@ export default function ProjectDetailPage() {
             src={project.heroImage}
             alt={`${project.title} Hero`}
             fill
-            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 896px"
+            quality={80}
             priority
-            quality={100}
+            className="object-cover"
           />
         </div>
       </motion.div>
@@ -283,6 +284,9 @@ export default function ProjectDetailPage() {
                     width={800}
                     height={600}
                     className="w-full h-auto object-cover transition-transform duration-500 hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    quality={75}
+                    loading="lazy"
                   />
                 </motion.div>
               ))}

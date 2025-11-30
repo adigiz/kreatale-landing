@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect } from "react";
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import projectsData from "@/lib/projectsData.json";
@@ -19,19 +19,34 @@ import { sortProjects } from "@/lib/utils";
 export default function Header() {
   const [projectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
   const [projectsBottomSheetOpen, setProjectsBottomSheetOpen] = useState(false);
+  // Initialize with false, will be set correctly on mount
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
   const t = useTranslations();
 
-  // Scroll detection
-  useEffect(() => {
-    const handleScroll = () => {
+  // Use useLayoutEffect to check scroll position synchronously before paint
+  useLayoutEffect(() => {
+    // Check initial scroll position immediately to prevent flicker
+    if (typeof window !== "undefined") {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 50);
+      setIsMounted(true);
+    }
+  }, []);
+
+  // Set up scroll listener after initial render
+  useEffect(() => {
+    const checkScroll = () => {
+      if (typeof window !== "undefined") {
+        const scrollPosition = window.scrollY;
+        setIsScrolled(scrollPosition > 50);
+      }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    // Add scroll listener with passive for better performance
+    window.addEventListener("scroll", checkScroll, { passive: true });
+    return () => window.removeEventListener("scroll", checkScroll);
   }, []);
 
   // Extract current locale from pathname
@@ -64,17 +79,13 @@ export default function Header() {
           isScrolled
             ? "px-6 py-3 max-w-5xl mx-auto rounded-full"
             : "px-6 py-4 md:px-16 w-full rounded-none"
+        } ${
+          isScrolled
+            ? "shadow-[0_10px_40px_rgba(0,0,0,0.1),0_0_0_1px_rgba(0,0,0,0.05)] backdrop-blur-[20px]"
+            : "shadow-[0_1px_3px_rgba(0,0,0,0.1)] backdrop-blur-0"
         }`}
-        animate={{
-          boxShadow: isScrolled
-            ? "0 10px 40px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05)"
-            : "0 1px 3px rgba(0, 0, 0, 0.1)",
+        style={{
           backgroundColor: "rgba(255, 255, 255, 0.95)",
-          backdropFilter: isScrolled ? "blur(20px)" : "blur(0px)",
-        }}
-        transition={{
-          duration: 0.3,
-          ease: "easeInOut",
         }}
       >
         <div
