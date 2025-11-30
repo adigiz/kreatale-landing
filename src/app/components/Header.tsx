@@ -21,7 +21,6 @@ export default function Header() {
   const [projectsBottomSheetOpen, setProjectsBottomSheetOpen] = useState(false);
   // Initialize with false, will be set correctly on mount
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
   const t = useTranslations();
 
@@ -31,7 +30,6 @@ export default function Header() {
     if (typeof window !== "undefined") {
       const scrollPosition = window.scrollY;
       setIsScrolled(scrollPosition > 50);
-      setIsMounted(true);
     }
   }, []);
 
