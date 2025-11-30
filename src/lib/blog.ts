@@ -15,6 +15,21 @@ export interface BlogPost {
 }
 
 export function transformPlasmicRowToBlogPost(row: PlasmicCMSRow): BlogPost {
+  // Handle featuredImage - it can be a string URL or an object with a url property
+  let featuredImage: string | undefined;
+  const featuredImageData = row.data.featuredImage;
+  if (featuredImageData) {
+    if (typeof featuredImageData === "string") {
+      featuredImage = featuredImageData;
+    } else if (
+      typeof featuredImageData === "object" &&
+      featuredImageData !== null &&
+      "url" in featuredImageData
+    ) {
+      featuredImage = (featuredImageData as { url: string }).url;
+    }
+  }
+
   return {
     id: row.id,
     createdAt: row.createdAt,
@@ -24,7 +39,7 @@ export function transformPlasmicRowToBlogPost(row: PlasmicCMSRow): BlogPost {
     slug: (row.data.slug as string) || "",
     content: (row.data.content as string) || "",
     excerpt: (row.data.excerpt as string) || "",
-    featuredImage: (row.data.featuredImage as string) || "",
+    featuredImage,
     publishedDate: (row.data.publishedDate as string) || row.createdAt,
     author: (row.data.author as string) || "",
   };
