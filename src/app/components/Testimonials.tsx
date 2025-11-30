@@ -114,6 +114,7 @@ export default function Testimonials() {
               <button
                 onClick={() => paginate("left")}
                 className="p-2 rounded-full bg-white border border-gray-200 hover:bg-gray-100 transition-colors"
+                aria-label="Previous testimonial"
               >
                 <svg
                   className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6"
@@ -132,6 +133,7 @@ export default function Testimonials() {
               <button
                 onClick={() => paginate("right")}
                 className="p-2 rounded-full bg-white border border-gray-200 hover:bg-gray-100 transition-colors"
+                aria-label="Next testimonial"
               >
                 <svg
                   className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6"

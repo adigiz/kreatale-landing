@@ -118,8 +118,9 @@ export default function MobileBottomNav({
                   className="flex items-center justify-center w-14 h-14 rounded-full bg-[#0061FF] text-white shadow-lg hover:shadow-xl transition-all duration-200 -mt-2 z-10"
                   whileTap={{ scale: 0.9 }}
                   whileHover={{ scale: 1.05 }}
+                  aria-label={t("footer.whatsappUs")}
                 >
-                  <MessageCircle size={24} />
+                  <MessageCircle size={24} aria-hidden="true" />
                 </motion.a>
               )}
             </Fragment>

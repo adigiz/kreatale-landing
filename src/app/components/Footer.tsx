@@ -95,22 +95,25 @@ export default function Footer() {
             href="https://www.instagram.com/kreatale"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Visit our Instagram profile"
           >
-            <FaInstagram className="hover:text-white cursor-pointer" />
+            <FaInstagram className="hover:text-white cursor-pointer" aria-hidden="true" />
           </Link>
           <Link
             href="https://www.tiktok.com/@kreatale"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Visit our TikTok profile"
           >
-            <FaTiktok className="hover:text-white cursor-pointer" />
+            <FaTiktok className="hover:text-white cursor-pointer" aria-hidden="true" />
           </Link>
           <Link
             href="https://www.linkedin.com/company/kreatale"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Visit our LinkedIn company page"
           >
-            <FaLinkedin className="hover:text-white cursor-pointer" />
+            <FaLinkedin className="hover:text-white cursor-pointer" aria-hidden="true" />
           </Link>
         </div>
       </div>

@@ -30,6 +30,9 @@ export default function LanguageSwitcher() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-lg transition-colors duration-200"
+        aria-label={`Change language. Current language: ${currentLanguage.name}`}
+        aria-expanded={isOpen}
+        aria-haspopup="true"
       >
         <Globe size={16} />
         <span className="hidden sm:inline">{currentLanguage.flag}</span>
@@ -60,6 +63,7 @@ export default function LanguageSwitcher() {
                     ? "bg-blue-50 text-blue-600 font-medium"
                     : "text-gray-700"
                 }`}
+                aria-label={`Switch to ${language.name}`}
               >
                 <span>{language.flag}</span>
                 <span>{language.name}</span>

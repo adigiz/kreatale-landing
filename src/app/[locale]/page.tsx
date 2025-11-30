@@ -61,7 +61,7 @@ export async function generateMetadata({
 
 export default function Home() {
   return (
-    <main>
+    <main style={{ minHeight: "100vh" }}>
       <Hero />
       <Portfolio />
       <Service />
