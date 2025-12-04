@@ -176,6 +176,8 @@
     "title": "Our Portfolio",
     "subtitle": "Recent Work",
     "description": "Explore our latest projects and see how we've helped businesses achieve their digital goals.",
+    "pageTitle": "Our Projects",
+    "pageDescription": "Browse our portfolio of innovative web development projects, mobile apps, and digital solutions. See how Kreatale helps businesses transform their digital presence with custom websites, web applications, and modern technology.",
     "viewAll": "View All Projects",
     "categories": {
       "all": "All",

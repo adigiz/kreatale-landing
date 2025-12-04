@@ -14,6 +14,8 @@ import {
 const baseUrl = "https://kreatale.com";
 
 export const revalidate = 60;
+// Allow dynamic params not in generateStaticParams (for new posts created after build)
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   const locales = ["en", "id"];

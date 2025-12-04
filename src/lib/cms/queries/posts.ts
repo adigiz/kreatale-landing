@@ -81,7 +81,7 @@ export async function getPublishedPosts(locale?: string) {
     .from(posts)
     .leftJoin(users, eq(posts.authorId, users.id))
     .where(and(...conditions))
-    .orderBy(desc(posts.publishedAt));
+    .orderBy(desc(posts.publishedAt), desc(posts.createdAt)); // Fallback to createdAt if publishedAt is null
 }
 
 export async function createPost(data: NewPost) {
@@ -129,4 +129,5 @@ export async function searchPosts(query: string, locale?: string) {
     .where(and(...conditions))
     .orderBy(desc(posts.createdAt));
 }
+
 

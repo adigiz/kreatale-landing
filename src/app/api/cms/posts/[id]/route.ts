@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/cms/auth/config";
 import {
   getPostById,
@@ -63,10 +64,15 @@ export async function PATCH(
     const body = await request.json();
     const data = updatePostSchema.parse(body);
 
-    // If status is being changed to published, set publishedAt
+    // If status is being changed to published, ensure publishedAt is set
     if (data.status === "published") {
       const existing = await getPostById(id);
-      if (existing && existing.post.status !== "published") {
+      // Set publishedAt if it's not already set (when changing from draft/archived to published)
+      if (existing && !existing.post.publishedAt) {
+        (data as { publishedAt?: Date }).publishedAt = new Date();
+      }
+      // If already published but publishedAt is null for some reason, set it
+      else if (existing && existing.post.status === "published" && !existing.post.publishedAt) {
         (data as { publishedAt?: Date }).publishedAt = new Date();
       }
     }
@@ -75,6 +81,15 @@ export async function PATCH(
 
     if (!post) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
+    }
+
+    // Revalidate blog pages when post status changes
+    if (data.status !== undefined) {
+      // Revalidate blog listing pages for all locales
+      revalidatePath("/en/blog");
+      revalidatePath("/id/blog");
+      // Revalidate the specific blog post page
+      revalidatePath(`/${post.locale}/blog/${post.slug}`);
     }
 
     return NextResponse.json(post);
@@ -102,7 +117,16 @@ export async function DELETE(
     }
 
     const { id } = await params;
+    const existing = await getPostById(id);
+    
     await deletePost(id);
+
+    // Revalidate blog pages after deletion
+    if (existing) {
+      revalidatePath("/en/blog");
+      revalidatePath("/id/blog");
+      revalidatePath(`/${existing.post.locale}/blog/${existing.post.slug}`);
+    }
 
     return NextResponse.json({ success: true });
   } catch {
@@ -112,4 +136,5 @@ export async function DELETE(
     );
   }
 }
+
 

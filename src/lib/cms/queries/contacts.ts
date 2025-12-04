@@ -67,3 +67,4 @@ export async function searchContacts(query: string) {
     )
     .orderBy(desc(contacts.createdAt));
 }
+

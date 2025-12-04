@@ -52,7 +52,10 @@ export async function generateMetadata({
   };
 
   return {
-    title,
+    title: {
+      default: title,
+      template: "%s | Kreatale",
+    },
     description,
     keywords: isEnglish
       ? [
@@ -76,6 +79,17 @@ export async function generateMetadata({
           "pengembangan web Indonesia",
         ],
     authors: [{ name: "Kreatale" }],
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     openGraph: {
       title,
       description,

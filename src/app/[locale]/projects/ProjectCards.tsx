@@ -150,3 +150,4 @@ export default function ProjectCards({ projects, locale }: ProjectCardsProps) {
     </motion.section>
   );
 }
+

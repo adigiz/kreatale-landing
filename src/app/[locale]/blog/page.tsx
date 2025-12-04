@@ -12,6 +12,9 @@ import {
 
 const baseUrl = "https://kreatale.com";
 
+// Revalidate every 60 seconds, but also allow on-demand revalidation
+export const revalidate = 60;
+
 export async function generateMetadata({
   params,
 }: {

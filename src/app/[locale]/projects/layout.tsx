@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 
 const baseUrl = "https://kreatale.com";
 
@@ -8,20 +9,14 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const messages = await import(`../../../messages/${locale}.json`).catch(
-    () => null
-  );
-  const t = messages?.default?.portfolio || {};
+  const t = await getTranslations({ locale, namespace: "portfolio" });
 
   const isEnglish = locale === "en";
   const title = isEnglish
     ? "Our Projects | Portfolio - Kreatale"
     : "Proyek Kami | Portfolio - Kreatale";
-  const description = isEnglish
-    ? t.description ||
-      "Explore our latest projects and see how we've helped businesses achieve their digital goals."
-    : t.description ||
-      "Jelajahi proyek terbaru kami dan lihat bagaimana kami membantu bisnis mencapai tujuan digital mereka.";
+  // Use translation from next-intl
+  const description = t("pageDescription") || t("description");
 
   const languages: Record<string, string> = {
     en: `${baseUrl}/en/projects`,
@@ -30,8 +25,22 @@ export async function generateMetadata({
   };
 
   return {
-    title,
+    title: {
+      default: title,
+      absolute: title,
+    },
     description,
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
+    },
     openGraph: {
       title,
       description,
@@ -68,4 +77,3 @@ export default function ProjectsLayout({
 }) {
   return <>{children}</>;
 }
-

@@ -59,3 +59,4 @@ export async function searchMedia(query: string) {
     .orderBy(desc(media.createdAt));
 }
 
+

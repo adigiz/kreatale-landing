@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/cms/auth/config";
 import {
   getAllPosts,
@@ -65,6 +66,13 @@ export async function POST(request: NextRequest) {
       publishedAt: data.status === "published" ? new Date() : null,
     });
 
+    // Revalidate blog pages if post is published
+    if (data.status === "published") {
+      revalidatePath("/en/blog");
+      revalidatePath("/id/blog");
+      revalidatePath(`/${post.locale}/blog/${post.slug}`);
+    }
+
     return NextResponse.json(post, { status: 201 });
   } catch (err) {
     if (err instanceof z.ZodError) {
@@ -76,4 +84,5 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
 

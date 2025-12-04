@@ -33,7 +33,7 @@ export default function PostEditor({
   const router = useRouter();
   const params = useParams();
   const locale = (params?.locale as string) || "en";
-  const [, setLoading] = useState(false); // Used for onSaveStateChange callback and events
+  const [isSubmitting, setIsSubmitting] = useState(false); // Guard against duplicate submissions
   const [previewLoading, setPreviewLoading] = useState(false);
   const [showPreview, setShowPreview] = useState(true);
   const [previewToken, setPreviewToken] = useState<string | null>(null);
@@ -146,7 +146,13 @@ export default function PostEditor({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    
+    // Prevent duplicate submissions
+    if (isSubmitting) {
+      return;
+    }
+    
+    setIsSubmitting(true);
     onSaveStateChange?.(true);
     window.dispatchEvent(new CustomEvent("post-editor:save-start"));
 
@@ -173,11 +179,11 @@ export default function PostEditor({
     } catch (error) {
       console.error("Error saving post:", error);
       alert(error instanceof Error ? error.message : "Failed to save post");
-      setLoading(false);
+      setIsSubmitting(false);
       onSaveStateChange?.(false);
       window.dispatchEvent(new CustomEvent("post-editor:save-end"));
     } finally {
-      setLoading(false);
+      setIsSubmitting(false);
       onSaveStateChange?.(false);
       window.dispatchEvent(new CustomEvent("post-editor:save-end"));
     }
