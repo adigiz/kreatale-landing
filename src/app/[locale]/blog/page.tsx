@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import { getAllBlogPosts } from "@/lib/plasmic-cms";
+import { getPublishedPosts } from "@/lib/cms/queries/posts";
 import {
-  transformPlasmicRowToBlogPost,
+  transformCmsPostToBlogPost,
   formatBlogDate,
   getBlogPostUrl,
   type BlogPost,
@@ -68,42 +68,23 @@ export default async function BlogPage({
 
   let blogPosts: BlogPost[] = [];
   try {
-    // Fetch blog posts with locale parameter for Plasmic's localization system
-    const rows = await getAllBlogPosts(locale);
-    blogPosts = rows.map(transformPlasmicRowToBlogPost);
+    // Fetch published blog posts from our CMS
+    const posts = await getPublishedPosts(locale);
+    blogPosts = posts.map(transformCmsPostToBlogPost);
   } catch (error) {
     console.error("Error fetching blog posts:", error);
-    // If MODEL_ID is not set, show empty state with helpful message
-    if (error instanceof Error && error.message.includes("PLASMIC_CMS_MODEL_ID")) {
-      return (
-        <main className="min-h-screen bg-white px-4 sm:px-8 lg:px-16 py-16">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl font-bold mb-8">{t("title")}</h1>
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-              <p className="text-yellow-800">
-                <strong>{t("setupRequired")}:</strong> {t("setupMessage")}
-              </p>
-            </div>
-          </div>
-        </main>
-      );
-    }
   }
 
   return (
     <main className="min-h-screen bg-white px-4 sm:px-8 lg:px-16 py-16">
       <div className="max-w-6xl mx-auto">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">{t("title")}</h1>
-        <p className="text-gray-600 mb-12 text-lg">
-          {t("description")}
-        </p>
+        <p className="text-gray-600 mb-12 text-lg">{t("description")}</p>
 
         {blogPosts.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-gray-500 text-lg">{t("noPosts")}</p>
-            <p className="text-gray-400 mt-2">
-              {t("noPostsDescription")}
-            </p>
+            <p className="text-gray-400 mt-2">{t("noPostsDescription")}</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -139,7 +120,11 @@ export default async function BlogPage({
                     {post.publishedDate && (
                       <span>{formatBlogDate(post.publishedDate)}</span>
                     )}
-                    {post.author && <span>{t("by")} {post.author}</span>}
+                    {post.author && (
+                      <span>
+                        {t("by")} {post.author}
+                      </span>
+                    )}
                   </div>
                 </div>
               </Link>
@@ -150,4 +135,3 @@ export default async function BlogPage({
     </main>
   );
 }
-

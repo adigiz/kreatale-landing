@@ -381,9 +381,7 @@
     "title": "Blog",
     "description": "Read our latest articles about web development, digital solutions, and technology insights.",
     "noPosts": "No blog posts found.",
-    "noPostsDescription": "Create and publish blog posts in Plasmic Studio to see them here.",
-    "setupRequired": "Setup Required",
-    "setupMessage": "Please set PLASMIC_CMS_MODEL_ID in your .env.local file. Get the model ID from Plasmic Studio after creating your Blog Post model.",
+    "noPostsDescription": "Create and publish blog posts in the admin panel to see them here.",
     "backToBlog": "← Back to Blog",
     "by": "By"
   }

@@ -381,9 +381,7 @@
     "title": "Blog",
     "description": "Baca artikel terbaru kami tentang pengembangan web, solusi digital, dan wawasan teknologi.",
     "noPosts": "Tidak ada artikel blog ditemukan.",
-    "noPostsDescription": "Buat dan publikasikan artikel blog di Plasmic Studio untuk melihatnya di sini.",
-    "setupRequired": "Pengaturan Diperlukan",
-    "setupMessage": "Harap set PLASMIC_CMS_MODEL_ID di file .env.local Anda. Dapatkan ID model dari Plasmic Studio setelah membuat model Blog Post Anda.",
+    "noPostsDescription": "Buat dan publikasikan artikel blog di panel admin untuk melihatnya di sini.",
     "backToBlog": "← Kembali ke Blog",
     "by": "Oleh"
   }

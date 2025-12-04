@@ -3,15 +3,12 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
+import { getPublishedPosts, getPostBySlug } from "@/lib/cms/queries/posts";
 import {
-  getAllBlogPosts,
-  getBlogPostBySlug,
-  getBlogPostByIdentifier,
-} from "@/lib/plasmic-cms";
-import {
-  transformPlasmicRowToBlogPost,
+  transformCmsPostToBlogPost,
   formatBlogDate,
   getBlogListingUrl,
+  type BlogPost,
 } from "@/lib/blog";
 
 const baseUrl = "https://kreatale.com";
@@ -24,10 +21,10 @@ export async function generateStaticParams() {
 
   try {
     for (const locale of locales) {
-      const rows = await getAllBlogPosts(locale);
-      const posts = rows.map(transformPlasmicRowToBlogPost);
+      const posts = await getPublishedPosts(locale);
+      const blogPosts = posts.map(transformCmsPostToBlogPost);
 
-      for (const post of posts) {
+      for (const post of blogPosts) {
         if (post.slug) {
           allParams.push({
             locale,
@@ -50,16 +47,13 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale, slug } = await params;
 
-  let post = null;
+  let post: BlogPost | null = null;
   try {
-    let row = await getBlogPostBySlug(slug, locale);
+    const result = await getPostBySlug(slug, locale);
 
-    if (!row) {
-      row = await getBlogPostBySlug(slug);
-    }
-
-    if (row) {
-      post = transformPlasmicRowToBlogPost(row);
+    // Only show published posts
+    if (result && result.post.status === "published") {
+      post = transformCmsPostToBlogPost(result);
     }
   } catch (error) {
     console.error("Error fetching blog post:", error);
@@ -76,6 +70,7 @@ export async function generateMetadata({
   const publishedTime = post.publishedDate || post.createdAt;
   const modifiedTime = post.updatedAt;
 
+  // For alternate locales, try to find the same post by slug in other locales
   const alternateSlugs: Record<string, string> = {
     [locale]: slug,
   };
@@ -83,9 +78,9 @@ export async function generateMetadata({
   const otherLocales = ["en", "id"].filter((l) => l !== locale);
   for (const altLocale of otherLocales) {
     try {
-      const altRow = await getBlogPostByIdentifier(post.identifier, altLocale);
-      if (altRow && altRow.data.slug && typeof altRow.data.slug === "string") {
-        alternateSlugs[altLocale] = altRow.data.slug;
+      const altResult = await getPostBySlug(slug, altLocale);
+      if (altResult && altResult.post.status === "published") {
+        alternateSlugs[altLocale] = altResult.post.slug;
       } else {
         alternateSlugs[altLocale] = slug;
       }
@@ -153,39 +148,16 @@ export default async function BlogPostPage({
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: "blog" });
 
-  let post = null;
+  let post: BlogPost | null = null;
   try {
-    let row = await getBlogPostBySlug(slug, locale);
+    const result = await getPostBySlug(slug, locale);
 
-    if (!row) {
-      console.warn(
-        `Post with slug "${slug}" not found in locale "${locale}", trying without locale filter...`
-      );
-      row = await getBlogPostBySlug(slug);
-    }
-
-    if (row) {
-      post = transformPlasmicRowToBlogPost(row);
+    // Only show published posts
+    if (result && result.post.status === "published") {
+      post = transformCmsPostToBlogPost(result);
     }
   } catch (error) {
     console.error("Error fetching blog post:", error);
-    if (
-      error instanceof Error &&
-      error.message.includes("PLASMIC_CMS_MODEL_ID")
-    ) {
-      return (
-        <main className="min-h-screen bg-white px-4 sm:px-8 lg:px-16 py-16">
-          <div className="max-w-4xl mx-auto">
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-              <p className="text-yellow-800">
-                <strong>Setup Required:</strong> Please set PLASMIC_CMS_MODEL_ID
-                in your .env.local file.
-              </p>
-            </div>
-          </div>
-        </main>
-      );
-    }
   }
 
   if (!post) {

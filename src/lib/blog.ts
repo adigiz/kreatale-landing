@@ -1,10 +1,9 @@
-import { PlasmicCMSRow } from "./plasmic-cms";
+import type { Post } from "./cms/db/schema";
 
 export interface BlogPost {
   id: string;
   createdAt: string;
   updatedAt: string;
-  identifier: string;
   title: string;
   slug: string;
   content: string;
@@ -14,34 +13,30 @@ export interface BlogPost {
   author?: string;
 }
 
-export function transformPlasmicRowToBlogPost(row: PlasmicCMSRow): BlogPost {
-  // Handle featuredImage - it can be a string URL or an object with a url property
-  let featuredImage: string | undefined;
-  const featuredImageData = row.data.featuredImage;
-  if (featuredImageData) {
-    if (typeof featuredImageData === "string") {
-      featuredImage = featuredImageData;
-    } else if (
-      typeof featuredImageData === "object" &&
-      featuredImageData !== null &&
-      "url" in featuredImageData
-    ) {
-      featuredImage = (featuredImageData as { url: string }).url;
-    }
+// Transform CMS post to BlogPost format
+export function transformCmsPostToBlogPost(
+  postData: {
+    post: Post;
+    author: {
+      id: string;
+      name: string | null;
+      email: string;
+    } | null;
   }
+): BlogPost {
+  const { post, author } = postData;
 
   return {
-    id: row.id,
-    createdAt: row.createdAt,
-    updatedAt: row.updatedAt,
-    identifier: row.identifier,
-    title: (row.data.title as string) || "",
-    slug: (row.data.slug as string) || "",
-    content: (row.data.content as string) || "",
-    excerpt: (row.data.excerpt as string) || "",
-    featuredImage,
-    publishedDate: (row.data.publishedDate as string) || row.createdAt,
-    author: (row.data.author as string) || "",
+    id: post.id,
+    createdAt: post.createdAt.toISOString(),
+    updatedAt: post.updatedAt.toISOString(),
+    title: post.title,
+    slug: post.slug,
+    content: post.content,
+    excerpt: post.excerpt || undefined,
+    featuredImage: post.featuredImage || undefined,
+    publishedDate: post.publishedAt?.toISOString() || post.createdAt.toISOString(),
+    author: author?.name || author?.email || undefined,
   };
 }
 
