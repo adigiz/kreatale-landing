@@ -39,9 +39,8 @@ export default async function ContactDetailPage({
           <MarkReadButton
             contactId={contact.id}
             isRead={contact.read === "true"}
-            locale={locale}
           />
-          <DeleteContactButton contactId={contact.id} locale={locale} />
+          <DeleteContactButton contactId={contact.id} />
         </div>
       </div>
 

@@ -65,7 +65,7 @@ export default function MobileBottomNav({
       transition={{ duration: 0.3, ease: "easeOut" }}
     >
       <div className="flex items-center justify-around px-1 py-1.5 safe-area-inset-bottom relative">
-        {navItems.map((item, index) => {
+        {navItems.map((item) => {
           const Icon = item.icon;
           const content = (
             <>

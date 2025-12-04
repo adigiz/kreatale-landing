@@ -1,5 +1,5 @@
 import { db, contacts, type NewContact } from "../db";
-import { eq, desc, and, like, or } from "drizzle-orm";
+import { eq, desc, like, or } from "drizzle-orm";
 
 export async function getAllContacts() {
   return await db

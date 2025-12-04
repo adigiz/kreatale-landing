@@ -35,7 +35,7 @@ export default async function AdminDashboard({
       .select({ count: count() })
       .from(contacts)
       .where(eq(contacts.read, "false"));
-  } catch (error) {
+  } catch {
     // Table doesn't exist yet - will be created after migration
     console.warn(
       "Contacts table not found. Run 'npm run db:push' to create it."

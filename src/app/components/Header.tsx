@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import projectsData from "@/lib/projectsData.json";
 import { ProjectsDatabase } from "@/lib/types";
 import { usePathname } from "next/navigation";
-import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
 import DesktopNav from "./DesktopNav";
 import MobileBottomNav from "./MobileBottomNav";
@@ -20,7 +19,6 @@ export default function Header() {
   // Initialize with false, will be set correctly on mount
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
-  const t = useTranslations();
 
   // Use useLayoutEffect to check scroll position synchronously before paint
   useLayoutEffect(() => {

@@ -8,13 +8,11 @@ import { useRouter } from "next/navigation";
 interface MarkReadButtonProps {
   contactId: string;
   isRead: boolean;
-  locale: string;
 }
 
 export default function MarkReadButton({
   contactId,
   isRead,
-  locale,
 }: MarkReadButtonProps) {
   const [isUpdating, setIsUpdating] = useState(false);
   const router = useRouter();

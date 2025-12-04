@@ -3,6 +3,27 @@ import { getSession } from "@/lib/cms/auth/config";
 import { canAccessAdmin } from "@/lib/cms/permissions";
 import AuthGuard from "./AuthGuard";
 import Sidebar from "./components/Sidebar";
+import type { Metadata } from "next";
+
+// Force dynamic rendering for admin routes (they require authentication)
+export const dynamic = "force-dynamic";
+
+// Prevent search engines from indexing admin pages
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+      "max-video-preview": -1,
+      "max-image-preview": "none",
+      "max-snippet": -1,
+    },
+  },
+};
 
 async function AuthenticatedLayout({
   children,

@@ -1,12 +1,8 @@
 import { getSession } from "@/lib/cms/auth/config";
 import { redirect } from "next/navigation";
-import { Search, Mail, CheckCircle, XCircle } from "lucide-react";
-import {
-  getAllContacts,
-  markContactAsRead,
-  markContactAsUnread,
-  deleteContact,
-} from "@/lib/cms/queries/contacts";
+import { Search, Mail, CheckCircle } from "lucide-react";
+import { getAllContacts } from "@/lib/cms/queries/contacts";
+import type { Contact } from "@/lib/cms/db/schema";
 import { Button } from "@/components/ui/button";
 import DeleteContactButton from "./DeleteContactButton";
 import MarkReadButton from "./MarkReadButton";
@@ -27,7 +23,7 @@ export default async function ContactsPage({
   const searchParamsData = await searchParams;
 
   // Get contacts (handle case where table doesn't exist yet)
-  let allContacts = [];
+  let allContacts: Contact[] = [];
   try {
     allContacts = await getAllContacts();
   } catch (error) {
@@ -226,12 +222,8 @@ export default async function ContactsPage({
                         <MarkReadButton
                           contactId={contact.id}
                           isRead={contact.read === "true"}
-                          locale={locale}
                         />
-                        <DeleteContactButton
-                          contactId={contact.id}
-                          locale={locale}
-                        />
+                        <DeleteContactButton contactId={contact.id} />
                       </div>
                     </td>
                   </tr>

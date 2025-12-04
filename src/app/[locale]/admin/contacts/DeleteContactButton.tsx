@@ -7,12 +7,10 @@ import { useRouter } from "next/navigation";
 
 interface DeleteContactButtonProps {
   contactId: string;
-  locale: string;
 }
 
 export default function DeleteContactButton({
   contactId,
-  locale,
 }: DeleteContactButtonProps) {
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();

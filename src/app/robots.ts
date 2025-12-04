@@ -10,6 +10,8 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: [
           "/admin/",
+          "/en/admin/", // Disallow admin routes for English locale
+          "/id/admin/", // Disallow admin routes for Indonesian locale
           "/api/",
           "/_next/",
           "/static/",

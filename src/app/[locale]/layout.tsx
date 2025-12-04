@@ -146,6 +146,12 @@ export default async function LocaleLayout({
       contactType: "Customer Service",
       availableLanguage: ["en", "id"],
     },
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: "5.0",
+      ratingCount: "2",
+      reviewCount: "2",
+    },
   };
 
   return (

@@ -8,11 +8,6 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-  const messages = await import(`../../../messages/${locale}.json`).catch(
-    () => null
-  );
-  const t = messages?.default?.terms || {};
-
   const isEnglish = locale === "en";
   const title = isEnglish
     ? "Terms of Service | Kreatale"
