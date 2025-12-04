@@ -415,5 +415,128 @@
     "noPostsDescription": "Buat dan publikasikan artikel blog di panel admin untuk melihatnya di sini.",
     "backToBlog": "← Kembali ke Blog",
     "by": "Oleh"
+  },
+  "privacy": {
+    "title": "Kebijakan Privasi",
+    "lastUpdated": "Terakhir diperbarui: Januari 2025",
+    "sections": {
+      "introduction": {
+        "title": "Pengenalan",
+        "content": "Di Kreatale, kami berkomitmen untuk melindungi privasi Anda. Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, mengungkapkan, dan melindungi informasi Anda ketika Anda mengunjungi website kami atau menggunakan layanan kami."
+      },
+      "information": {
+        "title": "Informasi yang Kami Kumpulkan",
+        "content": "Kami mengumpulkan informasi yang Anda berikan langsung kepada kami, termasuk:",
+        "items": {
+          "name": "Nama dan informasi kontak",
+          "email": "Alamat email",
+          "phone": "Nomor telepon (jika diberikan)",
+          "company": "Nama perusahaan (jika diberikan)",
+          "message": "Pesan dan pertanyaan yang dikirim melalui formulir kontak kami",
+          "usage": "Informasi tentang bagaimana Anda menggunakan website kami"
+        }
+      },
+      "use": {
+        "title": "Bagaimana Kami Menggunakan Informasi Anda",
+        "content": "Kami menggunakan informasi yang kami kumpulkan untuk:",
+        "items": {
+          "process": "Memproses dan menanggapi pertanyaan Anda",
+          "communicate": "Berkomunikasi dengan Anda tentang layanan kami",
+          "improve": "Meningkatkan website dan layanan kami",
+          "comply": "Mematuhi kewajiban hukum"
+        }
+      },
+      "cookies": {
+        "title": "Cookies dan Teknologi Pelacakan",
+        "content": "Kami menggunakan cookies dan teknologi pelacakan serupa untuk melacak aktivitas di website kami dan menyimpan informasi tertentu. Anda dapat menginstruksikan browser Anda untuk menolak semua cookies atau menunjukkan ketika cookie dikirim."
+      },
+      "security": {
+        "title": "Keamanan Data",
+        "content": "Kami menerapkan langkah-langkah keamanan teknis dan organisasi yang sesuai untuk melindungi informasi pribadi Anda. Namun, tidak ada metode transmisi melalui Internet atau penyimpanan elektronik yang 100% aman."
+      },
+      "sharing": {
+        "title": "Berbagi Informasi",
+        "content": "Kami tidak menjual, memperdagangkan, atau menyewakan informasi pribadi Anda kepada pihak ketiga. Kami dapat membagikan informasi Anda hanya dengan penyedia layanan yang membantu kami mengoperasikan website dan menjalankan bisnis kami, tunduk pada perjanjian kerahasiaan."
+      },
+      "rights": {
+        "title": "Hak Anda",
+        "content": "Anda berhak untuk:",
+        "items": {
+          "access": "Mengakses informasi pribadi Anda",
+          "correct": "Memperbaiki informasi yang tidak akurat",
+          "delete": "Meminta penghapusan informasi Anda",
+          "object": "Menolak pemrosesan informasi Anda",
+          "portability": "Meminta portabilitas data"
+        }
+      },
+      "changes": {
+        "title": "Perubahan pada Kebijakan Privasi Ini",
+        "content": "Kami dapat memperbarui Kebijakan Privasi ini dari waktu ke waktu. Kami akan memberi tahu Anda tentang perubahan apa pun dengan memposting Kebijakan Privasi baru di halaman ini dan memperbarui tanggal \"Terakhir diperbarui\"."
+      },
+      "contact": {
+        "title": "Hubungi Kami",
+        "content": "Jika Anda memiliki pertanyaan tentang Kebijakan Privasi ini, silakan hubungi kami melalui formulir kontak atau via WhatsApp."
+      }
+    }
+  },
+  "terms": {
+    "title": "Syarat Layanan",
+    "lastUpdated": "Terakhir diperbarui: Januari 2025",
+    "sections": {
+      "acceptance": {
+        "title": "Penerimaan Syarat",
+        "content": "Dengan mengakses dan menggunakan website dan layanan Kreatale, Anda menerima dan menyetujui untuk terikat oleh syarat dan ketentuan perjanjian ini."
+      },
+      "services": {
+        "title": "Layanan",
+        "content": "Kreatale menyediakan layanan pengembangan web, pengembangan aplikasi mobile, dan solusi digital. Semua layanan disediakan tunduk pada Syarat Layanan ini."
+      },
+      "obligations": {
+        "title": "Kewajiban Klien",
+        "content": "Sebagai klien, Anda menyetujui untuk:",
+        "items": {
+          "accurate": "Memberikan informasi yang akurat dan lengkap",
+          "authorized": "Memastikan Anda berwenang untuk membuat perjanjian atas nama organisasi Anda",
+          "comply": "Mematuhi semua hukum dan peraturan yang berlaku",
+          "responsible": "Bertanggung jawab untuk menjaga kerahasiaan kredensial atau informasi akses yang diberikan"
+        }
+      },
+      "intellectual": {
+        "title": "Kekayaan Intelektual",
+        "content": "Setelah pembayaran penuh, Anda akan memiliki hasil akhir yang dibuat khusus untuk Anda. Kreatale mempertahankan hak untuk menggunakan pengetahuan umum, keterampilan, dan pengalaman yang diperoleh selama proyek."
+      },
+      "payment": {
+        "title": "Syarat Pembayaran",
+        "content": "Syarat pembayaran akan ditentukan dalam perjanjian proyek individu. Semua biaya jatuh tempo sesuai yang disepakati dalam kontrak proyek."
+      },
+      "delivery": {
+        "title": "Pengiriman dan Timeline",
+        "content": "Kami akan berusaha semaksimal mungkin untuk mengirimkan proyek dalam timeline yang disepakati. Namun, penundaan dapat terjadi karena faktor di luar kendali kami, dan kami akan mengomunikasikan penundaan apa pun dengan segera."
+      },
+      "revisions": {
+        "title": "Revisi dan Perubahan",
+        "content": "Revisi yang wajar termasuk dalam paket layanan kami. Revisi tambahan di luar ruang lingkup yang disepakati dapat dikenakan biaya tambahan."
+      },
+      "warranty": {
+        "title": "Jaminan",
+        "content": "Kami menjamin bahwa layanan kami akan dilakukan dengan cara yang profesional dan terampil. Kami akan memperbaiki cacat apa pun dalam pekerjaan kami yang dilaporkan dalam 30 hari setelah pengiriman."
+      },
+      "liability": {
+        "title": "Pembatasan Tanggung Jawab",
+        "content": "Sejauh diizinkan oleh hukum, tanggung jawab Kreatale dibatasi pada jumlah yang dibayar untuk layanan tertentu. Kami tidak bertanggung jawab atas kerusakan tidak langsung, insidental, atau konsekuensial."
+      },
+      "termination": {
+        "title": "Pengakhiran",
+        "content": "Salah satu pihak dapat mengakhiri perjanjian proyek dengan pemberitahuan tertulis. Setelah pengakhiran, Anda akan bertanggung jawab untuk pembayaran pekerjaan yang diselesaikan hingga tanggal pengakhiran."
+      },
+      "changes": {
+        "title": "Perubahan Syarat",
+        "content": "Kami berhak untuk memodifikasi Syarat Layanan ini kapan saja. Penggunaan layanan kami yang berkelanjutan setelah perubahan merupakan penerimaan syarat baru."
+      },
+      "contact": {
+        "title": "Hubungi Kami",
+        "content": "Jika Anda memiliki pertanyaan tentang Syarat Layanan ini, silakan hubungi kami melalui formulir kontak atau via WhatsApp."
+      }
+    }
   }
 }

@@ -97,7 +97,10 @@ export default function Footer() {
             rel="noopener noreferrer"
             aria-label="Visit our Instagram profile"
           >
-            <FaInstagram className="hover:text-white cursor-pointer" aria-hidden="true" />
+            <FaInstagram
+              className="hover:text-white cursor-pointer"
+              aria-hidden="true"
+            />
           </Link>
           <Link
             href="https://www.tiktok.com/@kreatale"
@@ -105,7 +108,10 @@ export default function Footer() {
             rel="noopener noreferrer"
             aria-label="Visit our TikTok profile"
           >
-            <FaTiktok className="hover:text-white cursor-pointer" aria-hidden="true" />
+            <FaTiktok
+              className="hover:text-white cursor-pointer"
+              aria-hidden="true"
+            />
           </Link>
           <Link
             href="https://www.linkedin.com/company/kreatale"
@@ -113,7 +119,10 @@ export default function Footer() {
             rel="noopener noreferrer"
             aria-label="Visit our LinkedIn company page"
           >
-            <FaLinkedin className="hover:text-white cursor-pointer" aria-hidden="true" />
+            <FaLinkedin
+              className="hover:text-white cursor-pointer"
+              aria-hidden="true"
+            />
           </Link>
         </div>
       </div>
@@ -121,18 +130,24 @@ export default function Footer() {
       <div className="mt-10 border-t border-gray-800 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4">
         <p>Copyright © 2025 Kreatale. All rights reserved.</p>
         <div className="flex gap-4">
-          <span className="hover:text-white cursor-pointer">
+          <Link
+            href={createLocalizedPath("/privacy")}
+            className="hover:text-white transition-colors duration-200"
+          >
             Privacy Policy
-          </span>
+          </Link>
           <Link
             href={createLocalizedPath("/faq")}
             className="hover:text-white transition-colors duration-200"
           >
             FAQ
           </Link>
-          <span className="hover:text-white cursor-pointer">
-            Terms of service
-          </span>
+          <Link
+            href={createLocalizedPath("/terms")}
+            className="hover:text-white transition-colors duration-200"
+          >
+            Terms of Service
+          </Link>
         </div>
       </div>
     </section>

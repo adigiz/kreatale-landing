@@ -415,5 +415,128 @@
     "noPostsDescription": "Create and publish blog posts in the admin panel to see them here.",
     "backToBlog": "← Back to Blog",
     "by": "By"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: January 2025",
+    "sections": {
+      "introduction": {
+        "title": "Introduction",
+        "content": "At Kreatale, we are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services."
+      },
+      "information": {
+        "title": "Information We Collect",
+        "content": "We collect information that you provide directly to us, including:",
+        "items": {
+          "name": "Name and contact information",
+          "email": "Email address",
+          "phone": "Phone number (if provided)",
+          "company": "Company name (if provided)",
+          "message": "Messages and inquiries submitted through our contact form",
+          "usage": "Information about how you use our website"
+        }
+      },
+      "use": {
+        "title": "How We Use Your Information",
+        "content": "We use the information we collect to:",
+        "items": {
+          "process": "Process and respond to your inquiries",
+          "communicate": "Communicate with you about our services",
+          "improve": "Improve our website and services",
+          "comply": "Comply with legal obligations"
+        }
+      },
+      "cookies": {
+        "title": "Cookies and Tracking Technologies",
+        "content": "We use cookies and similar tracking technologies to track activity on our website and hold certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent."
+      },
+      "security": {
+        "title": "Data Security",
+        "content": "We implement appropriate technical and organizational security measures to protect your personal information. However, no method of transmission over the Internet or electronic storage is 100% secure."
+      },
+      "sharing": {
+        "title": "Information Sharing",
+        "content": "We do not sell, trade, or rent your personal information to third parties. We may share your information only with service providers who assist us in operating our website and conducting our business, subject to confidentiality agreements."
+      },
+      "rights": {
+        "title": "Your Rights",
+        "content": "You have the right to:",
+        "items": {
+          "access": "Access your personal information",
+          "correct": "Correct inaccurate information",
+          "delete": "Request deletion of your information",
+          "object": "Object to processing of your information",
+          "portability": "Request data portability"
+        }
+      },
+      "changes": {
+        "title": "Changes to This Privacy Policy",
+        "content": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the \"Last updated\" date."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "content": "If you have any questions about this Privacy Policy, please contact us through our contact form or via WhatsApp."
+      }
+    }
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: January 2025",
+    "sections": {
+      "acceptance": {
+        "title": "Acceptance of Terms",
+        "content": "By accessing and using Kreatale's website and services, you accept and agree to be bound by the terms and provision of this agreement."
+      },
+      "services": {
+        "title": "Services",
+        "content": "Kreatale provides web development, mobile app development, and digital solutions services. All services are provided subject to these Terms of Service."
+      },
+      "obligations": {
+        "title": "Client Obligations",
+        "content": "As a client, you agree to:",
+        "items": {
+          "accurate": "Provide accurate and complete information",
+          "authorized": "Ensure you are authorized to enter into agreements on behalf of your organization",
+          "comply": "Comply with all applicable laws and regulations",
+          "responsible": "Be responsible for maintaining the confidentiality of any credentials or access information provided"
+        }
+      },
+      "intellectual": {
+        "title": "Intellectual Property",
+        "content": "Upon full payment, you will own the final deliverables created specifically for you. Kreatale retains the right to use general knowledge, skills, and experience gained during the project."
+      },
+      "payment": {
+        "title": "Payment Terms",
+        "content": "Payment terms will be specified in individual project agreements. All fees are due as agreed upon in the project contract."
+      },
+      "delivery": {
+        "title": "Delivery and Timeline",
+        "content": "We will make every effort to deliver projects within agreed timelines. However, delays may occur due to factors beyond our control, and we will communicate any delays promptly."
+      },
+      "revisions": {
+        "title": "Revisions and Changes",
+        "content": "Reasonable revisions are included in our service packages. Additional revisions beyond the agreed scope may incur additional charges."
+      },
+      "warranty": {
+        "title": "Warranty",
+        "content": "We warrant that our services will be performed in a professional and workmanlike manner. We will correct any defects in our work that are reported within 30 days of delivery."
+      },
+      "liability": {
+        "title": "Limitation of Liability",
+        "content": "To the maximum extent permitted by law, Kreatale's liability is limited to the amount paid for the specific service. We are not liable for indirect, incidental, or consequential damages."
+      },
+      "termination": {
+        "title": "Termination",
+        "content": "Either party may terminate a project agreement with written notice. Upon termination, you will be responsible for payment for work completed up to the termination date."
+      },
+      "changes": {
+        "title": "Changes to Terms",
+        "content": "We reserve the right to modify these Terms of Service at any time. Continued use of our services after changes constitutes acceptance of the new terms."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "content": "If you have any questions about these Terms of Service, please contact us through our contact form or via WhatsApp."
+      }
+    }
   }
 }
