@@ -3,8 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import "../globals.css";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import ConditionalLayout from "./components/ConditionalLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -152,7 +151,12 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <head>
-        <link rel="preload" href="/banner.jpg" as="image" fetchPriority="high" />
+        <link
+          rel="preload"
+          href="/banner.jpg"
+          as="image"
+          fetchPriority="high"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -164,9 +168,7 @@ export default async function LocaleLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Header />
-          {children}
-          <Footer />
+          <ConditionalLayout>{children}</ConditionalLayout>
         </NextIntlClientProvider>
       </body>
     </html>
