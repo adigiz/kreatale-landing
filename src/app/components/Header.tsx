@@ -4,11 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useLayoutEffect } from "react";
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
 import projectsData from "@/lib/projectsData.json";
 import { ProjectsDatabase } from "@/lib/types";
 import { usePathname } from "next/navigation";
-import { WHATSAPP_NUMBER, WHATSAPP_BASE_URL } from "@/lib/constants";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "./LanguageSwitcher";
 import DesktopNav from "./DesktopNav";
@@ -57,14 +55,6 @@ export default function Header() {
 
   const typedProjectsData = projectsData as ProjectsDatabase;
   const projects = sortProjects(Object.entries(typedProjectsData)).slice(0, 5);
-
-  const whatsappMessage = encodeURIComponent(
-    "Hi! I'm interested in your services. Let's discuss my project!"
-  );
-  const whatsappUrl = `${WHATSAPP_BASE_URL}/${WHATSAPP_NUMBER.replace(
-    "+",
-    ""
-  )}?text=${whatsappMessage}`;
 
   return (
     <div
@@ -122,25 +112,6 @@ export default function Header() {
         <div className="flex items-center gap-3 md:gap-4">
           {/* Language Switcher */}
           <LanguageSwitcher />
-
-          {/* Desktop WhatsApp CTA */}
-          <motion.a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-2 bg-[#0061FF] text-white rounded-full font-semibold hover:bg-blue-600 transition-colors duration-200 shadow-lg hover:shadow-xl transform hover:scale-105"
-            animate={{
-              paddingLeft: isScrolled ? "1rem" : "1.25rem",
-              paddingRight: isScrolled ? "1rem" : "1.25rem",
-              paddingTop: isScrolled ? "0.5rem" : "0.75rem",
-              paddingBottom: isScrolled ? "0.5rem" : "0.75rem",
-              fontSize: isScrolled ? "0.75rem" : "0.875rem",
-            }}
-            transition={{ duration: 0.3 }}
-          >
-            <MessageCircle size={isScrolled ? 14 : 16} />
-            {t("footer.whatsappUs")}
-          </motion.a>
         </div>
       </motion.nav>
 
@@ -149,7 +120,6 @@ export default function Header() {
         pathname={pathname}
         createLocalizedPath={createLocalizedPath}
         onProjectsClick={() => setProjectsBottomSheetOpen(true)}
-        whatsappUrl={whatsappUrl}
       />
 
       {/* Projects Bottom Sheet */}

@@ -110,6 +110,19 @@ export const previewTokens = pgTable("preview_tokens", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+// Contacts table (Contact form submissions)
+export const contacts = pgTable("contacts", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  name: varchar("name", { length: 255 }).notNull(),
+  email: varchar("email", { length: 255 }).notNull(),
+  company: varchar("company", { length: 255 }),
+  phone: varchar("phone", { length: 50 }),
+  inquiry: varchar("inquiry", { length: 100 }).notNull(),
+  message: text("message").notNull(),
+  read: text("read").default("false").notNull(), // 'true' or 'false' as string
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 // Relations
 export const usersRelations = relations(users, ({ many }) => ({
   posts: many(posts),
@@ -152,4 +165,6 @@ export type Media = typeof media.$inferSelect;
 export type NewMedia = typeof media.$inferInsert;
 export type PreviewToken = typeof previewTokens.$inferSelect;
 export type NewPreviewToken = typeof previewTokens.$inferInsert;
+export type Contact = typeof contacts.$inferSelect;
+export type NewContact = typeof contacts.$inferInsert;
 

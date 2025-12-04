@@ -10,6 +10,7 @@ import {
   FileText,
   Users,
   Home,
+  Mail,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
@@ -99,6 +100,11 @@ export default function Sidebar({
       href: `/${locale}/admin/posts`,
       icon: FileText,
       label: "Posts",
+    },
+    {
+      href: `/${locale}/admin/contacts`,
+      icon: Mail,
+      label: "Inquiry",
     },
   ];
 
@@ -232,4 +238,3 @@ export default function Sidebar({
     </SidebarContext.Provider>
   );
 }
-

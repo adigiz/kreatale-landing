@@ -1,9 +1,9 @@
 import { getSession } from "@/lib/cms/auth/config";
-import { db, posts, projects, media } from "@/lib/cms/db";
+import { db, posts, projects, media, contacts } from "@/lib/cms/db";
 import { count, eq } from "drizzle-orm";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { FileText, FolderKanban, Image, Eye } from "lucide-react";
+import { FileText, FolderKanban, Image, Eye, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default async function AdminDashboard({
@@ -25,6 +25,22 @@ export default async function AdminDashboard({
     .select({ count: count() })
     .from(posts)
     .where(eq(posts.status, "published"));
+
+  // Get contacts count (handle case where table doesn't exist yet)
+  let contactsCount = { count: 0 };
+  let unreadContactsCount = { count: 0 };
+  try {
+    [contactsCount] = await db.select({ count: count() }).from(contacts);
+    [unreadContactsCount] = await db
+      .select({ count: count() })
+      .from(contacts)
+      .where(eq(contacts.read, "false"));
+  } catch (error) {
+    // Table doesn't exist yet - will be created after migration
+    console.warn(
+      "Contacts table not found. Run 'npm run db:push' to create it."
+    );
+  }
 
   const stats = [
     {
@@ -51,6 +67,14 @@ export default async function AdminDashboard({
       icon: Image,
       href: `/${locale}/admin/media`,
     },
+    {
+      name: "Inquiry",
+      value: contactsCount.count,
+      icon: Mail,
+      href: `/${locale}/admin/contacts`,
+      badge:
+        unreadContactsCount.count > 0 ? unreadContactsCount.count : undefined,
+    },
   ];
 
   return (
@@ -69,7 +93,7 @@ export default async function AdminDashboard({
             <Link
               key={stat.name}
               href={stat.href}
-              className="rounded-lg border bg-card p-4 hover:bg-accent transition-colors"
+              className="rounded-lg border bg-card p-4 hover:bg-accent transition-colors relative"
             >
               <div className="flex items-center justify-between">
                 <div>
@@ -80,8 +104,13 @@ export default async function AdminDashboard({
                     {stat.value}
                   </p>
                 </div>
-                <div className="rounded-md border bg-muted p-2">
+                <div className="rounded-md border bg-muted p-2 relative">
                   <Icon className="size-4 text-muted-foreground" />
+                  {stat.badge && stat.badge > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                      {stat.badge}
+                    </span>
+                  )}
                 </div>
               </div>
             </Link>

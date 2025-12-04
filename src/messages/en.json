@@ -185,6 +185,37 @@
       "design": "Design"
     }
   },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Contact",
+    "description": "Have a project in mind? We'd love to hear from you. Send us a message and we'll respond as soon as possible.",
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "your.email@example.com",
+      "company": "Company",
+      "companyPlaceholder": "Your company name (optional)",
+      "phone": "Phone Number",
+      "phonePlaceholder": "Your phone number (optional)",
+      "inquiry": "Inquiry Type",
+      "inquiryPlaceholder": "Select an inquiry type",
+      "inquiryOptions": {
+        "website": "Website Development",
+        "webapp": "Web Application",
+        "mobile": "Mobile App Development",
+        "training": "Training",
+        "other": "Other"
+      },
+      "message": "Message",
+      "messagePlaceholder": "Tell us about your project...",
+      "submit": "Send Inquiry",
+      "sending": "Sending...",
+      "success": "Thank you! Your message has been sent successfully. We'll get back to you soon.",
+      "error": "Oops! Something went wrong. Please try again later.",
+      "captchaRequired": "Please complete the captcha verification"
+    }
+  },
   "testimonials": {
     "title": "What Our Clients Say",
     "subtitle": "Testimonials",

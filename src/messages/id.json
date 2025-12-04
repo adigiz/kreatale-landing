@@ -185,6 +185,37 @@
       "design": "Desain"
     }
   },
+  "contact": {
+    "title": "Hubungi Kami",
+    "subtitle": "Kontak",
+    "description": "Ada proyek dalam pikiran? Kami ingin mendengar dari Anda. Kirimkan pesan dan kami akan merespons secepat mungkin.",
+    "form": {
+      "name": "Nama",
+      "namePlaceholder": "Nama Anda",
+      "email": "Email",
+      "emailPlaceholder": "email.anda@example.com",
+      "company": "Perusahaan",
+      "companyPlaceholder": "Nama perusahaan Anda (opsional)",
+      "phone": "Nomor Telepon",
+      "phonePlaceholder": "Nomor telepon Anda (opsional)",
+      "inquiry": "Jenis Pertanyaan",
+      "inquiryPlaceholder": "Pilih jenis pertanyaan",
+      "inquiryOptions": {
+        "website": "Pengembangan Website",
+        "webapp": "Aplikasi Web",
+        "mobile": "Pengembangan Mobile App",
+        "training": "Pelatihan",
+        "other": "Lainnya"
+      },
+      "message": "Pesan",
+      "messagePlaceholder": "Ceritakan tentang proyek Anda...",
+      "submit": "Kirim Pertanyaan",
+      "sending": "Mengirim...",
+      "success": "Terima kasih! Pesan Anda telah berhasil dikirim. Kami akan segera menghubungi Anda.",
+      "error": "Ups! Terjadi kesalahan. Silakan coba lagi nanti.",
+      "captchaRequired": "Silakan selesaikan verifikasi captcha"
+    }
+  },
   "testimonials": {
     "title": "Apa Kata Klien Kami",
     "subtitle": "Testimoni",

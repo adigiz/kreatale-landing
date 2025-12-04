@@ -3,6 +3,7 @@ import Hero from "../components/Hero";
 import Service from "../components/Service";
 import About from "../components/About";
 import Portfolio from "../components/Portfolio";
+import ContactForm from "../components/ContactForm";
 import Testimonials from "../components/Testimonials";
 
 const baseUrl = "https://kreatale.com";
@@ -66,6 +67,7 @@ export default function Home() {
       <Portfolio />
       <Service />
       <About />
+      <ContactForm />
       <Testimonials />
     </main>
   );

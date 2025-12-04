@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import FloatingWhatsAppButton from "../../components/FloatingWhatsAppButton";
 
 export default function ConditionalLayout({
   children,
@@ -17,7 +18,7 @@ export default function ConditionalLayout({
       {!isAdminRoute && <Header />}
       {children}
       {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <FloatingWhatsAppButton />}
     </>
   );
 }
-

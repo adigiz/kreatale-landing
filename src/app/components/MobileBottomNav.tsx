@@ -3,27 +3,19 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  FolderKanban,
-  BookOpen,
-  Briefcase,
-  HelpCircle,
-  MessageCircle,
-} from "lucide-react";
+import { FolderKanban, BookOpen, Briefcase, HelpCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 interface MobileBottomNavProps {
   pathname: string;
   createLocalizedPath: (path: string) => string;
   onProjectsClick: () => void;
-  whatsappUrl: string;
 }
 
 export default function MobileBottomNav({
   pathname,
   createLocalizedPath,
   onProjectsClick,
-  whatsappUrl,
 }: MobileBottomNavProps) {
   const t = useTranslations();
 
@@ -109,20 +101,6 @@ export default function MobileBottomNav({
                   {content}
                 </Link>
               )}
-              {/* Insert WhatsApp button after Blog (index 1) */}
-              {index === 1 && (
-                <motion.a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-14 h-14 rounded-full bg-[#0061FF] text-white shadow-lg hover:shadow-xl transition-all duration-200 -mt-2 z-10"
-                  whileTap={{ scale: 0.9 }}
-                  whileHover={{ scale: 1.05 }}
-                  aria-label={t("footer.whatsappUs")}
-                >
-                  <MessageCircle size={24} aria-hidden="true" />
-                </motion.a>
-              )}
             </Fragment>
           );
         })}
@@ -130,4 +108,3 @@ export default function MobileBottomNav({
     </motion.nav>
   );
 }
-
