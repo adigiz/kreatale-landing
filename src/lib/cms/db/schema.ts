@@ -152,3 +152,4 @@ export type Media = typeof media.$inferSelect;
 export type NewMedia = typeof media.$inferInsert;
 export type PreviewToken = typeof previewTokens.$inferSelect;
 export type NewPreviewToken = typeof previewTokens.$inferInsert;
+

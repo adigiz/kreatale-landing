@@ -194,3 +194,4 @@ export default function MediaLibrary({ initialMedia }: MediaLibraryProps) {
     </div>
   );
 }
+

@@ -4,3 +4,4 @@ import { authOptions } from "@/lib/cms/auth/config";
 const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
+

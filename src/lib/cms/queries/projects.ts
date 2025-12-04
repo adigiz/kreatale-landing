@@ -86,3 +86,4 @@ export async function searchProjects(query: string, locale?: string) {
     .where(and(...conditions))
     .orderBy(desc(projects.createdAt));
 }
+

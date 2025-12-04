@@ -23,3 +23,4 @@ export const sql = postgres(connectionString, {
 
 // Create Drizzle instance with schema
 export const db = drizzle(sql, { schema });
+

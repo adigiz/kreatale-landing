@@ -58,3 +58,4 @@ export async function searchMedia(query: string) {
     .where(like(media.filename, `%${query}%`))
     .orderBy(desc(media.createdAt));
 }
+

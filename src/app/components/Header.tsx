@@ -93,6 +93,7 @@ export default function Header() {
         >
           <Link href={createLocalizedPath("/")} className="flex-shrink-0">
             <motion.div
+              initial={false}
               animate={{
                 scale: isScrolled ? 0.85 : 1,
               }}
@@ -100,8 +101,8 @@ export default function Header() {
             >
               <Image
                 alt="logo"
-                height={isScrolled ? 40 : 150}
-                width={isScrolled ? 50 : 70}
+                height={isScrolled ? 40 : 50}
+                width={isScrolled ? 50 : 60}
                 src="/kreatale-logo-primary.svg"
                 className="transition-all duration-300"
               />

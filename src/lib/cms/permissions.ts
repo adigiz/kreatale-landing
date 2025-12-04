@@ -149,3 +149,4 @@ export function hasAllPermissions(
 export function canAccessAdmin(userRole: UserRole): boolean {
   return hasPermission(userRole, PERMISSIONS.ADMIN_ACCESS);
 }
+

@@ -129,3 +129,4 @@ export async function searchPosts(query: string, locale?: string) {
     .where(and(...conditions))
     .orderBy(desc(posts.createdAt));
 }
+

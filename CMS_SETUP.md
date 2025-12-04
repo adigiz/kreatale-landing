@@ -128,3 +128,4 @@ src/
 - Run `npm run db:push` for development
 - Use `npm run db:migrate` for production
 - Check Drizzle Studio: `npm run db:studio`
+
