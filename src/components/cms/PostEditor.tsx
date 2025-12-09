@@ -44,6 +44,7 @@ export default function PostEditor({
   const [splitRatio, setSplitRatio] = useState(20); // Percentage for form section (20:80 split)
   const [isResizing, setIsResizing] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [createdDraftId, setCreatedDraftId] = useState<string | null>(null); // Store draft ID for new posts
   const [formData, setFormData] = useState({
     title: initialPost?.title || "",
     slug: initialPost?.slug || "",
@@ -157,8 +158,10 @@ export default function PostEditor({
     window.dispatchEvent(new CustomEvent("post-editor:save-start"));
 
     try {
-      const url = postId ? `/api/cms/posts/${postId}` : "/api/cms/posts";
-      const method = postId ? "PATCH" : "POST";
+      // Use postId, createdDraftId, or create new post
+      const targetPostId = postId || createdDraftId;
+      const url = targetPostId ? `/api/cms/posts/${targetPostId}` : "/api/cms/posts";
+      const method = targetPostId ? "PATCH" : "POST";
 
       const response = await fetch(url, {
         method,
@@ -203,9 +206,9 @@ export default function PostEditor({
     setPreviewLoading(true);
     try {
       // Always save current form data as draft to ensure preview shows latest changes
-      let savedPostId = postId;
-      if (!postId) {
-        // New post - create it
+      let savedPostId = postId || createdDraftId;
+      if (!savedPostId) {
+        // New post - create it only if we don't have a draft ID yet
         const saveResponse = await fetch("/api/cms/posts", {
           method: "POST",
           headers: {
@@ -223,9 +226,10 @@ export default function PostEditor({
 
         const savedPost = await saveResponse.json();
         savedPostId = savedPost.id;
+        setCreatedDraftId(savedPostId); // Store the draft ID to reuse it
       } else {
-        // Existing post - update it with current form data
-        const saveResponse = await fetch(`/api/cms/posts/${postId}`, {
+        // Existing post or created draft - update it with current form data
+        const saveResponse = await fetch(`/api/cms/posts/${savedPostId}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
