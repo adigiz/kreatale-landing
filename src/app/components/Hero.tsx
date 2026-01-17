@@ -91,7 +91,7 @@ export default function Hero() {
           <Link
             href={projectPath}
             aria-label={`View ${projectData.title} project - ${t(
-              "hero.latestWork"
+              "hero.latestWork",
             )}`}
             className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-2xl"
           >

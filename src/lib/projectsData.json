@@ -1,4 +1,47 @@
 {
+  "gala-esports": {
+    "title": "Gala Esports",
+    "country": "Australia",
+    "subtitle": "Next-level gaming café ecosystem and franchise platform",
+    "client": "Gala Esport",
+    "duration": "17 December 2025 - 7 January 2026",
+    "timeline": "3 Weeks",
+    "demoUrl": "https://gala-esports.com.au/",
+    "heroImage": "/portfolio-22.webp",
+    "projectType": "Website Development",
+    "portfolioImage": "/gala-esports/gala-esport-current.webp",
+    "techStacks": ["Next JS", "Sanity", "Tailwind CSS", "React"],
+    "images": ["/gala-esports/gala-esport-banner.webp", "/portfolio-22.webp", "/gala-esports/gala-esport-current.webp"],
+    "sections": {
+      "background": {
+        "title": "Background Project",
+        "content": [
+          "Gala Esport, Australia's leading gaming experience provider, had an existing website built on WordPress. While it served its initial purpose, the platform was struggling with slow loading times and an outdated design that no longer reflected the premium, high-energy nature of their physical gaming cafés in Box Hill and Clayton.",
+          "The client approached us to completely revamp their digital presence, moving away from the limitations of their previous setup to a more modern, high-performance architecture."
+        ]
+      },
+      "problem": {
+        "title": "Problem and how to tackle it",
+        "content": [
+          "The primary challenges with the legacy WordPress site were its sluggish performance and poor SEO capabilities. The user experience was hindered by slow page transitions and a design that lacked the 'wow' factor essential for the gaming industry.",
+          "We needed to build a solution that combined lightning-fast performance, superior SEO features, and a sleek, modern aesthetic that would resonate with both the gaming community and potential franchise partners."
+        ]
+      },
+      "solution": {
+        "title": "Solution",
+        "content": [
+          "We completely rebuilt the platform using Next.js for the frontend and Sanity as a headless CMS. This transition provided a massive boost in performance and SEO flexibility. Next.js allowed us to implement server-side rendering and static generation, ensuring near-instant load times.",
+          "By integrating Sanity, we gave the Gala team a powerful, easy-to-use interface for managing their content, including location updates and hardware showcases. The new design features an immersive dark theme with vibrant accents, perfectly aligning with the brand's gaming-forward identity."
+        ]
+      },
+      "conclusion": {
+        "title": "Conclusion",
+        "content": [
+          "The transition from WordPress to a Next.js + Sanity architecture has successfully transformed Gala Esports' online presence. The site now boasts exceptional performance, improved search engine visibility, and a premium design that solidifies their position as Australia's #1 gaming experience."
+        ]
+      }
+    }
+  },
   "kei-truck-hub": {
     "title": "Kei Truck Hub",
     "country": "Japan",
