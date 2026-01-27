@@ -59,12 +59,11 @@ export default function DesktopNav({
 
   return (
     <motion.div
-      className="hidden md:flex text-black"
-      animate={{
-        gap: isScrolled ? "1.5rem" : "2rem",
-        fontSize: isScrolled ? "0.875rem" : "1rem",
-      }}
-      transition={{ duration: 0.3 }}
+      layout
+      className={`hidden md:flex text-black items-center ${
+        isScrolled ? "gap-6" : "gap-8"
+      }`}
+      transition={{ type: "spring", stiffness: 400, damping: 30 }}
     >
       {/* Projects Dropdown */}
       <div
@@ -119,15 +118,15 @@ export default function DesktopNav({
                       href={createLocalizedPath(`/projects/${slug}`)}
                       className="flex items-center gap-3 p-3 rounded-lg hover:bg-blue-50 transition-colors duration-200 group"
                     >
-                            <div className="w-12 h-12 relative rounded-lg overflow-hidden flex-shrink-0">
-                              <Image
-                                src={project.heroImage}
-                                alt={project.title}
-                                fill
-                                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                sizes="48px"
-                                quality={70}
-                              />
+                      <div className="w-12 h-12 relative rounded-lg overflow-hidden flex-shrink-0">
+                        <Image
+                          src={project.heroImage}
+                          alt={project.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          sizes="48px"
+                          quality={70}
+                        />
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2">
@@ -210,4 +209,3 @@ export default function DesktopNav({
     </motion.div>
   );
 }
-

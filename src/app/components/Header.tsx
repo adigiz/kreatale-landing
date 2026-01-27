@@ -61,7 +61,9 @@ export default function Header() {
       }`}
     >
       <motion.nav
-        className={`relative flex items-center justify-between bg-white transition-all duration-300 ${
+        layout
+        transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        className={`relative flex items-center justify-between bg-white ${
           isScrolled
             ? "px-6 py-3 max-w-5xl mx-auto rounded-full"
             : "px-6 py-4 md:px-16 w-full rounded-none"
@@ -81,18 +83,19 @@ export default function Header() {
         >
           <Link href={createLocalizedPath("/")} className="flex-shrink-0">
             <motion.div
+              layout
               initial={false}
               animate={{
-                scale: isScrolled ? 0.85 : 1,
+                scale: isScrolled ? 0.8 : 1,
               }}
-              transition={{ duration: 0.3 }}
+              transition={{ type: "spring", stiffness: 400, damping: 30 }}
             >
               <Image
                 alt="logo"
-                height={isScrolled ? 40 : 50}
-                width={isScrolled ? 50 : 60}
+                height={50}
+                width={60}
                 src="/kreatale-logo-primary.svg"
-                className="transition-all duration-300"
+                className=""
               />
             </motion.div>
           </Link>
