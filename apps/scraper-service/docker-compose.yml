@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  scraper-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    expose:
+      - 4000
+    environment:
+      - PORT=4000
+      - DATABASE_URL=${DATABASE_URL}
+      # Add other environment variables here
+    networks:
+      - dokploy-network
+    labels:
+      - "traefik.enable=true"
+      # REPLACE 'scraper.yourdomain.com' WITH YOUR ACTUAL DOMAIN
+      - "traefik.http.routers.scraper-service.rule=Host(`scraper.yourdomain.com`)"
+      - "traefik.http.routers.scraper-service.entrypoints=web"
+      - "traefik.http.services.scraper-service.loadbalancer.server.port=4000"
+
+networks:
+  dokploy-network:
+    external: true

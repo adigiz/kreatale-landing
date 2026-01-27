@@ -13,6 +13,7 @@ import {
   Mail,
   ChevronLeft,
   ChevronRight,
+  Target,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -105,6 +106,11 @@ export default function Sidebar({
       href: `/${locale}/admin/contacts`,
       icon: Mail,
       label: "Inquiry",
+    },
+    {
+      href: `/${locale}/admin/leads`,
+      icon: Target,
+      label: "Leads",
     },
   ];
 
