@@ -13,28 +13,31 @@ export default function middleware(request: NextRequest) {
   
   // Get pathname (after locale processing)
   const pathname = request.nextUrl.pathname;
+  const locale = pathname.startsWith("/id") ? "id" : "en";
+  
+  // Auth Check: Redirect from login to dashboard if already logged in
+  const isLoginPage = pathname.endsWith("/admin/login");
+  const token = request.cookies.get("next-auth.session-token") || 
+                request.cookies.get("__Secure-next-auth.session-token");
+
+  if (isLoginPage && token) {
+    return NextResponse.redirect(new URL(`/${locale}/admin`, request.url));
+  }
   
   // Add pathname to request headers so server components can read it
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-pathname", pathname);
   
-  // If response is a redirect, clone it and add the header
-  if (response instanceof NextResponse) {
-    // Clone the response to modify headers
-    const newResponse = NextResponse.next({
-      request: {
-        headers: requestHeaders,
-      },
-    });
-    
-    // Copy status and headers from intl middleware response
-    if (response.status >= 300 && response.status < 400) {
-      // It's a redirect - return the redirect but with modified request headers
-      return response;
-    }
-    
-    return newResponse;
+  // If response is a redirect from intl, just return it
+  if (response instanceof NextResponse && response.status >= 300 && response.status < 400) {
+     return response;
   }
+
+  // Otherwise return response with updated headers
+  const finalResponse = response instanceof NextResponse ? response : NextResponse.next();
+  // Headers are only easily set on NextResponse.next({ request: { headers } }) 
+  // or by modifying the response headers. For server components to see them, 
+  // we must return the result of NextResponse.next
   
   return NextResponse.next({
     request: {

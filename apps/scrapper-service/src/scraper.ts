@@ -14,6 +14,33 @@ interface Category {
   searchTerm: string;
 }
 
+async function reverseGeocode(lat: number, lng: number): Promise<{ city: string | null, state: string | null, country: string | null, district: string | null, postcode: string | null }> {
+  try {
+    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`, {
+      headers: {
+        'User-Agent': 'KreataleScraper/1.0 (contact@kreatale.com)'
+      }
+    });
+    if (!response.ok) throw new Error('Geocoding failed');
+    const data = await response.json();
+    const addr = data.address;
+    
+    // In Indonesia, cities can be 'city', 'town', or 'municipality'
+    // State is 'state' or 'region'
+    // District is 'suburb', 'city_district', or 'village'
+    return {
+      city: addr.city || addr.town || addr.municipality || addr.county || null,
+      state: addr.state || addr.region || null,
+      country: addr.country || "Indonesia",
+      district: addr.suburb || addr.village || addr.neighbourhood || addr.city_district || null,
+      postcode: addr.postcode || null
+    };
+  } catch (err) {
+    console.error("Reverse geocoding failed:", err);
+    return { city: null, state: null, country: "Indonesia", district: null, postcode: null };
+  }
+}
+
 export async function scrapeCategoryInLocation(
   location: Location,
   category: Category,
@@ -146,123 +173,37 @@ export async function scrapeCategoryInLocation(
     // Determine Location ID
     let targetLocationId = location.id;
 
-    if (location.id === "custom_map") {
-       console.log("Determining location from Coordinates (Reverse Geocode)...");
+    if (location.id === "custom_map" && coordinates) {
+       console.log("Determining location from Coordinates (Nominatim Reverse Geocode)...");
        
        try {
-           // We already have the page. We can try to look up the "center" of the search area?
-           // Or, more reliably, we interpret the address of the first few results OR we rely on the map title if possible.
-           // Actually, parsing the address of the results is still the most efficient way without an extra navigation 
-           // BUT the user specifically asked to "reverse the latlong".
+           const geoData = await reverseGeocode(coordinates.lat, coordinates.lng);
            
-           // If we want to be 100% sure of the "Area Name", we can navigate to the coordinates directly first.
-           // But that costs time. 
-           // Let's stick to the sophisticated parsing of results because we ALREADY have them. 
-           // BUT we will apply the "Reverse via results" logic with the new "State/City" improvements we built.
-           
-           // WAIT. The user said "reverse the latlong". 
-           // Let's assume they want us to actually check the coordinates.
-           
-           // Let's reuse the results parsing but make it robust as per previous step.
-           // The previous step's logic was actually quite good, but let's make it smarter.
-           
-           const cityCounts: Record<string, number> = {};
-           const stateCounts: Record<string, number> = {};
-           
-           for (const res of results) {
-             if (!res.address) continue;
-             const cleanAddress = res.address.includes('·') ? res.address.split('·').pop()?.trim() || res.address : res.address;
-             
-             // Analyze address
-             const parts = cleanAddress.split(",").map(p => p.trim());
-             for (const p of parts) {
-                const lowerP = p.toLowerCase();
-                
-                // Skip specific housing prefixes
-                if (lowerP.startsWith("perum") || lowerP.includes("komplek") || lowerP.includes("ruko") || lowerP.includes("apartemen")) continue;
-
-                // State Detection
-                if (
-                    lowerP.includes("jawa") || lowerP.includes("sumatera") || lowerP.includes("kalimantan") || 
-                    lowerP.includes("sulawesi") || lowerP.includes("papua") || lowerP.includes("bali") || 
-                    lowerP.includes("nusa tenggara") || lowerP.includes("jakarta") || lowerP.includes("yogyakarta") || 
-                    lowerP.includes("banten") || lowerP.includes("riau") || lowerP.includes("jambi") || 
-                    lowerP.includes("lampung") || lowerP.includes("bengkulu") || lowerP.includes("maluku") ||
-                    lowerP.includes("gorontalo") || lowerP.includes("aceh") || lowerP.includes("bangka")
-                ) {
-                    // It's a state/province
-                    let state = p.replace(/\d+/g, "").trim();
-                    if (state) stateCounts[state] = (stateCounts[state] || 0) + 1;
-                    
-                    // If it's a "Province", it's NOT a city. 
-                    // Special case: Jakarta and Yogyakarta are both
-                    continue; 
+           if (geoData.city) {
+              const slug = geoData.city.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+              
+              const [existing] = await db.select().from(locations).where(eq(locations.slug, slug));
+              
+              if (existing) {
+                targetLocationId = existing.id;
+                if (!existing.state && geoData.state) {
+                   await db.update(locations).set({ state: geoData.state }).where(eq(locations.id, existing.id));
                 }
-
-                // City Detection - Strict
-                if (lowerP.startsWith("kota ") || lowerP.startsWith("kabupaten ") || lowerP.startsWith("kab ") || lowerP.includes("city")) {
-                   let city = p;
-                   if (lowerP.startsWith("kota ")) city = p.substring(5).trim();
-                   if (lowerP.startsWith("kabupaten ")) city = p.substring(10).trim();
-                   if (lowerP.startsWith("kab ")) city = p.substring(4).trim();
-                   
-                   if (city.length > 2) cityCounts[city] = (cityCounts[city] || 0) + 1;
-                }
-             }
-           }
-           
-           // Best City
-           let bestCity = "Unknown Area";
-           let maxCount = 0;
-           for (const [city, count] of Object.entries(cityCounts)) {
-             if (count > maxCount) {
-               maxCount = count;
-               bestCity = city;
-             }
-           }
-
-           // Best State
-           let bestState = null;
-           let maxStateCount = 0;
-           for (const [state, count] of Object.entries(stateCounts)) {
-             if (count > maxStateCount) {
-                maxStateCount = count;
-                bestState = state;
-             }
-           }
-           
-           // If we still have "Unknown Area", fallback to coordinates lookup?
-           // No, for now let's rely on the improved parsing.
-           
-           console.log(`Inferred city: ${bestCity}, State: ${bestState}`);
-
-           if (bestCity !== "Unknown Area") {
-             const slug = bestCity.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
-             
-             const [existing] = await db.select().from(locations).where(eq(locations.slug, slug));
-             
-             if (existing) {
-               targetLocationId = existing.id;
-               if (!existing.state && bestState) {
-                  await db.update(locations).set({ state: bestState }).where(eq(locations.id, existing.id));
-               }
-               console.log(`Using existing location: ${existing.name}`);
-             } else {
-               const [newLoc] = await db.insert(locations).values({
-                 name: bestCity,
-                 slug: slug,
-                 country: "Indonesia",
-                 state: bestState
-               }).returning();
-               targetLocationId = newLoc.id;
-               console.log(`Created new location: ${newLoc.name}`);
-             }
+                console.log(`Using existing location: ${existing.name}`);
+              } else {
+                const [newLoc] = await db.insert(locations).values({
+                  name: geoData.city,
+                  slug: slug,
+                  country: geoData.country || "Indonesia",
+                  state: geoData.state
+                }).returning();
+                targetLocationId = newLoc.id;
+                console.log(`Created new location: ${newLoc.name}`);
+              }
            } else {
-             // Fallback: If we couldn't find a city, maybe use the coordinates to create a generic "Area at Lat/Lng"?
-             // Or just fail.
-             console.log("Could not infer city from results. Checking if we can try a reverse lookup...");
-             // Optional: Add actual reverse lookup here if inference fails
-             targetLocationId = null as any; 
+              console.log("Could not resolve city from reverse geocoding.");
+              // Fallback to name-based if impossible
+              targetLocationId = null as any;
            }
 
        } catch (err) {
@@ -270,38 +211,32 @@ export async function scrapeCategoryInLocation(
        }
     }
 
+    // Resolve location details for ALL leads in this scrape if coordinates provided
+    let globalGeoData = coordinates ? await reverseGeocode(coordinates.lat, coordinates.lng) : null;
+
     // Save to DB
     let savedCount = 0;
     for (const result of results) {
       if (!result.businessName || result.businessName.length < 2) continue;
 
-      // Extract details for Lead
-      let leadCity = null;
-      let leadState = null;
-      let leadDistrict = null;
-      let leadPostal = null;
-      let leadCountry = "Indonesia"; // Default if not found
+      // Extract details for Lead - Fallback parsing if we don't have globalGeoData
+      let leadCity = globalGeoData?.city || null;
+      let leadState = globalGeoData?.state || null;
+      let leadDistrict = globalGeoData?.district || null;
+      let leadPostal = globalGeoData?.postcode || null;
+      let leadCountry = globalGeoData?.country || "Indonesia";
 
-      if (result.address) {
+      if (result.address && !globalGeoData) {
          const parts = result.address.split(",").map(p => p.trim());
          for (const p of parts) {
-            // Country
             if (p.toLowerCase() === "indonesia") leadCountry = "Indonesia";
-            
-            // Postal (5 digits)
             if (/^\d{5}$/.test(p)) leadPostal = p;
-            
-            // District (Kecamatan)
             if (p.toLowerCase().startsWith("kec.") || p.toLowerCase().includes("kecamatan")) {
                leadDistrict = p.replace(/kec\.|kecamatan/i, "").trim();
             }
-
-            // City
             if (p.toLowerCase().startsWith("kota ") || p.toLowerCase().startsWith("kabupaten ") || p.toLowerCase().startsWith("kab ")) {
                leadCity = p.replace(/kota |kabupaten |kab /i, "").trim();
             }
-
-            // State (heuristic similar to above)
              const lowerP = p.toLowerCase();
              if (
                 lowerP.includes("jawa") || lowerP.includes("sumatera") || lowerP.includes("kalimantan") || 

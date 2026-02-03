@@ -10,9 +10,8 @@ import {
   getLeadStats,
   getScraperStatus,
   getFilterOptions,
-  SortField,
-  SortOrder,
 } from "../actions";
+import type { SortField, SortOrder } from "../actions";
 import { LeadsTable } from "./LeadsTable";
 import { LeadsFilters } from "./LeadsFilters";
 import { LeadsPagination } from "./LeadsPagination";

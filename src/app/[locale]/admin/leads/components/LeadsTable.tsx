@@ -156,28 +156,32 @@ export function LeadsTable({
                     )}
                   </td>
                   <td className="px-4 py-3 text-sm text-muted-foreground">
-                    {lead.location?.name || "-"}
-                  </td>
-                  <td className="px-4 py-3 text-sm text-muted-foreground">
                     <div className="flex flex-col gap-0.5">
-                      {(lead.district || lead.city) && (
+                      {lead.location?.name && (
                         <span className="font-medium text-foreground">
+                          {lead.location.name}
+                        </span>
+                      )}
+                      {(lead.district || lead.city) && (
+                        <span className="text-xs">
                           {[lead.district, lead.city]
                             .filter(Boolean)
                             .join(", ")}
                         </span>
                       )}
                       {(lead.state || lead.country) && (
-                        <span className="text-xs">
+                        <span className="text-xs opacity-70">
                           {[lead.state, lead.country]
                             .filter(Boolean)
                             .join(", ")}
                         </span>
                       )}
-                      {lead.postalCode && (
-                        <span className="text-xs">{lead.postalCode}</span>
-                      )}
-                      {!lead.city && !lead.state && !lead.country && "-"}
+                      {!lead.location?.name &&
+                        !lead.district &&
+                        !lead.city &&
+                        !lead.state &&
+                        !lead.country &&
+                        "-"}
                     </div>
                   </td>
                   <td className="px-4 py-3 text-sm text-muted-foreground">

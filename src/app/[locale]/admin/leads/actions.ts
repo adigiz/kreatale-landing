@@ -1,6 +1,7 @@
 "use server";
 
-import { db, locations, categories, leads, leadStatusEnum } from "@/lib/cms/db";
+import { db } from "@/lib/cms/db/client";
+import { locations, categories, leads, leadStatusEnum } from "@/lib/cms/db/schema";
 import { eq, desc, asc, and, count, isNotNull } from "drizzle-orm";
 
 export async function getLocations() {
