@@ -110,6 +110,7 @@ export async function scrapeCategoryInLocation(
         reviewCount: string | null;
         address: string | null;
         phone: string | null;
+        website: string | null;
         googleMapsUrl: string | null;
       }[] = [];
 
@@ -135,6 +136,10 @@ export async function scrapeCategoryInLocation(
         const phoneEl = article.querySelector('.UsdlK');
         const phone = phoneEl?.textContent?.trim() || null;
 
+        // Website - in a tag with aria-label containing "website"
+        const websiteEl = article.querySelector('a[aria-label*="website"]');
+        const website = websiteEl?.getAttribute("href") || null;
+
         // Address - look for text with street indicators or commas
         const textContent = (article as HTMLElement).innerText;
         const lines = textContent.split('\n').filter(l => l.trim());
@@ -154,6 +159,7 @@ export async function scrapeCategoryInLocation(
           rating,
           reviewCount,
           phone,
+          website,
           address: addressLine,
           googleMapsUrl: href,
         });
@@ -253,6 +259,7 @@ export async function scrapeCategoryInLocation(
           businessName: result.businessName,
           address: result.address,
           phone: result.phone,
+          website: result.website,
           rating: result.rating,
           reviewCount: result.reviewCount ? parseInt(result.reviewCount) : 0,
           googleMapsUrl: result.googleMapsUrl,
