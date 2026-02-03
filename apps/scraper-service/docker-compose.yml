@@ -17,7 +17,7 @@ services:
     labels:
       - "traefik.enable=true"
       # REPLACE 'scraper.yourdomain.com' WITH YOUR ACTUAL DOMAIN
-      - "traefik.http.routers.scraper-service.rule=Host(`scraper.yourdomain.com`)"
+      - "traefik.http.routers.scraper-service.rule=Host(`plane.kreatale.com`)"
       - "traefik.http.routers.scraper-service.entrypoints=web"
       - "traefik.http.services.scraper-service.loadbalancer.server.port=4000"
 

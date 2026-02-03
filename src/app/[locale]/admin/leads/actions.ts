@@ -1,3 +1,5 @@
+"use server";
+
 import { db, locations, categories, leads, leadStatusEnum } from "@/lib/cms/db";
 import { eq, desc, asc, and, count, isNotNull } from "drizzle-orm";
 
