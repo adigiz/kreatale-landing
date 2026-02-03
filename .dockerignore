@@ -1,0 +1,10 @@
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+README.md
+.next
+.git
+
+# Ignore scraper service to prevent it from being included in main app build context
+apps/scraper-service
