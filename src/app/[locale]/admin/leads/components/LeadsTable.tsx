@@ -201,15 +201,10 @@ export function LeadsTable({
                         </a>
                       )}
                       {lead.website && (
-                        <a
-                          href={lead.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-sm text-blue-600 hover:underline"
-                        >
+                        <span className="text-xs text-muted-foreground flex items-center gap-1">
                           <Globe className="size-3" />
-                          Website
-                        </a>
+                          Website available
+                        </span>
                       )}
                       {!lead.phone && !lead.website && (
                         <span className="text-muted-foreground">-</span>
@@ -250,12 +245,25 @@ export function LeadsTable({
                   </td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-2">
+                      {lead.website && (
+                        <Button variant="ghost" size="sm" asChild>
+                          <a
+                            href={lead.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            title="Visit Website"
+                          >
+                            <Globe className="size-4" />
+                          </a>
+                        </Button>
+                      )}
                       {lead.googleMapsUrl && (
                         <Button variant="ghost" size="sm" asChild>
                           <a
                             href={lead.googleMapsUrl}
                             target="_blank"
                             rel="noopener noreferrer"
+                            title="View on Google Maps"
                           >
                             <ExternalLink className="size-4" />
                           </a>
