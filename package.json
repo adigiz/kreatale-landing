@@ -12,7 +12,7 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "create-admin": "tsx scripts/create-admin.ts",
-    "scraper:dev": "npm run dev --prefix apps/scraper-service"
+    "scraper:dev": "npm run dev --prefix apps/scrapper-service"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.7.4",
