@@ -160,13 +160,15 @@ export async function updateLeadNotes(leadId: string, notes: string) {
     .where(eq(leads.id, leadId));
 }
 
+const SCRAPER_URL = process.env.SCRAPER_API_URL || "http://localhost:3002";
+
 export async function triggerScrape(
   locationId: string,
   categoryId: string,
   coordinates?: { lat: number; lng: number; zoom: number }
 ) {
   try {
-    const response = await fetch("http://localhost:3002/scrape", {
+    const response = await fetch(`${SCRAPER_URL}/scrape`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -199,7 +201,7 @@ export async function triggerMapScrape(
   categoryId: string
 ) {
   try {
-    const response = await fetch("http://localhost:3002/scrape", {
+    const response = await fetch(`${SCRAPER_URL}/scrape`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -225,7 +227,7 @@ export async function triggerMapScrape(
 
 export async function getScraperStatus() {
   try {
-    const response = await fetch("http://localhost:3002/status", {
+    const response = await fetch(`${SCRAPER_URL}/status`, {
       next: { revalidate: 0 }, // Disable cache
     });
     if (!response.ok) return { active: false, count: 0 };
