@@ -10,7 +10,7 @@ services:
       - 4000
     environment:
       - PORT=4000
-      - DATABASE_URL=${DATABASE_URL}
+      - DATABASE_URL=postgresql://master:root@tools-cms-dljgqz:5432/cms
       # Add other environment variables here
     networks:
       - dokploy-network
