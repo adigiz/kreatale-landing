@@ -18,7 +18,8 @@ async function reverseGeocode(lat: number, lng: number): Promise<{ city: string 
   try {
     const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`, {
       headers: {
-        'User-Agent': 'KreataleScraper/1.0 (contact@kreatale.com)'
+        'User-Agent': 'KreataleScraper/1.0 (contact@kreatale.com)',
+        'Accept-Language': 'id,en;q=0.9'
       }
     });
     if (!response.ok) throw new Error('Geocoding failed');
