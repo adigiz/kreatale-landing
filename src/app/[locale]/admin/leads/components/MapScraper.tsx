@@ -8,21 +8,43 @@ import { Button } from "@/components/ui/button";
 import { Search, MapPin, Loader2, Navigation } from "lucide-react";
 
 // Simple UI components to replace missing shadcn ones
-const Input = ({ className, ...props }: any) => (
+const Input = ({
+  className,
+  ...props
+}: React.InputHTMLAttributes<HTMLInputElement>) => (
   <input
     className={`flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 ${className}`}
     {...props}
   />
 );
 
-const Label = ({ className, ...props }: any) => (
+const Label = ({
+  className,
+  ...props
+}: React.LabelHTMLAttributes<HTMLLabelElement>) => (
   <label
     className={`text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${className}`}
     {...props}
   />
 );
 
-const Slider = ({ value, onValueChange, min, max, step, className }: any) => (
+interface SliderProps {
+  value: number[];
+  onValueChange: (val: number[]) => void;
+  min: number;
+  max: number;
+  step: number;
+  className?: string;
+}
+
+const Slider = ({
+  value,
+  onValueChange,
+  min,
+  max,
+  step,
+  className,
+}: SliderProps) => (
   <input
     type="range"
     min={min}
@@ -60,6 +82,12 @@ interface Category {
   name: string;
 }
 
+interface NominatimResult {
+  lat: string;
+  lon: string;
+  display_name: string;
+}
+
 interface MapScraperProps {
   categories: Category[];
   onScrape: (params: {
@@ -85,7 +113,7 @@ export default function MapScraper({
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
 
-  const [suggestions, setSuggestions] = useState<any[]>([]);
+  const [suggestions, setSuggestions] = useState<NominatimResult[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
   // Approximate radius based on zoom level for circle visualization
@@ -121,7 +149,7 @@ export default function MapScraper({
     return () => clearTimeout(delayDebounceFn);
   }, [searchQuery]);
 
-  const handleSelectLocation = (item: any) => {
+  const handleSelectLocation = (item: NominatimResult) => {
     const lat = parseFloat(item.lat);
     const lon = parseFloat(item.lon);
     setCenter([lat, lon]);
@@ -198,7 +226,7 @@ export default function MapScraper({
 
             {showSuggestions && suggestions.length > 0 && (
               <div className="absolute top-full left-0 right-0 mt-1 bg-popover text-popover-foreground rounded-md border shadow-md z-50 max-h-[200px] overflow-y-auto">
-                {suggestions.map((item: any, index: number) => (
+                {suggestions.map((item: NominatimResult, index: number) => (
                   <button
                     key={index}
                     className="w-full text-left px-3 py-2 text-sm hover:bg-accent hover:text-accent-foreground transition-colors border-b last:border-0"

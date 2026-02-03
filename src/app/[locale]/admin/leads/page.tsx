@@ -4,9 +4,9 @@ import LeadsDashboard from "./components/LeadsDashboard";
 export const dynamic = "force-dynamic";
 
 export default async function LeadsPage() {
-  let locations = [];
-  let categories = [];
-  let leadsResult = {
+  let locations: Awaited<ReturnType<typeof getLocations>> = [];
+  let categories: Awaited<ReturnType<typeof getCategories>> = [];
+  let leadsResult: Awaited<ReturnType<typeof getLeads>> = {
     data: [],
     pagination: { page: 1, pageSize: 10, total: 0, totalPages: 0 },
   };

@@ -12,6 +12,15 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3002;
 
+const activeJobs = new Set<string>();
+
+app.get("/status", (req, res) => {
+  return res.json({
+    active: activeJobs.size > 0,
+    count: activeJobs.size,
+  });
+});
+
 app.post("/scrape", async (req, res) => {
   const { locationId, categoryId, lat, lng, zoom } = req.body;
 
@@ -42,13 +51,25 @@ app.post("/scrape", async (req, res) => {
   const locationName = location ? location.name : `Coordinates: ${lat},${lng}`;
   console.log(`Starting scrape for ${category.name} in ${locationName}`);
 
+  // Generate a job ID
+  const jobId = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  activeJobs.add(jobId);
+
   // Start background job
-  scrapeCategoryInLocation(location || { id: "custom_map", name: "Custom Area" }, category, { lat, lng, zoom }).catch((err) => {
-    console.error("Scraping failed:", err);
-  });
+  scrapeCategoryInLocation(location || { id: "custom_map", name: "Custom Area" }, category, { lat, lng, zoom })
+    .then(() => {
+      console.log(`Scrape finished for ${jobId}`);
+    })
+    .catch((err) => {
+      console.error("Scraping failed:", err);
+    })
+    .finally(() => {
+      activeJobs.delete(jobId);
+    });
 
   return res.json({
     status: "started",
+    jobId,
     message: `Scraping started for ${category.name} in ${locationName}`,
   });
 });

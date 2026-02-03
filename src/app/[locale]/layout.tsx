@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import "../globals.css";
 import ConditionalLayout from "./components/ConditionalLayout";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -189,6 +190,7 @@ export default async function LocaleLayout({
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ConditionalLayout>{children}</ConditionalLayout>
+          <Toaster />
         </NextIntlClientProvider>
       </body>
     </html>

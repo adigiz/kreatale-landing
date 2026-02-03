@@ -24,6 +24,11 @@ interface Lead {
   status: string;
   isNewListing: boolean | null;
   notes: string | null;
+  city: string | null;
+  district: string | null;
+  state: string | null;
+  postalCode: string | null;
+  country: string | null;
   locationId: string | null;
   categoryId: string | null;
   createdAt: Date;
@@ -152,6 +157,28 @@ export function LeadsTable({
                   </td>
                   <td className="px-4 py-3 text-sm text-muted-foreground">
                     {lead.location?.name || "-"}
+                  </td>
+                  <td className="px-4 py-3 text-sm text-muted-foreground">
+                    <div className="flex flex-col gap-0.5">
+                      {(lead.district || lead.city) && (
+                        <span className="font-medium text-foreground">
+                          {[lead.district, lead.city]
+                            .filter(Boolean)
+                            .join(", ")}
+                        </span>
+                      )}
+                      {(lead.state || lead.country) && (
+                        <span className="text-xs">
+                          {[lead.state, lead.country]
+                            .filter(Boolean)
+                            .join(", ")}
+                        </span>
+                      )}
+                      {lead.postalCode && (
+                        <span className="text-xs">{lead.postalCode}</span>
+                      )}
+                      {!lead.city && !lead.state && !lead.country && "-"}
+                    </div>
                   </td>
                   <td className="px-4 py-3 text-sm text-muted-foreground">
                     {lead.category?.name || "-"}

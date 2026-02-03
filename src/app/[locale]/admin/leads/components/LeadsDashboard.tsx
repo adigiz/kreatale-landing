@@ -1,18 +1,23 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useEffect, useRef, useCallback } from "react";
 import dynamic from "next/dynamic";
 import {
   getLeads,
   triggerScrape,
   triggerMapScrape,
   updateLeadStatus,
+  getLeadStats,
+  getScraperStatus,
+  getFilterOptions,
   SortField,
   SortOrder,
 } from "../actions";
 import { LeadsTable } from "./LeadsTable";
 import { LeadsFilters } from "./LeadsFilters";
 import { LeadsPagination } from "./LeadsPagination";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 // Dynamic import for MapScraper
 const MapScraper = dynamic(() => import("./MapScraper"), {
@@ -50,6 +55,11 @@ interface Lead {
   status: string;
   isNewListing: boolean | null;
   notes: string | null;
+  city: string | null;
+  district: string | null;
+  state: string | null;
+  postalCode: string | null;
+  country: string | null;
   locationId: string | null;
   categoryId: string | null;
   createdAt: Date;
@@ -91,27 +101,105 @@ export default function LeadsDashboard({
   const [selectedLocation, setSelectedLocation] = useState<string>("all");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [statusFilter, setStatusFilter] = useState<string>("all");
+
+  // New Filters State
+  const [selectedCity, setSelectedCity] = useState("all");
+  const [selectedState, setSelectedState] = useState("all");
+  const [selectedDistrict, setSelectedDistrict] = useState("all");
+  const [selectedCountry, setSelectedCountry] = useState("all");
+  const [filterOptions, setFilterOptions] = useState<{
+    cities: string[];
+    states: string[];
+    countries: string[];
+    districts: string[];
+  }>({ cities: [], states: [], countries: [], districts: [] });
+
   const [sortBy, setSortBy] = useState<SortField>("createdAt");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [isPending, startTransition] = useTransition();
   const [isScraping, setIsScraping] = useState(false);
   const [activeTab, setActiveTab] = useState("list");
+  const [scrapedCount, setScrapedCount] = useState(0);
+  const initialTotalRef = useRef(stats.total);
+  const router = useRouter();
 
-  const fetchLeads = async (page: number = 1) => {
-    startTransition(async () => {
-      const result = await getLeads({
-        locationId: selectedLocation === "all" ? undefined : selectedLocation,
-        categoryId: selectedCategory === "all" ? undefined : selectedCategory,
-        status: statusFilter === "all" ? undefined : statusFilter,
-        page,
-        pageSize: 10,
-        sortBy,
-        sortOrder,
+  // Load filter options
+  useEffect(() => {
+    getFilterOptions().then((opts) => setFilterOptions(opts));
+  }, [leads]); // Refresh options when leads change (e.g. after scrape)
+
+  const fetchLeads = useCallback(
+    (page: number = 1) => {
+      startTransition(async () => {
+        const result = await getLeads({
+          locationId: selectedLocation === "all" ? undefined : selectedLocation,
+          categoryId: selectedCategory === "all" ? undefined : selectedCategory,
+          status: statusFilter === "all" ? undefined : statusFilter,
+          city: selectedCity === "all" ? undefined : selectedCity,
+          state: selectedState === "all" ? undefined : selectedState,
+          district: selectedDistrict === "all" ? undefined : selectedDistrict,
+          country: selectedCountry === "all" ? undefined : selectedCountry,
+          page,
+          pageSize: 10,
+          sortBy,
+          sortOrder,
+        });
+        setLeads(result.data);
+        setPagination(result.pagination);
       });
-      setLeads(result.data);
-      setPagination(result.pagination);
-    });
-  };
+    },
+    [
+      selectedLocation,
+      selectedCategory,
+      statusFilter,
+      selectedCity,
+      selectedState,
+      selectedDistrict,
+      selectedCountry,
+      sortBy,
+      sortOrder,
+    ],
+  );
+
+  // Polling for real-time updates
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+
+    if (isScraping) {
+      initialTotalRef.current = stats.total; // Reset baseline
+      interval = setInterval(async () => {
+        try {
+          // Poll stats
+          const newStats = await getLeadStats();
+          const diff = newStats.total - initialTotalRef.current;
+          if (diff > 0) {
+            setScrapedCount(diff);
+          }
+
+          // Poll scraper status
+          const status = await getScraperStatus();
+          if (!status.active) {
+            setIsScraping(false);
+            toast.success("Scraping completed!");
+
+            // Refresh everything
+            if (activeTab === "map") {
+              router.refresh();
+              setTimeout(() => fetchLeads(1), 1000);
+            } else {
+              fetchLeads(1);
+            }
+          }
+        } catch (error) {
+          console.error("Failed to poll stats", error);
+        }
+      }, 2000);
+    } else {
+      setScrapedCount(0);
+    }
+
+    return () => clearInterval(interval);
+  }, [isScraping, stats.total, activeTab, fetchLeads, router]);
 
   const handleFilter = () => fetchLeads(1);
 
@@ -133,17 +221,24 @@ export default function LeadsDashboard({
 
   const handleScrape = async () => {
     if (selectedLocation === "all" || selectedCategory === "all") {
-      alert("Please select both a location and category to scrape");
+      toast.error("Please select both a location and category to scrape");
       return;
     }
     setIsScraping(true);
+    setScrapedCount(0);
+    initialTotalRef.current = stats.total;
+
+    toast.info("Scraping started...");
+
     const result = await triggerScrape(selectedLocation, selectedCategory);
-    setIsScraping(false);
+    // Removed setIsScraping(false) - waiting for polling
+
     if (result.success) {
-      alert("Scraping started! Results will appear shortly.");
-      fetchLeads(1); // Refresh
+      // Do not wait for completion here, polling will handle it
+      fetchLeads(1);
     } else {
-      alert("Failed to start scraping: " + result.error);
+      toast.error("Failed to start scraping: " + result.error);
+      setIsScraping(false);
     }
   };
 
@@ -159,14 +254,22 @@ export default function LeadsDashboard({
     categoryId: string;
   }) => {
     setIsScraping(true);
+    setScrapedCount(0);
+    initialTotalRef.current = stats.total;
+
+    toast.info("Map scraping started...");
+
     const result = await triggerMapScrape(lat, lng, zoom, categoryId);
-    setIsScraping(false);
+    // Removed setIsScraping(false) - waiting for polling
+
     if (result.success) {
-      alert("Scraping started! Results will appear shortly.");
+      // Do not wait for completion here, polling will handle it
       setActiveTab("list");
-      setTimeout(() => fetchLeads(1), 2000); // Switch to list and refresh
+      router.refresh();
+      setTimeout(() => fetchLeads(1), 1000);
     } else {
-      alert("Failed to start scraping: " + result.error);
+      toast.error("Failed to start scraping: " + result.error);
+      setIsScraping(false);
     }
   };
 
@@ -189,6 +292,11 @@ export default function LeadsDashboard({
             {stats.total > 0 && (
               <span className="ml-2">
                 ({stats.total} total, {stats.new} new)
+              </span>
+            )}
+            {isScraping && (
+              <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 animate-pulse">
+                Found {scrapedCount} leads...
               </span>
             )}
           </p>
@@ -230,6 +338,15 @@ export default function LeadsDashboard({
             onScrape={handleScrape}
             isPending={isPending}
             isScraping={isScraping}
+            filterOptions={filterOptions}
+            selectedCity={selectedCity}
+            setSelectedCity={setSelectedCity}
+            selectedState={selectedState}
+            setSelectedState={setSelectedState}
+            selectedDistrict={selectedDistrict}
+            setSelectedDistrict={setSelectedDistrict}
+            selectedCountry={selectedCountry}
+            setSelectedCountry={setSelectedCountry}
           />
 
           <LeadsTable

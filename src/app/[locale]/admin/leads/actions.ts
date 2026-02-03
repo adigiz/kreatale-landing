@@ -1,7 +1,5 @@
-"use server";
-
-import { db, locations, categories, leads } from "@/lib/cms/db";
-import { eq, desc, asc, and, count } from "drizzle-orm";
+import { db, locations, categories, leads, leadStatusEnum } from "@/lib/cms/db";
+import { eq, desc, asc, and, count, isNotNull } from "drizzle-orm";
 
 export async function getLocations() {
   return await db.select().from(locations).orderBy(locations.name);
@@ -13,6 +11,22 @@ export async function getCategories() {
 
 export type SortField = "createdAt" | "businessName" | "rating" | "reviewCount";
 export type SortOrder = "asc" | "desc";
+export type LeadStatus = (typeof leadStatusEnum.enumValues)[number];
+
+export async function getFilterOptions() {
+  // We want distinct values for dropdowns
+  const countries = await db.selectDistinct({ value: leads.country }).from(leads).where(isNotNull(leads.country)).orderBy(leads.country);
+  const states = await db.selectDistinct({ value: leads.state }).from(leads).where(isNotNull(leads.state)).orderBy(leads.state);
+  const cities = await db.selectDistinct({ value: leads.city }).from(leads).where(isNotNull(leads.city)).orderBy(leads.city);
+  const districts = await db.selectDistinct({ value: leads.district }).from(leads).where(isNotNull(leads.district)).orderBy(leads.district);
+  
+  return {
+    countries: countries.map(c => c.value).filter((v): v is string => v !== null),
+    states: states.map(s => s.value).filter((v): v is string => v !== null),
+    cities: cities.map(c => c.value).filter((v): v is string => v !== null),
+    districts: districts.map(d => d.value).filter((v): v is string => v !== null)
+  };
+}
 
 export async function getLeads(filters?: {
   locationId?: string;
@@ -22,6 +36,11 @@ export async function getLeads(filters?: {
   pageSize?: number;
   sortBy?: SortField;
   sortOrder?: SortOrder;
+  // New Filters
+  city?: string;
+  district?: string;
+  state?: string;
+  country?: string;
 }) {
   const conditions = [];
   const page = filters?.page || 1;
@@ -29,15 +48,14 @@ export async function getLeads(filters?: {
   const sortBy = filters?.sortBy || "createdAt";
   const sortOrder = filters?.sortOrder || "desc";
 
-  if (filters?.locationId) {
-    conditions.push(eq(leads.locationId, filters.locationId));
-  }
-  if (filters?.categoryId) {
-    conditions.push(eq(leads.categoryId, filters.categoryId));
-  }
-  if (filters?.status) {
-    conditions.push(eq(leads.status, filters.status as any));
-  }
+  if (filters?.locationId) conditions.push(eq(leads.locationId, filters.locationId));
+  if (filters?.categoryId) conditions.push(eq(leads.categoryId, filters.categoryId));
+  if (filters?.status) conditions.push(eq(leads.status, filters.status as LeadStatus));
+  
+  if (filters?.city) conditions.push(eq(leads.city, filters.city));
+  if (filters?.district) conditions.push(eq(leads.district, filters.district));
+  if (filters?.state) conditions.push(eq(leads.state, filters.state));
+  if (filters?.country) conditions.push(eq(leads.country, filters.country));
 
   // Build sort column
   const sortColumn = {
@@ -71,6 +89,11 @@ export async function getLeads(filters?: {
       status: leads.status,
       isNewListing: leads.isNewListing,
       notes: leads.notes,
+      city: leads.city,
+      district: leads.district,
+      state: leads.state,
+      postalCode: leads.postalCode,
+      country: leads.country,
       locationId: leads.locationId,
       categoryId: leads.categoryId,
       createdAt: leads.createdAt,
@@ -124,7 +147,7 @@ export async function getLeadStats() {
 export async function updateLeadStatus(leadId: string, status: string) {
   await db
     .update(leads)
-    .set({ status: status as any, updatedAt: new Date() })
+    .set({ status: status as LeadStatus, updatedAt: new Date() })
     .where(eq(leads.id, leadId));
 }
 
@@ -193,8 +216,19 @@ export async function triggerMapScrape(
     }
 
     return { success: true };
-  } catch (error) {
-    console.error("Scraper trigger error:", error);
+  } catch {
     return { success: false, error: "Failed to connect to scraper service" };
+  }
+}
+
+export async function getScraperStatus() {
+  try {
+    const response = await fetch("http://localhost:3002/status", {
+      next: { revalidate: 0 }, // Disable cache
+    });
+    if (!response.ok) return { active: false, count: 0 };
+    return await response.json();
+  } catch {
+    return { active: false, count: 0 };
   }
 }

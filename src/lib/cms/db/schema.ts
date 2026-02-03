@@ -140,6 +140,7 @@ export const locations = pgTable("locations", {
   name: varchar("name", { length: 255 }).notNull(), // e.g., "Samarinda"
   slug: varchar("slug", { length: 255 }).notNull().unique(), // e.g., "samarinda"
   country: varchar("country", { length: 100 }), // Optional
+  state: varchar("state", { length: 100 }), // e.g., "East Kalimantan"
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
@@ -165,6 +166,13 @@ export const leads = pgTable("leads", {
   status: leadStatusEnum("status").default("new").notNull(),
   isNewListing: boolean("is_new_listing").default(false),
   notes: text("notes"),
+  
+  // Detailed Location Info
+  city: varchar("city", { length: 255 }),
+  district: varchar("district", { length: 255 }),
+  state: varchar("state", { length: 255 }),
+  postalCode: varchar("postal_code", { length: 20 }),
+  country: varchar("country", { length: 255 }),
   
   // Relations
   locationId: uuid("location_id").references(() => locations.id),
