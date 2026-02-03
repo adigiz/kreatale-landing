@@ -1,5 +1,6 @@
 import createMiddleware from "next-intl/middleware";
 import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
 const intlMiddleware = createMiddleware({
   locales: ["en", "id"],
@@ -7,22 +8,29 @@ const intlMiddleware = createMiddleware({
   localePrefix: "always",
 });
 
-export default function middleware(request: NextRequest) {
-  // Call next-intl middleware
-  const response = intlMiddleware(request);
-  
-  // Get pathname (after locale processing)
+export default async function middleware(request: NextRequest) {
+  // Get pathname
   const pathname = request.nextUrl.pathname;
-  const locale = pathname.startsWith("/id") ? "id" : "en";
   
   // Auth Check: Redirect from login to dashboard if already logged in
-  const isLoginPage = pathname.endsWith("/admin/login");
-  const token = request.cookies.get("next-auth.session-token") || 
-                request.cookies.get("__Secure-next-auth.session-token");
+  const normalizedPathname = pathname.replace(/\/$/, "");
+  const isLoginPage = normalizedPathname.split('/').filter(Boolean).slice(-2).join('/') === "admin/login";
+  
+  if (isLoginPage) {
+    const token = await getToken({ 
+      req: request, 
+      secret: process.env.NEXTAUTH_SECRET 
+    });
 
-  if (isLoginPage && token) {
-    return NextResponse.redirect(new URL(`/${locale}/admin`, request.url));
+    if (token) {
+      const locale = pathname.startsWith("/id") ? "id" : "en";
+      const redirectUrl = new URL(`/${locale}/admin`, request.url);
+      return NextResponse.redirect(redirectUrl);
+    }
   }
+
+  // Call next-intl middleware for all other cases
+  const response = intlMiddleware(request);
   
   // Add pathname to request headers so server components can read it
   const requestHeaders = new Headers(request.headers);
@@ -35,9 +43,6 @@ export default function middleware(request: NextRequest) {
 
   // Otherwise return response with updated headers
   const finalResponse = response instanceof NextResponse ? response : NextResponse.next();
-  // Headers are only easily set on NextResponse.next({ request: { headers } }) 
-  // or by modifying the response headers. For server components to see them, 
-  // we must return the result of NextResponse.next
   
   return NextResponse.next({
     request: {
