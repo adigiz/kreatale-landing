@@ -1,176 +1,126 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
-import projectsData from "@/lib/projectsData.json";
-import { sortProjects } from "@/lib/utils";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
+import Image from "next/image";
+
+// Importing logos from public folder
+const MARQUEE_LOGOS = [
+  { src: "/logos/gala-esport-logo.png", alt: "Gala Esports" },
+  { src: "/logos/activenet-logo.png", alt: "ActiveNet" },
+  { src: "/logos/noproblem-logo.png", alt: "No Problem" },
+  { src: "/logos/grace-logo.png", alt: "Grace" },
+  { src: "/logos/land-sale-expert-logo.png", alt: "Land Sale Expert" },
+  { src: "/logos/rizzsolutions-logo.png", alt: "Rizz Solutions" },
+  { src: "/logos/loui-logo.png", alt: "Loui" },
+  { src: "/logos/free-state-logo.png", alt: "Free State" },
+  { src: "/logos/jdm-vs-euro-logo.png", alt: "JDM vs Euro" },
+  { src: "/logos/sell-your-super-logo.png", alt: "Sell Your Super" },
+  { src: "/logos/pescheck-logo.png", alt: "Pescheck" },
+  { src: "/logos/zushino-logo.png", alt: "Zushino" },
+  { src: "/logos/galaclub-logo.png", alt: "Gala Club" },
+];
 
 export default function Hero() {
   const t = useTranslations();
-  const pathname = usePathname();
-
-  // Get current locale and first project
-  const currentLocale = pathname.split("/")[1] || "en";
-  const projects = sortProjects(Object.entries(projectsData));
-  const firstProject = projects[0];
-  const [projectSlug, projectData] = firstProject;
-
-  // Create localized path for the project
-  const projectPath = `/${currentLocale}/projects/${projectSlug}`;
 
   return (
     <section
       id="hero"
-      className="bg-white min-h-[calc(100vh-80px)] flex-1 text-white px-4 sm:px-8 lg:px-16 pb-8 pt-3 flex items-stretch relative overflow-hidden"
-      style={{ minHeight: "calc(100vh - 80px)" }}
+      className="relative w-full min-h-screen flex flex-col justify-center items-center overflow-hidden bg-white text-black pt-20"
     >
-      {/* Floating background elements */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 0.1, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 2, delay: 1 }}
-        className="absolute top-20 right-20 w-32 h-32 bg-blue-500 rounded-full blur-3xl"
-      />
-      <motion.div
-        initial={{ opacity: 0, scale: 0 }}
-        whileInView={{ opacity: 0.08, scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 2.5, delay: 1.5 }}
-        className="absolute bottom-20 left-20 w-24 h-24 bg-purple-500 rounded-full blur-2xl"
-      />
-
-      <div className="flex flex-col md:flex-row gap-8 w-full relative z-10">
-        <div className="relative flex-[3] rounded-3xl overflow-hidden aspect-[4/3] md:aspect-[16/10]">
-          <Image
-            src="/banner.jpg"
-            alt={`${t("hero.title")} - ${t("hero.subtitle")}`}
-            fill
-            className="object-cover"
-            priority
-            fetchPriority="high"
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 70vw, 50vw"
-            quality={85}
+      {/* Background Ambience with Lottie */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -bottom-20 -right-20 hidden md:block md:w-[800px] md:h-[800px] opacity-20">
+          <DotLottieReact
+            src="https://lottie.host/2f2c0365-9333-4ab6-a9b9-717c0e60cd01/3kNv3myJiJ.lottie"
+            loop
+            autoplay
           />
-          <div className="absolute bottom-0 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 py-8 px-6 sm:px-10 md:px-16 bg-gradient-to-t from-black/60 to-transparent w-full">
-            <div className="flex flex-col">
-              <motion.p
-                initial={{ opacity: 0, x: -20, y: 10 }}
-                whileInView={{ opacity: 1, x: 0, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className="text-xs sm:text-sm uppercase tracking-widest text-white/70"
-              >
-                {t("hero.subtitle")}
-              </motion.p>
-              <motion.h1
-                initial={{ opacity: 0, x: -20, y: 20 }}
-                whileInView={{ opacity: 1, x: 0, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                className="text-2xl sm:text-4xl md:text-5xl font-bold leading-tight max-w-xl"
-              >
-                <motion.span
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, delay: 0.9 }}
-                  className="block"
-                >
-                  {t("hero.title")}
-                </motion.span>
-              </motion.h1>
-            </div>
-          </div>
-        </div>
-
-        <div className="hidden flex-[1] lg:flex justify-center">
-          <Link
-            href={projectPath}
-            aria-label={`View ${projectData.title} project - ${t(
-              "hero.latestWork",
-            )}`}
-            className="focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 rounded-2xl"
-          >
-            <div className="bg-white rounded-2xl w-full h-full flex flex-col justify-start">
-              <div className="relative overflow-hidden rounded-2xl mb-4 w-[400px] h-[550px] aspect-[400/550]">
-                <Image
-                  src={projectData.portfolioImage}
-                  alt={`Screenshot of ${projectData.title} project showing the main interface`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 400px"
-                  quality={75}
-                  loading="lazy"
-                  className="object-cover hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-                className="flex justify-between items-center px-4 pb-4"
-              >
-                <div>
-                  <motion.p
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.8 }}
-                    className="text-xs sm:text-sm uppercase text-gray-400"
-                  >
-                    {t("hero.latestWork")}
-                  </motion.p>
-                  <motion.h2
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.9 }}
-                    className="text-2xl sm:text-3xl font-bold text-black"
-                  >
-                    {projectData.title}
-                  </motion.h2>
-                </div>
-
-                <motion.button
-                  whileHover={{
-                    scale: 1.1,
-                    rotate: 5,
-                    backgroundColor: "#000000",
-                    color: "#ffffff",
-                  }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ duration: 0.2 }}
-                  aria-label={`View ${projectData.title} project details`}
-                  className="border w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:bg-black hover:text-white transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                >
-                  <motion.svg
-                    initial={{ x: 0 }}
-                    whileHover={{ x: 2 }}
-                    transition={{ duration: 0.2 }}
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 5l7 7-7 7"
-                    />
-                  </motion.svg>
-                </motion.button>
-              </motion.div>
-            </div>
-          </Link>
         </div>
       </div>
+
+      {/* Main Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 max-w-5xl mx-auto gap-8 mb-20">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="flex flex-col items-center gap-6"
+        >
+          <h1 className="text-[50px] sm:text-[60px] md:text-[80px] leading-[1.1] font-bold tracking-tight text-gray-900">
+            {t.rich("hero.title", {
+              cursive: (chunks) => (
+                <span className="font-cursive text-primary italic">
+                  {chunks}
+                </span>
+              ),
+            })}
+          </h1>
+          <p className="text-xl sm:text-2xl text-gray-600 max-w-2xl font-light leading-relaxed">
+            {t("hero.subtitle")}
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <Link
+            href="#contact"
+            className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white transition-all duration-300 bg-primary rounded-full hover:brightness-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+          >
+            <span>Book a call</span>
+            <svg
+              className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 8l4 4m0 0l-4 4m4-4H3"
+              />
+            </svg>
+          </Link>
+        </motion.div>
+      </div>
+
+      {/* Marquee Section */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="relative w-full py-8 mt-auto border-t border-gray-100/50 bg-white/30 backdrop-blur-sm"
+      >
+        <p className="text-center text-sm font-medium text-gray-500 uppercase tracking-[0.2em] mb-8">
+          Trusted by innovative companies
+        </p>
+
+        <div className="w-full overflow-hidden mask-gradient">
+          <div className="flex w-max animate-marquee-seamless items-center gap-16">
+            {[...MARQUEE_LOGOS, ...MARQUEE_LOGOS].map((logo, index) => (
+              <div
+                key={index}
+                className="relative flex items-center justify-center min-w-[150px] h-12"
+              >
+                <Image
+                  src={logo.src}
+                  alt={logo.alt}
+                  width={150}
+                  height={50}
+                  className="object-contain w-auto h-full max-w-[150px]"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

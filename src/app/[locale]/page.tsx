@@ -78,8 +78,8 @@ export default function Home() {
   return (
     <main style={{ minHeight: "100vh" }}>
       <Hero />
-      <Portfolio />
       <Service />
+      <Portfolio />
       <About />
       <ContactForm />
       <Testimonials />
