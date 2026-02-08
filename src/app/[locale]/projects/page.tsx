@@ -1,6 +1,5 @@
-import projectsData from "@/lib/projectsData.json";
-import { ProjectsDatabase } from "@/lib/types";
-import { sortProjects } from "@/lib/utils";
+import { getPublishedProjects } from "@/lib/cms/queries/projects";
+import { dbProjectsToSortedEntries } from "@/lib/utils";
 import { getTranslations } from "next-intl/server";
 import ProjectCards from "./ProjectCards";
 
@@ -17,8 +16,8 @@ export default async function ProjectsPage({
   const tNav = await getTranslations({ locale, namespace: "nav" });
   const tPortfolio = await getTranslations({ locale, namespace: "portfolio" });
 
-  const typedProjectsData = projectsData as ProjectsDatabase;
-  const projects = sortProjects(Object.entries(typedProjectsData));
+  const dbProjects = await getPublishedProjects();
+  const projects = dbProjectsToSortedEntries(dbProjects);
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",

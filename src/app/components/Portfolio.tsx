@@ -4,34 +4,20 @@ import { Marquee } from "@/components/ui/marquee";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import projectsData from "@/lib/projectsData.json";
 import { PortfolioProject } from "@/lib/types";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
-import { sortProjects } from "@/lib/utils";
 
-const createProjectsArray = (locale: string): PortfolioProject[] => {
-  const projectEntries = Object.entries(projectsData);
-  const sortedEntries = sortProjects(projectEntries);
+interface PortfolioProps {
+  projects: PortfolioProject[];
+}
 
-  return sortedEntries.map(([slug, data]) => ({
-    title: data.title,
-    description: data.projectType || "Web Development",
-    country: data.country || "Unknown",
-    image: data.portfolioImage || "/portfolio-1.webp",
-    link: `/${locale}/projects/${slug}`,
-    slug: slug,
-  }));
-};
-
-export default function Portfolio() {
+export default function Portfolio({ projects }: PortfolioProps) {
   const t = useTranslations();
   const pathname = usePathname();
 
   // Extract current locale from pathname
   const currentLocale = pathname.split("/")[1] || "en";
-
-  const projects = createProjectsArray(currentLocale);
   const firstRow = projects.slice(0, Math.ceil(projects.length / 2));
   const secondRow = projects.slice(Math.ceil(projects.length / 2));
 

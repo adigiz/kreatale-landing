@@ -5,6 +5,9 @@ import About from "../components/About";
 import Portfolio from "../components/Portfolio";
 import ContactForm from "../components/ContactForm";
 import Testimonials from "../components/Testimonials";
+import { getPublishedProjects } from "@/lib/cms/queries/projects";
+import { dbProjectsToPortfolioProjects } from "@/lib/utils";
+import { getAboutStats, getCountriesFromProjects } from "@/lib/aboutData";
 
 const baseUrl = "https://kreatale.com";
 
@@ -74,13 +77,28 @@ export async function generateMetadata({
   };
 }
 
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const dbProjects = await getPublishedProjects();
+  const portfolioProjects = dbProjectsToPortfolioProjects(dbProjects, locale);
+
+  // Build a simple record for aboutData helpers
+  const projectRecord = Object.fromEntries(
+    dbProjects.map((p) => [p.slug, { country: p.country || "" }])
+  );
+  const aboutStats = getAboutStats(projectRecord);
+  const countries = getCountriesFromProjects(projectRecord);
+
   return (
     <main style={{ minHeight: "100vh" }}>
       <Hero />
       <Service />
-      <Portfolio />
-      <About />
+      <Portfolio projects={portfolioProjects} />
+      <About aboutStats={aboutStats} countries={countries} />
       <ContactForm />
       <Testimonials />
     </main>

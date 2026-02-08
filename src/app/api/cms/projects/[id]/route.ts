@@ -1,13 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/cms/auth/config";
 import {
   getProjectById,
   updateProject,
   deleteProject,
 } from "@/lib/cms/queries/projects";
-import { hasPermission } from "@/lib/cms/permissions";
-import { PERMISSIONS } from "@/lib/cms/permissions";
+import { hasPermission, PERMISSIONS, type UserRole } from "@/lib/cms/permissions";
 import { z } from "zod";
+
+const sectionSchema = z.object({
+  title: z.string(),
+  content: z.array(z.string()),
+});
+
+const translationLocaleSchema = z.object({
+  title: z.string().optional(),
+  subtitle: z.string().optional(),
+  sections: z.record(z.string(), sectionSchema).optional(),
+});
 
 const updateProjectSchema = z.object({
   slug: z.string().min(1).optional(),
@@ -17,13 +28,14 @@ const updateProjectSchema = z.object({
   client: z.string().optional(),
   duration: z.string().optional(),
   timeline: z.string().optional(),
-  heroImage: z.string().optional(),
-  portfolioImage: z.string().optional(),
+  heroImage: z.string().url().optional().or(z.literal("")),
+  portfolioImage: z.string().url().optional().or(z.literal("")),
   projectType: z.string().optional(),
   techStacks: z.array(z.string()).optional(),
-  images: z.array(z.string()).optional(),
-  sections: z.record(z.string(), z.any()).optional(),
-  demoUrl: z.string().optional(),
+  images: z.array(z.string().url()).optional(),
+  sections: z.record(z.string(), sectionSchema).optional(),
+  translations: z.record(z.string(), translationLocaleSchema).optional(),
+  demoUrl: z.string().url().optional().or(z.literal("")),
   locale: z.string().optional(),
   status: z.enum(["draft", "published", "archived"]).optional(),
 });
@@ -36,7 +48,7 @@ export async function GET(
     const session = await requireAdmin();
     const role = session.user.role;
 
-    if (!hasPermission(role as "super_admin" | "admin" | "editor" | "author" | "viewer", PERMISSIONS.PROJECTS_READ)) {
+    if (!hasPermission(role as UserRole, PERMISSIONS.PROJECTS_READ)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
@@ -64,7 +76,7 @@ export async function PATCH(
     const session = await requireAdmin();
     const role = session.user.role;
 
-    if (!hasPermission(role as "super_admin" | "admin" | "editor" | "author" | "viewer", PERMISSIONS.PROJECTS_UPDATE)) {
+    if (!hasPermission(role as UserRole, PERMISSIONS.PROJECTS_UPDATE)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
@@ -73,23 +85,36 @@ export async function PATCH(
     const data = updateProjectSchema.parse(body);
 
     // If status is being changed to published, set publishedAt
+    let publishedAt: Date | undefined;
     if (data.status === "published") {
       const existing = await getProjectById(id);
       if (existing && existing.status !== "published") {
-        (data as { publishedAt?: Date }).publishedAt = new Date();
+        publishedAt = new Date();
       }
     }
 
-    const project = await updateProject(id, data);
+    const project = await updateProject(id, {
+      ...data,
+      ...(publishedAt ? { publishedAt } : {}),
+    });
 
     if (!project) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
+    // Revalidate public project pages
+    revalidatePath("/[locale]/projects", "page");
+    revalidatePath(`/[locale]/projects/${project.slug}`, "page");
+    revalidatePath("/[locale]", "page");
+
     return NextResponse.json(project);
   } catch (err) {
     if (err instanceof z.ZodError) {
-      return NextResponse.json({ error: err.issues }, { status: 400 });
+      const fields = err.issues.map((i) => i.path.join(".")).filter(Boolean);
+      return NextResponse.json(
+        { error: "Validation failed", fields },
+        { status: 400 }
+      );
     }
     return NextResponse.json(
       { error: "Internal server error" },
@@ -106,12 +131,16 @@ export async function DELETE(
     const session = await requireAdmin();
     const role = session.user.role;
 
-    if (!hasPermission(role as "super_admin" | "admin" | "editor" | "author" | "viewer", PERMISSIONS.PROJECTS_DELETE)) {
+    if (!hasPermission(role as UserRole, PERMISSIONS.PROJECTS_DELETE)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     const { id } = await params;
     await deleteProject(id);
+
+    // Revalidate public project pages
+    revalidatePath("/[locale]/projects", "page");
+    revalidatePath("/[locale]", "page");
 
     return NextResponse.json({ success: true });
   } catch {

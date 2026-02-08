@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
-import projectsData from "@/lib/projectsData.json";
+import { getPublishedProjects } from "@/lib/cms/queries/projects";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://kreatale.com";
   const currentDate = new Date().toISOString();
   const locales = ["en", "id"]; // Available locales
@@ -75,18 +75,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]);
 
-  // Dynamic project pages for each locale with alternate languages
+  // Dynamic project pages from database
+  const dbProjects = await getPublishedProjects();
   const projectPages = locales.flatMap((locale) =>
-    Object.keys(projectsData).map((slug) => ({
-      url: `${baseUrl}/${locale}/projects/${slug}`,
-      lastModified: currentDate,
+    dbProjects.map((project) => ({
+      url: `${baseUrl}/${locale}/projects/${project.slug}`,
+      lastModified: project.updatedAt?.toISOString() || currentDate,
       changeFrequency: "monthly" as const,
       priority: 0.8,
       alternates: {
         languages: {
-          en: `${baseUrl}/en/projects/${slug}`,
-          id: `${baseUrl}/id/projects/${slug}`,
-          "x-default": `${baseUrl}/en/projects/${slug}`,
+          en: `${baseUrl}/en/projects/${project.slug}`,
+          id: `${baseUrl}/id/projects/${project.slug}`,
+          "x-default": `${baseUrl}/en/projects/${project.slug}`,
         },
       },
     }))

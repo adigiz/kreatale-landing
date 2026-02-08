@@ -3,13 +3,17 @@
 import { motion } from "framer-motion";
 import CountryMap from "./CountryMap";
 import Link from "next/link";
-import { getAboutStats, getCountriesFromProjects } from "@/lib/aboutData";
+import type { AboutStats } from "@/lib/aboutData";
 import { getCountryCodeMapping } from "@/lib/countryMapping";
-import projectsData from "@/lib/projectsData.json";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 
-export default function About() {
+interface AboutProps {
+  aboutStats: AboutStats[];
+  countries: string[];
+}
+
+export default function About({ aboutStats, countries }: AboutProps) {
   const t = useTranslations();
   const pathname = usePathname();
 
@@ -21,9 +25,6 @@ export default function About() {
     return `/${currentLocale}${path}`;
   };
 
-  // Get dynamic stats and country data
-  const aboutStats = getAboutStats(projectsData);
-  const countries = getCountriesFromProjects(projectsData);
   const countryCodeMapping = getCountryCodeMapping();
 
   // Create country codes for map highlighting

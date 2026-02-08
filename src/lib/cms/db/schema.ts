@@ -90,6 +90,7 @@ export const projects = pgTable("projects", {
   techStacks: jsonb("tech_stacks").notNull().default("[]"),
   images: jsonb("images").notNull().default("[]"),
   sections: jsonb("sections").notNull().default("{}"),
+  translations: jsonb("translations").notNull().default("{}"),
   demoUrl: text("demo_url"),
   locale: varchar("locale", { length: 10 }).notNull().default("en"),
   status: contentStatusEnum("status").notNull().default("draft"),

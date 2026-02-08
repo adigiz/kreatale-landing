@@ -16,7 +16,9 @@ export interface ProjectData {
   sections: {
     [key: string]: ProjectSection;
   };
-  demoUrl?: string
+  demoUrl?: string;
+  portfolioImage?: string;
+  projectType?: string;
 }
 
 export interface ProjectsDatabase {

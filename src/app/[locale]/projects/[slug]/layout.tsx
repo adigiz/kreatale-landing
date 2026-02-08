@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import projectsData from "@/lib/projectsData.json";
-import { ProjectsDatabase } from "@/lib/types";
+import { getProjectBySlug } from "@/lib/cms/queries/projects";
 
 const baseUrl = "https://kreatale.com";
 
@@ -10,8 +9,7 @@ export async function generateMetadata({
   params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
   const { locale, slug } = await params;
-  const typedProjectsData = projectsData as ProjectsDatabase;
-  const project = typedProjectsData[slug];
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     return {
@@ -26,7 +24,7 @@ export async function generateMetadata({
   } - Kreatale`;
 
   // Create comprehensive meta description (150-160 characters)
-  const techStack = project.techStacks
+  const techStack = (project.techStacks as string[])
     .slice(0, 2)
     .join(isEnglish ? " and " : " dan ");
 
@@ -95,8 +93,7 @@ export default async function ProjectLayout({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { locale, slug } = await params;
-  const typedProjectsData = projectsData as ProjectsDatabase;
-  const project = typedProjectsData[slug];
+  const project = await getProjectBySlug(slug);
 
   if (!project) {
     return <>{children}</>;
@@ -106,7 +103,7 @@ export default async function ProjectLayout({
 
   // Create the same comprehensive description for structured data
   const isEnglish = locale === "en";
-  const techStack = project.techStacks
+  const techStack = (project.techStacks as string[])
     .slice(0, 2)
     .join(isEnglish ? " and " : " dan ");
 

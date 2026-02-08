@@ -4,16 +4,18 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useLayoutEffect } from "react";
 import { motion } from "framer-motion";
-import projectsData from "@/lib/projectsData.json";
-import { ProjectsDatabase } from "@/lib/types";
+import { ProjectData } from "@/lib/types";
 import { usePathname } from "next/navigation";
 import LanguageSwitcher from "./LanguageSwitcher";
 import DesktopNav from "./DesktopNav";
 import MobileBottomNav from "./MobileBottomNav";
 import ProjectsBottomSheet from "./ProjectsBottomSheet";
-import { sortProjects } from "@/lib/utils";
 
-export default function Header() {
+interface HeaderProps {
+  projects: [string, ProjectData][];
+}
+
+export default function Header({ projects }: HeaderProps) {
   const [projectsDropdownOpen, setProjectsDropdownOpen] = useState(false);
   const [projectsBottomSheetOpen, setProjectsBottomSheetOpen] = useState(false);
   // Initialize with false, will be set correctly on mount
@@ -51,8 +53,8 @@ export default function Header() {
     return `/${currentLocale}${path}`;
   };
 
-  const typedProjectsData = projectsData as ProjectsDatabase;
-  const projects = sortProjects(Object.entries(typedProjectsData)).slice(0, 5);
+  // Projects are passed in from the server layout, already sorted. Take top 5.
+  const topProjects = projects.slice(0, 5);
 
   return (
     <div
@@ -103,7 +105,7 @@ export default function Header() {
           <DesktopNav
             pathname={pathname}
             createLocalizedPath={createLocalizedPath}
-            projects={projects}
+            projects={topProjects}
             projectsDropdownOpen={projectsDropdownOpen}
             setProjectsDropdownOpen={setProjectsDropdownOpen}
             isScrolled={isScrolled}
@@ -127,7 +129,7 @@ export default function Header() {
       <ProjectsBottomSheet
         isOpen={projectsBottomSheetOpen}
         onClose={() => setProjectsBottomSheetOpen(false)}
-        projects={projects}
+        projects={topProjects}
         createLocalizedPath={createLocalizedPath}
       />
     </div>

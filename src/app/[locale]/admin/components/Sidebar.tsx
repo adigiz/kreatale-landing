@@ -14,6 +14,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Target,
+  FolderKanban,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -101,6 +102,11 @@ export default function Sidebar({
       href: `/${locale}/admin/posts`,
       icon: FileText,
       label: "Posts",
+    },
+    {
+      href: `/${locale}/admin/projects`,
+      icon: FolderKanban,
+      label: "Projects",
     },
     {
       href: `/${locale}/admin/contacts`,

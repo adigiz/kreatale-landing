@@ -40,10 +40,35 @@ export async function POST(request: NextRequest) {
     }
 
     const formData = await request.formData();
-    const file = formData.get("file") as File;
+    const file = formData.get("file");
 
-    if (!file) {
+    if (!file || !(file instanceof File)) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
+    }
+
+    // Server-side file validation
+    const ALLOWED_MIME_TYPES = [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "image/webp",
+      "image/svg+xml",
+      "image/avif",
+    ];
+    const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+
+    if (!ALLOWED_MIME_TYPES.includes(file.type)) {
+      return NextResponse.json(
+        { error: "Invalid file type. Only images are allowed." },
+        { status: 400 }
+      );
+    }
+
+    if (file.size > MAX_FILE_SIZE) {
+      return NextResponse.json(
+        { error: "File too large. Maximum size is 10MB." },
+        { status: 400 }
+      );
     }
 
     // Convert file to buffer
@@ -58,11 +83,10 @@ export async function POST(request: NextRequest) {
       const uploadStream = cloudinary.uploader.upload_stream(
         {
           folder: "kreatale-cms",
-          resource_type: "auto",
+          resource_type: "image",
         },
         (error, result) => {
           if (error) {
-            console.error("Cloudinary upload error:", error);
             reject(error);
           } else if (result) {
             resolve({
@@ -78,12 +102,17 @@ export async function POST(request: NextRequest) {
       uploadStream.end(buffer);
     });
 
+    // Insert f_auto,q_auto delivery transformation for automatic format and quality optimization
+    const optimizedUrl = uploadResult.secure_url.replace(
+      "/image/upload/",
+      "/image/upload/f_auto,q_auto/"
+    );
+
     return NextResponse.json({
-      url: uploadResult.secure_url,
+      url: optimizedUrl,
       publicId: uploadResult.public_id,
     });
-  } catch (error) {
-    console.error("Upload error:", error);
+  } catch {
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }

@@ -1,8 +1,68 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import type { ProjectData, PortfolioProject } from "./types";
+import type { Project } from "./cms/db/schema";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
+}
+
+/**
+ * Converts a DB project row into a [slug, ProjectData] tuple
+ */
+export function dbProjectToProjectData(
+  project: Project
+): [string, ProjectData] {
+  return [
+    project.slug,
+    {
+      title: project.title,
+      subtitle: project.subtitle || "",
+      country: project.country || "",
+      client: project.client || "",
+      duration: project.duration || "",
+      timeline: project.timeline || "",
+      heroImage: project.heroImage || "",
+      images: (project.images as string[]) || [],
+      techStacks: (project.techStacks as string[]) || [],
+      sections:
+        (project.sections as Record<
+          string,
+          { title: string; content: string[] }
+        >) || {},
+      demoUrl: project.demoUrl || undefined,
+      portfolioImage: project.portfolioImage || undefined,
+      projectType: project.projectType || undefined,
+    },
+  ];
+}
+
+/**
+ * Converts DB project rows into sorted [slug, ProjectData][] tuples
+ */
+export function dbProjectsToSortedEntries(
+  dbProjects: Project[]
+): [string, ProjectData][] {
+  const entries = dbProjects.map(dbProjectToProjectData);
+  return sortProjects(entries);
+}
+
+/**
+ * Converts DB project rows into sorted PortfolioProject array (for homepage marquee)
+ */
+export function dbProjectsToPortfolioProjects(
+  dbProjects: Project[],
+  locale: string
+): PortfolioProject[] {
+  const sortedEntries = dbProjectsToSortedEntries(dbProjects);
+  return sortedEntries.map(([slug, data]) => ({
+    title: data.title,
+    description: data.projectType || "Web Development",
+    country: data.country || "Unknown",
+    image: data.portfolioImage || data.heroImage || "/portfolio-1.webp",
+    link: `/${locale}/projects/${slug}`,
+    slug,
+  }));
 }
 
 /**

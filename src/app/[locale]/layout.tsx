@@ -5,6 +5,8 @@ import type { Metadata } from "next";
 import "../globals.css";
 import ConditionalLayout from "./components/ConditionalLayout";
 import { Toaster } from "@/components/ui/sonner";
+import { getPublishedProjects } from "@/lib/cms/queries/projects";
+import { dbProjectsToSortedEntries } from "@/lib/utils";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -149,6 +151,10 @@ export default async function LocaleLayout({
     messages = {};
   }
 
+  // Fetch published projects for Header navigation
+  const dbProjects = await getPublishedProjects();
+  const projects = dbProjectsToSortedEntries(dbProjects);
+
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -197,7 +203,7 @@ export default async function LocaleLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <ConditionalLayout>{children}</ConditionalLayout>
+          <ConditionalLayout projects={projects}>{children}</ConditionalLayout>
           <Toaster />
         </NextIntlClientProvider>
       </body>
