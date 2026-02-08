@@ -28,6 +28,7 @@ export function SearchableSelect({
   return (
     <div className="relative">
       <Button
+        type="button"
         variant="outline"
         role="combobox"
         aria-expanded={isOpen}

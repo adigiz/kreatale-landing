@@ -161,6 +161,54 @@ export async function updateLeadNotes(leadId: string, notes: string) {
     .where(eq(leads.id, leadId));
 }
 
+export async function createLead(data: {
+  businessName: string;
+  address?: string;
+  phone?: string;
+  website?: string;
+  rating?: string;
+  reviewCount?: number;
+  googleMapsUrl?: string;
+  status?: LeadStatus;
+  notes?: string;
+  city?: string;
+  district?: string;
+  state?: string;
+  postalCode?: string;
+  country?: string;
+  locationId?: string;
+  categoryId?: string;
+}) {
+  try {
+    const [newLead] = await db
+      .insert(leads)
+      .values({
+        businessName: data.businessName,
+        address: data.address || null,
+        phone: data.phone || null,
+        website: data.website || null,
+        rating: data.rating || null,
+        reviewCount: data.reviewCount || 0,
+        googleMapsUrl: data.googleMapsUrl || null,
+        status: data.status || "new",
+        notes: data.notes || null,
+        city: data.city || null,
+        district: data.district || null,
+        state: data.state || null,
+        postalCode: data.postalCode || null,
+        country: data.country || null,
+        locationId: data.locationId || null,
+        categoryId: data.categoryId || null,
+      })
+      .returning({ id: leads.id });
+
+    return { success: true, id: newLead.id };
+  } catch (error) {
+    console.error("Failed to create lead:", error);
+    return { success: false, error: "Failed to create lead" };
+  }
+}
+
 const SCRAPER_URL = process.env.SCRAPER_API_URL || "http://localhost:3002";
 
 export async function triggerScrape(
