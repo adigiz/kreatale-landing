@@ -44,7 +44,8 @@ export async function POST(request: NextRequest) {
     const formData = await request.formData();
     const file = formData.get("file");
 
-    if (!file || !(file instanceof File)) {
+    // Use Blob check instead of File — File class isn't available in all Node.js runtimes
+    if (!file || typeof file === "string" || !("arrayBuffer" in file)) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 });
     }
 
@@ -58,15 +59,17 @@ export async function POST(request: NextRequest) {
       "image/avif",
     ];
     const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+    const fileType = file.type;
+    const fileSize = file.size;
 
-    if (!ALLOWED_MIME_TYPES.includes(file.type)) {
+    if (!ALLOWED_MIME_TYPES.includes(fileType)) {
       return NextResponse.json(
         { error: "Invalid file type. Only images are allowed." },
         { status: 400 }
       );
     }
 
-    if (file.size > MAX_FILE_SIZE) {
+    if (fileSize > MAX_FILE_SIZE) {
       return NextResponse.json(
         { error: "File too large. Maximum size is 10MB." },
         { status: 400 }
@@ -76,7 +79,7 @@ export async function POST(request: NextRequest) {
     // Convert file to base64 data URI — more reliable than upload_stream in containers
     const bytes = await file.arrayBuffer();
     const base64 = Buffer.from(bytes).toString("base64");
-    const dataUri = `data:${file.type};base64,${base64}`;
+    const dataUri = `data:${fileType};base64,${base64}`;
 
     // Upload to Cloudinary using base64 data URI
     const uploadResult = await cloudinary.uploader.upload(dataUri, {
