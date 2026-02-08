@@ -3,36 +3,38 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/cms/auth/config";
 import { v2 as cloudinary } from "cloudinary";
 
-// Parse Cloudinary URL or use individual env vars
-function getCloudinaryConfig() {
-  const cloudinaryUrl = process.env.CLOUDINARY_URL;
-  
-  if (cloudinaryUrl) {
-    // Parse cloudinary://api_key:api_secret@cloud_name
-    const match = cloudinaryUrl.match(/cloudinary:\/\/([^:]+):([^@]+)@(.+)/);
-    if (match) {
-      return {
-        cloud_name: match[3],
-        api_key: match[1],
-        api_secret: match[2],
-      };
-    }
+// Configure Cloudinary — the SDK auto-reads CLOUDINARY_URL if set
+// but we configure explicitly as a fallback
+function ensureCloudinaryConfig() {
+  // If CLOUDINARY_URL is set, the SDK reads it automatically
+  if (process.env.CLOUDINARY_URL) {
+    return true;
   }
-  
-  // Fallback to individual env vars
-  return {
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-  };
-}
 
-// Configure Cloudinary
-const config = getCloudinaryConfig();
-cloudinary.config(config);
+  // Fallback to individual env vars
+  if (process.env.CLOUDINARY_CLOUD_NAME) {
+    cloudinary.config({
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET,
+    });
+    return true;
+  }
+
+  return false;
+}
 
 export async function POST(request: NextRequest) {
   try {
+    // Check Cloudinary configuration
+    if (!ensureCloudinaryConfig()) {
+      console.error("[Upload] Cloudinary not configured. Set CLOUDINARY_URL or individual CLOUDINARY_* env vars.");
+      return NextResponse.json(
+        { error: "Image upload service is not configured" },
+        { status: 503 }
+      );
+    }
+
     const session = await getServerSession(authOptions);
 
     if (!session?.user) {
@@ -71,35 +73,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Convert file to buffer
+    // Convert file to base64 data URI — more reliable than upload_stream in containers
     const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    const base64 = Buffer.from(bytes).toString("base64");
+    const dataUri = `data:${file.type};base64,${base64}`;
 
-    // Upload to Cloudinary
-    const uploadResult = await new Promise<{
-      secure_url: string;
-      public_id: string;
-    }>((resolve, reject) => {
-      const uploadStream = cloudinary.uploader.upload_stream(
-        {
-          folder: "kreatale-cms",
-          resource_type: "image",
-        },
-        (error, result) => {
-          if (error) {
-            reject(error);
-          } else if (result) {
-            resolve({
-              secure_url: result.secure_url,
-              public_id: result.public_id,
-            });
-          } else {
-            reject(new Error("Upload failed: No result"));
-          }
-        }
-      );
-
-      uploadStream.end(buffer);
+    // Upload to Cloudinary using base64 data URI
+    const uploadResult = await cloudinary.uploader.upload(dataUri, {
+      folder: "kreatale-cms",
+      resource_type: "image",
     });
 
     // Insert f_auto,q_auto delivery transformation for automatic format and quality optimization
@@ -112,12 +94,13 @@ export async function POST(request: NextRequest) {
       url: optimizedUrl,
       publicId: uploadResult.public_id,
     });
-  } catch {
+  } catch (err) {
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("[Upload Error]", message);
+
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: `Upload failed: ${message}` },
       { status: 500 }
     );
   }
 }
-
-

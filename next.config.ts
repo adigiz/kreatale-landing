@@ -4,10 +4,13 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
+  output: "standalone",
   // Enable preview mode for CMS live preview
   experimental: {
     // Preview mode is enabled by default in Next.js 15
   },
+  // Allow larger request bodies for image uploads (default is 1MB)
+  serverExternalPackages: ["cloudinary"],
   images: {
     remotePatterns: [
       {
