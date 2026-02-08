@@ -6,8 +6,7 @@ import {
   createPost,
   searchPosts,
 } from "@/lib/cms/queries/posts";
-import { hasPermission } from "@/lib/cms/permissions";
-import { PERMISSIONS } from "@/lib/cms/permissions";
+import { hasPermission, PERMISSIONS, type UserRole } from "@/lib/cms/permissions";
 import { z } from "zod";
 
 const postSchema = z.object({
@@ -25,7 +24,7 @@ export async function GET(request: NextRequest) {
     const session = await requireAdmin();
     const role = session.user.role;
 
-    if (!hasPermission(role as "super_admin" | "admin" | "editor" | "author" | "viewer", PERMISSIONS.POSTS_READ)) {
+    if (!hasPermission(role as UserRole, PERMISSIONS.POSTS_READ)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
@@ -53,7 +52,7 @@ export async function POST(request: NextRequest) {
     const session = await requireAdmin();
     const role = session.user.role;
 
-    if (!hasPermission(role as "super_admin" | "admin" | "editor" | "author" | "viewer", PERMISSIONS.POSTS_CREATE)) {
+    if (!hasPermission(role as UserRole, PERMISSIONS.POSTS_CREATE)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 

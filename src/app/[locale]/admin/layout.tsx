@@ -1,8 +1,10 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/lib/cms/auth/config";
-import { canAccessAdmin } from "@/lib/cms/permissions";
+import { canAccessAdmin, type UserRole } from "@/lib/cms/permissions";
+import { getEffectivePermissions } from "@/lib/cms/permissions.server";
 import AuthGuard from "./AuthGuard";
 import Sidebar from "./components/Sidebar";
+import AdminProviders from "./components/AdminProviders";
 import type { Metadata } from "next";
 
 // Force dynamic rendering for admin routes (they require authentication)
@@ -46,27 +48,31 @@ async function AuthenticatedLayout({
 
   const role = session.user.role as string;
   if (
-    !canAccessAdmin(
-      role as "super_admin" | "admin" | "editor" | "author" | "viewer"
-    )
+    !canAccessAdmin(role as UserRole)
   ) {
     redirect(`/${locale}`);
   }
+
+  // Fetch effective permissions from DB (with fallback to hardcoded)
+  const permissions = await getEffectivePermissions(role);
 
   // Render authenticated layout with sidebar - NO HEADER/FOOTER
   // Note: This layout is nested under [locale]/layout.tsx, so we don't include html/body tags
   const userName = (session.user as { name?: string | null }).name || null;
   return (
-    <div className="min-h-screen bg-background">
-      <Sidebar
-        locale={locale}
-        userEmail={session.user.email}
-        userName={userName}
-        role={role}
-      >
-        {children}
-      </Sidebar>
-    </div>
+    <AdminProviders>
+      <div className="min-h-screen bg-background">
+        <Sidebar
+          locale={locale}
+          userEmail={session.user.email}
+          userName={userName}
+          role={role}
+          permissions={permissions}
+        >
+          {children}
+        </Sidebar>
+      </div>
+    </AdminProviders>
   );
 }
 

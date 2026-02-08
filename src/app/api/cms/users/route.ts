@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/cms/auth/config";
 import { getAllUsers, createUser } from "@/lib/cms/queries/users";
-import { hasPermission } from "@/lib/cms/permissions";
-import { PERMISSIONS } from "@/lib/cms/permissions";
+import { hasPermission, PERMISSIONS, type UserRole } from "@/lib/cms/permissions";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 
@@ -10,7 +9,7 @@ const userSchema = z.object({
   email: z.string().email(),
   name: z.string().optional(),
   password: z.string().min(6),
-  role: z.enum(["super_admin", "admin", "editor", "author", "viewer"]),
+  role: z.enum(["super_admin", "admin", "editor", "author", "sales", "viewer"]),
 });
 
 export async function GET() {
@@ -20,7 +19,7 @@ export async function GET() {
 
     if (
       !hasPermission(
-        role as "super_admin" | "admin" | "editor" | "author" | "viewer",
+        role as UserRole,
         PERMISSIONS.USERS_READ
       )
     ) {
@@ -47,7 +46,7 @@ export async function POST(request: NextRequest) {
 
     if (
       !hasPermission(
-        role as "super_admin" | "admin" | "editor" | "author" | "viewer",
+        role as UserRole,
         PERMISSIONS.USERS_CREATE
       )
     ) {

@@ -5,6 +5,7 @@ import { useRouter, useParams } from "next/navigation";
 import { Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { User } from "@/lib/cms/db";
+import type { UserRole } from "@/lib/cms/permissions";
 
 interface UserEditorProps {
   userId?: string;
@@ -20,12 +21,7 @@ export default function UserEditor({ userId, initialUser }: UserEditorProps) {
     email: initialUser?.email || "",
     name: initialUser?.name || "",
     password: "",
-    role: (initialUser?.role || "viewer") as
-      | "super_admin"
-      | "admin"
-      | "editor"
-      | "author"
-      | "viewer",
+    role: (initialUser?.role || "viewer") as UserRole,
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -40,7 +36,7 @@ export default function UserEditor({ userId, initialUser }: UserEditorProps) {
         email: string;
         name?: string;
         password?: string;
-        role: "super_admin" | "admin" | "editor" | "author" | "viewer";
+        role: UserRole;
       } = {
         email: formData.email,
         role: formData.role,
@@ -136,17 +132,13 @@ export default function UserEditor({ userId, initialUser }: UserEditorProps) {
               onChange={(e) =>
                 setFormData({
                   ...formData,
-                  role: e.target.value as
-                    | "super_admin"
-                    | "admin"
-                    | "editor"
-                    | "author"
-                    | "viewer",
+                  role: e.target.value as UserRole,
                 })
               }
               className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               <option value="viewer">Viewer</option>
+              <option value="sales">Sales</option>
               <option value="author">Author</option>
               <option value="editor">Editor</option>
               <option value="admin">Admin</option>

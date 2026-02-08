@@ -5,8 +5,7 @@ import {
   updateUser,
   deleteUser,
 } from "@/lib/cms/queries/users";
-import { hasPermission } from "@/lib/cms/permissions";
-import { PERMISSIONS } from "@/lib/cms/permissions";
+import { hasPermission, PERMISSIONS, type UserRole } from "@/lib/cms/permissions";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 
@@ -14,7 +13,7 @@ const updateUserSchema = z.object({
   email: z.string().email().optional(),
   name: z.string().optional(),
   password: z.string().min(6).optional(),
-  role: z.enum(["super_admin", "admin", "editor", "author", "viewer"]).optional(),
+  role: z.enum(["super_admin", "admin", "editor", "author", "sales", "viewer"]).optional(),
 });
 
 export async function GET(
@@ -27,7 +26,7 @@ export async function GET(
 
     if (
       !hasPermission(
-        role as "super_admin" | "admin" | "editor" | "author" | "viewer",
+        role as UserRole,
         PERMISSIONS.USERS_READ
       )
     ) {
@@ -63,7 +62,7 @@ export async function PATCH(
 
     if (
       !hasPermission(
-        role as "super_admin" | "admin" | "editor" | "author" | "viewer",
+        role as UserRole,
         PERMISSIONS.USERS_UPDATE
       )
     ) {
@@ -74,12 +73,7 @@ export async function PATCH(
     const body = await request.json();
     const data = updateUserSchema.parse(body);
 
-    const updateData: {
-      email?: string;
-      name?: string | null;
-      passwordHash?: string;
-      role?: "super_admin" | "admin" | "editor" | "author" | "viewer";
-    } = {};
+    const updateData: Parameters<typeof updateUser>[1] = {};
 
     if (data.email) updateData.email = data.email;
     if (data.name !== undefined) updateData.name = data.name || null;
@@ -119,7 +113,7 @@ export async function DELETE(
 
     if (
       !hasPermission(
-        role as "super_admin" | "admin" | "editor" | "author" | "viewer",
+        role as UserRole,
         PERMISSIONS.USERS_DELETE
       )
     ) {

@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/cms/auth/config";
 import { getMediaById, deleteMedia } from "@/lib/cms/queries/media";
-import { hasPermission } from "@/lib/cms/permissions";
-import { PERMISSIONS } from "@/lib/cms/permissions";
+import { hasPermission, PERMISSIONS, type UserRole } from "@/lib/cms/permissions";
 
 export async function GET(
   request: NextRequest,
@@ -12,7 +11,7 @@ export async function GET(
     const session = await requireAdmin();
     const role = session.user.role;
 
-    if (!hasPermission(role as "super_admin" | "admin" | "editor" | "author" | "viewer", PERMISSIONS.MEDIA_READ)) {
+    if (!hasPermission(role as UserRole, PERMISSIONS.MEDIA_READ)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
@@ -40,7 +39,7 @@ export async function DELETE(
     const session = await requireAdmin();
     const role = session.user.role;
 
-    if (!hasPermission(role as "super_admin" | "admin" | "editor" | "author" | "viewer", PERMISSIONS.MEDIA_DELETE)) {
+    if (!hasPermission(role as UserRole, PERMISSIONS.MEDIA_DELETE)) {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 

@@ -17,6 +17,7 @@ export const userRoleEnum = pgEnum("user_role", [
   "admin",
   "editor",
   "author",
+  "sales",
   "viewer",
 ]);
 

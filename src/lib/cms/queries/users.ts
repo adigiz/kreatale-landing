@@ -1,5 +1,7 @@
-import { db, users } from "@/lib/cms/db";
+import { db, users, type NewUser } from "@/lib/cms/db";
 import { eq } from "drizzle-orm";
+
+type DbRole = NonNullable<NewUser["role"]>;
 
 export async function getAllUsers() {
   const allUsers = await db.select().from(users).orderBy(users.createdAt);
@@ -24,7 +26,7 @@ export async function createUser(data: {
   email: string;
   name?: string;
   passwordHash: string;
-  role: "super_admin" | "admin" | "editor" | "author" | "viewer";
+  role: DbRole;
 }) {
   const [user] = await db
     .insert(users)
@@ -44,7 +46,7 @@ export async function updateUser(
     email?: string;
     name?: string | null;
     passwordHash?: string;
-    role?: "super_admin" | "admin" | "editor" | "author" | "viewer";
+    role?: DbRole;
   }
 ) {
   const [user] = await db
@@ -61,5 +63,3 @@ export async function updateUser(
 export async function deleteUser(id: string) {
   await db.delete(users).where(eq(users.id, id));
 }
-
-

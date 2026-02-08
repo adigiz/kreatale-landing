@@ -15,6 +15,8 @@ import {
   ChevronRight,
   Target,
   FolderKanban,
+  Shield,
+  type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -41,11 +43,21 @@ const SidebarContext = createContext<SidebarContextType>({
 
 export const useSidebar = () => useContext(SidebarContext);
 
+interface NavItem {
+  href: string;
+  icon: LucideIcon;
+  label: string;
+  requiredPermission?: string;
+  /** Show only for these roles (bypasses permission check) */
+  roles?: string[];
+}
+
 interface SidebarProps {
   locale: string;
   userEmail: string;
   userName?: string | null;
   role: string;
+  permissions: string[];
   children: React.ReactNode;
 }
 
@@ -54,6 +66,7 @@ export default function Sidebar({
   userEmail,
   userName,
   role,
+  permissions,
   children,
 }: SidebarProps) {
   const pathname = usePathname();
@@ -92,41 +105,61 @@ export default function Sidebar({
   const sidebarWidth = isCollapsed ? "w-16" : "w-64";
   const mainMargin = isCollapsed ? "ml-16" : "ml-64";
 
-  const navItems = [
+  const allNavItems: NavItem[] = [
     {
       href: `/${locale}/admin`,
       icon: Home,
       label: "Dashboard",
+      requiredPermission: "admin:access",
     },
     {
       href: `/${locale}/admin/posts`,
       icon: FileText,
       label: "Posts",
+      requiredPermission: "posts:read",
     },
     {
       href: `/${locale}/admin/projects`,
       icon: FolderKanban,
       label: "Projects",
+      requiredPermission: "projects:read",
     },
     {
       href: `/${locale}/admin/contacts`,
       icon: Mail,
       label: "Inquiry",
+      requiredPermission: "contacts:read",
     },
     {
       href: `/${locale}/admin/leads`,
       icon: Target,
       label: "Leads",
+      requiredPermission: "leads:read",
     },
-  ];
-
-  if (role === "super_admin" || role === "admin") {
-    navItems.push({
+    {
       href: `/${locale}/admin/users`,
       icon: Users,
       label: "Users",
-    });
-  }
+      requiredPermission: "users:read",
+    },
+    {
+      href: `/${locale}/admin/roles`,
+      icon: Shield,
+      label: "Roles",
+      roles: ["super_admin", "admin"],
+    },
+  ];
+
+  // Filter nav items based on user permissions
+  const navItems = allNavItems.filter((item) => {
+    if (item.roles) {
+      return item.roles.includes(role);
+    }
+    if (item.requiredPermission) {
+      return permissions.includes(item.requiredPermission);
+    }
+    return true;
+  });
 
   return (
     <SidebarContext.Provider value={{ isCollapsed, sidebarWidth, mainMargin }}>
