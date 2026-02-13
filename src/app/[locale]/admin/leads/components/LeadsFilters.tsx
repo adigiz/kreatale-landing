@@ -1,7 +1,6 @@
-"use client";
-
-import { RefreshCw } from "lucide-react";
+import { RefreshCw, Search, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Select,
   SelectContent,
@@ -11,16 +10,11 @@ import {
 } from "@/components/ui/select";
 import { SearchableSelect } from "@/components/ui/searchable-select";
 import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-  SheetFooter,
-  SheetClose,
-} from "@/components/ui/sheet";
-import { SlidersHorizontal } from "lucide-react";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Badge } from "@/components/ui/badge";
 
 interface LeadsFiltersProps {
   locations: { id: string; name: string }[];
@@ -35,7 +29,6 @@ interface LeadsFiltersProps {
   onScrape: () => void;
   isPending: boolean;
   isScraping: boolean;
-  // New Filter Props
   filterOptions: {
     cities: string[];
     states: string[];
@@ -83,99 +76,112 @@ export function LeadsFilters({
   selectedCountry,
   setSelectedCountry,
 }: LeadsFiltersProps) {
+  const activeFiltersCount = [
+    selectedLocation !== "all",
+    selectedCategory !== "all",
+    statusFilter !== "all",
+    selectedCity !== "all",
+    selectedState !== "all",
+    selectedDistrict !== "all",
+    selectedCountry !== "all",
+  ].filter(Boolean).length;
+
+  const clearFilters = () => {
+    setSelectedLocation("all");
+    setSelectedCategory("all");
+    setStatusFilter("all");
+    setSelectedCity("all");
+    setSelectedState("all");
+    setSelectedDistrict("all");
+    setSelectedCountry("all");
+  };
+
   return (
-    <div className="space-y-6">
-      {/* Filters Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 p-4 border rounded-lg bg-card/50">
-        <div className="flex flex-wrap items-center gap-3">
-          {/* Primary Filters (Always Visible) */}
-          <div className="w-[200px]">
-            <SearchableSelect
-              options={[{ id: "all", name: "All Locations" }, ...locations]}
-              value={selectedLocation}
-              onChange={setSelectedLocation}
-              placeholder="Location"
+    <div className="space-y-4">
+      <div className="flex flex-col sm:flex-row gap-3 items-start sm:items-center justify-between p-4 border rounded-xl bg-card shadow-sm">
+        {/* Main Search & Filters */}
+        <div className="flex flex-1 flex-col sm:flex-row gap-3 w-full">
+          {/* Search Input (Placeholder for future implementation) */}
+          <div className="relative w-full sm:w-64 max-w-sm">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+            <Input
+              placeholder="Search leads..."
+              className="pl-9 bg-background"
+              disabled
+              title="Search functionality coming soon"
             />
           </div>
 
-          <div className="w-[200px]">
-            <SearchableSelect
-              options={[{ id: "all", name: "All Categories" }, ...categories]}
-              value={selectedCategory}
-              onChange={setSelectedCategory}
-              placeholder="Category"
-            />
-          </div>
+          <div className="flex flex-wrap gap-2 items-center">
+            <div className="w-[180px]">
+              <SearchableSelect
+                options={[{ id: "all", name: "All Locations" }, ...locations]}
+                value={selectedLocation}
+                onChange={setSelectedLocation}
+                placeholder="Location"
+              />
+            </div>
 
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={onFilter}
-            disabled={isPending}
-          >
-            <RefreshCw
-              className={`size-4 mr-2 ${isPending ? "animate-spin" : ""}`}
-            />
-            {isPending ? "Refreshing..." : "Apply"}
-          </Button>
+            <div className="w-[180px]">
+              <SearchableSelect
+                options={[{ id: "all", name: "All Categories" }, ...categories]}
+                value={selectedCategory}
+                onChange={setSelectedCategory}
+                placeholder="Category"
+              />
+            </div>
+
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="w-[140px] h-9 bg-background">
+                <SelectValue placeholder="Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Status</SelectItem>
+                {statusOptions.map((opt) => (
+                  <SelectItem key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
-        {/* Drawer Trigger */}
-        <Sheet>
-          <SheetTrigger asChild>
-            <Button variant="outline" size="sm" className="ml-auto">
-              <SlidersHorizontal className="size-4 mr-2" />
-              More Filters
-            </Button>
-          </SheetTrigger>
-          <SheetContent>
-            <SheetHeader>
-              <SheetTitle>Filter Leads</SheetTitle>
-              <SheetDescription>
-                Refine your search with detailed location filters.
-              </SheetDescription>
-            </SheetHeader>
-
-            <div className="py-6 px-6 space-y-8">
-              {/* Status Filter */}
-              <div className="space-y-3">
-                <label className="text-sm font-semibold text-foreground/80">
-                  Status
-                </label>
-                <Select value={statusFilter} onValueChange={setStatusFilter}>
-                  <SelectTrigger className="w-full h-10">
-                    <SelectValue placeholder="All Status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All Status</SelectItem>
-                    {statusOptions.map((opt) => (
-                      <SelectItem key={opt.value} value={opt.value}>
-                        {opt.label}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t" />
+        {/* Actions & Advanced Filters */}
+        <div className="flex items-center gap-2 w-full sm:w-auto mt-2 sm:mt-0">
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button variant="outline" size="sm" className="ml-auto relative">
+                <SlidersHorizontal className="size-4 mr-2" />
+                More
+                {activeFiltersCount > 0 && (
+                  <Badge
+                    variant="secondary"
+                    className="ml-2 h-5 px-1.5 min-w-[1.25rem] text-[10px]"
+                  >
+                    {activeFiltersCount}
+                  </Badge>
+                )}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-80 p-4" align="end">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between pb-2 border-b">
+                  <h4 className="font-medium leading-none">Advanced Filters</h4>
+                  {activeFiltersCount > 0 && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-auto p-0 text-xs text-muted-foreground hover:text-foreground"
+                      onClick={clearFilters}
+                    >
+                      Clear all
+                    </Button>
+                  )}
                 </div>
-                <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-background px-2 text-muted-foreground">
-                    Filters
-                  </span>
-                </div>
-              </div>
 
-              {/* Location Details */}
-              <div className="space-y-5">
-                <h4 className="text-sm font-semibold text-foreground/80">
-                  Location Details
-                </h4>
-
-                <div className="space-y-4">
-                  <div className="space-y-2">
+                <div className="space-y-3">
+                  <div className="space-y-1.5">
                     <label className="text-xs font-medium text-muted-foreground">
                       Country
                     </label>
@@ -192,10 +198,9 @@ export function LeadsFilters({
                       placeholder="Select Country"
                     />
                   </div>
-
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <label className="text-xs font-medium text-muted-foreground">
-                      State / Province
+                      State
                     </label>
                     <SearchableSelect
                       options={[
@@ -210,8 +215,7 @@ export function LeadsFilters({
                       placeholder="Select State"
                     />
                   </div>
-
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <label className="text-xs font-medium text-muted-foreground">
                       City
                     </label>
@@ -228,8 +232,7 @@ export function LeadsFilters({
                       placeholder="Select City"
                     />
                   </div>
-
-                  <div className="space-y-2">
+                  <div className="space-y-1.5">
                     <label className="text-xs font-medium text-muted-foreground">
                       District
                     </label>
@@ -248,18 +251,24 @@ export function LeadsFilters({
                   </div>
                 </div>
               </div>
-            </div>
+            </PopoverContent>
+          </Popover>
 
-            <SheetFooter>
-              <SheetClose asChild>
-                <Button onClick={onFilter} className="w-full">
-                  Apply Filters
-                </Button>
-              </SheetClose>
-            </SheetFooter>
-          </SheetContent>
-        </Sheet>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onFilter}
+            disabled={isPending}
+            title="Refresh List"
+          >
+            <RefreshCw
+              className={`size-4 ${isPending ? "animate-spin" : ""}`}
+            />
+          </Button>
+        </div>
       </div>
+
+      {/* Active Filters Summary (Optional - can be added if needed for better visibility) */}
     </div>
   );
 }

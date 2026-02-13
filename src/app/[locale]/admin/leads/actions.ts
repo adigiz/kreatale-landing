@@ -16,18 +16,98 @@ export type SortField = "createdAt" | "businessName" | "rating" | "reviewCount";
 export type SortOrder = "asc" | "desc";
 export type LeadStatus = (typeof leadStatusEnum.enumValues)[number];
 
-export async function getFilterOptions() {
-  // We want distinct values for dropdowns
-  const countries = await db.selectDistinct({ value: leads.country }).from(leads).where(isNotNull(leads.country)).orderBy(leads.country);
-  const states = await db.selectDistinct({ value: leads.state }).from(leads).where(isNotNull(leads.state)).orderBy(leads.state);
-  const cities = await db.selectDistinct({ value: leads.city }).from(leads).where(isNotNull(leads.city)).orderBy(leads.city);
-  const districts = await db.selectDistinct({ value: leads.district }).from(leads).where(isNotNull(leads.district)).orderBy(leads.district);
-  
+export async function getFilterOptions(filters?: {
+  country?: string;
+  state?: string;
+  city?: string;
+}) {
+  // Base queries
+  const countriesQuery = db
+    .selectDistinct({ value: leads.country })
+    .from(leads)
+    .where(isNotNull(leads.country))
+    .orderBy(leads.country);
+
+  let statesQuery = db
+    .selectDistinct({ value: leads.state })
+    .from(leads)
+    .where(isNotNull(leads.state))
+    .orderBy(leads.state);
+
+  let citiesQuery = db
+    .selectDistinct({ value: leads.city })
+    .from(leads)
+    .where(isNotNull(leads.city))
+    .orderBy(leads.city);
+
+  let districtsQuery = db
+    .selectDistinct({ value: leads.district })
+    .from(leads)
+    .where(isNotNull(leads.district))
+    .orderBy(leads.district);
+
+  // Apply filters
+  // 1. States depend on Country
+  if (filters?.country && filters.country !== "all") {
+    statesQuery = db
+      .selectDistinct({ value: leads.state })
+      .from(leads)
+      .where(and(isNotNull(leads.state), eq(leads.country, filters.country)))
+      .orderBy(leads.state);
+  }
+
+  // 2. Cities depend on Country (optional) and State
+  const cityConditions = [isNotNull(leads.city)];
+  if (filters?.country && filters.country !== "all") {
+    cityConditions.push(eq(leads.country, filters.country));
+  }
+  if (filters?.state && filters.state !== "all") {
+    cityConditions.push(eq(leads.state, filters.state));
+  }
+  if (cityConditions.length > 1) {
+    citiesQuery = db
+        .selectDistinct({ value: leads.city })
+        .from(leads)
+        .where(and(...cityConditions))
+        .orderBy(leads.city);
+  }
+
+
+  // 3. Districts depend on Country, State, City
+  const districtConditions = [isNotNull(leads.district)];
+  if (filters?.country && filters.country !== "all") {
+    districtConditions.push(eq(leads.country, filters.country));
+  }
+  if (filters?.state && filters.state !== "all") {
+    districtConditions.push(eq(leads.state, filters.state));
+  }
+   if (filters?.city && filters.city !== "all") {
+    districtConditions.push(eq(leads.city, filters.city));
+  }
+  if (districtConditions.length > 1) {
+     districtsQuery = db
+    .selectDistinct({ value: leads.district })
+    .from(leads)
+    .where(and(...districtConditions))
+    .orderBy(leads.district);
+  }
+
+  const [countries, states, cities, districts] = await Promise.all([
+    countriesQuery,
+    statesQuery,
+    citiesQuery,
+    districtsQuery,
+  ]);
+
   return {
-    countries: countries.map(c => c.value).filter((v): v is string => v !== null),
-    states: states.map(s => s.value).filter((v): v is string => v !== null),
-    cities: cities.map(c => c.value).filter((v): v is string => v !== null),
-    districts: districts.map(d => d.value).filter((v): v is string => v !== null)
+    countries: countries
+      .map((c) => c.value)
+      .filter((v): v is string => v !== null),
+    states: states.map((s) => s.value).filter((v): v is string => v !== null),
+    cities: cities.map((c) => c.value).filter((v): v is string => v !== null),
+    districts: districts
+      .map((d) => d.value)
+      .filter((v): v is string => v !== null),
   };
 }
 
@@ -206,6 +286,58 @@ export async function createLead(data: {
   } catch (error) {
     console.error("Failed to create lead:", error);
     return { success: false, error: "Failed to create lead" };
+  }
+}
+
+export async function updateLead(
+  id: string,
+  data: {
+    businessName: string;
+    address?: string;
+    phone?: string;
+    website?: string;
+    rating?: string;
+    reviewCount?: number;
+    googleMapsUrl?: string;
+    status?: LeadStatus;
+    notes?: string;
+    city?: string;
+    district?: string;
+    state?: string;
+    postalCode?: string;
+    country?: string;
+    locationId?: string;
+    categoryId?: string;
+  }
+) {
+  try {
+    await db
+      .update(leads)
+      .set({
+        businessName: data.businessName,
+        address: data.address || null,
+        phone: data.phone || null,
+        website: data.website || null,
+        rating: data.rating || null,
+        reviewCount: data.reviewCount || 0,
+        googleMapsUrl: data.googleMapsUrl || null,
+        status: data.status,
+        notes: data.notes || null,
+        city: data.city || null,
+        district: data.district || null,
+        state: data.state || null,
+        postalCode: data.postalCode || null,
+        country: data.country || null,
+        locationId: data.locationId || null,
+        categoryId: data.categoryId || null,
+        updatedAt: new Date(),
+      })
+      .where(eq(leads.id, id));
+
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to update lead:", error);
+    return { success: false, error: "Failed to update lead" };
   }
 }
 

@@ -15,7 +15,8 @@ import type { SortField, SortOrder } from "../actions";
 import { LeadsTable } from "./LeadsTable";
 import { LeadsFilters } from "./LeadsFilters";
 import { LeadsPagination } from "./LeadsPagination";
-import { AddLeadDialog } from "./AddLeadDialog";
+import { LeadFormDialog } from "./LeadFormDialog";
+import { StatsCards } from "./StatsCards";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -43,7 +44,7 @@ interface Category {
   searchTerm: string;
 }
 
-interface Lead {
+export interface Lead {
   id: string;
   businessName: string;
   address: string | null;
@@ -123,10 +124,36 @@ export default function LeadsDashboard({
   const initialTotalRef = useRef(stats.total);
   const router = useRouter();
 
-  // Load filter options
+  // Load filter options (dependent)
   useEffect(() => {
-    getFilterOptions().then((opts) => setFilterOptions(opts));
-  }, [leads]); // Refresh options when leads change (e.g. after scrape)
+    getFilterOptions({
+      country: selectedCountry,
+      state: selectedState,
+      city: selectedCity,
+    }).then((opts) => setFilterOptions(opts));
+  }, [leads, selectedCountry, selectedState, selectedCity]);
+
+  // Reset downstream filters
+  useEffect(() => {
+    if (selectedCountry === "all") {
+      setSelectedState("all");
+      setSelectedCity("all");
+      setSelectedDistrict("all");
+    }
+  }, [selectedCountry, setSelectedState, setSelectedCity, setSelectedDistrict]);
+
+  useEffect(() => {
+    if (selectedState === "all" && selectedCountry !== "all") {
+      setSelectedCity("all");
+      setSelectedDistrict("all");
+    }
+  }, [selectedState, selectedCountry, setSelectedCity, setSelectedDistrict]);
+
+  useEffect(() => {
+    if (selectedCity === "all" && selectedState !== "all") {
+      setSelectedDistrict("all");
+    }
+  }, [selectedCity, selectedState, setSelectedDistrict]);
 
   const fetchLeads = useCallback(
     (page: number = 1) => {
@@ -160,6 +187,11 @@ export default function LeadsDashboard({
       sortOrder,
     ],
   );
+
+  // Auto-fetch when filters or sort change
+  useEffect(() => {
+    fetchLeads(1);
+  }, [fetchLeads]);
 
   // Polling for real-time updates
   useEffect(() => {
@@ -289,11 +321,6 @@ export default function LeadsDashboard({
           <h1 className="text-2xl font-semibold text-foreground">Leads</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Manage business leads from Google Maps
-            {stats.total > 0 && (
-              <span className="ml-2">
-                ({stats.total} total, {stats.new} new)
-              </span>
-            )}
             {isScraping && (
               <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800 animate-pulse">
                 Found {scrapedCount} leads...
@@ -302,10 +329,11 @@ export default function LeadsDashboard({
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <AddLeadDialog
+          <LeadFormDialog
+            mode="create"
             locations={locations}
             categories={categories}
-            onLeadCreated={() => fetchLeads(1)}
+            onSuccess={() => fetchLeads(1)}
           />
           <div className="inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground">
             <button
@@ -323,6 +351,8 @@ export default function LeadsDashboard({
           </div>
         </div>
       </div>
+
+      <StatsCards stats={stats} />
 
       {activeTab === "map" ? (
         <MapScraper
@@ -358,10 +388,13 @@ export default function LeadsDashboard({
 
           <LeadsTable
             leads={leads}
+            locations={locations}
+            categories={categories}
             sortBy={sortBy}
             sortOrder={sortOrder}
             onSort={handleSort}
             onStatusChange={handleStatusChange}
+            onLeadUpdated={() => fetchLeads(pagination.page)}
           />
 
           <LeadsPagination

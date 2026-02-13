@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { Plus } from "lucide-react";
+import { useState, useTransition, useEffect } from "react";
+import { Plus, Pencil } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -20,13 +20,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { SearchableSelect } from "@/components/ui/searchable-select";
-import { createLead } from "../actions";
+import { createLead, updateLead, LeadStatus } from "../actions";
 import { toast } from "sonner";
+import { Lead } from "./LeadsDashboard";
 
-interface AddLeadDialogProps {
+interface LeadFormDialogProps {
+  mode: "create" | "edit";
+  lead?: Lead;
   locations: { id: string; name: string }[];
   categories: { id: string; name: string }[];
-  onLeadCreated: () => void;
+  onSuccess: () => void;
 }
 
 const statusOptions = [
@@ -44,11 +47,13 @@ const inputClasses =
 
 const labelClasses = "text-sm font-medium text-foreground/80";
 
-export function AddLeadDialog({
+export function LeadFormDialog({
+  mode,
+  lead,
   locations,
   categories,
-  onLeadCreated,
-}: AddLeadDialogProps) {
+  onSuccess,
+}: LeadFormDialogProps) {
   const [open, setOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 
@@ -89,6 +94,32 @@ export function AddLeadDialog({
     setCategoryId("");
   };
 
+  // Update state when lead changes (for edit mode) or dialog opens
+  useEffect(() => {
+    if (open) {
+      if (mode === "edit" && lead) {
+        setBusinessName(lead.businessName);
+        setAddress(lead.address || "");
+        setPhone(lead.phone || "");
+        setWebsite(lead.website || "");
+        setRating(lead.rating || "");
+        setReviewCount(lead.reviewCount?.toString() || "");
+        setGoogleMapsUrl(lead.googleMapsUrl || "");
+        setStatus(lead.status);
+        setNotes(lead.notes || "");
+        setCity(lead.city || "");
+        setDistrict(lead.district || "");
+        setState(lead.state || "");
+        setPostalCode(lead.postalCode || "");
+        setCountry(lead.country || "");
+        setLocationId(lead.locationId || "");
+        setCategoryId(lead.categoryId || "");
+      } else {
+        resetForm();
+      }
+    }
+  }, [open, lead, mode]);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -98,7 +129,7 @@ export function AddLeadDialog({
     }
 
     startTransition(async () => {
-      const result = await createLead({
+      const leadData = {
         businessName: businessName.trim(),
         address: address.trim() || undefined,
         phone: phone.trim() || undefined,
@@ -106,7 +137,7 @@ export function AddLeadDialog({
         rating: rating.trim() || undefined,
         reviewCount: reviewCount ? parseInt(reviewCount) : undefined,
         googleMapsUrl: googleMapsUrl.trim() || undefined,
-        status: status as "new" | "contacted" | "replied" | "qualified" | "converted" | "lost" | "ignored",
+        status: status as LeadStatus,
         notes: notes.trim() || undefined,
         city: city.trim() || undefined,
         district: district.trim() || undefined,
@@ -115,15 +146,26 @@ export function AddLeadDialog({
         country: country.trim() || undefined,
         locationId: locationId || undefined,
         categoryId: categoryId || undefined,
-      });
+      };
+
+      let result;
+      if (mode === "create") {
+        result = await createLead(leadData);
+      } else if (mode === "edit" && lead) {
+        result = await updateLead(lead.id, leadData);
+      } else {
+        return; // Should not happen
+      }
 
       if (result.success) {
-        toast.success("Lead created successfully");
-        resetForm();
+        toast.success(
+          `Lead ${mode === "create" ? "created" : "updated"} successfully`,
+        );
         setOpen(false);
-        onLeadCreated();
+        if (mode === "create") resetForm();
+        onSuccess();
       } else {
-        toast.error(result.error || "Failed to create lead");
+        toast.error(result.error || `Failed to ${mode} lead`);
       }
     });
   };
@@ -131,16 +173,26 @@ export function AddLeadDialog({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="sm">
-          <Plus className="size-4 mr-2" />
-          Add Lead
-        </Button>
+        {mode === "create" ? (
+          <Button size="sm">
+            <Plus className="size-4 mr-2" />
+            Add Lead
+          </Button>
+        ) : (
+          <Button variant="ghost" size="icon" className="h-8 w-8">
+            <Pencil className="size-4" />
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Add New Lead</DialogTitle>
+          <DialogTitle>
+            {mode === "create" ? "Add New Lead" : "Edit Lead"}
+          </DialogTitle>
           <DialogDescription>
-            Manually add a business lead. Only business name is required.
+            {mode === "create"
+              ? "Manually add a business lead. Only business name is required."
+              : "Update lead details."}
           </DialogDescription>
         </DialogHeader>
 
@@ -365,7 +417,13 @@ export function AddLeadDialog({
               Cancel
             </Button>
             <Button type="submit" disabled={isPending}>
-              {isPending ? "Creating..." : "Create Lead"}
+              {isPending
+                ? mode === "create"
+                  ? "Creating..."
+                  : "Saving..."
+                : mode === "create"
+                  ? "Create Lead"
+                  : "Save Changes"}
             </Button>
           </DialogFooter>
         </form>

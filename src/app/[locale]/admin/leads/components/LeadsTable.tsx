@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/select";
 import { ArrowUp, ArrowDown, ArrowUpDown } from "lucide-react";
 import { SortField, SortOrder } from "../actions";
+import { LeadFormDialog } from "./LeadFormDialog";
 
 interface Lead {
   id: string;
@@ -38,10 +39,13 @@ interface Lead {
 
 interface LeadsTableProps {
   leads: Lead[];
+  locations: { id: string; name: string }[];
+  categories: { id: string; name: string }[];
   sortBy: SortField;
   sortOrder: SortOrder;
   onSort: (field: SortField) => void;
   onStatusChange: (leadId: string, newStatus: string) => void;
+  onLeadUpdated: () => void;
 }
 
 const statusColors: Record<string, string> = {
@@ -66,10 +70,13 @@ const statusOptions = [
 
 export function LeadsTable({
   leads,
+  locations,
+  categories,
   sortBy,
   sortOrder,
   onSort,
   onStatusChange,
+  onLeadUpdated,
 }: LeadsTableProps) {
   const SortButton = ({
     field,
@@ -269,6 +276,14 @@ export function LeadsTable({
                           </a>
                         </Button>
                       )}
+
+                      <LeadFormDialog
+                        mode="edit"
+                        lead={lead}
+                        locations={locations}
+                        categories={categories}
+                        onSuccess={onLeadUpdated}
+                      />
                     </div>
                   </td>
                 </tr>
