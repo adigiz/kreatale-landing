@@ -17,6 +17,8 @@ import { LeadsFilters } from "./LeadsFilters";
 import { LeadsPagination } from "./LeadsPagination";
 import { LeadFormDialog } from "./LeadFormDialog";
 import { StatsCards } from "./StatsCards";
+import { WhatsAppTemplateDialog } from "./WhatsAppTemplateDialog";
+
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
@@ -115,6 +117,8 @@ export default function LeadsDashboard({
     districts: string[];
   }>({ cities: [], states: [], countries: [], districts: [] });
 
+  const [waTemplate, setWaTemplate] = useState("");
+
   const [sortBy, setSortBy] = useState<SortField>("createdAt");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [isPending, startTransition] = useTransition();
@@ -154,6 +158,19 @@ export default function LeadsDashboard({
       setSelectedDistrict("all");
     }
   }, [selectedCity, selectedState, setSelectedDistrict]);
+
+  // Load WA Template from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("kreatale_wa_template");
+    if (saved) {
+      setWaTemplate(saved);
+    }
+  }, []);
+
+  const handleSaveWaTemplate = (template: string) => {
+    setWaTemplate(template);
+    localStorage.setItem("kreatale_wa_template", template);
+  };
 
   const fetchLeads = useCallback(
     (page: number = 1) => {
@@ -328,27 +345,31 @@ export default function LeadsDashboard({
             )}
           </p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
+          <WhatsAppTemplateDialog
+            template={waTemplate}
+            onSave={handleSaveWaTemplate}
+          />
           <LeadFormDialog
             mode="create"
             locations={locations}
             categories={categories}
             onSuccess={() => fetchLeads(1)}
           />
-          <div className="inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground">
-            <button
-              onClick={() => setActiveTab("list")}
-              className={`inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${activeTab === "list" ? "bg-background text-foreground shadow" : "hover:bg-background/50"}`}
-            >
-              List View
-            </button>
-            <button
-              onClick={() => setActiveTab("map")}
-              className={`inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${activeTab === "map" ? "bg-background text-foreground shadow" : "hover:bg-background/50"}`}
-            >
-              Map Scraper
-            </button>
-          </div>
+        </div>
+        <div className="inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground">
+          <button
+            onClick={() => setActiveTab("list")}
+            className={`inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${activeTab === "list" ? "bg-background text-foreground shadow" : "hover:bg-background/50"}`}
+          >
+            List View
+          </button>
+          <button
+            onClick={() => setActiveTab("map")}
+            className={`inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ${activeTab === "map" ? "bg-background text-foreground shadow" : "hover:bg-background/50"}`}
+          >
+            Map Scraper
+          </button>
         </div>
       </div>
 
@@ -395,6 +416,7 @@ export default function LeadsDashboard({
             onSort={handleSort}
             onStatusChange={handleStatusChange}
             onLeadUpdated={() => fetchLeads(pagination.page)}
+            waTemplate={waTemplate}
           />
 
           <LeadsPagination

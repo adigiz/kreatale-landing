@@ -46,6 +46,7 @@ interface LeadsTableProps {
   onSort: (field: SortField) => void;
   onStatusChange: (leadId: string, newStatus: string) => void;
   onLeadUpdated: () => void;
+  waTemplate?: string;
 }
 
 const statusColors: Record<string, string> = {
@@ -77,6 +78,7 @@ export function LeadsTable({
   onSort,
   onStatusChange,
   onLeadUpdated,
+  waTemplate,
 }: LeadsTableProps) {
   const SortButton = ({
     field,
@@ -198,7 +200,12 @@ export function LeadsTable({
                     <div className="flex flex-col gap-1">
                       {lead.phone && (
                         <a
-                          href={`https://wa.me/${lead.phone.replace(/\D/g, "").replace(/^0/, "62")}`}
+                          href={`https://wa.me/${lead.phone.replace(/\D/g, "").replace(/^0/, "62")}?text=${encodeURIComponent(
+                            (
+                              waTemplate ||
+                              "Halo, saya melihat *{{businessName}}* di Google Maps..."
+                            ).replace("{{businessName}}", lead.businessName),
+                          )}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-1 text-sm text-blue-600 hover:underline"
