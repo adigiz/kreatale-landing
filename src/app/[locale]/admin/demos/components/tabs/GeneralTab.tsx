@@ -55,6 +55,17 @@ export function GeneralTab({
           )}
         </div>
         <div className="space-y-2">
+          <Label htmlFor="websiteName">Website Name</Label>
+          <Input
+            id="websiteName"
+            {...register("websiteName")}
+            placeholder="e.g. Luxury Travel Co."
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-2">
           <Label>Template</Label>
           <Select
             onValueChange={(val) => setValue("templateId", val)}
@@ -72,38 +83,36 @@ export function GeneralTab({
             </SelectContent>
           </Select>
         </div>
+        <div className="space-y-2">
+          <Label htmlFor="location">Location</Label>
+          <Input
+            id="location"
+            {...register("location")}
+            placeholder="e.g. Indonesia / Global"
+          />
+        </div>
       </div>
 
-      <div className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label htmlFor="location">Location</Label>
-            <Input
-              id="location"
-              {...register("location")}
-              placeholder="e.g. Indonesia / Global"
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="currency">Global Currency</Label>
-            <Input
-              id="currency"
-              {...register("currency")}
-              placeholder="e.g. Rp, $, €"
-            />
-          </div>
-        </div>
-
-        <div className="flex items-center space-x-2">
-          <input
-            type="checkbox"
-            id="isPublished"
-            className="h-4 w-4 rounded border-gray-300"
-            checked={watch("isPublished")}
-            onChange={(e) => setValue("isPublished", e.target.checked)}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="currency">Global Currency</Label>
+          <Input
+            id="currency"
+            {...register("currency")}
+            placeholder="e.g. Rp, $, €"
           />
-          <Label htmlFor="isPublished">Publish this demo site</Label>
         </div>
+      </div>
+
+      <div className="flex items-center space-x-2">
+        <input
+          type="checkbox"
+          id="isPublished"
+          className="h-4 w-4 rounded border-gray-300"
+          checked={watch("isPublished")}
+          onChange={(e) => setValue("isPublished", e.target.checked)}
+        />
+        <Label htmlFor="isPublished">Publish this demo site</Label>
       </div>
 
       <div className="flex items-end">

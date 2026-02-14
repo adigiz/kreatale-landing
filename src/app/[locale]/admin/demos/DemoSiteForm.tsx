@@ -6,12 +6,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useParams } from "next/navigation";
 import { DemoFormValues, demoSchema, DemoSite } from "./types";
 import { DUMMY_TOUR_CONFIG } from "@/lib/cms/dummy/tour";
-import { DestinationsSection } from "./components/DestinationsSection";
-import { PackagesSection } from "./components/PackagesSection";
+import { DUMMY_CAR_CONFIG } from "./utils/template-configs";
 import { GeneralTab } from "./components/tabs/GeneralTab";
 import { BrandingTab } from "./components/tabs/BrandingTab";
 import { HeroTab } from "./components/tabs/HeroTab";
+import { CollectionSection } from "./components/CollectionSection";
+import { EntitySection } from "./components/EntitySection";
 import { PreviewSystem } from "./components/PreviewSystem";
+import { TEMPLATE_CONFIGS } from "./utils/template-configs";
 import { Button } from "@/components/ui/button";
 import { createDemoSite, updateDemoSite } from "./actions";
 import { toast } from "sonner";
@@ -85,6 +87,7 @@ export default function DemoSiteForm({
 
   const defaultValues: Partial<DemoFormValues> = {
     slug: initialData?.slug || "",
+    websiteName: initialData?.config?.websiteName || "",
     templateId: initialData?.templateId || "tour",
     isPublished: initialData?.isPublished || false,
     logo: initialData?.config?.logo || "",
@@ -115,6 +118,9 @@ export default function DemoSiteForm({
 
   const templateId = watch("templateId");
   const formValues = watch();
+  const currentTemplateId = templateId || "tour";
+  const templateConfig =
+    TEMPLATE_CONFIGS[currentTemplateId] || TEMPLATE_CONFIGS.tour;
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -204,11 +210,18 @@ export default function DemoSiteForm({
   );
 
   const handleFillDummyData = useCallback(() => {
+    let dummyData = null;
     if (templateId === "tour") {
-      Object.entries(DUMMY_TOUR_CONFIG).forEach(([key, value]) => {
+      dummyData = DUMMY_TOUR_CONFIG;
+    } else if (templateId === "car") {
+      dummyData = DUMMY_CAR_CONFIG;
+    }
+
+    if (dummyData) {
+      Object.entries(dummyData).forEach(([key, value]) => {
         setValue(key as keyof DemoFormValues, value);
       });
-      toast.success("Filled with Tour template sample data");
+      toast.success(`Filled with ${templateConfig.name} sample data`);
     } else {
       toast.info(`Sample data for '${templateId}' not available yet.`);
     }
@@ -218,7 +231,7 @@ export default function DemoSiteForm({
     setTimeout(() => {
       handlePreview(false);
     }, 100);
-  }, [templateId, setValue, handlePreview]);
+  }, [templateId, setValue, handlePreview, templateConfig.name]);
 
   useEffect(() => {
     const currentConfigString = JSON.stringify(formValues);
@@ -359,24 +372,27 @@ export default function DemoSiteForm({
                     register={register}
                     watch={watch}
                     setValue={setValue}
+                    config={templateConfig}
                   />
                 </TabsContent>
                 <TabsContent
                   value="content"
                   className="space-y-6 border p-4 rounded-lg bg-gray-50/50 mt-4"
                 >
-                  <DestinationsSection
+                  <CollectionSection
                     control={control}
                     register={register}
                     watch={watch}
                     setValue={setValue}
+                    config={templateConfig}
                   />
 
-                  <PackagesSection
+                  <EntitySection
                     control={control}
                     register={register}
                     watch={watch}
                     setValue={setValue}
+                    config={templateConfig}
                   />
                 </TabsContent>
               </Tabs>

@@ -1,4 +1,6 @@
 export const DUMMY_TOUR_CONFIG = {
+  slug: "luxury-travel-demo",
+  websiteName: "Luxury Travel Co.",
   heroTitle: "The Art of Verified Travel.",
   heroSubtitle:
     "We don't just plan trips; we craft narratives tailored to your unique travel style.",

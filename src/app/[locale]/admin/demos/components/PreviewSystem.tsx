@@ -82,6 +82,7 @@ export function PreviewSystem({
         <div className="flex-1 bg-gray-100 flex justify-center overflow-auto p-8">
           {iframeSrc && (
             <iframe
+              key={previewToken}
               src={iframeSrc}
               className="bg-white shadow-xl transition-all duration-300"
               style={{
@@ -162,6 +163,7 @@ export function PreviewSystem({
       <div className="flex-1 overflow-auto flex justify-center p-8 bg-gray-50/50">
         {iframeSrc ? (
           <iframe
+            key={previewToken}
             src={iframeSrc}
             className="bg-white shadow-xl transition-all duration-300"
             style={{

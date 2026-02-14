@@ -10,30 +10,34 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import ImagePicker from "../../ImagePicker";
 import { DemoFormValues } from "../../types";
+import { TemplateConfig } from "../../utils/template-configs";
 
 interface HeroTabProps {
   register: UseFormRegister<DemoFormValues>;
   watch: UseFormWatch<DemoFormValues>;
   setValue: UseFormSetValue<DemoFormValues>;
+  config: TemplateConfig;
 }
 
-export function HeroTab({ register, watch, setValue }: HeroTabProps) {
+export function HeroTab({ register, watch, setValue, config }: HeroTabProps) {
+  const { heroFields } = config;
+
   return (
     <div className="space-y-4">
       <h3 className="font-semibold text-lg">Hero Section</h3>
       <div className="grid grid-cols-1 gap-4">
         <div className="space-y-2">
-          <Label>Hero Title</Label>
+          <Label>{heroFields.heroTitle.label}</Label>
           <Textarea
             {...register("heroTitle")}
-            placeholder="Experience the Extraordinary"
+            placeholder={heroFields.heroTitle.placeholder}
           />
         </div>
         <div className="space-y-2">
-          <Label>Hero Subtitle</Label>
+          <Label>{heroFields.heroSubtitle.label}</Label>
           <Textarea
             {...register("heroSubtitle")}
-            placeholder="Your journey begins here..."
+            placeholder={heroFields.heroSubtitle.placeholder}
           />
         </div>
         <div className="space-y-2">
@@ -45,20 +49,32 @@ export function HeroTab({ register, watch, setValue }: HeroTabProps) {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 border-t">
           <div className="space-y-2">
-            <Label>Spotlight Price</Label>
-            <Input {...register("price")} placeholder="e.g. 14,200" />
+            <Label>{heroFields.price.label}</Label>
+            <Input
+              {...register("price")}
+              placeholder={heroFields.price.placeholder}
+            />
           </div>
           <div className="space-y-2">
-            <Label>Global Currency</Label>
-            <Input {...register("currency")} placeholder="Rp" />
+            <Label>{heroFields.currency.label}</Label>
+            <Input
+              {...register("currency")}
+              placeholder={heroFields.currency.placeholder}
+            />
           </div>
           <div className="space-y-2">
-            <Label>Spotlight Duration</Label>
-            <Input {...register("days")} placeholder="7 Days" />
+            <Label>{heroFields.days.label}</Label>
+            <Input
+              {...register("days")}
+              placeholder={heroFields.days.placeholder}
+            />
           </div>
           <div className="space-y-2">
-            <Label>Spotlight Location</Label>
-            <Input {...register("location")} placeholder="Bali, Indonesia" />
+            <Label>{heroFields.location.label}</Label>
+            <Input
+              {...register("location")}
+              placeholder={heroFields.location.placeholder}
+            />
           </div>
         </div>
       </div>

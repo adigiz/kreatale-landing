@@ -5,6 +5,7 @@ export const demoSchema = z.object({
     .string()
     .min(3, "Slug must be at least 3 characters")
     .regex(/^[a-z0-9-]+$/, "Slug must be lowercase alphanumeric with dashes"),
+  websiteName: z.string().optional(),
   templateId: z.string().min(1, "Template is required"),
   isPublished: z.boolean(),
   logo: z.string().optional(),

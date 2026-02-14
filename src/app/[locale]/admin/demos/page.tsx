@@ -42,6 +42,9 @@ export default async function DemosPage({
             <thead>
               <tr className="border-b">
                 <th className="h-10 px-4 text-left align-middle text-xs font-medium text-muted-foreground">
+                  Website Name
+                </th>
+                <th className="h-10 px-4 text-left align-middle text-xs font-medium text-muted-foreground">
                   Slug
                 </th>
                 <th className="h-10 px-4 text-left align-middle text-xs font-medium text-muted-foreground">
@@ -62,7 +65,7 @@ export default async function DemosPage({
               {demoSites.length === 0 ? (
                 <tr>
                   <td
-                    colSpan={5}
+                    colSpan={6}
                     className="h-24 text-center text-sm text-muted-foreground"
                   >
                     No demo sites found. Create one to get started.
@@ -75,20 +78,25 @@ export default async function DemosPage({
                     className="border-b transition-colors hover:bg-muted/50"
                   >
                     <td className="p-4">
-                      <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium text-foreground">
+                        {(site.config as any)?.websiteName || "-"}
+                      </span>
+                    </td>
+                    <td className="p-4">
+                      {site.isPublished ? (
+                        <Link
+                          href={`/${locale}/demo/${site.slug}`}
+                          target="_blank"
+                          className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
+                        >
+                          {site.slug}
+                          <ExternalLink className="size-3" />
+                        </Link>
+                      ) : (
                         <span className="text-sm font-medium text-foreground">
                           {site.slug}
                         </span>
-                        {site.isPublished && (
-                          <Link
-                            href={`/${locale}/demo/${site.slug}`}
-                            target="_blank"
-                            className="text-muted-foreground hover:text-primary"
-                          >
-                            <ExternalLink className="size-3" />
-                          </Link>
-                        )}
-                      </div>
+                      )}
                     </td>
                     <td className="p-4">
                       <span className="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium uppercase">
