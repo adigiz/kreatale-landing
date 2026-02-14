@@ -1,5 +1,11 @@
 import { NextIntlClientProvider } from "next-intl";
-import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
+import {
+  Geist,
+  Geist_Mono,
+  Instrument_Serif,
+  Plus_Jakarta_Sans,
+  Playfair_Display,
+} from "next/font/google";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import "../globals.css";
@@ -28,6 +34,18 @@ const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument-serif",
   weight: "400",
   style: ["normal", "italic"],
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
   subsets: ["latin"],
   display: "swap",
 });
@@ -192,6 +210,14 @@ export default async function LocaleLayout({
           as="image"
           fetchPriority="high"
         />
+        <link
+          href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -200,7 +226,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} ${jakarta.variable} ${playfair.variable} antialiased`}
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ConditionalLayout projects={projects}>{children}</ConditionalLayout>

@@ -16,12 +16,16 @@ export default function ConditionalLayout({
 }: ConditionalLayoutProps) {
   const pathname = usePathname();
   const isAdminRoute = pathname?.includes("/admin") || false;
+  const isDemoRoute = pathname?.includes("/demo") || false;
+  const isPreviewRoute = pathname?.includes("/preview") || false;
 
   return (
     <>
-      {!isAdminRoute && <Header projects={projects} />}
+      {!isAdminRoute && !isDemoRoute && !isPreviewRoute && (
+        <Header projects={projects} />
+      )}
       {children}
-      {!isAdminRoute && <Footer />}
+      {!isAdminRoute && !isDemoRoute && !isPreviewRoute && <Footer />}
     </>
   );
 }

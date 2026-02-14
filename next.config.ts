@@ -47,6 +47,11 @@ const nextConfig: NextConfig = {
         hostname: "res.cloudinary.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
+        pathname: "/**",
+      },
     ],
     formats: ["image/avif", "image/webp"],
     // Optimized for mobile-first: smaller sizes for mobile devices

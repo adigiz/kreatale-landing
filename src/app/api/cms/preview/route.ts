@@ -28,6 +28,7 @@ export async function POST(request: NextRequest) {
       token,
       contentType,
       contentId: contentId || null,
+      data: contentData, // Store the unsaved data
       expiresAt,
     });
 
@@ -60,6 +61,11 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: "Invalid or expired token" }, { status: 401 });
     }
 
+    // If we have stored data, return it
+    if (previewToken.data) {
+       return NextResponse.json({ valid: true, previewToken, data: previewToken.data });
+    }
+    
     return NextResponse.json({ valid: true, previewToken });
   } catch {
     return NextResponse.json(

@@ -51,6 +51,18 @@
   --breakpoint-xsm: 425px;
   --animate-marquee: marquee var(--duration) infinite linear;
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+
+  /* Tour Template Theme */
+  --color-tour-primary: var(--tour-primary, #1173d4);
+  --color-tour-primary-hover: var(--tour-primary-hover, #0e5ea8);
+  --color-tour-navy-dark: #0a1128;
+  --color-tour-navy-light: #1c2a48;
+  --color-tour-background-light: #ffffff;
+  --color-tour-background-dark: #101922;
+  --color-tour-surface-dark: #1a2632;
+  --color-tour-surface-darker: #15202b;
+  --font-tour-sans: var(--font-jakarta);
+  --font-tour-serif: var(--font-playfair);
 }
 
 @keyframes marquee {
@@ -97,7 +109,7 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: #0061FF;
+  --primary: #0061ff;
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
@@ -131,7 +143,7 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: #0061FF;
+  --primary: #0061ff;
   --primary-foreground: oklch(0.985 0 0);
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
@@ -190,7 +202,7 @@
       transparent
     );
   }
-  
+
   @keyframes marquee-seamless {
     0% {
       transform: translateX(0);

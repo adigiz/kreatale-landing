@@ -9,6 +9,7 @@ import {
 } from "@/lib/cms/db";
 import { eq, and, gt } from "drizzle-orm";
 import Image from "next/image";
+import type { DemoSite } from "@/app/[locale]/admin/demos/types";
 
 export default async function PreviewPage({
   params,
@@ -39,8 +40,8 @@ export default async function PreviewPage({
     .where(
       and(
         eq(previewTokens.token, token),
-        gt(previewTokens.expiresAt, new Date())
-      )
+        gt(previewTokens.expiresAt, new Date()),
+      ),
     )
     .limit(1);
 
@@ -70,7 +71,7 @@ export default async function PreviewPage({
     }
   }
 
-  if (!content) {
+  if (!content && !previewToken.data) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="text-center">
@@ -128,6 +129,43 @@ export default async function PreviewPage({
     );
   }
 
+  // Demo Site preview
+  if (previewToken.contentType === "demo-site") {
+    // We prefer the 'data' from the token (unsaved changes)
+    const data = previewToken.data as unknown as DemoSite;
+    const config = data?.config || {};
+
+    // If no data in token but contentId exists (saved demo)
+    // We would need to handle this case if we fetched 'content' earlier for demo-site
+    // But currently we don't fetch content for demo-site in the block above
+    // So we rely on passed data.
+    // TODO: If we want to support saved demo preview without data passed, we need to add demo-site to the fetch logic above.
+
+    // Dynamic import to avoid circular deps or server/client issues if any
+    const TourTemplate = (await import("@/components/demo/tour/TourTemplate"))
+      .default;
+
+    return (
+      <div className="min-h-screen bg-white">
+        {device && device !== "desktop" && (
+          <div className="sticky top-0 z-50 bg-gray-100 border-b border-gray-200 px-4 py-2 text-sm text-gray-600 text-center">
+            {deviceConfig.name} Preview ({deviceConfig.maxWidth})
+          </div>
+        )}
+        <div
+          className="mx-auto bg-white min-h-screen shadow-2xl overflow-hidden origin-top"
+          style={{
+            maxWidth: deviceConfig.maxWidth,
+            margin: device && device !== "desktop" ? "0 auto" : undefined,
+            // Scale for better mobile view if needed, but iframe handles it
+          }}
+        >
+          <TourTemplate config={config} />
+        </div>
+      </div>
+    );
+  }
+
   // Project preview
   const project = content as Project;
   return (
@@ -168,5 +206,3 @@ export default async function PreviewPage({
     </div>
   );
 }
-
-
