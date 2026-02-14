@@ -1,6 +1,7 @@
 import TourTemplate, {
   type TourConfig,
 } from "@/components/demo/tour/TourTemplate";
+import { CarTemplate, type CarConfig } from "@/components/demo/car/CarTemplate";
 import { getDemoSiteBySlug } from "@/lib/cms/queries/demo-sites";
 import { notFound } from "next/navigation";
 
@@ -18,8 +19,15 @@ export default async function DemoPage({
 
   // Check template type and render appropriate component
   if (demoSite.templateId === "tour") {
-    // Cast config to appropriate type or pass as any if loose
     return <TourTemplate config={demoSite.config as unknown as TourConfig} />;
+  }
+
+  if (demoSite.templateId === "car") {
+    const carConfig = {
+      ...(demoSite.config as any),
+      slug,
+    } as unknown as CarConfig;
+    return <CarTemplate config={carConfig} />;
   }
 
   return <div>Template not found</div>;

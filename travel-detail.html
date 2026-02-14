@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mobile Package Detail View</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Playfair+Display:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0A2472","primary-hover": "#0e5ea8",
+                        "accent": "#1173d4","background-light": "#ffffff",
+                        "background-dark": "#101922",
+                        "surface-dark": "#1a2632",
+                        "surface-darker": "#15202b",
+                    },
+                    fontFamily: {
+                        "display": ["Plus Jakarta Sans", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+<style>.no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }.no-scrollbar {
+            -ms-overflow-style: none;scrollbar-width: none;}
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-gray-800 dark:text-gray-100 antialiased overflow-hidden h-screen flex flex-col">
+<nav class="w-full z-50 bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 h-16 flex-none sticky top-0">
+<div class="max-w-[1920px] mx-auto px-4 h-full flex items-center justify-between">
+<button class="p-2 -ml-2 text-gray-500 hover:text-primary transition-colors">
+<span class="material-icons">arrow_back</span>
+</button>
+<div class="flex items-center gap-1 cursor-pointer">
+<span class="text-lg font-bold tracking-tight text-primary dark:text-white">Voyage<span class="text-accent">.</span></span>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-gray-500 hover:text-primary transition-colors">
+<span class="material-icons">favorite_border</span>
+</button>
+<button class="p-2 -mr-2 text-gray-500 hover:text-primary transition-colors">
+<span class="material-icons">share</span>
+</button>
+</div>
+</div>
+</nav>
+<main class="flex-1 flex flex-col lg:flex-row overflow-hidden w-full max-w-[1920px] mx-auto">
+<section class="w-full lg:w-1/2 lg:h-full h-[45vh] flex-none relative bg-gray-900 lg:overflow-y-auto no-scrollbar group">
+<img alt="Scenic view of Santorini architecture at sunset" class="w-full h-full object-cover transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyU6OxNe7z0NQ7uEX7VvsNZF2iAhNR8klSv7Vct6lzgoErV9IXpp33UQQVtwXMJyp_y2uMOK5fLmiacjxT3k4MSaHd90rg_QMcxnBoOXrnlnSj_3Ughj02WxucNKrhj0xO8etNtBcKs_NoANyJtf9z-nSQw__45j5-iLdZhfx2ZEzb9dFg0XK98xle8U3SHXmWgqTm4wBU9dLjXUm730YIb09gqaQ1dk85n4zis4rQxwm7sz0R3_hWn4lZlLyLulVLkE3kmRoEH4Y"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80 lg:hidden"></div>
+<div class="absolute top-4 left-4 z-10">
+<span class="px-3 py-1 bg-white/90 dark:bg-surface-dark/90 text-primary dark:text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-sm backdrop-blur-sm">Featured</span>
+</div>
+<div class="absolute bottom-4 right-4 flex gap-1 lg:hidden">
+<div class="w-2 h-2 rounded-full bg-white"></div>
+<div class="w-2 h-2 rounded-full bg-white/50"></div>
+<div class="w-2 h-2 rounded-full bg-white/50"></div>
+<div class="w-2 h-2 rounded-full bg-white/50"></div>
+</div>
+<div class="hidden lg:block">
+<div class="h-[60vh] w-full relative mt-1">
+<img alt="Luxury hotel room interior with sea view" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKj5ZVb4T5xEiHYTrSd1FtMwsQjtD0MXDxRhio51c3PPeIuAZ-0nFozR0f3-nefQqQ0sL0ASCLnVhpUpSaHjjIm8ZPsBDjT_d0ENR7lV81LiEAXPrhwoAFPYZ1pobP1908hXsX_UsQLaujrMmFrGvAX7ycTHkPNTM76Q4NX23yyhWs--67bWpc9ab5OcuPFDhq2-ge6oNkOX1ffZgX3uWqcdjtyu-EQEou6_6-mDauqsnM4EL2YsdG6oPI6I0KmGJdhHJ7nuhjZ7Q"/>
+</div>
+<div class="h-[60vh] w-full relative mt-1">
+<img alt="Fine dining table setup with wine by the ocean" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIhnr5zKZciLL26qeAUY7kX2XbNC2aIbceu1LH-aZr0IXLQiOQpnViFB30v6-VrTkWC9jwqt6op1st0DE84u1oBB9_eZDdrg3tR4C_dnZjm4jvr0dDn00rCnZ5mMLl3AuOsbQmSxrEGEKXYvGU19B1_BDOXdTVvkiqCxmN_qMcgH_iGIxQTHrcX3N2Xrx9faeIhSCC8hDgj_E1X1WtgqyEjlaIX-zES871BmYpf2Nb8VcMAHogK2dw8UTp1lDst2KwRgyo1GJKclA"/>
+</div>
+</div>
+</section>
+<section class="w-full lg:w-1/2 h-full bg-background-light dark:bg-background-dark flex flex-col relative z-10 lg:border-l border-gray-200 dark:border-gray-800 -mt-6 lg:mt-0 rounded-t-3xl lg:rounded-none shadow-xl lg:shadow-none overflow-hidden">
+<div class="w-full flex justify-center pt-3 pb-1 lg:hidden bg-background-light dark:bg-background-dark">
+<div class="w-12 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full"></div>
+</div>
+<div class="flex-1 overflow-y-auto px-6 pb-32 pt-2 lg:p-12" id="content-scroll">
+<header class="mb-6 lg:mb-10">
+<div class="flex flex-col gap-2 mb-4">
+<div class="flex items-center gap-1 text-xs font-semibold text-accent uppercase tracking-wider mb-1">
+<span class="material-icons text-sm">location_on</span>
+                            Santorini, Greece
+                        </div>
+<h1 class="text-3xl lg:text-5xl font-bold font-serif text-primary dark:text-white leading-tight">
+                            Aegean Odyssey:<br/> <span class="text-accent font-light">7 Days of Luxury</span>
+</h1>
+</div>
+<div class="flex items-center justify-between mt-4 pb-6 border-b border-gray-100 dark:border-gray-800">
+<div class="flex flex-col">
+<span class="text-sm text-gray-500 dark:text-gray-400">Total Price</span>
+<div class="flex items-baseline gap-1">
+<span class="text-2xl font-bold text-gray-900 dark:text-white">$4,500</span>
+<span class="text-sm text-gray-500">/ pp</span>
+</div>
+</div>
+<div class="flex items-center gap-2 bg-gray-50 dark:bg-surface-dark px-3 py-2 rounded-lg">
+<span class="material-icons text-yellow-500 text-sm">star</span>
+<span class="font-bold text-gray-900 dark:text-white text-sm">4.96</span>
+<span class="text-xs text-gray-500">(128)</span>
+</div>
+</div>
+</header>
+<div class="mb-8 overflow-x-auto no-scrollbar -mx-6 px-6 lg:mx-0 lg:px-0">
+<div class="flex gap-3 min-w-max">
+<span class="px-4 py-2.5 bg-blue-50 dark:bg-surface-dark border border-blue-100 dark:border-gray-700 rounded-full text-xs font-semibold text-primary dark:text-blue-200 flex items-center gap-2 whitespace-nowrap">
+<span class="material-icons text-accent text-sm">wifi</span> High-Speed Wi-Fi
+                        </span>
+<span class="px-4 py-2.5 bg-blue-50 dark:bg-surface-dark border border-blue-100 dark:border-gray-700 rounded-full text-xs font-semibold text-primary dark:text-blue-200 flex items-center gap-2 whitespace-nowrap">
+<span class="material-icons text-accent text-sm">pool</span> Private Pool
+                        </span>
+<span class="px-4 py-2.5 bg-blue-50 dark:bg-surface-dark border border-blue-100 dark:border-gray-700 rounded-full text-xs font-semibold text-primary dark:text-blue-200 flex items-center gap-2 whitespace-nowrap">
+<span class="material-icons text-accent text-sm">restaurant</span> Fine Dining
+                        </span>
+<span class="px-4 py-2.5 bg-blue-50 dark:bg-surface-dark border border-blue-100 dark:border-gray-700 rounded-full text-xs font-semibold text-primary dark:text-blue-200 flex items-center gap-2 whitespace-nowrap">
+<span class="material-icons text-accent text-sm">local_taxi</span> Transfers
+                        </span>
+</div>
+</div>
+<div class="mb-10">
+<h3 class="text-lg font-bold font-serif text-primary dark:text-white mb-3">The Experience</h3>
+<p class="text-gray-600 dark:text-gray-300 leading-relaxed text-sm lg:text-base">
+                        Immerse yourself in the sapphire waters and whitewashed architecture of the Cyclades. This curated journey combines the vibrant nightlife of Mykonos with the romantic serenity of Santorini. Enjoy private yacht charters, exclusive wine tastings in volcanic vineyards, and dining experiences reserved only for the few.
+                    </p>
+</div>
+<div class="mb-12">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold font-serif text-primary dark:text-white">Daily Itinerary</h3>
+<span class="text-xs font-medium text-accent uppercase tracking-wider">7 Days</span>
+</div>
+<div class="relative pl-2">
+<div class="absolute top-2 bottom-0 left-[7px] w-0.5 bg-gray-100 dark:bg-gray-800"></div>
+<div class="relative pl-8 pb-8 group">
+<div class="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-white dark:border-background-dark bg-accent shadow-sm z-10"></div>
+<div class="bg-white dark:bg-surface-darker p-4 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-base font-bold text-gray-900 dark:text-white">Day 1: Arrival &amp; Champagne</h4>
+<span class="material-icons text-gray-400 text-sm transform transition-transform group-hover:rotate-180">expand_more</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-xs leading-relaxed mb-3 line-clamp-2">
+                                    Private transfer from JTR Airport to your cliffside suite in Oia. Evening welcome reception with local wines.
+                                </p>
+<div class="flex gap-2">
+<span class="text-[10px] px-2 py-1 bg-gray-50 dark:bg-surface-dark rounded text-gray-500 uppercase font-bold tracking-wide">Dinner</span>
+</div>
+</div>
+</div>
+<div class="relative pl-8 pb-8 group">
+<div class="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-white dark:border-background-dark bg-gray-300 dark:bg-gray-600 z-10"></div>
+<div class="bg-white dark:bg-surface-darker p-4 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-base font-bold text-gray-900 dark:text-white">Day 2: Catamaran Cruise</h4>
+<span class="material-icons text-gray-400 text-sm">expand_more</span>
+</div>
+<p class="text-gray-500 dark:text-gray-400 text-xs leading-relaxed mb-3 line-clamp-2">
+                                    Embark on a luxury catamaran for a day sailing around the caldera. Stops at the Red Beach and White Beach.
+                                </p>
+<div class="flex gap-2">
+<span class="text-[10px] px-2 py-1 bg-gray-50 dark:bg-surface-dark rounded text-gray-500 uppercase font-bold tracking-wide">Lunch</span>
+</div>
+</div>
+</div>
+<div class="relative pl-8 pb-8 group">
+<div class="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-white dark:border-background-dark bg-gray-300 dark:bg-gray-600 z-10"></div>
+<div class="bg-white dark:bg-surface-darker p-4 rounded-xl border border-gray-100 dark:border-gray-800 shadow-sm opacity-75">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-base font-bold text-gray-900 dark:text-white">Day 3: Vineyard Tour</h4>
+<span class="material-icons text-gray-400 text-sm">expand_more</span>
+</div>
+</div>
+</div>
+<div class="relative pl-8 group">
+<button class="w-full py-3 border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-xl text-sm font-semibold text-primary dark:text-white hover:bg-gray-50 dark:hover:bg-surface-dark transition-colors">
+                                View Full Itinerary (7 Days)
+                             </button>
+</div>
+</div>
+</div>
+<div class="mb-8 p-5 bg-blue-50 dark:bg-surface-darker rounded-xl border border-blue-100 dark:border-gray-700">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="Elena R., Senior Travel Consultant" class="w-14 h-14 rounded-full object-cover border-2 border-white dark:border-gray-600" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsHyqewONwlavQwN_YnhdGQG1Dif_3qOpyoiWuMDggfAlfMov0E-EVbqhBjZqYjmtuwrKpbK-3ujhO71AAejf0WPtAmZZXHRQEdUGMR1bmtrzqxy3MPjvnoDsMLa2YDDZmqUQYIT-BlU3wqCnBR304YME6vzSZ-itrXava9Uh_un-C25EGZSFzffAWrA-okxHTftYuGkmqVITUp9j4hUkWLUJd5tRfx40yRrIfU5wbcGpY9pQM5KuVQfv3nYBz3EUFcOGyttVjQgU"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-surface-dark rounded-full"></div>
+</div>
+<div class="flex-1">
+<h4 class="text-base font-bold text-primary dark:text-white">Elena Rodriguez</h4>
+<p class="text-xs text-accent font-medium">Your Travel Designer</p>
+</div>
+<button class="p-2.5 rounded-full bg-white dark:bg-surface-dark text-primary shadow-sm">
+<span class="material-icons text-xl">chat</span>
+</button>
+</div>
+</div>
+<div class="h-24"></div>
+</div>
+<div class="absolute bottom-0 left-0 right-0 bg-white dark:bg-surface-dark border-t border-gray-200 dark:border-gray-800 px-6 py-4 z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+<div class="flex items-center gap-4">
+<div class="flex flex-col flex-1">
+<span class="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase">Total for 1 Guest</span>
+<div class="flex items-baseline gap-1">
+<span class="text-xl font-bold text-gray-900 dark:text-white">$4,500</span>
+</div>
+</div>
+<button class="bg-primary hover:bg-primary-hover text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-blue-900/20 active:scale-95 transition-all flex items-center gap-2">
+<span>Book Now</span>
+<span class="material-icons text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+
+</body></html>

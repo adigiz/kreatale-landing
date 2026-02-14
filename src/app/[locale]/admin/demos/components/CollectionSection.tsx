@@ -6,6 +6,7 @@ import {
   useFieldArray,
   UseFormWatch,
   UseFormSetValue,
+  FieldErrors,
 } from "react-hook-form";
 import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -22,6 +23,7 @@ interface CollectionSectionProps {
   watch: UseFormWatch<DemoFormValues>;
   setValue: UseFormSetValue<DemoFormValues>;
   config: TemplateConfig;
+  errors: FieldErrors<DemoFormValues>;
 }
 
 export function CollectionSection({
@@ -30,6 +32,7 @@ export function CollectionSection({
   watch,
   setValue,
   config,
+  errors,
 }: CollectionSectionProps) {
   const { fields, append, remove } = useFieldArray({
     control,
@@ -61,7 +64,17 @@ export function CollectionSection({
               <Input
                 {...register(`destinations.${index}.name` as const)}
                 placeholder={`${collectionFields.name.label} (e.g. ${collectionFields.name.placeholder})`}
+                className={
+                  errors.destinations?.[index]?.name
+                    ? "border-red-500 focus-visible:ring-red-500"
+                    : ""
+                }
               />
+              {errors.destinations?.[index]?.name && (
+                <p className="text-xs text-red-500 mt-1">
+                  {errors.destinations[index]?.name?.message}
+                </p>
+              )}
               <ImagePicker
                 value={watch(`destinations.${index}.image` as const)}
                 onChange={(url) =>

@@ -3,6 +3,10 @@ import { getDemoSiteBySlug } from "@/lib/cms/queries/demo-sites";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { type TourConfig } from "@/components/demo/tour/TourTemplate";
+import {
+  CarDetailPage,
+  type CarDetailConfig,
+} from "@/components/demo/car/CarDetailPage";
 
 interface PageProps {
   params: Promise<{
@@ -23,31 +27,62 @@ export default async function PackageDetailPage(props: PageProps) {
     notFound();
   }
 
-  const config = demoSite.config as unknown as TourConfig;
+  const config = demoSite.config as any;
   const packages = config.packages || [];
 
   // Find the specific package
-  const pkg = packages.find(
-    (p: Exclude<TourConfig["packages"], undefined>[number]) => {
-      const pSlug =
-        p.slug ||
-        p.title
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, "-")
-          .replace(/(^-|-$)+/g, "");
-      return pSlug === packageSlug;
-    },
-  );
+  const pkg = packages.find((p: any) => {
+    const pSlug =
+      p.slug ||
+      p.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)+/g, "");
+    return pSlug === packageSlug;
+  });
 
   if (!pkg) {
-    // If dynamic package not found, check if it matches one of the hardcoded fallbacks
-    // existing in the previous template version, just in case.
-    // modifying the logic to be robust: if we are in preview mode we might need to handle differently,
-    // but for now let's stick to DB data.
     notFound();
   }
 
-  // Styles based on primary color
+  // If car template, render CarDetailPage
+  if (demoSite.templateId === "car") {
+    const carConfig: CarDetailConfig = {
+      name: pkg.title || "Luxury Vehicle",
+      category: pkg.feature || "Premium",
+      description: pkg.itinerary?.[0]?.description || "",
+      price: pkg.price || "1,000",
+      currency: config.currency || "$",
+      heroImage: pkg.image,
+      specs: {
+        acceleration: "3.2s",
+        topSpeed: pkg.duration || "Auto",
+        power: "502 HP",
+        transmission: pkg.duration || "Auto",
+      },
+      features: [
+        "Premium Sound System",
+        "Navigation System",
+        "Advanced Safety Features",
+        "Luxury Interior Package",
+        "Performance Brakes",
+      ],
+      inclusions: [
+        "Comprehensive Insurance Coverage",
+        "24/7 Roadside Assistance",
+        "Concierge Delivery & Collection",
+        "200km Daily Allowance",
+      ],
+      gallery: pkg.image ? [pkg.image, pkg.image, pkg.image] : [],
+      logo: config.logo,
+      primaryColor: config.primaryColor,
+      websiteName: config.websiteName,
+    };
+
+    return <CarDetailPage config={carConfig} />;
+  }
+
+  // Otherwise render tour package detail page
   const primaryColor = config.primaryColor || "#1173d4";
   const style = {
     "--tour-primary": primaryColor,
@@ -156,7 +191,7 @@ export default async function PackageDetailPage(props: PageProps) {
                 cultural immersion, exclusive access, and unparalleled comfort.
               </p>
 
-              {/* Highlights (Using placeholder data for now as specific highlights aren't in schema yet) */}
+              {/* Highlights */}
               <div className="mb-16">
                 <h3 className="text-xl font-bold uppercase tracking-widest text-slate-900 mb-6 border-b border-gray-200 pb-4">
                   Trip Highlights
@@ -190,25 +225,17 @@ export default async function PackageDetailPage(props: PageProps) {
                     The Journey
                   </h3>
                   <div className="space-y-8 border-l border-gray-200 ml-3 pl-8 relative">
-                    {pkg.itinerary.map(
-                      (
-                        day: Exclude<
-                          TourConfig["itinerary"],
-                          undefined
-                        >[number],
-                        idx: number,
-                      ) => (
-                        <div key={idx} className="relative">
-                          <span className="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-[var(--color-tour-primary)] border-4 border-white shadow-sm"></span>
-                          <h4 className="text-lg font-serif font-bold text-slate-900 mb-2">
-                            Day {day.day || idx + 1}: {day.title}
-                          </h4>
-                          <p className="text-slate-600 font-light leading-relaxed">
-                            {day.description}
-                          </p>
-                        </div>
-                      ),
-                    )}
+                    {pkg.itinerary.map((day: any, idx: number) => (
+                      <div key={idx} className="relative">
+                        <span className="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-[var(--color-tour-primary)] border-4 border-white shadow-sm"></span>
+                        <h4 className="text-lg font-serif font-bold text-slate-900 mb-2">
+                          Day {day.day || idx + 1}: {day.title}
+                        </h4>
+                        <p className="text-slate-600 font-light leading-relaxed">
+                          {day.description}
+                        </p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               )}

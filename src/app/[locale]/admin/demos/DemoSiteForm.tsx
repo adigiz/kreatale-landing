@@ -123,6 +123,27 @@ export default function DemoSiteForm({
     TEMPLATE_CONFIGS[currentTemplateId] || TEMPLATE_CONFIGS.tour;
 
   useEffect(() => {
+    // When templateId changes, we should reset specific fields to their defaults
+    // to avoid carrying over irrelevant data from the previous template.
+    // However, we only do this if it's a user interaction, not on initial load.
+    // The best way to detect this is to check if the form is dirty or if we're not initializing.
+
+    // For now, we'll just listen to templateId changes and if it's different from the default "tour",
+    // we might want to clear some fields.
+    // A better approach is to rely on the "Fill Sample Data" feature, but users might want a clean slate.
+
+    // Let's reset collections and entities when template changes
+    if (templateId !== initialData?.templateId) {
+      setValue("destinations", []);
+      setValue("packages", []);
+      setValue("heroImage", "");
+      setValue("heroTitle", "");
+      setValue("heroSubtitle", "");
+      // Reset other fields as needed
+    }
+  }, [templateId, setValue, initialData]);
+
+  useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!isResizing) return;
       const container = document.querySelector(
@@ -273,7 +294,11 @@ export default function DemoSiteForm({
       router.refresh();
     } catch (error) {
       console.error(error);
-      toast.error("Failed to save demo site.");
+      if (error instanceof Error) {
+        toast.error(error.message);
+      } else {
+        toast.error("Failed to save demo site.");
+      }
     } finally {
       window.dispatchEvent(new CustomEvent("demo-site:save-end"));
     }
@@ -385,6 +410,7 @@ export default function DemoSiteForm({
                     watch={watch}
                     setValue={setValue}
                     config={templateConfig}
+                    errors={errors}
                   />
 
                   <EntitySection
@@ -393,6 +419,7 @@ export default function DemoSiteForm({
                     watch={watch}
                     setValue={setValue}
                     config={templateConfig}
+                    errors={errors}
                   />
                 </TabsContent>
               </Tabs>

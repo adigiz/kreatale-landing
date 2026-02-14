@@ -6,6 +6,7 @@ import {
   useFieldArray,
   UseFormWatch,
   UseFormSetValue,
+  FieldErrors,
 } from "react-hook-form";
 import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,6 +29,7 @@ interface EntitySectionProps {
   watch: UseFormWatch<DemoFormValues>;
   setValue: UseFormSetValue<DemoFormValues>;
   config: TemplateConfig;
+  errors: FieldErrors<DemoFormValues>;
 }
 
 export function EntitySection({
@@ -36,6 +38,7 @@ export function EntitySection({
   watch,
   setValue,
   config,
+  errors,
 }: EntitySectionProps) {
   const {
     fields: entityFields,
@@ -80,6 +83,9 @@ export function EntitySection({
               <div className="flex items-center gap-2">
                 {watch(`packages.${entIdx}.title` as const) ||
                   `New ${entityItemLabel}`}
+                {errors.packages?.[entIdx]?.title && (
+                  <span className="h-2 w-2 rounded-full bg-red-500 ml-2" />
+                )}
               </div>
             </AccordionTrigger>
             <AccordionContent className="p-4 space-y-6 bg-white rounded-md border mt-2">
@@ -89,7 +95,17 @@ export function EntitySection({
                   <Input
                     {...register(`packages.${entIdx}.title` as const)}
                     placeholder={fieldsConfig.title.placeholder}
+                    className={
+                      errors.packages?.[entIdx]?.title
+                        ? "border-red-500 focus-visible:ring-red-500"
+                        : ""
+                    }
                   />
+                  {errors.packages?.[entIdx]?.title && (
+                    <p className="text-xs text-red-500 mt-1">
+                      {errors.packages[entIdx]?.title?.message}
+                    </p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label>{fieldsConfig.slug.label} (Optional)</Label>
@@ -158,6 +174,7 @@ export function EntitySection({
                   register={register}
                   parentIdx={entIdx}
                   config={config}
+                  errors={errors}
                 />
               </div>
 

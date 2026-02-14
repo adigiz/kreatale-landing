@@ -134,6 +134,7 @@ export default async function PreviewPage({
     // We prefer the 'data' from the token (unsaved changes)
     const data = previewToken.data as unknown as DemoSite;
     const config = data?.config || {};
+    const templateId = data?.templateId || "tour";
 
     // If no data in token but contentId exists (saved demo)
     // We would need to handle this case if we fetched 'content' earlier for demo-site
@@ -141,9 +142,16 @@ export default async function PreviewPage({
     // So we rely on passed data.
     // TODO: If we want to support saved demo preview without data passed, we need to add demo-site to the fetch logic above.
 
-    // Dynamic import to avoid circular deps or server/client issues if any
-    const TourTemplate = (await import("@/components/demo/tour/TourTemplate"))
-      .default;
+    // Dynamic import based on template type
+    let TemplateComponent;
+    if (templateId === "car") {
+      const { CarTemplate } = await import("@/components/demo/car/CarTemplate");
+      TemplateComponent = CarTemplate;
+    } else {
+      const TourTemplate = (await import("@/components/demo/tour/TourTemplate"))
+        .default;
+      TemplateComponent = TourTemplate;
+    }
 
     return (
       <div className="min-h-screen bg-white">
@@ -160,7 +168,7 @@ export default async function PreviewPage({
             // Scale for better mobile view if needed, but iframe handles it
           }}
         >
-          <TourTemplate config={config} />
+          <TemplateComponent config={config} />
         </div>
       </div>
     );

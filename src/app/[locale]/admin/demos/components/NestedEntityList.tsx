@@ -1,6 +1,11 @@
 "use client";
 
-import { Control, UseFormRegister, useFieldArray } from "react-hook-form";
+import {
+  Control,
+  UseFormRegister,
+  useFieldArray,
+  FieldErrors,
+} from "react-hook-form";
 import { Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,6 +25,7 @@ interface NestedEntityListProps {
   register: UseFormRegister<DemoFormValues>;
   parentIdx: number;
   config: TemplateConfig;
+  errors: FieldErrors<DemoFormValues>;
 }
 
 export function NestedEntityList({
@@ -27,6 +33,7 @@ export function NestedEntityList({
   register,
   parentIdx,
   config,
+  errors,
 }: NestedEntityListProps) {
   const { fields, append, remove } = useFieldArray({
     control,
@@ -41,8 +48,13 @@ export function NestedEntityList({
         {fields.map((field, index) => (
           <AccordionItem key={field.id} value={field.id}>
             <AccordionTrigger className="text-xs font-medium bg-gray-50/50 px-3 rounded-t-sm">
-              {nestedItemLabel} {index + 1}:{" "}
-              {fields[index].title || `New ${nestedItemLabel}`}
+              <div className="flex items-center gap-2">
+                {nestedItemLabel} {index + 1}:{" "}
+                {fields[index].title || `New ${nestedItemLabel}`}
+                {errors.packages?.[parentIdx]?.itinerary?.[index]?.title && (
+                  <span className="h-1.5 w-1.5 rounded-full bg-red-500" />
+                )}
+              </div>
             </AccordionTrigger>
             <AccordionContent className="p-4 space-y-4 bg-white border-x border-b rounded-b-sm">
               <div className="grid grid-cols-1 gap-2">
@@ -54,8 +66,20 @@ export function NestedEntityList({
                     `packages.${parentIdx}.itinerary.${index}.title` as const,
                   )}
                   placeholder={nestedFields.title.placeholder}
-                  className="h-8 text-sm"
+                  className={`h-8 text-sm ${
+                    errors.packages?.[parentIdx]?.itinerary?.[index]?.title
+                      ? "border-red-500 focus-visible:ring-red-500"
+                      : ""
+                  }`}
                 />
+                {errors.packages?.[parentIdx]?.itinerary?.[index]?.title && (
+                  <p className="text-xs text-red-500">
+                    {
+                      errors.packages[parentIdx]?.itinerary?.[index]?.title
+                        ?.message
+                    }
+                  </p>
+                )}
               </div>
               {nestedFields.description && (
                 <div className="grid grid-cols-1 gap-2">
