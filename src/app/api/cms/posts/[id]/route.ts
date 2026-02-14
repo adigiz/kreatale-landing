@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-import { requireAdmin } from "@/lib/cms/auth/config";
+import { requirePermission } from "@/lib/cms/auth/config";
 import {
   getPostById,
   updatePost,
   deletePost,
 } from "@/lib/cms/queries/posts";
-import { hasPermission, PERMISSIONS, type UserRole } from "@/lib/cms/permissions";
+import { PERMISSIONS } from "@/lib/cms/permissions";
 import { z } from "zod";
 
 const updatePostSchema = z.object({
@@ -24,12 +24,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await requireAdmin();
-    const role = session.user.role;
-
-    if (!hasPermission(role as UserRole, PERMISSIONS.POSTS_READ)) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    await requirePermission(PERMISSIONS.POSTS_READ);
 
     const { id } = await params;
     const result = await getPostById(id);
@@ -52,12 +47,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await requireAdmin();
-    const role = session.user.role;
-
-    if (!hasPermission(role as UserRole, PERMISSIONS.POSTS_UPDATE)) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    const session = await requirePermission(PERMISSIONS.POSTS_UPDATE);
 
     const { id } = await params;
     const body = await request.json();
@@ -108,12 +98,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await requireAdmin();
-    const role = session.user.role;
-
-    if (!hasPermission(role as UserRole, PERMISSIONS.POSTS_DELETE)) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    await requirePermission(PERMISSIONS.POSTS_DELETE);
 
     const { id } = await params;
     const existing = await getPostById(id);

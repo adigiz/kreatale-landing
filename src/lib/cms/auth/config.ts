@@ -4,6 +4,8 @@ import { db, users } from "../db";
 import { eq } from "drizzle-orm";
 import bcrypt from "bcryptjs";
 import { canAccessAdmin, type UserRole } from "../permissions";
+import { getEffectivePermissions } from "../permissions.server";
+import { permissionIncludes } from "../permissions";
 import { getServerSession } from "next-auth";
 
 /** How often (in seconds) to re-validate the JWT against the DB */
@@ -155,6 +157,21 @@ export async function requireAdmin() {
   const role = (session.user as { role: string }).role;
   if (!canAccessAdmin(role as UserRole)) {
     throw new Error("Forbidden: Admin access required");
+  }
+  return session;
+}
+
+/**
+ * Require admin access and a specific permission (DB-backed).
+ * Use this in API routes and server actions so role customizations in the DB are enforced.
+ */
+export async function requirePermission(permission: string) {
+  const session = await requireAdmin();
+  const permissions = await getEffectivePermissions(
+    (session.user as { role: string }).role
+  );
+  if (!permissionIncludes(permissions, permission)) {
+    throw new Error("Forbidden: Insufficient permissions");
   }
   return session;
 }

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getSession } from "@/lib/cms/auth/config";
+import { requirePermission } from "@/lib/cms/auth/config";
+import { PERMISSIONS } from "@/lib/cms/permissions";
 import { markContactAsRead, markContactAsUnread, deleteContact } from "@/lib/cms/queries/contacts";
 
 export async function PATCH(
@@ -7,10 +8,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await getSession();
-    if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    await requirePermission(PERMISSIONS.CONTACTS_UPDATE);
 
     const { id } = await params;
     const body = await request.json();
@@ -37,10 +35,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await getSession();
-    if (!session?.user) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    await requirePermission(PERMISSIONS.CONTACTS_DELETE);
 
     const { id } = await params;
     await deleteContact(id);

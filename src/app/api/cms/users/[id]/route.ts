@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAdmin } from "@/lib/cms/auth/config";
+import { requirePermission } from "@/lib/cms/auth/config";
 import {
   getUserById,
   updateUser,
   deleteUser,
 } from "@/lib/cms/queries/users";
-import { hasPermission, PERMISSIONS, type UserRole } from "@/lib/cms/permissions";
+import { PERMISSIONS } from "@/lib/cms/permissions";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 
@@ -21,17 +21,7 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await requireAdmin();
-    const role = session.user.role;
-
-    if (
-      !hasPermission(
-        role as UserRole,
-        PERMISSIONS.USERS_READ
-      )
-    ) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    await requirePermission(PERMISSIONS.USERS_READ);
 
     const { id } = await params;
     const user = await getUserById(id);
@@ -57,17 +47,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await requireAdmin();
-    const role = session.user.role;
-
-    if (
-      !hasPermission(
-        role as UserRole,
-        PERMISSIONS.USERS_UPDATE
-      )
-    ) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    const session = await requirePermission(PERMISSIONS.USERS_UPDATE);
 
     const { id } = await params;
     const body = await request.json();
@@ -108,17 +88,7 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await requireAdmin();
-    const role = session.user.role;
-
-    if (
-      !hasPermission(
-        role as UserRole,
-        PERMISSIONS.USERS_DELETE
-      )
-    ) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    const session = await requirePermission(PERMISSIONS.USERS_DELETE);
 
     const { id } = await params;
     

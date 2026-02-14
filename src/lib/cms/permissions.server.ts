@@ -2,7 +2,7 @@ import "server-only";
 
 import { unstable_cache } from "next/cache";
 import { getRoleByName } from "./queries/roles";
-import { ALL_PERMISSIONS, ROLE_PERMISSIONS } from "./permissions";
+import { ALL_PERMISSIONS, ROLE_PERMISSIONS, permissionIncludes } from "./permissions";
 
 /**
  * Fetch effective permissions for a role from the DB with caching.
@@ -38,3 +38,16 @@ export const getEffectivePermissions = unstable_cache(
   ["role-permissions"],
   { tags: ["roles"], revalidate: 300 } // cache for 5 minutes, invalidated on update
 );
+
+/**
+ * Check if a role has a permission using DB-backed effective permissions.
+ * Use this for server-side enforcement (API routes, server actions) so that
+ * DB-customized role permissions are respected.
+ */
+export async function sessionHasPermission(
+  roleName: string,
+  permission: string
+): Promise<boolean> {
+  const permissions = await getEffectivePermissions(roleName);
+  return permissionIncludes(permissions, permission);
+}

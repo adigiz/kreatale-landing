@@ -1,17 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAdmin } from "@/lib/cms/auth/config";
-import { hasPermission, PERMISSIONS, type UserRole } from "@/lib/cms/permissions";
+import { requirePermission } from "@/lib/cms/auth/config";
+import { PERMISSIONS } from "@/lib/cms/permissions";
 import { put } from "@vercel/blob";
 import { createMedia } from "@/lib/cms/queries/media";
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await requireAdmin();
-    const role = session.user.role;
-
-    if (!hasPermission(role as UserRole, PERMISSIONS.MEDIA_CREATE)) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    const session = await requirePermission(PERMISSIONS.MEDIA_CREATE);
 
     const formData = await request.formData();
     const file = formData.get("file") as File;

@@ -5,18 +5,14 @@ import { db } from "@/lib/cms/db";
 import { demoSites, type NewDemoSite } from "@/lib/cms/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-import { requireAuth } from "@/lib/cms/auth/config";
-import { hasPermission, PERMISSIONS, type UserRole } from "@/lib/cms/permissions";
+import { requirePermission } from "@/lib/cms/auth/config";
+import { PERMISSIONS } from "@/lib/cms/permissions";
 import { getDemoSiteById } from "@/lib/cms/queries/demo-sites";
 
 export async function deleteDemoSite(id: string) {
-  const session = await requireAuth();
-  const role = session.user.role as UserRole;
+  const session = await requirePermission(PERMISSIONS.DEMO_SITES_DELETE);
+  const role = session.user.role;
   const userId = session.user.id;
-
-  if (!hasPermission(role, PERMISSIONS.DEMO_SITES_DELETE)) {
-    throw new Error("Forbidden: Insufficient permissions");
-  }
 
   // Check ownership if not admin
   if (role !== "super_admin" && role !== "admin") {
@@ -36,12 +32,7 @@ export async function deleteDemoSite(id: string) {
 }
 
 export async function createDemoSite(data: NewDemoSite) {
-  const session = await requireAuth();
-  const role = session.user.role as UserRole;
-
-  if (!hasPermission(role, PERMISSIONS.DEMO_SITES_CREATE)) {
-    throw new Error("Forbidden: Insufficient permissions");
-  }
+  const session = await requirePermission(PERMISSIONS.DEMO_SITES_CREATE);
 
   try {
     // Assign current user as author
@@ -64,13 +55,9 @@ export async function createDemoSite(data: NewDemoSite) {
 }
 
 export async function updateDemoSite(id: string, data: Partial<NewDemoSite>) {
-  const session = await requireAuth();
-  const role = session.user.role as UserRole;
+  const session = await requirePermission(PERMISSIONS.DEMO_SITES_UPDATE);
+  const role = session.user.role;
   const userId = session.user.id;
-
-  if (!hasPermission(role, PERMISSIONS.DEMO_SITES_UPDATE)) {
-    throw new Error("Forbidden: Insufficient permissions");
-  }
 
   // Check ownership if not admin
   if (role !== "super_admin" && role !== "admin") {

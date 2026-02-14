@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { requireAdmin } from "@/lib/cms/auth/config";
+import { requirePermission } from "@/lib/cms/auth/config";
 import { getAllUsers, createUser } from "@/lib/cms/queries/users";
-import { hasPermission, PERMISSIONS, type UserRole } from "@/lib/cms/permissions";
+import { PERMISSIONS } from "@/lib/cms/permissions";
 import { z } from "zod";
 import bcrypt from "bcryptjs";
 
@@ -14,17 +14,7 @@ const userSchema = z.object({
 
 export async function GET() {
   try {
-    const session = await requireAdmin();
-    const role = session.user.role;
-
-    if (
-      !hasPermission(
-        role as UserRole,
-        PERMISSIONS.USERS_READ
-      )
-    ) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    await requirePermission(PERMISSIONS.USERS_READ);
 
     const users = await getAllUsers();
     // Don't return password hashes
@@ -41,17 +31,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await requireAdmin();
-    const role = session.user.role;
-
-    if (
-      !hasPermission(
-        role as UserRole,
-        PERMISSIONS.USERS_CREATE
-      )
-    ) {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
+    await requirePermission(PERMISSIONS.USERS_CREATE);
 
     const body = await request.json();
     const data = userSchema.parse(body);
