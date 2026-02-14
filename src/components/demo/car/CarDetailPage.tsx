@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 import { useState } from "react";
 
 export interface CarDetailConfig {
@@ -29,13 +31,113 @@ export interface CarDetailConfig {
   // Branding
   logo?: string;
   primaryColor?: string;
+
   websiteName?: string;
+  language?: "en" | "id";
 }
+
+const DICTIONARY = {
+  en: {
+    nav: {
+      fleet: "The Fleet",
+      brands: "Curated Brands",
+      membership: "Membership",
+      signIn: "Sign In",
+      myBookings: "My Bookings",
+    },
+    hero: {
+      dayRate: "Day Rate",
+      perDay: "/ day",
+    },
+    specs: {
+      title: "Specifications",
+      acceleration: "0-100 km/h",
+      topSpeed: "Top Speed",
+      power: "Power",
+      trans: "Trans",
+    },
+    features: {
+      title: "Vehicle Features",
+      inclusions: "Rental Inclusions",
+    },
+    gallery: {
+      title: "Gallery",
+    },
+    booking: {
+      title: "Reserve Your Drive",
+      subtitle: "Instant confirmation for dates available.",
+      pickup: "Pick-up Date",
+      dropoff: "Drop-off Date",
+      dailyRate: "Daily Rate",
+      insurance: "Insurance",
+      included: "Included",
+      taxes: "Taxes & Fees",
+      total: "Est. Total",
+      reserve: "Reserve Now",
+      whatsapp: "Inquire via WhatsApp",
+      secure: "Secure booking powered by Stripe",
+    },
+    concierge: {
+      title: "Need specific arrangements?",
+      desc: "Our concierge team can arrange custom delivery locations or special event packages.",
+      contact: "Contact Concierge",
+    },
+  },
+  id: {
+    nav: {
+      fleet: "Armada",
+      brands: "Merek Pilihan",
+      membership: "Keanggotaan",
+      signIn: "Masuk",
+      myBookings: "Pesanan Saya",
+    },
+    hero: {
+      dayRate: "Tarif Harian",
+      perDay: "/ hari",
+    },
+    specs: {
+      title: "Spesifikasi",
+      acceleration: "0-100 km/jam",
+      topSpeed: "Kecepatan Maks",
+      power: "Tenaga",
+      trans: "Transmisi",
+    },
+    features: {
+      title: "Fitur Kendaraan",
+      inclusions: "Termasuk Sewa",
+    },
+    gallery: {
+      title: "Galeri",
+    },
+    booking: {
+      title: "Pesan Perjalanan Anda",
+      subtitle: "Konfirmasi instan untuk tanggal yang tersedia.",
+      pickup: "Tanggal Pengambilan",
+      dropoff: "Tanggal Pengembalian",
+      dailyRate: "Tarif Harian",
+      insurance: "Asuransi",
+      included: "Termasuk",
+      taxes: "Pajak & Biaya",
+      total: "Est. Total",
+      reserve: "Pesan Sekarang",
+      whatsapp: "Tanya via WhatsApp",
+      secure: "Pemesanan aman didukung oleh Stripe",
+    },
+    concierge: {
+      title: "Butuh pengaturan khusus?",
+      desc: "Tim concierge kami dapat mengatur lokasi pengiriman khusus atau paket acara spesial.",
+      contact: "Hubungi Concierge",
+    },
+  },
+};
 
 export function CarDetailPage({ config }: { config: CarDetailConfig }) {
   const [pickupDate, setPickupDate] = useState("");
   const [dropoffDate, setDropoffDate] = useState("");
+
   const primaryColor = config.primaryColor || "#256af4";
+  const language = config.language || "en";
+  const t = DICTIONARY[language];
 
   return (
     <div className="bg-gray-50 dark:bg-gray-900 font-sans text-gray-800 dark:text-gray-200 antialiased">
@@ -74,19 +176,19 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                 className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 href="#"
               >
-                The Fleet
+                {t.nav.fleet}
               </a>
               <a
                 className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 href="#"
               >
-                Curated Brands
+                {t.nav.brands}
               </a>
               <a
                 className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 href="#"
               >
-                Membership
+                {t.nav.membership}
               </a>
             </div>
             <div className="flex items-center space-x-6">
@@ -94,13 +196,13 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                 className="hidden md:block text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 href="#"
               >
-                Sign In
+                {t.nav.signIn}
               </a>
               <button
                 className="px-6 py-2.5 rounded-lg text-xs uppercase tracking-widest font-bold transition-all shadow-md hover:shadow-lg text-white"
                 style={{ backgroundColor: primaryColor }}
               >
-                My Bookings
+                {t.nav.myBookings}
               </button>
             </div>
           </div>
@@ -142,14 +244,16 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                 </div>
                 <div className="bg-white/10 backdrop-blur-md border border-white/10 p-6 rounded-lg text-white min-w-[200px]">
                   <p className="text-xs uppercase tracking-widest text-white/60 mb-1">
-                    Day Rate
+                    {t.hero.dayRate}
                   </p>
                   <div className="flex items-baseline gap-2">
                     <span className="font-serif text-4xl md:text-5xl font-medium">
                       {config.currency || "$"}
                       {config.price}
                     </span>
-                    <span className="text-white/60 font-light">/ day</span>
+                    <span className="text-white/60 font-light">
+                      {t.hero.perDay}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -168,7 +272,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
               {config.specs && (
                 <section>
                   <h3 className="font-serif text-2xl text-gray-900 dark:text-white mb-8 border-b border-gray-200 dark:border-gray-800 pb-4">
-                    Specifications
+                    {t.specs.title}
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     {config.specs.acceleration && (
@@ -180,7 +284,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                           speed
                         </span>
                         <p className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">
-                          0-100 km/h
+                          {t.specs.acceleration}
                         </p>
                         <p className="text-xl font-bold text-gray-900 dark:text-white font-serif">
                           {config.specs.acceleration}
@@ -196,7 +300,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                           timer
                         </span>
                         <p className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">
-                          Top Speed
+                          {t.specs.topSpeed}
                         </p>
                         <p className="text-xl font-bold text-gray-900 dark:text-white font-serif">
                           {config.specs.topSpeed}
@@ -212,7 +316,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                           bolt
                         </span>
                         <p className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">
-                          Power
+                          {t.specs.power}
                         </p>
                         <p className="text-xl font-bold text-gray-900 dark:text-white font-serif">
                           {config.specs.power}
@@ -228,7 +332,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                           settings
                         </span>
                         <p className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">
-                          Trans
+                          {t.specs.trans}
                         </p>
                         <p className="text-xl font-bold text-gray-900 dark:text-white font-serif">
                           {config.specs.transmission}
@@ -252,7 +356,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                           >
                             stars
                           </span>
-                          Vehicle Features
+                          {t.features.title}
                         </h3>
                         <ul className="space-y-4">
                           {config.features.map((feature, index) => (
@@ -279,7 +383,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                           >
                             verified_user
                           </span>
-                          Rental Inclusions
+                          {t.features.inclusions}
                         </h3>
                         <ul className="space-y-4">
                           {config.inclusions.map((inclusion, index) => (
@@ -304,7 +408,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
               {config.gallery && config.gallery.length > 0 && (
                 <section>
                   <h3 className="font-serif text-2xl text-gray-900 dark:text-white mb-6">
-                    Gallery
+                    {t.gallery.title}
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {config.gallery.map((image, index) => (
@@ -330,16 +434,16 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                 <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-xl border border-gray-100 dark:border-gray-800">
                   <div className="mb-6">
                     <h3 className="font-serif text-2xl text-gray-900 dark:text-white">
-                      Reserve Your Drive
+                      {t.booking.title}
                     </h3>
                     <p className="text-sm text-gray-500 mt-2">
-                      Instant confirmation for dates available.
+                      {t.booking.subtitle}
                     </p>
                   </div>
                   <form className="space-y-5">
                     <div className="space-y-2">
                       <label className="text-xs uppercase font-bold text-gray-500 dark:text-gray-400 tracking-wider">
-                        Pick-up Date
+                        {t.booking.pickup}
                       </label>
                       <input
                         type="date"
@@ -350,7 +454,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                     </div>
                     <div className="space-y-2">
                       <label className="text-xs uppercase font-bold text-gray-500 dark:text-gray-400 tracking-wider">
-                        Drop-off Date
+                        {t.booking.dropoff}
                       </label>
                       <input
                         type="date"
@@ -361,24 +465,24 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                     </div>
                     <div className="pt-4 pb-4 border-t border-b border-gray-100 dark:border-gray-800 space-y-3">
                       <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
-                        <span>Daily Rate</span>
+                        <span>{t.booking.dailyRate}</span>
                         <span>
                           {config.currency || "$"}
                           {config.price}
                         </span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
-                        <span>Insurance</span>
-                        <span>Included</span>
+                        <span>{t.booking.insurance}</span>
+                        <span>{t.booking.included}</span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
-                        <span>Taxes & Fees</span>
+                        <span>{t.booking.taxes}</span>
                         <span>{config.currency || "$"}165</span>
                       </div>
                     </div>
                     <div className="flex justify-between items-center pb-2">
                       <span className="font-bold text-gray-900 dark:text-white">
-                        Est. Total
+                        {t.booking.total}
                       </span>
                       <span
                         className="font-serif text-2xl font-bold"
@@ -396,14 +500,14 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                         boxShadow: `0 10px 25px ${primaryColor}30`,
                       }}
                     >
-                      Reserve Now
+                      {t.booking.reserve}
                     </button>
                     <button
                       type="button"
                       className="w-full flex items-center justify-center gap-2 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800/50 py-3 rounded-lg text-sm font-medium hover:bg-green-100 dark:hover:bg-green-900/30 transition-colors"
                     >
                       <span className="material-icons text-lg">chat</span>
-                      Inquire via WhatsApp
+                      {t.booking.whatsapp}
                     </button>
                   </form>
                   <div className="mt-6 text-center">
@@ -411,7 +515,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                       <span className="material-icons text-[10px] align-middle mr-1">
                         lock
                       </span>
-                      Secure booking powered by Stripe
+                      {t.booking.secure}
                     </p>
                   </div>
                 </div>
@@ -432,18 +536,17 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                   </div>
                   <div>
                     <h4 className="font-bold text-sm text-gray-900 dark:text-white mb-1">
-                      Need specific arrangements?
+                      {t.concierge.title}
                     </h4>
                     <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                      Our concierge team can arrange custom delivery locations
-                      or special event packages.
+                      {t.concierge.desc}
                     </p>
                     <a
                       className="text-xs font-bold mt-2 inline-block hover:underline"
                       href="#"
                       style={{ color: primaryColor }}
                     >
-                      Contact Concierge
+                      {t.concierge.contact}
                     </a>
                   </div>
                 </div>

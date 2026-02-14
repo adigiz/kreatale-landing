@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -34,41 +36,203 @@ export interface CarConfig {
       description?: string;
     }>;
   }>;
+  language?: "en" | "id";
 }
+
+const DICTIONARY = {
+  en: {
+    nav: {
+      fleet: "The Fleet",
+      brands: "Curated Brands",
+      membership: "Membership",
+      journal: "Journal",
+      signIn: "Sign In",
+      bookNow: "Book Now",
+    },
+    hero: {
+      slides: [
+        {
+          category: "The Mountain Pass",
+          title: "Conquer the",
+          titleItalic: "Altitude",
+          subtitle:
+            "Precision engineering meets raw nature. Elevate your journey.",
+          ctaText: "Explore Alpine Routes",
+        },
+        {
+          category: "Urban Elegance",
+          title: "Design in",
+          titleItalic: "Motion",
+          subtitle:
+            "Sleek lines for the modern metropolis. Arrive in undeniable style.",
+          ctaText: "View City Collection",
+        },
+        {
+          category: "Coastal Horizons",
+          title: "Chasing the",
+          titleItalic: "Sunset",
+          subtitle: "Open roads, ocean air, and the purr of a perfect engine.",
+          ctaText: "Discover Coastal Drives",
+        },
+      ],
+    },
+    fleet: {
+      title: "Handpicked Fleet",
+      subtitle: "Engineering masterpieces ready for your command.",
+      viewCollection: "View Full Collection",
+      available: "Available Now",
+      viewDetails: "View Details",
+      perDay: "/ day",
+    },
+    brands: {
+      label: "Manufacturers",
+      title: "Curated Brands",
+      description:
+        "We partner exclusively with the world's most prestigious automotive houses.",
+      viewDetails: "View Details",
+    },
+    testimonial: {
+      text: "The perfect fusion of machine and landscape. An unforgettable journey that redefined my expectations of travel.",
+      author: "James Sterling",
+      role: "Member since 2019",
+    },
+    cta: {
+      title: "Command the Road",
+      button: "Inquire with a Specialist",
+    },
+    footer: {
+      description:
+        "Redefining luxury travel through curated driving experiences and an unrivaled fleet of world-class vehicles.",
+      company: {
+        title: "Company",
+        links: ["About Us", "Careers", "Press", "Partners"],
+      },
+      support: {
+        title: "Support",
+        links: [
+          "Contact Center",
+          "Terms of Service",
+          "Privacy Policy",
+          "Insurance Guide",
+        ],
+      },
+      newsletter: {
+        title: "Newsletter",
+        placeholder: "Email address",
+        button: "Subscribe",
+      },
+      rights: "Luxury Rentals. All rights reserved.",
+    },
+  },
+  id: {
+    nav: {
+      fleet: "Armada",
+      brands: "Merek Pilihan",
+      membership: "Keanggotaan",
+      journal: "Jurnal",
+      signIn: "Masuk",
+      bookNow: "Pesan Sekarang",
+    },
+    hero: {
+      slides: [
+        {
+          category: "Lintasan Gunung",
+          title: "Taklukkan",
+          titleItalic: "Ketinggian",
+          subtitle:
+            "Rekayasa presisi bertemu alam liar. Tingkatkan perjalanan Anda.",
+          ctaText: "Jelajahi Rute Alpen",
+        },
+        {
+          category: "Elegan Urban",
+          title: "Desain dalam",
+          titleItalic: "Gerakan",
+          subtitle:
+            "Garis ramping untuk metropolis modern. Tiba dengan gaya tak terbantahkan.",
+          ctaText: "Lihat Koleksi Kota",
+        },
+        {
+          category: "Cakrawala Pesisir",
+          title: "Mengejar",
+          titleItalic: "Matahari Terbenam",
+          subtitle: "Jalan terbuka, udara laut, dan deru mesin yang sempurna.",
+          ctaText: "Temukan Perjalanan Pesisir",
+        },
+      ],
+    },
+    fleet: {
+      title: "Armada Pilihan",
+      subtitle: "Mahakarya teknik siap untuk perintah Anda.",
+      viewCollection: "Lihat Koleksi Lengkap",
+      available: "Tersedia Sekarang",
+      viewDetails: "Lihat Detail",
+      perDay: "/ hari",
+    },
+    brands: {
+      label: "Pabrikan",
+      title: "Merek Pilihan",
+      description:
+        "Kami bermitra secara eksklusif dengan rumah otomotif paling bergengsi di dunia.",
+      viewDetails: "Lihat Detail",
+    },
+    testimonial: {
+      text: "Perpaduan sempurna antara mesin dan lanskap. Perjalanan tak terlupakan yang mendefinisikan ulang harapan perjalanan saya.",
+      author: "James Sterling",
+      role: "Anggota sejak 2019",
+    },
+    cta: {
+      title: "Kuasai Jalan",
+      button: "Tanya Spesialis",
+    },
+    footer: {
+      description:
+        "Mendefinisikan ulang perjalanan mewah melalui pengalaman berkendara yang dikuratori dan armada kendaraan kelas dunia yang tak tertandingi.",
+      company: {
+        title: "Perusahaan",
+        links: ["Tentang Kami", "Karir", "Pers", "Mitra"],
+      },
+      support: {
+        title: "Dukungan",
+        links: [
+          "Pusat Kontak",
+          "Ketentuan Layanan",
+          "Kebijakan Privasi",
+          "Panduan Asuransi",
+        ],
+      },
+      newsletter: {
+        title: "Buletin",
+        placeholder: "Alamat email",
+        button: "Berlangganan",
+      },
+      rights: "Penyewaan Mewah. Hak cipta dilindungi undang-undang.",
+    },
+  },
+};
 
 export function CarTemplate({ config }: { config: CarConfig }) {
   const [activeSlide, setActiveSlide] = useState(0);
   const primaryColor = config.primaryColor || "#256af4";
 
+  const language = config.language || "en";
+  const t = DICTIONARY[language];
+
   // Hero carousel slides - using first 3 destinations as hero slides
   const heroSlides = [
     {
-      category: "The Mountain Pass",
-      title: "Conquer the",
-      titleItalic: "Altitude",
-      subtitle: "Precision engineering meets raw nature. Elevate your journey.",
-      ctaText: "Explore Alpine Routes",
+      ...t.hero.slides[0],
       image:
         config.destinations?.[0]?.image ||
         "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070",
     },
     {
-      category: "Urban Elegance",
-      title: "Design in",
-      titleItalic: "Motion",
-      subtitle:
-        "Sleek lines for the modern metropolis. Arrive in undeniable style.",
-      ctaText: "View City Collection",
+      ...t.hero.slides[1],
       image:
         config.destinations?.[1]?.image ||
         "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070",
     },
     {
-      category: "Coastal Horizons",
-      title: "Chasing the",
-      titleItalic: "Sunset",
-      subtitle: "Open roads, ocean air, and the purr of a perfect engine.",
-      ctaText: "Discover Coastal Drives",
+      ...t.hero.slides[2],
       image:
         config.destinations?.[2]?.image ||
         "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?q=80&w=2070",
@@ -128,25 +292,25 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                 className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 href="#"
               >
-                The Fleet
+                {t.nav.fleet}
               </a>
               <a
                 className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 href="#"
               >
-                Curated Brands
+                {t.nav.brands}
               </a>
               <a
                 className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 href="#"
               >
-                Membership
+                {t.nav.membership}
               </a>
               <a
                 className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 href="#"
               >
-                Journal
+                {t.nav.journal}
               </a>
             </div>
             <div className="flex items-center space-x-6">
@@ -154,7 +318,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                 className="hidden md:block text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
                 href="#"
               >
-                Sign In
+                {t.nav.signIn}
               </a>
               <button
                 className="px-6 py-2.5 rounded-lg text-xs uppercase tracking-widest font-bold transition-all shadow-md hover:shadow-lg text-white"
@@ -162,7 +326,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                   backgroundColor: primaryColor,
                 }}
               >
-                Book Now
+                {t.nav.bookNow}
               </button>
             </div>
           </div>
@@ -239,10 +403,10 @@ export function CarTemplate({ config }: { config: CarConfig }) {
           <div className="flex justify-between items-end mb-12">
             <div>
               <h2 className="font-serif text-3xl md:text-4xl text-gray-900 dark:text-white mb-2">
-                Handpicked Fleet
+                {t.fleet.title}
               </h2>
               <p className="text-gray-500 dark:text-gray-400">
-                Engineering masterpieces ready for your command.
+                {t.fleet.subtitle}
               </p>
             </div>
             <a
@@ -250,7 +414,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
               href="#"
               style={{ color: primaryColor }}
             >
-              View Full Collection{" "}
+              {t.fleet.viewCollection}{" "}
               <span className="material-icons ml-1 text-sm">arrow_forward</span>
             </a>
           </div>
@@ -270,7 +434,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                     }
                   />
                   <div className="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur text-xs font-bold px-3 py-1 rounded uppercase tracking-wider text-gray-900 dark:text-white">
-                    Available Now
+                    {t.fleet.available}
                   </div>
                 </div>
                 <div className="p-6">
@@ -291,7 +455,9 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                         {config.currency || "$"}
                         {car.price || "1,200"}
                       </span>
-                      <span className="text-xs text-gray-400">/ day</span>
+                      <span className="text-xs text-gray-400">
+                        {t.fleet.perDay}
+                      </span>
                     </div>
                   </div>
                   <div className="border-t border-gray-100 dark:border-gray-700 py-4 flex justify-between text-sm text-gray-600 dark:text-gray-300">
@@ -334,7 +500,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                       e.currentTarget.style.color = primaryColor;
                     }}
                   >
-                    View Details
+                    {t.fleet.viewDetails}
                   </Link>
                 </div>
               </div>
@@ -351,15 +517,14 @@ export function CarTemplate({ config }: { config: CarConfig }) {
               className="font-medium tracking-widest text-xs uppercase"
               style={{ color: primaryColor }}
             >
-              Manufacturers
+              {t.brands.label}
             </span>
             <h2 className="font-serif text-4xl md:text-5xl text-gray-900 dark:text-white mt-3">
-              Curated Brands
+              {t.brands.title}
             </h2>
             <div className="w-16 h-0.5 bg-gray-200 dark:bg-gray-700 mx-auto mt-6"></div>
             <p className="text-gray-500 dark:text-gray-400 mt-6 max-w-2xl mx-auto font-light">
-              We partner exclusively with the world's most prestigious
-              automotive houses.
+              {t.brands.description}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -399,7 +564,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                       className="inline-flex items-center text-xs font-bold uppercase tracking-widest group-hover:translate-x-2 transition-transform duration-300"
                       style={{ color: primaryColor }}
                     >
-                      View Details{" "}
+                      {t.brands.viewDetails}{" "}
                       <span className="material-icons text-sm ml-1">
                         arrow_forward
                       </span>
@@ -435,15 +600,14 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                 format_quote
               </span>
               <blockquote className="font-serif text-3xl md:text-4xl leading-tight text-gray-900 dark:text-white mb-8">
-                The perfect fusion of machine and landscape. An unforgettable
-                journey that redefined my expectations of travel.
+                {t.testimonial.text}
               </blockquote>
               <div>
                 <cite className="not-italic font-bold text-lg text-gray-900 dark:text-white">
-                  James Sterling
+                  {t.testimonial.author}
                 </cite>
                 <span className="block text-gray-500 dark:text-gray-400 text-sm mt-1">
-                  Member since 2019
+                  {t.testimonial.role}
                 </span>
               </div>
             </div>
@@ -464,7 +628,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
         <div className="absolute inset-0 bg-gray-900/60 dark:bg-gray-900/70"></div>
         <div className="relative z-10 px-4">
           <h2 className="font-serif text-5xl md:text-6xl text-white mb-8">
-            Command the Road
+            {t.cta.title}
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
@@ -474,7 +638,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                 boxShadow: `0 10px 25px ${primaryColor}30`,
               }}
             >
-              Inquire with a Specialist
+              {t.cta.button}
             </button>
           </div>
         </div>
@@ -497,13 +661,12 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                 </span>
               </div>
               <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                Redefining luxury travel through curated driving experiences and
-                an unrivaled fleet of world-class vehicles.
+                {t.footer.description}
               </p>
             </div>
             <div>
               <h4 className="font-bold text-gray-900 dark:text-white mb-6">
-                Company
+                {t.footer.company.title}
               </h4>
               <ul className="space-y-4 text-sm text-gray-500 dark:text-gray-400">
                 <li>
@@ -512,7 +675,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                     href="#"
                     style={{ color: "inherit" }}
                   >
-                    About Us
+                    {t.footer.company.links[0]}
                   </a>
                 </li>
                 <li>
@@ -521,7 +684,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                     href="#"
                     style={{ color: "inherit" }}
                   >
-                    Careers
+                    {t.footer.company.links[1]}
                   </a>
                 </li>
                 <li>
@@ -530,7 +693,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                     href="#"
                     style={{ color: "inherit" }}
                   >
-                    Press
+                    {t.footer.company.links[2]}
                   </a>
                 </li>
                 <li>
@@ -539,14 +702,14 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                     href="#"
                     style={{ color: "inherit" }}
                   >
-                    Partners
+                    {t.footer.company.links[3]}
                   </a>
                 </li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-gray-900 dark:text-white mb-6">
-                Support
+                {t.footer.support.title}
               </h4>
               <ul className="space-y-4 text-sm text-gray-500 dark:text-gray-400">
                 <li>
@@ -555,7 +718,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                     href="#"
                     style={{ color: "inherit" }}
                   >
-                    Contact Center
+                    {t.footer.support.links[0]}
                   </a>
                 </li>
                 <li>
@@ -564,7 +727,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                     href="#"
                     style={{ color: "inherit" }}
                   >
-                    Terms of Service
+                    {t.footer.support.links[1]}
                   </a>
                 </li>
                 <li>
@@ -573,7 +736,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                     href="#"
                     style={{ color: "inherit" }}
                   >
-                    Privacy Policy
+                    {t.footer.support.links[2]}
                   </a>
                 </li>
                 <li>
@@ -582,20 +745,20 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                     href="#"
                     style={{ color: "inherit" }}
                   >
-                    Insurance Guide
+                    {t.footer.support.links[3]}
                   </a>
                 </li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-gray-900 dark:text-white mb-6">
-                Newsletter
+                {t.footer.newsletter.title}
               </h4>
               <form className="space-y-4">
                 <div className="relative">
                   <input
                     className="w-full bg-gray-50 dark:bg-gray-800 border-none rounded-lg py-3 px-4 text-sm text-gray-900 dark:text-white focus:ring-2 focus:ring-opacity-50"
-                    placeholder="Email address"
+                    placeholder={t.footer.newsletter.placeholder}
                     type="email"
                   />
                 </div>
@@ -603,15 +766,14 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                   className="w-full py-2.5 rounded-lg text-sm font-medium transition-colors text-white"
                   style={{ backgroundColor: primaryColor }}
                 >
-                  Subscribe
+                  {t.footer.newsletter.button}
                 </button>
               </form>
             </div>
           </div>
           <div className="border-t border-gray-100 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
             <p>
-              © 2023 {config.websiteName || "Velocitá"} Luxury Rentals. All
-              rights reserved.
+              © 2023 {config.websiteName || "Velocitá"} {t.footer.rights}
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a

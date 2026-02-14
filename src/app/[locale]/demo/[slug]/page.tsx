@@ -26,7 +26,7 @@ export default async function DemoPage({
 
   if (demoSite.templateId === "car") {
     const carConfig = {
-      ...(demoSite.config as any),
+      ...(demoSite.config as unknown as Record<string, unknown>),
       slug,
     } as unknown as CarConfig;
     return <CarTemplate config={carConfig} />;

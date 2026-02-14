@@ -20,7 +20,8 @@ export default async function DemoDetailPage({
   if (demoSite.templateId === "tour") {
     // Config can be passed if detail page needs dynamic data later
     // For now TourDetailTemplate handles its own static content
-    return <TourDetailTemplate />;
+    const config = demoSite.config as { language?: "en" | "id" };
+    return <TourDetailTemplate language={config.language} />;
   }
 
   return <div>Template detail not found</div>;

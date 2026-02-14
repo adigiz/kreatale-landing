@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 import React from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -37,7 +39,79 @@ export interface TourConfig {
     price?: string;
     itinerary?: { day: number; title: string; description?: string }[];
   }[];
+  language?: "en" | "id";
 }
+
+const DICTIONARY = {
+  en: {
+    nav: {
+      destinations: "Destinations",
+      experiences: "Experiences",
+      journal: "Journal",
+      curatedTrips: "Curated Trips",
+      inquire: "Inquire",
+    },
+    hero: {
+      featured: "Featured Experience",
+      curatedLuxury: "Curated Luxury",
+      startJourney: "Start Your Journey",
+      viewJournal: "View Journal",
+    },
+    signature: {
+      title: "Signature Collections",
+      swipe: "Swipe",
+    },
+    packages: {
+      handpicked: "Handpicked Journeys",
+      title: "Curated Tour Packages",
+      viewAll: "View All",
+      startingFrom: "Starting From",
+    },
+    destinations: {
+      wanderlust: "Wanderlust",
+      title: "Top Destinations",
+      description:
+        "Explore the world's most captivating regions, hand-selected for their cultural depth and natural beauty.",
+    },
+    experience: {
+      title: "The Voyage Experience",
+    },
+  },
+  id: {
+    nav: {
+      destinations: "Destinasi",
+      experiences: "Pengalaman",
+      journal: "Jurnal",
+      curatedTrips: "Perjalanan Kurasi",
+      inquire: "Tanya",
+    },
+    hero: {
+      featured: "Pengalaman Unggulan",
+      curatedLuxury: "Kemewahan Terkurasi",
+      startJourney: "Mulai Perjalanan",
+      viewJournal: "Lihat Jurnal",
+    },
+    signature: {
+      title: "Koleksi Tanda Tangan",
+      swipe: "Geser",
+    },
+    packages: {
+      handpicked: "Perjalanan Pilihan",
+      title: "Paket Tur Terkurasi",
+      viewAll: "Lihat Semua",
+      startingFrom: "Mulai Dari",
+    },
+    destinations: {
+      wanderlust: "Hasrat Berkelana",
+      title: "Destinasi Teratas",
+      description:
+        "Jelajahi wilayah paling memikat di dunia, dipilih langsung karena kedalaman budaya dan keindahan alamnya.",
+    },
+    experience: {
+      title: "Pengalaman Voyage",
+    },
+  },
+};
 
 interface TourTemplateProps {
   config?: TourConfig;
@@ -60,7 +134,10 @@ export default function TourTemplate({ config }: TourTemplateProps) {
   const days = config?.days || "7 Days";
   const location = config?.location || "Oia, Greece";
   const primaryColor = config?.primaryColor || "#1173d4";
+
   const currency = config?.currency || "Rp";
+  const language = config?.language || "en";
+  const t = DICTIONARY[language];
 
   // Helper for price formatting
   const formatPrice = (p: string) => {
@@ -103,31 +180,30 @@ export default function TourTemplate({ config }: TourTemplateProps) {
             )}
           </div>
 
-          {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-10 text-sm font-medium tracking-wide text-gray-600 dark:text-gray-300">
             <a
               href="#"
               className="hover:text-tour-primary transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-tour-primary after:transition-all hover:after:w-full"
             >
-              Destinations
+              {t.nav.destinations}
             </a>
             <a
               href="#"
               className="hover:text-tour-primary transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-tour-primary after:transition-all hover:after:w-full"
             >
-              Experiences
+              {t.nav.experiences}
             </a>
             <a
               href="#"
               className="hover:text-tour-primary transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-tour-primary after:transition-all hover:after:w-full"
             >
-              Journal
+              {t.nav.journal}
             </a>
             <a
               href="#"
               className="hover:text-tour-primary transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-tour-primary after:transition-all hover:after:w-full"
             >
-              Curated Trips
+              {t.nav.curatedTrips}
             </a>
           </div>
 
@@ -136,7 +212,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
               <span className="material-symbols-outlined">search</span>
             </button>
             <button className="hidden lg:block px-5 py-2.5 text-xs font-bold uppercase tracking-widest border border-gray-200 dark:border-gray-700 hover:border-tour-primary hover:text-tour-primary transition-all rounded-sm">
-              Inquire
+              {t.nav.inquire}
             </button>
             {/* Mobile Menu Button */}
             <button className="lg:hidden flex items-center justify-center w-10 h-10 text-tour-navy-dark dark:text-white hover:text-tour-primary transition-colors">
@@ -156,7 +232,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
           <div className="absolute inset-0 bg-gradient-to-t from-tour-navy-dark/40 via-transparent to-transparent lg:from-tour-navy-dark/80 lg:via-tour-navy-dark/20"></div>
           <div className="absolute top-4 left-4 lg:top-8 lg:left-8">
             <span className="px-3 py-1 bg-white/20 backdrop-blur-md text-white border border-white/30 text-[10px] lg:text-xs font-bold uppercase tracking-widest rounded-full">
-              Featured Experience
+              {t.hero.featured}
             </span>
           </div>
           <div className="absolute bottom-8 left-6 right-6 lg:bottom-12 lg:left-12 lg:right-12 text-white max-w-xl">
@@ -191,7 +267,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
         <div className="w-full lg:w-1/2 lg:h-full bg-white dark:bg-tour-background-dark flex items-center justify-center px-6 py-10 lg:p-16">
           <div className="max-w-xl w-full">
             <span className="text-tour-primary font-bold uppercase tracking-widest text-xs mb-3 lg:mb-4 block">
-              Curated Luxury
+              {t.hero.curatedLuxury}
             </span>
             <h1 className="text-4xl lg:text-7xl font-tour-serif font-medium text-tour-navy-dark dark:text-white mb-4 lg:mb-8 leading-[1.15] lg:leading-[1.1]">
               Redefining the <br />
@@ -212,9 +288,9 @@ export default function TourTemplate({ config }: TourTemplateProps) {
             <div className="mb-8 lg:hidden">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xs font-bold uppercase tracking-widest text-tour-navy-dark dark:text-white border-b-2 border-tour-primary/20 pb-1">
-                  Signature Collections
+                  {t.signature.title}
                 </h3>
-                <div className="text-xs text-gray-400">Swipe</div>
+                <div className="text-xs text-gray-400">{t.signature.swipe}</div>
               </div>
               <div className="flex gap-4 overflow-x-auto no-scrollbar pb-4 -mx-6 px-6 snap-x">
                 <div className="min-w-[140px] w-[140px] snap-start group cursor-pointer flex-shrink-0">
@@ -260,7 +336,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
             <div className="mb-12 hidden lg:block">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-sm font-bold uppercase tracking-widest text-tour-navy-dark dark:text-white border-b-2 border-tour-primary/20 pb-1">
-                  Signature Collections
+                  {t.signature.title}
                 </h3>
                 <div className="flex gap-2">
                   <button className="w-8 h-8 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 hover:text-tour-primary hover:border-tour-primary transition-all">
@@ -329,7 +405,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
 
             <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
               <button className="bg-tour-primary hover:bg-tour-primary-hover text-white py-4 lg:px-8 rounded-sm font-medium transition-all shadow-lg shadow-tour-primary/20 hover:shadow-tour-primary/30 flex items-center justify-center gap-2 group w-full lg:w-auto">
-                <span>Start Your Journey</span>
+                <span>{t.hero.startJourney}</span>
                 <span className="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">
                   arrow_forward
                 </span>
@@ -338,7 +414,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                 href={`/${locale}/demo/${slug}/detail`}
                 className="py-4 lg:px-8 border border-gray-200 dark:border-gray-700 hover:border-tour-navy-dark dark:hover:border-white rounded-sm font-medium text-tour-navy-dark dark:text-white transition-all w-full lg:w-auto bg-white dark:bg-transparent flex items-center justify-center"
               >
-                View Journal
+                {t.hero.viewJournal}
               </Link>
             </div>
           </div>
@@ -350,17 +426,17 @@ export default function TourTemplate({ config }: TourTemplateProps) {
           <div className="flex items-end justify-between mb-12 border-b border-gray-200 dark:border-gray-700 pb-6">
             <div>
               <span className="text-tour-primary font-bold uppercase tracking-widest text-xs mb-2 block">
-                Handpicked Journeys
+                {t.packages.handpicked}
               </span>
               <h3 className="text-3xl md:text-4xl font-tour-serif text-tour-navy-dark dark:text-white">
-                Curated Tour Packages
+                {t.packages.title}
               </h3>
             </div>
             <a
               href="#"
               className="text-sm font-bold uppercase tracking-widest text-tour-primary hover:text-tour-navy-dark dark:hover:text-white transition-colors flex items-center gap-1"
             >
-              View All{" "}
+              {t.packages.viewAll}{" "}
               <span className="material-symbols-outlined text-sm">
                 arrow_forward
               </span>
@@ -434,7 +510,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                       <div className="flex items-center justify-between pt-6 border-t border-gray-100 dark:border-gray-800">
                         <div>
                           <p className="text-xs text-gray-500 uppercase tracking-wide">
-                            Starting From
+                            {t.packages.startingFrom}
                           </p>
                           <p className="text-xl font-tour-serif font-semibold text-tour-primary">
                             {formatPrice(pkg.price || "")}
@@ -616,14 +692,13 @@ export default function TourTemplate({ config }: TourTemplateProps) {
         <div className="max-w-[1920px] mx-auto px-8">
           <div className="text-center mb-16">
             <span className="text-tour-primary font-bold uppercase tracking-widest text-xs mb-3 block">
-              Wanderlust
+              {t.destinations.wanderlust}
             </span>
             <h3 className="text-4xl md:text-5xl font-tour-serif text-tour-navy-dark dark:text-white mb-6">
-              Top Destinations
+              {t.destinations.title}
             </h3>
             <p className="text-gray-500 max-w-2xl mx-auto font-light">
-              Explore the world&apos;s most captivating regions, hand-selected
-              for their cultural depth and natural beauty.
+              {t.destinations.description}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-[800px] md:h-[600px] lg:h-[600px]">
@@ -773,7 +848,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
             </div>
             <div className="w-full lg:w-1/2">
               <span className="text-tour-primary font-bold uppercase tracking-widest text-xs mb-6 block">
-                The Voyage Experience
+                {t.experience.title}
               </span>
               <h3 className="text-3xl md:text-4xl lg:text-5xl font-tour-serif leading-tight text-tour-navy-dark dark:text-white mb-10 italic">
                 &quot;It wasn&apos;t just a vacation; it was a masterclass in

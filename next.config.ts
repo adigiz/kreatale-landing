@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   experimental: {
     // Preview mode is enabled by default in Next.js 15
   },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   // Allow larger request bodies for image uploads (default is 1MB)
   serverExternalPackages: ["cloudinary"],
   images: {

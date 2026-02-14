@@ -65,6 +65,9 @@ export default async function DemosPage({
                   Template
                 </th>
                 <th className="h-10 px-4 text-left align-middle text-xs font-medium text-muted-foreground">
+                  Language
+                </th>
+                <th className="h-10 px-4 text-left align-middle text-xs font-medium text-muted-foreground">
                   Status
                 </th>
                 <th className="h-10 px-4 text-left align-middle text-xs font-medium text-muted-foreground">
@@ -82,7 +85,7 @@ export default async function DemosPage({
               {demoSites.length === 0 ? (
                 <tr>
                   <td
-                    colSpan={7}
+                    colSpan={8}
                     className="h-24 text-center text-sm text-muted-foreground"
                   >
                     No demo sites found. Create one to get started.
@@ -123,6 +126,11 @@ export default async function DemosPage({
                       <td className="p-4">
                         <span className="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium uppercase">
                           {site.templateId}
+                        </span>
+                      </td>
+                      <td className="p-4">
+                        <span className="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium uppercase">
+                          {(site.config as any)?.language || "en"}
                         </span>
                       </td>
                       <td className="p-4">

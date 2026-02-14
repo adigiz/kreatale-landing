@@ -1,8 +1,152 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element */
+
 import React from "react";
 
-export default function TourDetailTemplate() {
+const DICTIONARY = {
+  en: {
+    nav: {
+      voyage: "Voyage",
+      featured: "Featured",
+    },
+    crumbs: {
+      europe: "Europe",
+      greece: "Greece",
+      luxury: "Luxury Escapes",
+    },
+    header: {
+      title: "Aegean Odyssey:",
+      subtitle: "7 Days of Luxury",
+      perPerson: "per person",
+      reviews: "reviews",
+      duration: "7 Days, 6 Nights",
+      location: "Santorini & Mykonos",
+    },
+    overview: {
+      title: "Experience Overview",
+      description:
+        "Immerse yourself in the sapphire waters and whitewashed architecture of the Cyclades. This curated journey combines the vibrant nightlife of Mykonos with the romantic serenity of Santorini. Enjoy private yacht charters, exclusive wine tastings in volcanic vineyards, and dining experiences reserved only for the few.",
+      features: {
+        wifi: "Wi-Fi",
+        pool: "Private Pool",
+        breakfast: "Breakfast Included",
+        transfers: "Transfers",
+      },
+    },
+    itinerary: {
+      title: "Daily Itinerary",
+      download: "Download PDF",
+      day1: {
+        title: "Day 1: Arrival & Welcome Champagne",
+        desc: "Private transfer from JTR Airport to your cliffside suite in Oia. Evening welcome reception with local wines and a sunset viewing from the private terrace.",
+        tag1: "5-Star Accommodation",
+        tag2: "Dinner Included",
+      },
+      day2: {
+        title: "Day 2: Catamaran Cruise",
+        desc: "Embark on a luxury catamaran for a day sailing around the caldera. Stops at the Red Beach and White Beach for swimming and snorkeling. Fresh BBQ lunch served on board.",
+        tag1: "6 Hours",
+        tag2: "Lunch Included",
+      },
+      day3: {
+        title: "Day 3: Private Vineyard Tour",
+        desc: "Explore the unique volcanic vineyards of Santorini. A guided tour with a sommelier through three award-winning wineries, tasting the indigenous Assyrtiko grape.",
+        tag1: "3 Wineries",
+        tag2: "Private Driver",
+      },
+      day4: {
+        title: "Days 4-7: Mykonos & Departure",
+        action: "View Full Itinerary",
+      },
+    },
+    policies: {
+      cancellation: "Cancellation Policy",
+      visa: "Visa Requirements",
+    },
+    footer: {
+      totalPrice: "Total Price",
+      bookNow: "Book Now",
+      reserve: "Reserve",
+      total7Days: "Total (7 Days)",
+    },
+  },
+  id: {
+    nav: {
+      voyage: "Voyage",
+      featured: "Unggulan",
+    },
+    crumbs: {
+      europe: "Eropa",
+      greece: "Yunani",
+      luxury: "Pelarian Mewah",
+    },
+    header: {
+      title: "Odyssey Aegean:",
+      subtitle: "7 Hari Kemewahan",
+      perPerson: "per orang",
+      reviews: "ulasan",
+      duration: "7 Hari, 6 Malam",
+      location: "Santorini & Mykonos",
+    },
+    overview: {
+      title: "Gambaran Pengalaman",
+      description:
+        "Benamkan diri Anda dalam perairan safir dan arsitektur bercat putih Cyclades. Perjalanan terkurasi ini menggabungkan kehidupan malam Mykonos yang semarak dengan ketenangan romantis Santorini. Nikmati penyewaan kapal pesiar pribadi, pencicipan anggur eksklusif di kebun anggur vulkanik, dan pengalaman bersantap yang hanya diperuntukkan bagi segelintir orang.",
+      features: {
+        wifi: "Wi-Fi",
+        pool: "Kolam Pribadi",
+        breakfast: "Termasuk Sarapan",
+        transfers: "Transfer",
+      },
+    },
+    itinerary: {
+      title: "Rencana Perjalanan Harian",
+      download: "Unduh PDF",
+      day1: {
+        title: "Hari 1: Kedatangan & Sampanye Selamat Datang",
+        desc: "Transfer pribadi dari Bandara JTR ke suite tepi tebing Anda di Oia. Resepsi selamat datang malam hari dengan anggur lokal dan pemandangan matahari terbenam dari teras pribadi.",
+        tag1: "Akomodasi Bintang 5",
+        tag2: "Termasuk Makan Malam",
+      },
+      day2: {
+        title: "Hari 2: Pelayaran Katamaran",
+        desc: "Naiki katamaran mewah untuk berlayar seharian di sekitar kaldera. Berhenti di Pantai Merah dan Pantai Putih untuk berenang dan snorkeling. Makan siang BBQ segar disajikan di atas kapal.",
+        tag1: "6 Jam",
+        tag2: "Termasuk Makan Siang",
+      },
+      day3: {
+        title: "Hari 3: Tur Kebun Anggur Pribadi",
+        desc: "Jelajahi kebun anggur vulkanik unik di Santorini. Tur berpemandu dengan sommelier melalui tiga kilang anggur pemenang penghargaan, mencicipi anggur Assyrtiko asli.",
+        tag1: "3 Kilang Anggur",
+        tag2: "Sopir Pribadi",
+      },
+      day4: {
+        title: "Hari 4-7: Mykonos & Keberangkatan",
+        action: "Lihat Rencana Perjalanan Lengkap",
+      },
+    },
+    policies: {
+      cancellation: "Kebijakan Pembatalan",
+      visa: "Persyaratan Visa",
+    },
+    footer: {
+      totalPrice: "Total Harga",
+      bookNow: "Pesan Sekarang",
+      reserve: "Reservasi",
+      total7Days: "Total (7 Hari)",
+    },
+  },
+};
+
+export default function TourDetailTemplate({
+  language = "en",
+}: {
+  language?: "en" | "id";
+}) {
+  const t = DICTIONARY[language];
+  const currency = language === "id" ? "Rp" : "$";
+  const price = language === "id" ? "70.000.000" : "4,500";
   return (
     <div className="bg-tour-background-light dark:bg-tour-background-dark font-tour-sans text-gray-800 dark:text-gray-100 antialiased overflow-hidden h-screen flex flex-col">
       {/* Navigation Bar */}
@@ -13,7 +157,8 @@ export default function TourDetailTemplate() {
           </button>
           <div className="flex items-center gap-1 cursor-pointer">
             <span className="text-lg font-bold tracking-tight text-tour-navy-dark dark:text-white">
-              Voyage<span className="text-tour-primary">.</span>
+              {t.nav.voyage}
+              <span className="text-tour-primary">.</span>
             </span>
           </div>
           <div className="flex items-center gap-2">
@@ -40,7 +185,7 @@ export default function TourDetailTemplate() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-80 lg:hidden"></div>
           <div className="absolute top-4 left-4 z-10">
             <span className="px-3 py-1 bg-white/90 dark:bg-tour-surface-dark/90 text-tour-navy-dark dark:text-white text-xs font-bold uppercase tracking-wider rounded-full shadow-sm backdrop-blur-sm">
-              Featured
+              {t.nav.featured}
             </span>
           </div>
           {/* Mobile Dots */}
@@ -85,33 +230,33 @@ export default function TourDetailTemplate() {
             {/* Breadcrumbs */}
             <nav className="flex items-center text-xs text-gray-500 dark:text-gray-400 mb-6 uppercase tracking-wider font-semibold">
               <a href="#" className="hover:text-tour-primary">
-                Europe
+                {t.crumbs.europe}
               </a>
               <span className="mx-2 text-gray-300 dark:text-gray-600">/</span>
               <a href="#" className="hover:text-tour-primary">
-                Greece
+                {t.crumbs.greece}
               </a>
               <span className="mx-2 text-gray-300 dark:text-gray-600">/</span>
               <span className="text-gray-900 dark:text-white">
-                Luxury Escapes
+                {t.crumbs.luxury}
               </span>
             </nav>
 
-            {/* Header */}
             <header className="mb-10">
               <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                 <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight max-w-xl">
-                  Aegean Odyssey: <br />
+                  {t.header.title} <br />
                   <span className="text-tour-primary bg-clip-text text-transparent bg-gradient-to-r from-tour-primary to-blue-400">
-                    7 Days of Luxury
+                    {t.header.subtitle}
                   </span>
                 </h1>
                 <div className="flex flex-col items-end">
                   <div className="text-3xl font-bold text-gray-900 dark:text-white">
-                    $4,500
+                    {currency}
+                    {price}
                   </div>
                   <div className="text-sm text-gray-500 dark:text-gray-400">
-                    per person
+                    {t.header.perPerson}
                   </div>
                 </div>
               </div>
@@ -123,21 +268,23 @@ export default function TourDetailTemplate() {
                   <span className="font-bold text-gray-900 dark:text-white">
                     4.96
                   </span>
-                  <span className="text-gray-400">(128 reviews)</span>
+                  <span className="text-gray-400">
+                    (128 {t.header.reviews})
+                  </span>
                 </div>
                 <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
                 <div className="flex items-center gap-1.5">
                   <span className="material-icons text-tour-primary text-lg">
                     schedule
                   </span>
-                  <span>7 Days, 6 Nights</span>
+                  <span>{t.header.duration}</span>
                 </div>
                 <div className="w-1 h-1 bg-gray-400 rounded-full"></div>
                 <div className="flex items-center gap-1.5">
                   <span className="material-icons text-tour-primary text-lg">
                     flight_takeoff
                   </span>
-                  <span>Santorini & Mykonos</span>
+                  <span>{t.header.location}</span>
                 </div>
               </div>
             </header>
@@ -146,40 +293,35 @@ export default function TourDetailTemplate() {
             {/* Overview */}
             <div className="mb-12">
               <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
-                Experience Overview
+                {t.overview.title}
               </h3>
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                Immerse yourself in the sapphire waters and whitewashed
-                architecture of the Cyclades. This curated journey combines the
-                vibrant nightlife of Mykonos with the romantic serenity of
-                Santorini. Enjoy private yacht charters, exclusive wine tastings
-                in volcanic vineyards, and dining experiences reserved only for
-                the few.
+                {t.overview.description}
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <span className="px-4 py-2 bg-white dark:bg-tour-surface-dark border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2">
                   <span className="material-icons text-tour-primary text-base">
                     wifi
                   </span>{" "}
-                  Wi-Fi
+                  {t.overview.features.wifi}
                 </span>
                 <span className="px-4 py-2 bg-white dark:bg-tour-surface-dark border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2">
                   <span className="material-icons text-tour-primary text-base">
                     pool
                   </span>{" "}
-                  Private Pool
+                  {t.overview.features.pool}
                 </span>
                 <span className="px-4 py-2 bg-white dark:bg-tour-surface-dark border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2">
                   <span className="material-icons text-tour-primary text-base">
                     restaurant
                   </span>{" "}
-                  Breakfast Included
+                  {t.overview.features.breakfast}
                 </span>
                 <span className="px-4 py-2 bg-white dark:bg-tour-surface-dark border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-medium text-gray-600 dark:text-gray-300 flex items-center gap-2">
                   <span className="material-icons text-tour-primary text-base">
                     local_taxi
                   </span>{" "}
-                  Transfers
+                  {t.overview.features.transfers}
                 </span>
               </div>
             </div>
@@ -188,10 +330,10 @@ export default function TourDetailTemplate() {
             <div className="mb-12">
               <div className="flex items-center justify-between mb-8">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  Daily Itinerary
+                  {t.itinerary.title}
                 </h3>
                 <button className="text-sm font-medium text-tour-primary hover:text-tour-primary-hover underline underline-offset-4">
-                  Download PDF
+                  {t.itinerary.download}
                 </button>
               </div>
               <div className="relative">
@@ -202,23 +344,21 @@ export default function TourDetailTemplate() {
                   {/* Dot */}
                   <div className="absolute left-[17px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-tour-primary bg-white dark:bg-tour-background-dark z-10 group-hover:bg-tour-primary transition-colors"></div>
                   <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-tour-primary transition-colors cursor-pointer">
-                    Day 1: Arrival & Welcome Champagne
+                    {t.itinerary.day1.title}
                   </h4>
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-3">
-                    Private transfer from JTR Airport to your cliffside suite in
-                    Oia. Evening welcome reception with local wines and a sunset
-                    viewing from the private terrace.
+                    {t.itinerary.day1.desc}
                   </p>
                   <div className="flex items-center gap-4 text-xs font-medium text-gray-500 uppercase tracking-wide">
                     <span className="flex items-center gap-1">
-                      <span className="material-icons text-sm">bed</span> 5-Star
-                      Accommodation
+                      <span className="material-icons text-sm">bed</span>{" "}
+                      {t.itinerary.day1.tag1}
                     </span>
                     <span className="flex items-center gap-1">
                       <span className="material-icons text-sm">
                         dinner_dining
                       </span>{" "}
-                      Dinner Included
+                      {t.itinerary.day1.tag2}
                     </span>
                   </div>
                 </div>
@@ -226,23 +366,21 @@ export default function TourDetailTemplate() {
                 <div className="relative pl-12 pb-12 group">
                   <div className="absolute left-[17px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-tour-primary bg-white dark:bg-tour-background-dark z-10 group-hover:bg-tour-primary transition-colors"></div>
                   <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-tour-primary transition-colors cursor-pointer">
-                    Day 2: Catamaran Cruise
+                    {t.itinerary.day2.title}
                   </h4>
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-3">
-                    Embark on a luxury catamaran for a day sailing around the
-                    caldera. Stops at the Red Beach and White Beach for swimming
-                    and snorkeling. Fresh BBQ lunch served on board.
+                    {t.itinerary.day2.desc}
                   </p>
                   <div className="flex items-center gap-4 text-xs font-medium text-gray-500 uppercase tracking-wide">
                     <span className="flex items-center gap-1">
-                      <span className="material-icons text-sm">sailing</span> 6
-                      Hours
+                      <span className="material-icons text-sm">sailing</span>{" "}
+                      {t.itinerary.day2.tag1}
                     </span>
                     <span className="flex items-center gap-1">
                       <span className="material-icons text-sm">
                         lunch_dining
                       </span>{" "}
-                      Lunch Included
+                      {t.itinerary.day2.tag2}
                     </span>
                   </div>
                 </div>
@@ -250,23 +388,21 @@ export default function TourDetailTemplate() {
                 <div className="relative pl-12 pb-12 group">
                   <div className="absolute left-[17px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-tour-primary bg-white dark:bg-tour-background-dark z-10 group-hover:bg-tour-primary transition-colors"></div>
                   <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-tour-primary transition-colors cursor-pointer">
-                    Day 3: Private Vineyard Tour
+                    {t.itinerary.day3.title}
                   </h4>
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-3">
-                    Explore the unique volcanic vineyards of Santorini. A guided
-                    tour with a sommelier through three award-winning wineries,
-                    tasting the indigenous Assyrtiko grape.
+                    {t.itinerary.day3.desc}
                   </p>
                   <div className="flex items-center gap-4 text-xs font-medium text-gray-500 uppercase tracking-wide">
                     <span className="flex items-center gap-1">
-                      <span className="material-icons text-sm">wine_bar</span> 3
-                      Wineries
+                      <span className="material-icons text-sm">wine_bar</span>{" "}
+                      {t.itinerary.day3.tag1}
                     </span>
                     <span className="flex items-center gap-1">
                       <span className="material-icons text-sm">
                         directions_car
                       </span>{" "}
-                      Private Driver
+                      {t.itinerary.day3.tag2}
                     </span>
                   </div>
                 </div>
@@ -274,10 +410,10 @@ export default function TourDetailTemplate() {
                 <div className="relative pl-12 group">
                   <div className="absolute left-[17px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-gray-400 dark:border-gray-600 bg-white dark:bg-tour-background-dark z-10"></div>
                   <h4 className="text-lg font-bold text-gray-500 dark:text-gray-400 mb-2">
-                    Days 4-7: Mykonos & Departure
+                    {t.itinerary.day4.title}
                   </h4>
                   <button className="text-tour-primary text-sm font-semibold hover:underline">
-                    View Full Itinerary
+                    {t.itinerary.day4.action}
                   </button>
                 </div>
               </div>
@@ -288,7 +424,7 @@ export default function TourDetailTemplate() {
               <div className="border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
                 <button className="w-full px-5 py-4 flex items-center justify-between bg-gray-50 dark:bg-tour-surface-darker hover:bg-gray-100 dark:hover:bg-tour-surface-dark transition-colors">
                   <span className="font-semibold text-sm text-gray-700 dark:text-gray-200">
-                    Cancellation Policy
+                    {t.policies.cancellation}
                   </span>
                   <span className="material-icons text-gray-400 text-lg">
                     expand_more
@@ -316,13 +452,16 @@ export default function TourDetailTemplate() {
             <div className="flex items-center justify-between gap-6">
               <div className="hidden sm:block">
                 <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide font-semibold mb-1">
-                  Total Price
+                  {t.footer.totalPrice}
                 </p>
                 <div className="flex items-baseline gap-1">
                   <span className="text-2xl font-bold text-gray-900 dark:text-white">
-                    $4,500
+                    {currency}
+                    {price}
                   </span>
-                  <span className="text-sm text-gray-500">/ person</span>
+                  <span className="text-sm text-gray-500">
+                    / {t.header.perPerson}
+                  </span>
                 </div>
               </div>
               <div className="flex items-center gap-3 flex-1 justify-end">
@@ -333,7 +472,7 @@ export default function TourDetailTemplate() {
                   <span className="material-icons">share</span>
                 </button>
                 <button className="bg-tour-primary hover:bg-tour-primary-hover text-white px-8 py-3.5 rounded-lg font-bold shadow-lg shadow-tour-primary/30 transition-all transform active:scale-95 flex items-center gap-2 flex-1 sm:flex-none justify-center">
-                  <span>Book Now</span>
+                  <span>{t.footer.bookNow}</span>
                   <span className="material-icons text-sm">arrow_forward</span>
                 </button>
               </div>
@@ -346,14 +485,15 @@ export default function TourDetailTemplate() {
       <div className="fixed bottom-0 w-full bg-white dark:bg-tour-background-dark border-t border-gray-100 dark:border-gray-800 p-4 z-50 flex justify-between items-center shadow-sticky-footer lg:hidden">
         <div>
           <p className="text-[10px] text-gray-500 uppercase font-bold">
-            Total (7 Days)
+            {t.footer.total7Days}
           </p>
           <p className="text-xl font-bold text-tour-navy-dark dark:text-white">
-            $4,500
+            {currency}
+            {price}
           </p>
         </div>
         <button className="bg-tour-primary text-white px-6 py-3 rounded-sm font-bold text-sm shadow-lg shadow-tour-primary/20">
-          Reserve
+          {t.footer.reserve}
         </button>
       </div>
     </div>

@@ -16,6 +16,87 @@ interface PageProps {
   }>;
 }
 
+const DICTIONARY = {
+  en: {
+    nav: {
+      back: "Back to Home",
+      inquire: "Inquire Now",
+      voyage: "Voyage",
+    },
+    hero: {
+      location: "a breathtaking destination",
+    },
+    sections: {
+      about: "About this Journey",
+      aboutDesc:
+        "Experience the ultimate in luxury travel with this curated package to {location}. Designed for the discerning traveler, this itinerary blends cultural immersion, exclusive access, and unparalleled comfort.",
+      highlights: "Trip Highlights",
+      journey: "The Journey",
+    },
+    highlights: [
+      "Private Chauffeur Service",
+      "Luxury Accommodations",
+      "Exclusive Guided Tours",
+      "Authentic Culinary Experiences",
+      "24/7 Concierge Support",
+      "VIP Airport Fast Track",
+    ],
+    sidebar: {
+      startingFrom: "Starting From",
+      perPerson: "/ per person",
+      duration: "Duration",
+      flexible: "Flexible",
+      groupSize: "Group Size",
+      groupDesc: "Private / Small Group",
+      travelStyle: "Travel Style",
+      luxury: "Luxury",
+      requestQuote: "Request a Quote",
+      downloadBrochure: "Download Brochure",
+      disclaimer:
+        "*Prices are subject to availability and seasonality. Contact our consultants for a personalized proposal.",
+    },
+  },
+  id: {
+    nav: {
+      back: "Kembali ke Beranda",
+      inquire: "Tanya Sekarang",
+      voyage: "Voyage",
+    },
+    hero: {
+      location: "destinasi yang menakjubkan",
+    },
+    sections: {
+      about: "Tentang Perjalanan Ini",
+      aboutDesc:
+        "Rasakan pengalaman perjalanan mewah terbaik dengan paket terkurasi ini ke {location}. Dirancang untuk pelancong yang cerdas, rencana perjalanan ini memadukan imersi budaya, akses eksklusif, dan kenyamanan yang tak tertandingi.",
+      highlights: "Sorotan Perjalanan",
+      journey: "Perjalanan",
+    },
+    highlights: [
+      "Layanan Sopir Pribadi",
+      "Akomodasi Mewah",
+      "Tur Pemandu Eksklusif",
+      "Pengalaman Kuliner Otentik",
+      "Dukungan Concierge 24/7",
+      "Jalur Cepat VIP Bandara",
+    ],
+    sidebar: {
+      startingFrom: "Mulai Dari",
+      perPerson: "/ per orang",
+      duration: "Durasi",
+      flexible: "Fleksibel",
+      groupSize: "Ukuran Grup",
+      groupDesc: "Pribadi / Grup Kecil",
+      travelStyle: "Gaya Perjalanan",
+      luxury: "Mewah",
+      requestQuote: "Minta Penawaran",
+      downloadBrochure: "Unduh Brosur",
+      disclaimer:
+        "*Harga tergantung ketersediaan dan musim. Hubungi konsultan kami untuk proposal yang dipersonalisasi.",
+    },
+  },
+};
+
 export default async function PackageDetailPage(props: PageProps) {
   const params = await props.params;
   const { locale, slug, packageSlug } = params;
@@ -29,10 +110,12 @@ export default async function PackageDetailPage(props: PageProps) {
 
   const { demoSite } = result;
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   const config = demoSite.config as any;
   const packages = config.packages || [];
 
   // Find the specific package
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   const pkg = packages.find((p: any) => {
     const pSlug =
       p.slug ||
@@ -79,6 +162,7 @@ export default async function PackageDetailPage(props: PageProps) {
       logo: config.logo,
       primaryColor: config.primaryColor,
       websiteName: config.websiteName,
+      language: config.language,
     };
 
     return <CarDetailPage config={carConfig} />;
@@ -86,6 +170,10 @@ export default async function PackageDetailPage(props: PageProps) {
 
   // Otherwise render tour package detail page
   const primaryColor = config.primaryColor || "#1173d4";
+  const language = (config.language as "en" | "id") || "en";
+  const t = DICTIONARY[language];
+  const currency = language === "id" ? "Rp" : "$";
+
   const style = {
     "--tour-primary": primaryColor,
     "--tour-primary-hover": primaryColor,
@@ -104,7 +192,7 @@ export default async function PackageDetailPage(props: PageProps) {
             className="flex items-center gap-2 text-slate-900 hover:text-[var(--color-tour-primary)] transition-colors group"
           >
             <ArrowLeft className="size-5 group-hover:-translate-x-1 transition-transform" />
-            <span className="font-medium">Back to Home</span>
+            <span className="font-medium">{t.nav.back}</span>
           </Link>
           <div className="flex items-center gap-2">
             {config.logo ? (
@@ -119,14 +207,14 @@ export default async function PackageDetailPage(props: PageProps) {
                   travel_explore
                 </span>
                 <span className="text-xl font-serif font-bold tracking-tight text-slate-900">
-                  Voyage
+                  {t.nav.voyage}
                   <span className="text-[var(--color-tour-primary)]">.</span>
                 </span>
               </div>
             )}
           </div>
           <button className="px-5 py-2.5 text-xs font-bold uppercase tracking-widest border border-gray-200 hover:border-[var(--color-tour-primary)] hover:text-[var(--color-tour-primary)] transition-all rounded-sm hidden sm:block">
-            Inquire Now
+            {t.nav.inquire}
           </button>
         </div>
       </nav>
@@ -184,29 +272,22 @@ export default async function PackageDetailPage(props: PageProps) {
             {/* Main Content */}
             <div className="w-full lg:w-2/3">
               <h2 className="text-3xl font-serif text-slate-900 mb-8">
-                About this Journey
+                {t.sections.about}
               </h2>
               <p className="text-lg text-slate-600 leading-relaxed font-light mb-12">
-                Experience the ultimate in luxury travel with this curated
-                package to {pkg.location || "a breathtaking destination"}.
-                Designed for the discerning traveler, this itinerary blends
-                cultural immersion, exclusive access, and unparalleled comfort.
+                {t.sections.aboutDesc.replace(
+                  "{location}",
+                  pkg.location || t.hero.location,
+                )}
               </p>
 
               {/* Highlights */}
               <div className="mb-16">
                 <h3 className="text-xl font-bold uppercase tracking-widest text-slate-900 mb-6 border-b border-gray-200 pb-4">
-                  Trip Highlights
+                  {t.sections.highlights}
                 </h3>
                 <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {[
-                    "Private Chauffeur Service",
-                    "Luxury Accommodations",
-                    "Exclusive Guided Tours",
-                    "Authentic Culinary Experiences",
-                    "24/7 Concierge Support",
-                    "VIP Airport Fast Track",
-                  ].map((highlight, i) => (
+                  {t.highlights.map((highlight, i) => (
                     <li
                       key={i}
                       className="flex items-center gap-3 text-slate-700"
@@ -224,20 +305,29 @@ export default async function PackageDetailPage(props: PageProps) {
               {pkg.itinerary && pkg.itinerary.length > 0 && (
                 <div>
                   <h3 className="text-xl font-bold uppercase tracking-widest text-slate-900 mb-6 border-b border-gray-200 pb-4">
-                    The Journey
+                    {t.sections.journey}
                   </h3>
                   <div className="space-y-8 border-l border-gray-200 ml-3 pl-8 relative">
-                    {pkg.itinerary.map((day: any, idx: number) => (
-                      <div key={idx} className="relative">
-                        <span className="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-[var(--color-tour-primary)] border-4 border-white shadow-sm"></span>
-                        <h4 className="text-lg font-serif font-bold text-slate-900 mb-2">
-                          Day {day.day || idx + 1}: {day.title}
-                        </h4>
-                        <p className="text-slate-600 font-light leading-relaxed">
-                          {day.description}
-                        </p>
-                      </div>
-                    ))}
+                    {pkg.itinerary.map(
+                      (
+                        day: {
+                          day: number;
+                          title: string;
+                          description: string;
+                        },
+                        idx: number,
+                      ) => (
+                        <div key={idx} className="relative">
+                          <span className="absolute -left-[37px] top-1 w-4 h-4 rounded-full bg-[var(--color-tour-primary)] border-4 border-white shadow-sm"></span>
+                          <h4 className="text-lg font-serif font-bold text-slate-900 mb-2">
+                            Day {day.day || idx + 1}: {day.title}
+                          </h4>
+                          <p className="text-slate-600 font-light leading-relaxed">
+                            {day.description}
+                          </p>
+                        </div>
+                      ),
+                    )}
                   </div>
                 </div>
               )}
@@ -248,49 +338,54 @@ export default async function PackageDetailPage(props: PageProps) {
               <div className="bg-gray-50 border border-gray-100 p-8 rounded-sm sticky top-24">
                 <div className="mb-8">
                   <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">
-                    Starting From
+                    {t.sidebar.startingFrom}
                   </p>
                   <div className="flex items-baseline gap-1">
                     <span className="text-4xl font-serif text-[var(--color-tour-primary)]">
-                      {config.currency || "Rp"}
+                      {config.currency || currency}
                       {config.currency && config.currency.length > 1 ? " " : ""}
                       {pkg.price || "0"}
                     </span>
                     <span className="text-gray-500 font-light">
-                      / per person
+                      {t.sidebar.perPerson}
                     </span>
                   </div>
                 </div>
 
                 <div className="space-y-4 mb-8">
                   <div className="flex justify-between py-3 border-b border-gray-200">
-                    <span className="text-slate-600">Duration</span>
+                    <span className="text-slate-600">{t.sidebar.duration}</span>
                     <span className="font-semibold text-slate-900">
-                      {pkg.duration || "Flexible"}
+                      {pkg.duration || t.sidebar.flexible}
                     </span>
                   </div>
                   <div className="flex justify-between py-3 border-b border-gray-200">
-                    <span className="text-slate-600">Group Size</span>
+                    <span className="text-slate-600">
+                      {t.sidebar.groupSize}
+                    </span>
                     <span className="font-semibold text-slate-900">
-                      Private / Small Group
+                      {t.sidebar.groupDesc}
                     </span>
                   </div>
                   <div className="flex justify-between py-3 border-b border-gray-200">
-                    <span className="text-slate-600">Travel Style</span>
-                    <span className="font-semibold text-slate-900">Luxury</span>
+                    <span className="text-slate-600">
+                      {t.sidebar.travelStyle}
+                    </span>
+                    <span className="font-semibold text-slate-900">
+                      {t.sidebar.luxury}
+                    </span>
                   </div>
                 </div>
 
                 <button className="w-full bg-[var(--color-tour-primary)] hover:bg-slate-900 text-white py-4 rounded-sm font-bold uppercase tracking-widest transition-colors mb-4 shadow-lg shadow-[var(--color-tour-primary)]/20">
-                  Request a Quote
+                  {t.sidebar.requestQuote}
                 </button>
                 <button className="w-full border border-slate-200 hover:border-slate-900 text-slate-900 py-4 rounded-sm font-bold uppercase tracking-widest transition-all bg-white">
-                  Download Brochure
+                  {t.sidebar.downloadBrochure}
                 </button>
 
                 <p className="text-xs text-gray-400 text-center mt-6 leading-relaxed">
-                  *Prices are subject to availability and seasonality. Contact
-                  our consultants for a personalized proposal.
+                  {t.sidebar.disclaimer}
                 </p>
               </div>
             </div>

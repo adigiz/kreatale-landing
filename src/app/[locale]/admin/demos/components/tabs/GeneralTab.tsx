@@ -102,6 +102,23 @@ export function GeneralTab({
             placeholder="e.g. Rp, $, €"
           />
         </div>
+        <div className="space-y-2">
+          <Label>Language</Label>
+          <Select
+            onValueChange={(val) =>
+              setValue("language", val as "en" | "id", { shouldDirty: true })
+            }
+            defaultValue={watch("language")}
+          >
+            <SelectTrigger>
+              <SelectValue placeholder="Select Language" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="en">English</SelectItem>
+              <SelectItem value="id">Bahasa Indonesia</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
 
       <div className="flex items-end">

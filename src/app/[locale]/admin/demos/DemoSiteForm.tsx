@@ -23,7 +23,7 @@ import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const TAB_FIELDS: Record<string, string[]> = {
-  basic: ["slug", "templateId", "isPublished"],
+  basic: ["slug", "templateId", "language", "isPublished"],
   branding: ["logo", "primaryColor"],
   hero: [
     "heroTitle",
@@ -92,6 +92,7 @@ export default function DemoSiteForm({
     slug: initialData?.slug || "",
     websiteName: initialData?.config?.websiteName || "",
     templateId: initialData?.templateId || "tour",
+    language: initialData?.config?.language || "en",
     isPublished: initialData?.isPublished || false,
     logo: initialData?.config?.logo || "",
     primaryColor: initialData?.config?.primaryColor || "#000000",

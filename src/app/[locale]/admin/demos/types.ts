@@ -10,6 +10,7 @@ export const demoSchema = z.object({
   isPublished: z.boolean(),
   logo: z.string().optional(),
   primaryColor: z.string().optional(),
+  language: z.enum(["en", "id"]).default("en").optional(),
   currency: z.string().default("Rp").optional(),
   heroTitle: z.string().optional(),
   heroSubtitle: z.string().optional(),
