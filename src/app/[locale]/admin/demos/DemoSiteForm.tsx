@@ -15,6 +15,9 @@ import { EntitySection } from "./components/EntitySection";
 import { PreviewSystem } from "./components/PreviewSystem";
 import { TEMPLATE_CONFIGS } from "./utils/template-configs";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Badge } from "@/components/ui/badge";
+import { Label } from "@/components/ui/label";
 import { createDemoSite, updateDemoSite } from "./actions";
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -333,8 +336,36 @@ export default function DemoSiteForm({
               className="space-y-6 pb-20"
             >
               <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-4">
                   <h3 className="text-lg font-semibold">Configuration</h3>
+                  <div className="flex items-center gap-2 border-l pl-4 ml-2">
+                    <Switch
+                      id="publish-mode"
+                      checked={watch("isPublished")}
+                      onCheckedChange={(checked) =>
+                        setValue("isPublished", checked, {
+                          shouldDirty: true,
+                        })
+                      }
+                    />
+                    <Label
+                      htmlFor="publish-mode"
+                      className="text-sm font-normal cursor-pointer"
+                    >
+                      {watch("isPublished") ? (
+                        <Badge
+                          variant="default"
+                          className="bg-green-500 hover:bg-green-600 border-none text-white"
+                        >
+                          Published
+                        </Badge>
+                      ) : (
+                        <Badge variant="outline" className="text-gray-500">
+                          Draft
+                        </Badge>
+                      )}
+                    </Label>
+                  </div>
                 </div>
                 {!showPreview && (
                   <Button

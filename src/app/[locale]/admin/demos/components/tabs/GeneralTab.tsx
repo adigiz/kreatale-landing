@@ -104,17 +104,6 @@ export function GeneralTab({
         </div>
       </div>
 
-      <div className="flex items-center space-x-2">
-        <input
-          type="checkbox"
-          id="isPublished"
-          className="h-4 w-4 rounded border-gray-300"
-          checked={watch("isPublished")}
-          onChange={(e) => setValue("isPublished", e.target.checked)}
-        />
-        <Label htmlFor="isPublished">Publish this demo site</Label>
-      </div>
-
       <div className="flex items-end">
         <Button
           type="button"
