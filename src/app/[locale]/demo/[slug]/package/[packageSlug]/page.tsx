@@ -21,11 +21,13 @@ export default async function PackageDetailPage(props: PageProps) {
   const { locale, slug, packageSlug } = params;
 
   // Fetch the demo site config
-  const demoSite = await getDemoSiteBySlug(slug);
+  const result = await getDemoSiteBySlug(slug);
 
-  if (!demoSite) {
+  if (!result) {
     notFound();
   }
+
+  const { demoSite } = result;
 
   const config = demoSite.config as any;
   const packages = config.packages || [];

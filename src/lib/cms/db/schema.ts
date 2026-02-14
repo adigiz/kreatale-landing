@@ -221,6 +221,7 @@ export const demoSites = pgTable("demo_sites", {
   templateId: varchar("template_id", { length: 100 }).notNull(), // e.g., "tour", "car-rental"
   config: jsonb("config").notNull().default("{}"), // Stores flexible content
   isPublished: boolean("is_published").default(false).notNull(),
+  authorId: uuid("author_id").references(() => users.id, { onDelete: "set null" }), // Nullable for now
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

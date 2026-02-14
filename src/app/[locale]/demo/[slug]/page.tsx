@@ -11,11 +11,13 @@ export default async function DemoPage({
   params: Promise<{ locale: string; slug: string }>;
 }) {
   const { slug } = await params;
-  const demoSite = await getDemoSiteBySlug(slug);
+  const result = await getDemoSiteBySlug(slug);
 
-  if (!demoSite) {
+  if (!result) {
     notFound();
   }
+
+  const { demoSite } = result;
 
   // Check template type and render appropriate component
   if (demoSite.templateId === "tour") {

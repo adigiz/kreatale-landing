@@ -1,15 +1,23 @@
 
 import { db } from "@/lib/cms/db";
-import { demoSites } from "@/lib/cms/db/schema";
+import { demoSites, users } from "@/lib/cms/db/schema";
 import { eq, desc } from "drizzle-orm";
 
 export async function getAllDemoSites() {
   try {
     const results = await db
-      .select()
+      .select({
+        demoSite: demoSites,
+        author: {
+          id: users.id,
+          name: users.name,
+          email: users.email,
+        },
+      })
       .from(demoSites)
+      .leftJoin(users, eq(demoSites.authorId, users.id))
       .orderBy(desc(demoSites.createdAt));
-    
+
     return results;
   } catch (error) {
     console.error("Error fetching demo sites:", error);
@@ -20,8 +28,16 @@ export async function getAllDemoSites() {
 export async function getDemoSiteById(id: string) {
   try {
     const result = await db
-      .select()
+      .select({
+        demoSite: demoSites,
+        author: {
+          id: users.id,
+          name: users.name,
+          email: users.email,
+        },
+      })
       .from(demoSites)
+      .leftJoin(users, eq(demoSites.authorId, users.id))
       .where(eq(demoSites.id, id))
       .limit(1);
 
@@ -35,8 +51,16 @@ export async function getDemoSiteById(id: string) {
 export async function getDemoSiteBySlug(slug: string) {
   try {
     const result = await db
-      .select()
+      .select({
+        demoSite: demoSites,
+        author: {
+          id: users.id,
+          name: users.name,
+          email: users.email,
+        },
+      })
       .from(demoSites)
+      .leftJoin(users, eq(demoSites.authorId, users.id))
       .where(eq(demoSites.slug, slug))
       .limit(1);
 
