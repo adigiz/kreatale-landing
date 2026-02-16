@@ -4,6 +4,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { CAR_DICTIONARY } from "./translations";
 
 export interface CarConfig {
   slug?: string; // Demo site slug for routing
@@ -39,176 +40,7 @@ export interface CarConfig {
   language?: "en" | "id";
 }
 
-const DICTIONARY = {
-  en: {
-    nav: {
-      fleet: "The Fleet",
-      brands: "Curated Brands",
-      membership: "Membership",
-      journal: "Journal",
-      signIn: "Sign In",
-      bookNow: "Book Now",
-    },
-    hero: {
-      slides: [
-        {
-          category: "The Mountain Pass",
-          title: "Conquer the",
-          titleItalic: "Altitude",
-          subtitle:
-            "Precision engineering meets raw nature. Elevate your journey.",
-          ctaText: "Explore Alpine Routes",
-        },
-        {
-          category: "Urban Elegance",
-          title: "Design in",
-          titleItalic: "Motion",
-          subtitle:
-            "Sleek lines for the modern metropolis. Arrive in undeniable style.",
-          ctaText: "View City Collection",
-        },
-        {
-          category: "Coastal Horizons",
-          title: "Chasing the",
-          titleItalic: "Sunset",
-          subtitle: "Open roads, ocean air, and the purr of a perfect engine.",
-          ctaText: "Discover Coastal Drives",
-        },
-      ],
-    },
-    fleet: {
-      title: "Handpicked Fleet",
-      subtitle: "Engineering masterpieces ready for your command.",
-      viewCollection: "View Full Collection",
-      available: "Available Now",
-      viewDetails: "View Details",
-      perDay: "/ day",
-    },
-    brands: {
-      label: "Manufacturers",
-      title: "Curated Brands",
-      description:
-        "We partner exclusively with the world's most prestigious automotive houses.",
-      viewDetails: "View Details",
-    },
-    testimonial: {
-      text: "The perfect fusion of machine and landscape. An unforgettable journey that redefined my expectations of travel.",
-      author: "James Sterling",
-      role: "Member since 2019",
-    },
-    cta: {
-      title: "Command the Road",
-      button: "Inquire with a Specialist",
-    },
-    footer: {
-      description:
-        "Redefining luxury travel through curated driving experiences and an unrivaled fleet of world-class vehicles.",
-      company: {
-        title: "Company",
-        links: ["About Us", "Careers", "Press", "Partners"],
-      },
-      support: {
-        title: "Support",
-        links: [
-          "Contact Center",
-          "Terms of Service",
-          "Privacy Policy",
-          "Insurance Guide",
-        ],
-      },
-      newsletter: {
-        title: "Newsletter",
-        placeholder: "Email address",
-        button: "Subscribe",
-      },
-      rights: "Luxury Rentals. All rights reserved.",
-    },
-  },
-  id: {
-    nav: {
-      fleet: "Armada",
-      brands: "Merek Pilihan",
-      membership: "Keanggotaan",
-      journal: "Jurnal",
-      signIn: "Masuk",
-      bookNow: "Pesan Sekarang",
-    },
-    hero: {
-      slides: [
-        {
-          category: "Lintasan Gunung",
-          title: "Taklukkan",
-          titleItalic: "Ketinggian",
-          subtitle:
-            "Rekayasa presisi bertemu alam liar. Tingkatkan perjalanan Anda.",
-          ctaText: "Jelajahi Rute Alpen",
-        },
-        {
-          category: "Elegan Urban",
-          title: "Desain dalam",
-          titleItalic: "Gerakan",
-          subtitle:
-            "Garis ramping untuk metropolis modern. Tiba dengan gaya tak terbantahkan.",
-          ctaText: "Lihat Koleksi Kota",
-        },
-        {
-          category: "Cakrawala Pesisir",
-          title: "Mengejar",
-          titleItalic: "Matahari Terbenam",
-          subtitle: "Jalan terbuka, udara laut, dan deru mesin yang sempurna.",
-          ctaText: "Temukan Perjalanan Pesisir",
-        },
-      ],
-    },
-    fleet: {
-      title: "Armada Pilihan",
-      subtitle: "Mahakarya teknik siap untuk perintah Anda.",
-      viewCollection: "Lihat Koleksi Lengkap",
-      available: "Tersedia Sekarang",
-      viewDetails: "Lihat Detail",
-      perDay: "/ hari",
-    },
-    brands: {
-      label: "Pabrikan",
-      title: "Merek Pilihan",
-      description:
-        "Kami bermitra secara eksklusif dengan rumah otomotif paling bergengsi di dunia.",
-      viewDetails: "Lihat Detail",
-    },
-    testimonial: {
-      text: "Perpaduan sempurna antara mesin dan lanskap. Perjalanan tak terlupakan yang mendefinisikan ulang harapan perjalanan saya.",
-      author: "James Sterling",
-      role: "Anggota sejak 2019",
-    },
-    cta: {
-      title: "Kuasai Jalan",
-      button: "Tanya Spesialis",
-    },
-    footer: {
-      description:
-        "Mendefinisikan ulang perjalanan mewah melalui pengalaman berkendara yang dikuratori dan armada kendaraan kelas dunia yang tak tertandingi.",
-      company: {
-        title: "Perusahaan",
-        links: ["Tentang Kami", "Karir", "Pers", "Mitra"],
-      },
-      support: {
-        title: "Dukungan",
-        links: [
-          "Pusat Kontak",
-          "Ketentuan Layanan",
-          "Kebijakan Privasi",
-          "Panduan Asuransi",
-        ],
-      },
-      newsletter: {
-        title: "Buletin",
-        placeholder: "Alamat email",
-        button: "Berlangganan",
-      },
-      rights: "Penyewaan Mewah. Hak cipta dilindungi undang-undang.",
-    },
-  },
-};
+const DICTIONARY = CAR_DICTIONARY;
 
 export function CarTemplate({ config }: { config: CarConfig }) {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -272,7 +104,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
           <div className="flex justify-between items-center h-20">
             <div className="flex-shrink-0 flex items-center gap-2">
               {config.logo ? (
-                <img src={config.logo} alt="Logo" className="h-8 w-auto" />
+                <img src={config.logo} alt={t.alt.logo} className="h-8 w-auto" />
               ) : (
                 <>
                   <span
@@ -444,7 +276,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                         {car.name}
                       </h3>
                       <p className="text-gray-500 dark:text-gray-400 text-sm">
-                        {car.region || "Grand Tourer"}
+                        {car.region || t.specs.defaultRegion}
                       </p>
                     </div>
                     <div className="text-right">
@@ -465,19 +297,19 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                       <span className="material-icons text-gray-400 text-base">
                         speed
                       </span>{" "}
-                      620 HP
+                      620 {t.specs.power}
                     </div>
                     <div className="flex items-center gap-1">
                       <span className="material-icons text-gray-400 text-base">
                         timer
                       </span>{" "}
-                      3.4s
+                      3.4{t.specs.acceleration}
                     </div>
                     <div className="flex items-center gap-1">
                       <span className="material-icons text-gray-400 text-base">
                         settings
                       </span>{" "}
-                      Auto
+                      {t.specs.transmission}
                     </div>
                   </div>
                   <Link
@@ -557,7 +389,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                   </div>
                   <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6 font-light">
                     {brand.itinerary?.[0]?.description ||
-                      "Premium automotive excellence."}
+                      t.specs.defaultDescription}
                   </p>
                   <div className="mt-auto">
                     <span
@@ -587,7 +419,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                 style={{ backgroundColor: `${primaryColor}20` }}
               ></div>
               <img
-                alt="Interior cockpit of a luxury sports car"
+                alt={t.alt.interior}
                 className="relative z-10 w-full rounded-lg shadow-2xl"
                 src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800"
               />
@@ -618,7 +450,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
       {/* CTA Section */}
       <section className="relative py-32 md:py-48 flex items-center justify-center text-center overflow-hidden">
         <img
-          alt="Scenic road"
+          alt={t.alt.scenicRoad}
           className="absolute inset-0 w-full h-full object-cover"
           src={
             config.heroImage ||
@@ -773,7 +605,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
           </div>
           <div className="border-t border-gray-100 dark:border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
             <p>
-              © 2023 {config.websiteName || "Velocitá"} {t.footer.rights}
+              {t.footer.copyright} {config.websiteName || "Velocitá"} {t.footer.rights}
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a
@@ -781,21 +613,21 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                 href="#"
                 style={{ color: "inherit" }}
               >
-                Instagram
+                {t.footer.social.instagram}
               </a>
               <a
                 className="hover:opacity-80 transition-colors"
                 href="#"
                 style={{ color: "inherit" }}
               >
-                Twitter
+                {t.footer.social.twitter}
               </a>
               <a
                 className="hover:opacity-80 transition-colors"
                 href="#"
                 style={{ color: "inherit" }}
               >
-                LinkedIn
+                {t.footer.social.linkedin}
               </a>
             </div>
           </div>

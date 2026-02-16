@@ -5,6 +5,7 @@
 import React from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { TOUR_DICTIONARY } from "./translations";
 // Using standard img tag as requested to keep styling exactly as is without handling Next/Image complexity yet.
 
 export interface TourConfig {
@@ -42,76 +43,7 @@ export interface TourConfig {
   language?: "en" | "id";
 }
 
-const DICTIONARY = {
-  en: {
-    nav: {
-      destinations: "Destinations",
-      experiences: "Experiences",
-      journal: "Journal",
-      curatedTrips: "Curated Trips",
-      inquire: "Inquire",
-    },
-    hero: {
-      featured: "Featured Experience",
-      curatedLuxury: "Curated Luxury",
-      startJourney: "Start Your Journey",
-      viewJournal: "View Journal",
-    },
-    signature: {
-      title: "Signature Collections",
-      swipe: "Swipe",
-    },
-    packages: {
-      handpicked: "Handpicked Journeys",
-      title: "Curated Tour Packages",
-      viewAll: "View All",
-      startingFrom: "Starting From",
-    },
-    destinations: {
-      wanderlust: "Wanderlust",
-      title: "Top Destinations",
-      description:
-        "Explore the world's most captivating regions, hand-selected for their cultural depth and natural beauty.",
-    },
-    experience: {
-      title: "The Voyage Experience",
-    },
-  },
-  id: {
-    nav: {
-      destinations: "Destinasi",
-      experiences: "Pengalaman",
-      journal: "Jurnal",
-      curatedTrips: "Perjalanan Kurasi",
-      inquire: "Tanya",
-    },
-    hero: {
-      featured: "Pengalaman Unggulan",
-      curatedLuxury: "Kemewahan Terkurasi",
-      startJourney: "Mulai Perjalanan",
-      viewJournal: "Lihat Jurnal",
-    },
-    signature: {
-      title: "Koleksi Tanda Tangan",
-      swipe: "Geser",
-    },
-    packages: {
-      handpicked: "Perjalanan Pilihan",
-      title: "Paket Tur Terkurasi",
-      viewAll: "Lihat Semua",
-      startingFrom: "Mulai Dari",
-    },
-    destinations: {
-      wanderlust: "Hasrat Berkelana",
-      title: "Destinasi Teratas",
-      description:
-        "Jelajahi wilayah paling memikat di dunia, dipilih langsung karena kedalaman budaya dan keindahan alamnya.",
-    },
-    experience: {
-      title: "Pengalaman Voyage",
-    },
-  },
-};
+const DICTIONARY = TOUR_DICTIONARY;
 
 interface TourTemplateProps {
   config?: TourConfig;
@@ -270,17 +202,14 @@ export default function TourTemplate({ config }: TourTemplateProps) {
               {t.hero.curatedLuxury}
             </span>
             <h1 className="text-4xl lg:text-7xl font-tour-serif font-medium text-tour-navy-dark dark:text-white mb-4 lg:mb-8 leading-[1.15] lg:leading-[1.1]">
-              Redefining the <br />
-              <span className="italic text-tour-primary">Art of Travel.</span>
+              {t.hero.title} <br />
+              <span className="italic text-tour-primary">{t.hero.titleItalic}</span>
             </h1>
             <p className="text-base lg:text-lg text-gray-600 dark:text-gray-300 leading-relaxed font-light mb-8">
-              We don&apos;t just plan trips; we craft narratives. From the
-              secluded vineyards of Tuscany to the icy fjords of Norway, Voyage
-              curates moments that linger long after you return home.
+              {t.hero.description}
               <span className="hidden lg:inline">
                 {" "}
-                Experience the world with unparalleled access and effortless
-                elegance.
+                {t.hero.descriptionExtended}
               </span>
             </p>
 
@@ -302,7 +231,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                     />
                   </div>
                   <h4 className="font-tour-serif text-sm font-semibold text-tour-navy-dark dark:text-white">
-                    Private Jet
+                    {t.collections.privateJet}
                   </h4>
                 </div>
                 <div className="min-w-[140px] w-[140px] snap-start group cursor-pointer flex-shrink-0">
@@ -314,7 +243,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                     />
                   </div>
                   <h4 className="font-tour-serif text-sm font-semibold text-tour-navy-dark dark:text-white">
-                    Safari
+                    {t.collections.safari}
                   </h4>
                 </div>
                 <div className="min-w-[140px] w-[140px] snap-start group cursor-pointer flex-shrink-0">
@@ -326,7 +255,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                     />
                   </div>
                   <h4 className="font-tour-serif text-sm font-semibold text-tour-navy-dark dark:text-white">
-                    Alpine
+                    {t.collections.alpine}
                   </h4>
                 </div>
               </div>
@@ -362,10 +291,10 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                     <div className="absolute inset-0 bg-tour-navy-dark/0 group-hover:bg-tour-navy-dark/10 transition-colors"></div>
                   </div>
                   <h4 className="font-tour-serif text-sm font-semibold text-tour-navy-dark dark:text-white group-hover:text-tour-primary transition-colors">
-                    Private Jet
+                    {t.collections.privateJet}
                   </h4>
                   <p className="text-[10px] text-gray-500 uppercase tracking-wide mt-0.5">
-                    Expeditions
+                    {t.collections.expeditions}
                   </p>
                 </div>
                 <div className="group cursor-pointer">
@@ -378,10 +307,10 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                     <div className="absolute inset-0 bg-tour-navy-dark/0 group-hover:bg-tour-navy-dark/10 transition-colors"></div>
                   </div>
                   <h4 className="font-tour-serif text-sm font-semibold text-tour-navy-dark dark:text-white group-hover:text-tour-primary transition-colors">
-                    Safari
+                    {t.collections.safari}
                   </h4>
                   <p className="text-[10px] text-gray-500 uppercase tracking-wide mt-0.5">
-                    Reserves
+                    {t.collections.reserves}
                   </p>
                 </div>
                 <div className="group cursor-pointer">
@@ -394,10 +323,10 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                     <div className="absolute inset-0 bg-tour-navy-dark/0 group-hover:bg-tour-navy-dark/10 transition-colors"></div>
                   </div>
                   <h4 className="font-tour-serif text-sm font-semibold text-tour-navy-dark dark:text-white group-hover:text-tour-primary transition-colors">
-                    Alpine
+                    {t.collections.alpine}
                   </h4>
                   <p className="text-[10px] text-gray-500 uppercase tracking-wide mt-0.5">
-                    Retreats
+                    {t.collections.retreats}
                   </p>
                 </div>
               </div>
@@ -567,7 +496,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                     <div className="flex items-center justify-between pt-6 border-t border-gray-100 dark:border-gray-800">
                       <div>
                         <p className="text-xs text-gray-500 uppercase tracking-wide">
-                          Starting From
+                          {t.packages.startingFrom}
                         </p>
                         <p className="text-xl font-tour-serif font-semibold text-tour-primary">
                           Rp 14,200
@@ -619,7 +548,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                     <div className="flex items-center justify-between pt-6 border-t border-gray-100 dark:border-gray-800">
                       <div>
                         <p className="text-xs text-gray-500 uppercase tracking-wide">
-                          Starting From
+                          {t.packages.startingFrom}
                         </p>
                         <p className="text-xl font-tour-serif font-semibold text-tour-primary">
                           Rp 9,800
@@ -668,7 +597,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                     <div className="flex items-center justify-between pt-6 border-t border-gray-100 dark:border-gray-800">
                       <div>
                         <p className="text-xs text-gray-500 uppercase tracking-wide">
-                          Starting From
+                          {t.packages.startingFrom}
                         </p>
                         <p className="text-xl font-tour-serif font-semibold text-tour-primary">
                           Rp 12,500
@@ -877,13 +806,13 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                   <p className="text-3xl font-tour-serif text-tour-navy-dark dark:text-white mb-1">
                     98%
                   </p>
-                  <p className="text-sm text-gray-500">5-Star Reviews</p>
+                  <p className="text-sm text-gray-500">{t.stats.fiveStarReviews}</p>
                 </div>
                 <div>
                   <p className="text-3xl font-tour-serif text-tour-navy-dark dark:text-white mb-1">
                     12k+
                   </p>
-                  <p className="text-sm text-gray-500">Happy Travelers</p>
+                  <p className="text-sm text-gray-500">{t.stats.happyTravelers}</p>
                 </div>
               </div>
             </div>
@@ -900,18 +829,16 @@ export default function TourTemplate({ config }: TourTemplateProps) {
         <div className="absolute inset-0 bg-tour-navy-dark/70 transition-opacity duration-500 group-hover:bg-tour-navy-dark/60"></div>
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6 max-w-4xl mx-auto">
           <span className="text-tour-primary font-bold uppercase tracking-widest text-sm mb-6 block animate-fade-in-up">
-            Your Next Chapter
+            {t.cta.yourNextChapter}
           </span>
           <h2 className="text-5xl md:text-7xl font-tour-serif text-white mb-8 leading-tight">
-            Start Your Journey Today
+            {t.cta.startJourneyToday}
           </h2>
           <p className="text-gray-200 text-lg md:text-xl font-light mb-12 max-w-2xl leading-relaxed">
-            Your next extraordinary journey awaits. Let us craft a bespoke
-            itinerary tailored exclusively to your desires, ensuring every
-            moment is unforgettable.
+            {t.cta.journeyDescription}
           </p>
           <button className="bg-tour-primary hover:bg-white hover:text-tour-navy-dark text-white px-12 py-5 rounded-sm font-bold text-sm uppercase tracking-widest transition-all duration-300 shadow-2xl shadow-tour-primary/30 hover:shadow-white/20 transform hover:-translate-y-1">
-            Talk to a Consultant
+            {t.cta.talkToConsultant}
           </button>
         </div>
       </section>
@@ -929,9 +856,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                 </span>
               </div>
               <p className="text-gray-500 dark:text-gray-400 mb-8 max-w-md leading-relaxed">
-                Curating the world&apos;s most exceptional travel experiences
-                for the discerning modern explorer. We believe in travel that
-                transforms.
+                {t.footer.description}
               </p>
               <div className="flex gap-4">
                 <a
@@ -962,7 +887,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
             </div>
             <div>
               <h5 className="font-tour-serif font-medium text-lg text-tour-navy-dark dark:text-white mb-6">
-                Explore
+                {t.footer.explore}
               </h5>
               <ul className="space-y-4 text-sm text-gray-500 dark:text-gray-400">
                 <li>
@@ -971,7 +896,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                     className="hover:text-tour-primary transition-colors flex items-center gap-2"
                   >
                     <span className="w-1 h-1 bg-tour-primary rounded-full opacity-0 hover:opacity-100 transition-opacity"></span>
-                    Destinations
+                    {t.footer.destinations}
                   </a>
                 </li>
                 <li>
@@ -980,7 +905,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                     className="hover:text-tour-primary transition-colors flex items-center gap-2"
                   >
                     <span className="w-1 h-1 bg-tour-primary rounded-full opacity-0 hover:opacity-100 transition-opacity"></span>
-                    Signature Tours
+                    {t.footer.signatureTours}
                   </a>
                 </li>
                 <li>
@@ -989,7 +914,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                     className="hover:text-tour-primary transition-colors flex items-center gap-2"
                   >
                     <span className="w-1 h-1 bg-tour-primary rounded-full opacity-0 hover:opacity-100 transition-opacity"></span>
-                    Private Charters
+                    {t.footer.privateCharters}
                   </a>
                 </li>
                 <li>
@@ -998,46 +923,46 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                     className="hover:text-tour-primary transition-colors flex items-center gap-2"
                   >
                     <span className="w-1 h-1 bg-tour-primary rounded-full opacity-0 hover:opacity-100 transition-opacity"></span>
-                    The Journal
+                    {t.footer.theJournal}
                   </a>
                 </li>
               </ul>
             </div>
             <div>
               <h5 className="font-tour-serif font-medium text-lg text-tour-navy-dark dark:text-white mb-6">
-                Newsletter
+                {t.footer.newsletter}
               </h5>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-                Join our inner circle for exclusive updates and hidden gems.
+                {t.footer.newsletterDescription}
               </p>
               <div className="flex flex-col gap-3">
                 <input
                   type="email"
                   className="w-full bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-sm text-sm px-4 py-3 focus:ring-1 focus:ring-tour-primary focus:border-tour-primary transition-all"
-                  placeholder="Email Address"
+                  placeholder={t.footer.emailPlaceholder}
                 />
                 <button className="bg-tour-navy-dark hover:bg-tour-primary text-white px-4 py-3 rounded-sm transition-colors text-sm font-bold uppercase tracking-wide">
-                  Subscribe
+                  {t.footer.subscribe}
                 </button>
               </div>
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-100 dark:border-gray-800">
             <p className="text-xs text-gray-400">
-              © 2024 Voyage Luxury Travel. All rights reserved.
+              {t.footer.copyright}
             </p>
             <div className="flex gap-8 mt-4 md:mt-0">
               <a
                 href="#"
                 className="text-xs text-gray-400 hover:text-tour-navy-dark dark:hover:text-white transition-colors"
               >
-                Privacy Policy
+                {t.footer.privacyPolicy}
               </a>
               <a
                 href="#"
                 className="text-xs text-gray-400 hover:text-tour-navy-dark dark:hover:text-white transition-colors"
               >
-                Terms of Service
+                {t.footer.termsOfService}
               </a>
             </div>
           </div>
@@ -1046,10 +971,10 @@ export default function TourTemplate({ config }: TourTemplateProps) {
       <div className="fixed bottom-0 w-full bg-white dark:bg-tour-background-dark border-t border-gray-100 dark:border-gray-800 p-4 z-50 flex justify-between items-center shadow-sticky-footer lg:hidden">
         <div className="flex flex-col">
           <span className="text-[10px] uppercase text-gray-400 font-bold tracking-widest">
-            Questions?
+            {t.footer.questions}
           </span>
           <span className="text-sm font-tour-serif font-bold text-tour-navy-dark dark:text-white">
-            Contact Concierge
+            {t.footer.contactConcierge}
           </span>
         </div>
         <div className="flex gap-3">

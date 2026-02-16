@@ -1,0 +1,184 @@
+export const TOUR_DETAIL_DICTIONARY = {
+  en: {
+    nav: {
+      voyage: "Voyage",
+      featured: "Featured",
+    },
+    crumbs: {
+      europe: "Europe",
+      greece: "Greece",
+      luxury: "Luxury Escapes",
+    },
+    header: {
+      title: "Aegean Odyssey:",
+      subtitle: "7 Days of Luxury",
+      perPerson: "per person",
+      reviews: "reviews",
+      duration: "7 Days, 6 Nights",
+      location: "Santorini, Greece",
+    },
+    overview: {
+      title: "Experience Overview",
+      experience: "The Experience",
+      description:
+        "Immerse yourself in the sapphire waters and whitewashed architecture of the Cyclades. This curated journey combines the vibrant nightlife of Mykonos with the romantic serenity of Santorini. Enjoy private yacht charters, exclusive wine tastings in volcanic vineyards, and dining experiences reserved only for the few.",
+      features: {
+        wifi: "Wi-Fi",
+        pool: "Private Pool",
+        breakfast: "Breakfast Included",
+        transfers: "Transfers",
+      },
+    },
+    itinerary: {
+      title: "Daily Itinerary",
+      download: "Download PDF",
+      viewFull: "View Full Itinerary",
+      showLess: "Show Less",
+      days: "Days",
+      day1: {
+        title: "Day 1: Arrival & Champagne",
+        desc: "Private transfer from JTR Airport to your cliffside suite in Oia. Evening welcome reception with local wines.",
+        tag1: "5-Star Accommodation",
+        tag2: "Dinner Included",
+      },
+      day2: {
+        title: "Day 2: Catamaran Cruise",
+        desc: "Embark on a luxury catamaran for a day sailing around the caldera. Stops at the Red Beach and White Beach.",
+        tag1: "6 Hours",
+        tag2: "Lunch Included",
+      },
+      day3: {
+        title: "Day 3: Private Vineyard Tour",
+        desc: "Explore the unique volcanic vineyards of Santorini. A guided tour with a sommelier through three award-winning wineries, tasting the indigenous Assyrtiko grape.",
+        tag1: "3 Wineries",
+        tag2: "Private Driver",
+      },
+      day4: {
+        title: "Day 4: Transfer to Mykonos",
+        desc: "Morning ferry transfer to Mykonos. Check into your luxury beachfront villa. Afternoon at leisure to explore the charming streets of Mykonos Town.",
+        tag1: "Ferry Transfer",
+        tag2: "Beachfront Villa",
+      },
+      day5: {
+        title: "Day 5: Delos Archaeological Site",
+        desc: "Private guided tour to the sacred island of Delos, birthplace of Apollo. Explore ancient ruins and learn about Greek mythology. Return to Mykonos for sunset cocktails.",
+        tag1: "Private Guide",
+        tag2: "Historical Tour",
+      },
+      day6: {
+        title: "Day 6: Beach Day & Water Sports",
+        desc: "Spend the day at Paradise Beach or Super Paradise Beach. Enjoy water sports, beach clubs, and crystal-clear waters. Evening at a world-renowned beach club.",
+        tag1: "Water Sports",
+        tag2: "Beach Club Access",
+      },
+      day7: {
+        title: "Day 7: Departure",
+        desc: "Final breakfast at your villa. Private transfer to Mykonos Airport (JMK) for your departure flight. End of your Aegean Odyssey.",
+        tag1: "Airport Transfer",
+        tag2: "Breakfast Included",
+      },
+    },
+    policies: {
+      cancellation: "Cancellation Policy",
+      visa: "Visa Requirements",
+    },
+    footer: {
+      totalPrice: "Total Price",
+      totalForGuest: "Total for 1 Guest",
+      bookNow: "Book Now",
+      reserve: "Reserve",
+      total7Days: "Total (7 Days)",
+    },
+  },
+  id: {
+    nav: {
+      voyage: "Voyage",
+      featured: "Unggulan",
+    },
+    crumbs: {
+      europe: "Eropa",
+      greece: "Yunani",
+      luxury: "Pelarian Mewah",
+    },
+    header: {
+      title: "Odyssey Aegean:",
+      subtitle: "7 Hari Kemewahan",
+      perPerson: "per orang",
+      reviews: "ulasan",
+      duration: "7 Hari, 6 Malam",
+      location: "Santorini & Mykonos",
+    },
+    overview: {
+      title: "Gambaran Pengalaman",
+      experience: "Pengalaman",
+      description:
+        "Benamkan diri Anda dalam perairan safir dan arsitektur bercat putih Cyclades. Perjalanan terkurasi ini menggabungkan kehidupan malam Mykonos yang semarak dengan ketenangan romantis Santorini. Nikmati penyewaan kapal pesiar pribadi, pencicipan anggur eksklusif di kebun anggur vulkanik, dan pengalaman bersantap yang hanya diperuntukkan bagi segelintir orang.",
+      features: {
+        wifi: "Wi-Fi",
+        pool: "Kolam Pribadi",
+        breakfast: "Termasuk Sarapan",
+        transfers: "Transfer",
+      },
+    },
+    itinerary: {
+      title: "Rencana Perjalanan Harian",
+      download: "Unduh PDF",
+      viewFull: "Lihat Rencana Perjalanan Lengkap",
+      showLess: "Tampilkan Lebih Sedikit",
+      days: "Hari",
+      day1: {
+        title: "Hari 1: Kedatangan & Sampanye Selamat Datang",
+        desc: "Transfer pribadi dari Bandara JTR ke suite tepi tebing Anda di Oia. Resepsi selamat datang malam hari dengan anggur lokal dan pemandangan matahari terbenam dari teras pribadi.",
+        tag1: "Akomodasi Bintang 5",
+        tag2: "Termasuk Makan Malam",
+      },
+      day2: {
+        title: "Hari 2: Pelayaran Katamaran",
+        desc: "Naiki katamaran mewah untuk berlayar seharian di sekitar kaldera. Berhenti di Pantai Merah dan Pantai Putih untuk berenang dan snorkeling. Makan siang BBQ segar disajikan di atas kapal.",
+        tag1: "6 Jam",
+        tag2: "Termasuk Makan Siang",
+      },
+      day3: {
+        title: "Hari 3: Tur Kebun Anggur Pribadi",
+        desc: "Jelajahi kebun anggur vulkanik unik di Santorini. Tur berpemandu dengan sommelier melalui tiga kilang anggur pemenang penghargaan, mencicipi anggur Assyrtiko asli.",
+        tag1: "3 Kilang Anggur",
+        tag2: "Sopir Pribadi",
+      },
+      day4: {
+        title: "Hari 4: Transfer ke Mykonos",
+        desc: "Transfer feri pagi ke Mykonos. Check-in ke villa tepi pantai mewah Anda. Sore hari bebas untuk menjelajahi jalan-jalan menawan di Kota Mykonos.",
+        tag1: "Transfer Feri",
+        tag2: "Villa Tepi Pantai",
+      },
+      day5: {
+        title: "Hari 5: Situs Arkeologi Delos",
+        desc: "Tur berpemandu pribadi ke pulau suci Delos, tempat kelahiran Apollo. Jelajahi reruntuhan kuno dan pelajari mitologi Yunani. Kembali ke Mykonos untuk koktail matahari terbenam.",
+        tag1: "Pemandu Pribadi",
+        tag2: "Tur Sejarah",
+      },
+      day6: {
+        title: "Hari 6: Hari Pantai & Olahraga Air",
+        desc: "Habiskan hari di Paradise Beach atau Super Paradise Beach. Nikmati olahraga air, klub pantai, dan air jernih. Malam hari di klub pantai terkenal di dunia.",
+        tag1: "Olahraga Air",
+        tag2: "Akses Klub Pantai",
+      },
+      day7: {
+        title: "Hari 7: Keberangkatan",
+        desc: "Sarapan terakhir di villa Anda. Transfer pribadi ke Bandara Mykonos (JMK) untuk penerbangan keberangkatan Anda. Akhir dari Odyssey Aegean Anda.",
+        tag1: "Transfer Bandara",
+        tag2: "Termasuk Sarapan",
+      },
+    },
+    policies: {
+      cancellation: "Kebijakan Pembatalan",
+      visa: "Persyaratan Visa",
+    },
+    footer: {
+      totalPrice: "Total Harga",
+      totalForGuest: "Total untuk 1 Tamu",
+      bookNow: "Pesan Sekarang",
+      reserve: "Reservasi",
+      total7Days: "Total (7 Hari)",
+    },
+  },
+};
