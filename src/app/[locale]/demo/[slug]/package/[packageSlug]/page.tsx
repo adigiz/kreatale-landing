@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { getDemoSiteBySlug } from "@/lib/cms/queries/demo-sites";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { type TourConfig } from "@/components/demo/tour/TourTemplate";
+
 import {
   CarDetailPage,
   type CarDetailConfig,

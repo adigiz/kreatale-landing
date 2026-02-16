@@ -47,7 +47,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await requirePermission(PERMISSIONS.POSTS_UPDATE);
+    await requirePermission(PERMISSIONS.POSTS_UPDATE);
 
     const { id } = await params;
     const body = await request.json();

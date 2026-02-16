@@ -104,7 +104,8 @@ export default async function DemosPage({
                     >
                       <td className="p-4">
                         <span className="text-sm font-medium text-foreground">
-                          {(site.config as any)?.websiteName || "-"}
+                          {(site.config as { websiteName?: string })
+                            ?.websiteName || "-"}
                         </span>
                       </td>
                       <td className="p-4">
@@ -130,7 +131,8 @@ export default async function DemosPage({
                       </td>
                       <td className="p-4">
                         <span className="inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium uppercase">
-                          {(site.config as any)?.language || "en"}
+                          {(site.config as { language?: string })?.language ||
+                            "en"}
                         </span>
                       </td>
                       <td className="p-4">

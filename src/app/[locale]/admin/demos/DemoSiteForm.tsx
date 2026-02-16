@@ -18,9 +18,10 @@ import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Label } from "@/components/ui/label";
-import { createDemoSite, updateDemoSite } from "./actions";
+import { createDemoSite, updateDemoSite, checkSlugUnique } from "./actions";
 import { toast } from "sonner";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useDebounce } from "@/hooks/use-debounce";
 
 const TAB_FIELDS: Record<string, string[]> = {
   basic: ["slug", "templateId", "language", "isPublished"],
@@ -112,13 +113,45 @@ export default function DemoSiteForm({
     control,
     handleSubmit,
     setValue,
+    setError,
+    clearErrors,
     watch,
     getValues,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<DemoFormValues>({
     resolver: zodResolver(demoSchema),
     defaultValues,
+    mode: "onChange",
   });
+
+  useEffect(() => {
+    // console.log("Validity changed:", isValid, errors);
+    window.dispatchEvent(
+      new CustomEvent("demo-site:validity-change", { detail: { isValid } }),
+    );
+  }, [isValid]);
+
+  const slug = watch("slug");
+  const debouncedSlug = useDebounce(slug, 500);
+
+  useEffect(() => {
+    const validateSlug = async () => {
+      if (!debouncedSlug || debouncedSlug.length < 3) return;
+
+      const isUnique = await checkSlugUnique(debouncedSlug, initialData?.id);
+      // console.log("Slug check:", debouncedSlug, isUnique);
+      if (!isUnique) {
+        setError("slug", {
+          type: "manual",
+          message: "Slug is already taken",
+        });
+      } else {
+        clearErrors("slug");
+      }
+    };
+
+    validateSlug();
+  }, [debouncedSlug, initialData?.id, setError, clearErrors]);
 
   const templateId = watch("templateId");
   const formValues = watch();

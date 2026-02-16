@@ -7,7 +7,7 @@ import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { requirePermission } from "@/lib/cms/auth/config";
 import { PERMISSIONS } from "@/lib/cms/permissions";
-import { getDemoSiteById } from "@/lib/cms/queries/demo-sites";
+import { getDemoSiteById, getDemoSiteBySlug } from "@/lib/cms/queries/demo-sites";
 
 export async function deleteDemoSite(id: string) {
   const session = await requirePermission(PERMISSIONS.DEMO_SITES_DELETE);
@@ -46,7 +46,7 @@ export async function createDemoSite(data: NewDemoSite) {
     return newSite;
   } catch (error) {
     console.error("Error creating demo site:", error);
-    // @ts-ignore
+    // @ts-expect-error: error is unknown typed but checking code property
     if (error.code === '23505') { // Unique violation for slug
          throw new Error("Slug might be taken");
     }
@@ -81,4 +81,13 @@ export async function updateDemoSite(id: string, data: Partial<NewDemoSite>) {
     console.error("Error updating demo site:", error);
     throw new Error("Failed to update demo site");
   }
+}
+
+export async function checkSlugUnique(slug: string, excludeId?: string) {
+  const existingSite = await getDemoSiteBySlug(slug);
+  
+  if (!existingSite) return true; // Unique
+  if (excludeId && existingSite.demoSite.id === excludeId) return true; // Same site
+  
+  return false; // Not unique
 }

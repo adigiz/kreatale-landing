@@ -21,10 +21,13 @@ export default async function EditDemoSitePage({
     redirect(`/${locale}/admin/login`);
   }
 
-  const demoSite = (await getDemoSiteById(id)) as DemoSite | null;
-  if (!demoSite) {
+  const data = await getDemoSiteById(id);
+
+  if (!data || !data.demoSite) {
     notFound();
   }
+
+  const demoSite = data.demoSite as unknown as DemoSite;
 
   return (
     <div className="space-y-6">

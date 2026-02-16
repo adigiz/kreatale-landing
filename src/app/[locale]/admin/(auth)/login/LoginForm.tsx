@@ -12,7 +12,15 @@ export default function LoginForm() {
   const searchParams = useSearchParams();
   const params = useParams();
   const locale = (params?.locale as string) || "en";
-  const callbackUrl = searchParams.get("callbackUrl") || `/${locale}/admin`;
+  const defaultCallback = `/${locale}/admin`;
+  const rawCallback = searchParams.get("callbackUrl");
+  // Prevent open redirect: allow only relative paths (e.g. /en/admin or /en/admin/posts)
+  const callbackUrl =
+    typeof rawCallback === "string" &&
+    rawCallback.startsWith("/") &&
+    !rawCallback.startsWith("//")
+      ? rawCallback
+      : defaultCallback;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
