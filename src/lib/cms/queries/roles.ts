@@ -27,3 +27,12 @@ export async function updateRolePermissions(
 
   return role || null;
 }
+
+/** Create a role (used when it does not exist in DB yet). */
+export async function createRole(name: string, permissions: string[]) {
+  const [role] = await db
+    .insert(roles)
+    .values({ name, permissions })
+    .returning();
+  return role || null;
+}

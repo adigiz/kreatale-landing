@@ -12,6 +12,8 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "create-admin": "tsx scripts/create-admin.ts",
+    "update-sales-role": "tsx scripts/update-sales-role.ts",
+    "seed-roles": "tsx scripts/seed-roles.ts",
     "scraper:dev": "npm run dev --prefix apps/scrapper-service"
   },
   "dependencies": {

@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { revalidateTag } from "next/cache";
 import { requireAdmin } from "@/lib/cms/auth/config";
-import { getAllRoles } from "@/lib/cms/queries/roles";
-import { updateRolePermissions } from "@/lib/cms/queries/roles";
+import { getAllRoles, updateRolePermissions, createRole } from "@/lib/cms/queries/roles";
 import { ALL_PERMISSIONS, type UserRole } from "@/lib/cms/permissions";
 import { z } from "zod";
 
@@ -72,10 +71,15 @@ export async function PATCH(request: NextRequest) {
       );
     }
 
-    const updated = await updateRolePermissions(
+    let updated = await updateRolePermissions(
       data.roleName,
       data.permissions
     );
+
+    // If role doesn't exist in DB yet, create it (super_admin can manage from admin UI)
+    if (!updated) {
+      updated = await createRole(data.roleName, data.permissions);
+    }
 
     if (!updated) {
       return NextResponse.json({ error: "Role not found" }, { status: 404 });

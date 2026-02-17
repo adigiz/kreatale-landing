@@ -1,7 +1,10 @@
 import { getSession } from "@/lib/cms/auth/config";
 import { redirect } from "next/navigation";
 import { getAllRoles } from "@/lib/cms/queries/roles";
+import { ROLE_PERMISSIONS, ALL_PERMISSIONS } from "@/lib/cms/permissions";
 import RolesContent from "./components/RolesContent";
+
+const STANDARD_ROLE_NAMES = ["super_admin", "admin", "editor", "author", "sales", "viewer"] as const;
 
 export default async function RolesPage({
   params,
@@ -22,19 +25,37 @@ export default async function RolesPage({
     redirect(`/${locale}/admin`);
   }
 
-  const allRoles = await getAllRoles();
+  const dbRoles = await getAllRoles();
+  const dbRolesByName = new Map(dbRoles.map((r) => [r.name, r]));
 
-  // Serialize dates for client component
-  const serializedRoles = allRoles.map((r) => ({
-    ...r,
-    permissions: (r.permissions as string[]) || [],
-    createdAt: new Date(r.createdAt),
-    updatedAt: new Date(r.updatedAt),
-  }));
+  // Always show all standard roles: from DB when present, else code defaults (so super_admin can manage from admin)
+  const now = new Date();
+  const mergedRoles = STANDARD_ROLE_NAMES.map((name) => {
+    const fromDb = dbRolesByName.get(name);
+    if (fromDb) {
+      return {
+        ...fromDb,
+        permissions: (fromDb.permissions as string[]) || [],
+        createdAt: new Date(fromDb.createdAt),
+        updatedAt: new Date(fromDb.updatedAt),
+      };
+    }
+    // Not in DB: use code defaults so they appear in the UI and can be saved (creates row)
+    const permissions = name === "super_admin"
+      ? [...ALL_PERMISSIONS]
+      : (ROLE_PERMISSIONS[name] ?? []);
+    return {
+      id: `default-${name}`,
+      name,
+      permissions,
+      createdAt: now,
+      updatedAt: now,
+    };
+  });
 
   return (
     <RolesContent
-      roles={serializedRoles}
+      roles={mergedRoles}
       currentUserRole={role}
     />
   );
