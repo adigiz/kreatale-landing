@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { getDemoSiteBySlug } from "@/lib/cms/queries/demo-sites";
+import { getDestinationSlug, getPackageSlug } from "@/lib/demo-slug";
 import {
   CarDetailPage,
   type CarDetailConfig,
@@ -20,7 +21,6 @@ export default async function PackageDetailPage(props: PageProps) {
   const params = await props.params;
   const { locale, slug, packageSlug } = params;
 
-  // Fetch the demo site config
   const result = await getDemoSiteBySlug(slug);
 
   if (!result) {
@@ -32,25 +32,62 @@ export default async function PackageDetailPage(props: PageProps) {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   const config = demoSite.config as any;
   const packages = config.packages || [];
+  const destinations = config.destinations || [];
 
-  // Find the specific package
+  // Car: item with price is a destination (car). Resolve from destinations first, then packages.
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  const pkg = packages.find((p: any) => {
-    const pSlug =
-      p.slug ||
-      p.title
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/(^-|-$)+/g, "");
-    return pSlug === packageSlug;
-  });
+  const destByDataSlug = destinations.find((d: any) => d.slug != null && d.slug !== "" && d.slug === packageSlug);
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  const destByDerivedSlug = destinations.find((d: any) => getDestinationSlug(d) === packageSlug);
+  const dest = destByDataSlug ?? destByDerivedSlug;
 
-  if (!pkg) {
-    notFound();
-  }
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  const pkgByDataSlug = packages.find((p: any) => p.slug != null && p.slug !== "" && p.slug === packageSlug);
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  const pkgByDerivedSlug = packages.find((p: any) => getPackageSlug(p) === packageSlug);
+  const pkg = pkgByDataSlug ?? pkgByDerivedSlug;
 
-  // If car template, render CarDetailPage
+  // Car template: prefer destination (the bookable car with price), fallback to package (brand-level)
   if (demoSite.templateId === "car") {
+    const item = dest ?? pkg;
+    if (!item) notFound();
+
+    if (dest) {
+      const carConfig: CarDetailConfig = {
+        name: dest.name || "Luxury Vehicle",
+        category: dest.region || "Premium",
+        description: dest.description || "",
+        price: dest.price || "1,000",
+        currency: config.currency || "$",
+        heroImage: dest.image,
+        specs: {
+          acceleration: "3.2s",
+          topSpeed: "Auto",
+          power: "502 HP",
+          transmission: "Auto",
+        },
+        features: [
+          "Premium Sound System",
+          "Navigation System",
+          "Advanced Safety Features",
+          "Luxury Interior Package",
+          "Performance Brakes",
+        ],
+        inclusions: [
+          "Comprehensive Insurance Coverage",
+          "24/7 Roadside Assistance",
+          "Concierge Delivery & Collection",
+          "200km Daily Allowance",
+        ],
+        gallery: dest.image ? [dest.image, dest.image, dest.image] : [],
+        logo: config.logo,
+        primaryColor: config.primaryColor,
+        websiteName: config.websiteName,
+        language: config.language,
+      };
+      return <CarDetailPage config={carConfig} />;
+    }
+
     const carConfig: CarDetailConfig = {
       name: pkg.title || "Luxury Vehicle",
       category: pkg.feature || "Premium",
@@ -83,11 +120,12 @@ export default async function PackageDetailPage(props: PageProps) {
       websiteName: config.websiteName,
       language: config.language,
     };
-
     return <CarDetailPage config={carConfig} />;
   }
 
-  // Otherwise render tour package detail page using TourDetailTemplate
+  if (!pkg) notFound();
+
+  // Tour: render tour package detail page using TourDetailTemplate
   const language = (config.language as "en" | "id") || "en";
   const currency = language === "id" ? "Rp" : "$";
 

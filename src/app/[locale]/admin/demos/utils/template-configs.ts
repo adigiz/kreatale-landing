@@ -135,6 +135,7 @@ export const DUMMY_CAR_CONFIG = {
   destinations: [
     {
       name: "Ferrari Roma",
+      slug: "ferrari-roma",
       region: "Grand Tourer",
       description: "Maranello's finest. A legacy of racing DNA infused into every curve.",
       image: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=800&q=80",
@@ -142,6 +143,7 @@ export const DUMMY_CAR_CONFIG = {
     },
     {
       name: "Range Rover Autobiography",
+      slug: "range-rover-autobiography",
       region: "Luxury SUV",
       description: "British luxury refined. Commanding presence with sophisticated capability.",
       image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?auto=format&fit=crop&w=800&q=80",
@@ -149,6 +151,7 @@ export const DUMMY_CAR_CONFIG = {
     },
     {
       name: "Porsche 911 GT3",
+      slug: "porsche-911-gt3",
       region: "Track Precision",
       description: "Stuttgart's engineering marvel. Timeless design meets track performance.",
       image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=800&q=80",
@@ -156,6 +159,7 @@ export const DUMMY_CAR_CONFIG = {
     },
     {
       name: "Lamborghini Huracán",
+      slug: "lamborghini-huracan",
       region: "Supercar",
       description: "Sant'Agata's raging bull. Bold, aggressive, undeniably powerful.",
       image: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=800&q=80",
@@ -163,6 +167,7 @@ export const DUMMY_CAR_CONFIG = {
     },
     {
       name: "Mercedes-Benz S-Class",
+      slug: "mercedes-benz-s-class",
       region: "Executive Sedan",
       description: "German precision. The pinnacle of automotive luxury and technology.",
       image: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=800&q=80",
@@ -170,6 +175,7 @@ export const DUMMY_CAR_CONFIG = {
     },
     {
       name: "BMW M4",
+      slug: "bmw-m4",
       region: "Sports Coupe",
       description: "Bavarian performance. Perfect balance of power and elegance.",
       image: "https://images.unsplash.com/photo-1555215695-3004980ad54e?auto=format&fit=crop&w=800&q=80",

@@ -43,7 +43,7 @@ export function DestinationsSection({
           type="button"
           size="sm"
           variant="outline"
-          onClick={() => append({ name: "", image: "" })}
+          onClick={() => append({ name: "", image: "", slug: "" })}
         >
           <Plus className="size-4 mr-1" /> Add
         </Button>
@@ -57,7 +57,12 @@ export function DestinationsSection({
             <div className="space-y-2 flex-1">
               <Input
                 {...register(`destinations.${index}.name` as const)}
-                placeholder="Name (e.g. Ubud)"
+                placeholder="Name (e.g. Ferrari Roma, Ubud)"
+              />
+              <Input
+                {...register(`destinations.${index}.slug` as const)}
+                placeholder="URL slug (optional, e.g. ferrari-roma)"
+                className="text-sm"
               />
               <ImagePicker
                 value={watch(`destinations.${index}.image` as const)}

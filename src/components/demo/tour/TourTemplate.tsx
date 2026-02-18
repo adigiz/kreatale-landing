@@ -5,6 +5,7 @@
 import React from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { getPackageSlug, slugify } from "@/lib/demo-slug";
 import { TOUR_DICTIONARY } from "./translations";
 // Using standard img tag as requested to keep styling exactly as is without handling Next/Image complexity yet.
 
@@ -374,13 +375,7 @@ export default function TourTemplate({ config }: TourTemplateProps) {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {config?.packages && config.packages.length > 0 ? (
               config.packages.map((pkg, idx) => {
-                // Generate a simple slug from title if not present
-                const pkgSlug =
-                  pkg.slug ||
-                  pkg.title
-                    .toLowerCase()
-                    .replace(/[^a-z0-9]+/g, "-")
-                    .replace(/(^-|-$)+/g, "");
+                const pkgSlug = getPackageSlug(pkg);
 
                 return (
                   <div
@@ -632,10 +627,13 @@ export default function TourTemplate({ config }: TourTemplateProps) {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-[800px] md:h-[600px] lg:h-[600px]">
             {config?.destinations && config.destinations.length > 0 ? (
-              config.destinations.map((dest, idx) => (
-                <div
+              config.destinations.map((dest, idx) => {
+                const destSlug = slugify(dest.name);
+                return (
+                <Link
                   key={idx}
-                  className="relative group h-full overflow-hidden cursor-pointer rounded-sm"
+                  href={`/${locale}/demo/${slug}/${destSlug}`}
+                  className="relative group h-full overflow-hidden cursor-pointer rounded-sm block"
                 >
                   <img
                     alt={dest.name}
@@ -659,14 +657,15 @@ export default function TourTemplate({ config }: TourTemplateProps) {
                       </p>
                     )}
                   </div>
-                </div>
-              ))
+                </Link>
+                );
+              })
             ) : (
               // Default Hardcoded Destinations (Fallback)
               <>
                 {/* Destination 1 */}
                 <Link
-                  href={`/${locale}/demo/${slug}/detail`}
+                  href={`/${locale}/demo/${slug}/santorini`}
                   className="relative group h-full overflow-hidden cursor-pointer rounded-sm block"
                 >
                   <img

@@ -4,6 +4,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import { getDestinationSlug, getPackageSlug } from "@/lib/demo-slug";
 import { CAR_DICTIONARY } from "./translations";
 
 export interface CarConfig {
@@ -43,11 +45,15 @@ export interface CarConfig {
 const DICTIONARY = CAR_DICTIONARY;
 
 export function CarTemplate({ config }: { config: CarConfig }) {
+  const params = useParams();
+  const locale = (params?.locale as string) || "en";
   const [activeSlide, setActiveSlide] = useState(0);
   const primaryColor = config.primaryColor || "#256af4";
 
   const language = config.language || "en";
   const t = DICTIONARY[language];
+
+    const demoBase = config.slug ? `/${locale}/demo/${config.slug}` : "";
 
   // Hero carousel slides - using first 3 destinations as hero slides
   const heroSlides = [
@@ -251,7 +257,10 @@ export function CarTemplate({ config }: { config: CarConfig }) {
             </a>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {config.destinations?.slice(0, 6).map((car, index) => (
+            {config.destinations?.slice(0, 6).map((car, index) => {
+              const destSlug = getDestinationSlug(car);
+              const detailHref = demoBase && destSlug ? `${demoBase}/package/${destSlug}` : "#";
+              return (
               <div
                 key={index}
                 className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
@@ -313,11 +322,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                     </div>
                   </div>
                   <Link
-                    href={
-                      config.slug && car.region
-                        ? `/${config.slug}/${car.region.toLowerCase().replace(/\s+/g, "-")}`
-                        : "#"
-                    }
+                    href={detailHref}
                     className="block w-full mt-2 py-3 border rounded-lg text-sm font-medium transition-colors text-center"
                     style={{
                       borderColor: primaryColor,
@@ -336,7 +341,8 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                   </Link>
                 </div>
               </div>
-            ))}
+            );
+            })}
           </div>
         </div>
       </section>
@@ -360,12 +366,14 @@ export function CarTemplate({ config }: { config: CarConfig }) {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {config.packages?.slice(0, 4).map((brand, index) => (
+            {config.packages?.slice(0, 4).map((brand, index) => {
+                const brandSlug = getPackageSlug(brand);
+                return (
               <Link
                 key={index}
                 href={
-                  config.slug && brand.slug
-                    ? `/${config.slug}/package/${brand.slug}`
+                  demoBase && brandSlug
+                    ? `${demoBase}/${brandSlug}`
                     : "#"
                 }
                 className="group relative bg-gray-50 dark:bg-gray-900 rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-800 flex flex-col md:flex-row h-auto md:h-80"
@@ -404,7 +412,8 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                   </div>
                 </div>
               </Link>
-            ))}
+            );
+            })}
           </div>
         </div>
       </section>

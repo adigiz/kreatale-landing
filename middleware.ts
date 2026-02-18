@@ -8,10 +8,35 @@ const intlMiddleware = createMiddleware({
   localePrefix: "always",
 });
 
+const LOCALES = ["en", "id"] as const;
+
 export default async function middleware(request: NextRequest) {
   // Get pathname
   const pathname = request.nextUrl.pathname;
-  
+  const segments = pathname.split("/").filter(Boolean);
+
+  // Rewrite demo URLs without locale: /dealer-mobil/... -> /en/demo/dealer-mobil/...
+  // So shared links like https://kreatale.com/dealer-mobil/package/ferrari work
+  const firstSegment = segments[0];
+  if (
+    firstSegment &&
+    !LOCALES.includes(firstSegment as "en" | "id") &&
+    firstSegment !== "admin" &&
+    firstSegment !== "demo" &&
+    firstSegment !== "about" &&
+    firstSegment !== "blog" &&
+    firstSegment !== "projects" &&
+    firstSegment !== "services" &&
+    firstSegment !== "privacy" &&
+    firstSegment !== "terms" &&
+    firstSegment !== "preview"
+  ) {
+    const demoPath = `/en/demo/${segments.join("/")}`;
+    const url = request.nextUrl.clone();
+    url.pathname = demoPath;
+    return NextResponse.rewrite(url);
+  }
+
   // Auth Check: Redirect from login to dashboard if already logged in
   const normalizedPathname = pathname.replace(/\/$/, "");
   const isLoginPage = normalizedPathname.split('/').filter(Boolean).slice(-2).join('/') === "admin/login";
