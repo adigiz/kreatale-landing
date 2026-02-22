@@ -1,3 +1,7 @@
+"use client";
+
+/* eslint-disable @next/next/no-img-element */
+
 import Link from "next/link";
 import { getPackageSlug } from "@/lib/demo-slug";
 

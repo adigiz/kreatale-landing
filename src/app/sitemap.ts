@@ -75,8 +75,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]);
 
-  // Dynamic project pages from database
-  const dbProjects = await getPublishedProjects();
+  // Dynamic project pages from database (skip when DB unavailable at build time)
+  let dbProjects: Awaited<ReturnType<typeof getPublishedProjects>> = [];
+  try {
+    dbProjects = await getPublishedProjects();
+  } catch (err) {
+    console.warn("Sitemap: could not fetch projects (e.g. build without DB):", err);
+  }
   const projectPages = locales.flatMap((locale) =>
     dbProjects.map((project) => ({
       url: `${baseUrl}/${locale}/projects/${project.slug}`,

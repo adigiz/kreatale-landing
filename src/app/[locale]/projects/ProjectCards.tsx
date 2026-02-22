@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, Clock, User } from "lucide-react";
+import { Calendar, User } from "lucide-react";
 import { ProjectData } from "@/lib/types";
 
 const containerVariants = {
@@ -127,17 +127,17 @@ export default function ProjectCards({ projects, locale }: ProjectCardsProps) {
                       <span>{project.client}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <Clock size={14} />
-                      <span>{project.timeline}</span>
-                    </div>
-                  </div>
-
-                  {/* Call to Action */}
-                  <div className="flex items-center justify-between mt-auto">
-                    <div className="flex items-center gap-1">
-                      <Calendar size={14} className="text-gray-400" />
-                      <span className="text-sm text-gray-500">
-                        {project.duration.split(" - ")[0]}
+                      <Calendar size={14} />
+                      <span>
+                        {(() => {
+                          const parts = project.duration.split(" - ");
+                          const start = parts[0]?.trim() ?? "";
+                          const yearMatch = project.duration.match(/\d{4}/);
+                          const year = yearMatch ? yearMatch[0] : "";
+                          return year && !start.includes(year)
+                            ? `${start} ${year}`.trim()
+                            : start || project.duration;
+                        })()}
                       </span>
                     </div>
                   </div>

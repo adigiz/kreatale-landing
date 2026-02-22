@@ -226,7 +226,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} ${jakarta.variable} ${playfair.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} ${jakarta.variable} ${playfair.variable} font-sans antialiased`}
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ConditionalLayout projects={projects}>{children}</ConditionalLayout>
