@@ -1,0 +1,301 @@
+/* fortes.vision — FAQ; scoped .fortes-demo-root */
+
+.fortes-demo-root .faq-home .container-1320 {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+@media (max-width: 991px) {
+  .fortes-demo-root .faq-home .container-1320 {
+    padding: 0 8px;
+  }
+}
+
+/* faq-overflow wipe: exclude questions (.faq-home__heading) or they clip to ~38px. */
+.fortes-demo-root .faq-home [data-aos="faq-overflow"].faq-home__title {
+  transition-duration: 650ms !important;
+  transition-timing-function: cubic-bezier(0.63, 0, 0.02, 1) !important;
+  overflow: hidden;
+  height: 19px;
+  padding-top: 19px;
+}
+
+.fortes-demo-root .faq-home [data-aos="faq-overflow"].faq-home__btn-link::before {
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 0ms;
+  width: 0;
+}
+
+.fortes-demo-root .faq-home [data-aos="faq-overflow"].faq-home__btn-link {
+  transition-duration: 650ms !important;
+  transition-timing-function: cubic-bezier(0.63, 0, 0.02, 1) !important;
+  overflow: hidden;
+  height: 28px !important;
+  padding-top: 28px;
+}
+
+.fortes-demo-root .faq-home [data-aos="faq-overflow"].aos-animate {
+  padding-top: 0;
+}
+
+.fortes-demo-root .faq-home [data-aos="faq-overflow"].aos-animate.faq-home__btn-link::before {
+  width: 100%;
+}
+
+.fortes-demo-root .faq-home {
+  padding-top: 160px;
+  padding-bottom: 100px;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .faq-home {
+    padding-top: 84px;
+    padding-bottom: 80px;
+  }
+}
+
+.fortes-demo-root .faq-home__blur-wrapper {
+  position: absolute;
+  top: -10%;
+  will-change: transform;
+  z-index: -1;
+  pointer-events: none;
+  width: 100%;
+}
+
+@media (max-width: 992px) {
+  .fortes-demo-root .faq-home__blur-wrapper {
+    display: none;
+  }
+}
+
+.fortes-demo-root .faq-home__blur-pan {
+  display: block;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  will-change: transform;
+}
+
+.fortes-demo-root .faq-home__blur-pan img {
+  display: block;
+  max-width: 1600px;
+  height: auto;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.fortes-demo-root .faq-home__title {
+  font-size: 19px;
+  line-height: 19px;
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 42px;
+}
+
+.fortes-demo-root .faq-home__wrapper {
+  margin-bottom: 50px;
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .faq-home__wrapper {
+    margin-bottom: 43px;
+  }
+}
+
+.fortes-demo-root .faq-home__heading {
+  font-size: 38px;
+  line-height: 100%;
+  font-weight: 600;
+  letter-spacing: -1.8px;
+  min-height: 41px;
+  height: auto;
+  text-align: center;
+  position: relative;
+  display: inline-flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 18px;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  max-width: 100%;
+  font-family: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  box-sizing: border-box;
+}
+
+.fortes-demo-root .faq-home__heading.active .faq-home__icon {
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 992px) {
+  .fortes-demo-root .faq-home__heading {
+    font-size: 30px;
+    letter-spacing: -1px;
+    min-height: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .faq-home__heading {
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 668px) {
+  .fortes-demo-root .faq-home__heading {
+    font-size: 15px;
+    letter-spacing: normal;
+    min-height: 16px;
+  }
+}
+
+.fortes-demo-root .faq-home__icon {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGQ9Ik0xMC41IDAuNjk1MzEyQzEwLjk3NzcgMC42OTUzMTIgMTEuMzY1MiAxLjA4MjgyIDExLjM2NTIgMS41NjA1NVY5LjY5NTMxSDE5LjVDMTkuOTc3NyA5LjY5NTMxIDIwLjM2NTIgMTAuMDgyOCAyMC4zNjUyIDEwLjU2MDVDMjAuMzY1MiAxMS4wMzgzIDE5Ljk3NzcgMTEuNDI1OCAxOS41IDExLjQyNThIMTEuMzY1MlYxOS41NjA1QzExLjM2NTIgMjAuMDM4MyAxMC45Nzc3IDIwLjQyNTggMTAuNSAyMC40MjU4QzEwLjAyMjMgMjAuNDI1OCA5LjYzNDc3IDIwLjAzODMgOS42MzQ3NyAxOS41NjA1VjExLjQyNThIMS41QzEuMDIyMjcgMTEuNDI1OCAwLjYzNDc2NiAxMS4wMzgzIDAuNjM0NzY2IDEwLjU2MDVDMC42MzQ3NjYgMTAuMDgyOCAxLjAyMjI3IDkuNjk1MzEgMS41IDkuNjk1MzFIOS42MzQ3N1YxLjU2MDU1QzkuNjM0NzcgMS4wODI4MiAxMC4wMjIzIDAuNjk1MzEyIDEwLjUgMC42OTUzMTJaIiBmaWxsPSIjQThBOEE4Ii8+DQo8L3N2Zz4NCg==)
+    no-repeat center;
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 0ms;
+  transform-origin: center;
+}
+
+@media (max-width: 668px) {
+  .fortes-demo-root .faq-home__icon {
+    width: 14px;
+    height: 14px;
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4NCjxwYXRoIGQ9Ik02LjkxNDA2IDMuMDA1ODZDNy4xMDI2NiAzLjAwNjA2IDcuMjU1ODYgMy4xNTkwMSA3LjI1NTg2IDMuMzQ3NjZWNi41NjE1MkgxMC40Njk3QzEwLjY1ODQgNi41NjE1MiAxMC44MTE0IDYuNzE0NjYgMTAuODExNSA2LjkwMzMyQzEwLjgxMTUgNy4wOTIwOSAxMC42NTg1IDcuMjQ1MTIgMTAuNDY5NyA3LjI0NTEySDcuMjU1ODZWMTAuNDZDNy4yNTU2MSAxMC42NDg0IDcuMTAyNTEgMTAuODAxNiA2LjkxNDA2IDEwLjgwMThDNi43MjU0NCAxMC44MDE4IDYuNTcyNTIgMTAuNjQ4NSA2LjU3MjI3IDEwLjQ2VjcuMjQ1MTJIMy4zNTc0MkMzLjE2ODc5IDcuMjQ0OTQgMy4wMTU2MiA3LjA5MTk5IDMuMDE1NjMgNi45MDMzMkMzLjAxNTc1IDYuNzE0NzYgMy4xNjg4NyA2LjU2MTcgMy4zNTc0MiA2LjU2MTUySDYuNTcyMjdWMy4zNDc2NkM2LjU3MjI3IDMuMTU4ODggNi43MjUyOSAzLjAwNTg2IDYuOTE0MDYgMy4wMDU4NloiIGZpbGw9IiNBOEE4QTgiLz4NCjwvc3ZnPg0K)
+      no-repeat center;
+  }
+}
+
+.fortes-demo-root .faq-home__inner {
+  overflow: hidden;
+  max-height: 0;
+  transition:
+    max-height 650ms cubic-bezier(0.63, 0, 0.02, 1),
+    opacity 650ms cubic-bezier(0.63, 0, 0.02, 1);
+  opacity: 0;
+}
+
+.fortes-demo-root .faq-home__inner.active {
+  opacity: 1;
+  max-height: 8000px;
+}
+
+.fortes-demo-root .faq-home__text {
+  max-width: 450px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 0ms;
+  font-size: 16px;
+  line-height: 1.45;
+  font-weight: 500;
+  color: #080808;
+  text-align: center;
+  white-space: pre-line;
+}
+
+.fortes-demo-root .faq-home__text ul li {
+  position: relative;
+  padding-left: 10px;
+}
+
+.fortes-demo-root .faq-home__text ul li::before {
+  content: "–";
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+@media (max-width: 668px) {
+  .fortes-demo-root .faq-home__text {
+    font-size: 12px;
+    line-height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fortes-demo-root .faq-home__text {
+    max-width: 220px;
+  }
+}
+
+.fortes-demo-root .faq-home__text.active {
+  opacity: 1;
+  visibility: visible;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  max-height: 2000px;
+}
+
+@media (max-width: 668px) {
+  .fortes-demo-root .faq-home__text.active {
+    margin-top: 10px;
+  }
+}
+
+.fortes-demo-root .faq-home__item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.fortes-demo-root .faq-home__item:not(:last-child) {
+  margin-bottom: 32px;
+}
+
+@media (max-width: 668px) {
+  .fortes-demo-root .faq-home__item:not(:last-child) {
+    margin-bottom: 15px;
+  }
+}
+
+.fortes-demo-root .faq-home__btn {
+  display: flex;
+  justify-content: center;
+}
+
+.fortes-demo-root .faq-home__btn-link {
+  font-size: 16px;
+  line-height: 32px;
+  letter-spacing: 0.32px;
+  position: relative;
+  color: #515050;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.fortes-demo-root .faq-home__btn-link.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.fortes-demo-root .faq-home__btn-link::before {
+  content: "";
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: #515050;
+}
+
+.fortes-demo-root .faq-home__btn-link:hover {
+  color: #080808;
+}

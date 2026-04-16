@@ -23,7 +23,7 @@ interface DemoCategoryListProps {
   packages: PackageItem[];
   primaryColor?: string;
   currency?: string;
-  templateId: "car" | "tour";
+  templateId: "car" | "tour" | "bedding";
 }
 
 export function DemoCategoryList({
@@ -35,7 +35,9 @@ export function DemoCategoryList({
   currency = "$",
   templateId,
 }: DemoCategoryListProps) {
-  const demoBase = `/${locale}/demo/${slug}`;
+  const demoBase = `/${locale}/demos/${slug}`;
+  const displayFont =
+    templateId === "tour" ? "font-serif" : "font-semibold tracking-tight";
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 font-sans text-gray-800 dark:text-gray-200 antialiased">
@@ -46,13 +48,25 @@ export function DemoCategoryList({
           style={{ color: primaryColor }}
         >
           <span className="material-icons text-lg">arrow_back</span>
-          Back to {templateId === "car" ? "Fleet" : "Destinations"}
+          Back to{" "}
+          {templateId === "car"
+            ? "Fleet"
+            : templateId === "bedding"
+              ? "Shop"
+              : "Destinations"}
         </Link>
-        <h1 className="font-serif text-3xl md:text-4xl text-gray-900 dark:text-white mb-2">
+        <h1
+          className={`text-3xl md:text-4xl text-gray-900 dark:text-white mb-2 ${displayFont}`}
+        >
           {categoryTitle}
         </h1>
         <p className="text-gray-500 dark:text-gray-400 mb-12">
-          {packages.length} {templateId === "car" ? "vehicle" : "package"}
+          {packages.length}{" "}
+          {templateId === "car"
+            ? "vehicle"
+            : templateId === "bedding"
+              ? "product"
+              : "package"}
           {packages.length !== 1 ? "s" : ""} available
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -82,7 +96,9 @@ export function DemoCategoryList({
                   )}
                 </div>
                 <div className="p-6">
-                  <h3 className="font-serif text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:opacity-90">
+                  <h3
+                    className={`text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:opacity-90 ${templateId === "tour" ? "font-serif" : ""}`}
+                  >
                     {pkg.title}
                   </h3>
                   <div className="flex flex-wrap gap-3 mb-4 text-sm text-gray-500 dark:text-gray-400">

@@ -4,6 +4,7 @@
     "services": "Services",
     "about": "About",
     "projects": "Projects",
+    "demos": "Demos",
     "faq": "FAQ",
     "contact": "Contact"
   },
@@ -172,6 +173,23 @@
       { "value": "100%", "label": "Client Satisfaction" }
     ]
   },
+  "demos": {
+    "metaTitle": "Demo Sites",
+    "metaDescription": "Sample sites you can open in a new tab.",
+    "pageTitle": "Demo Sites",
+    "pageDescription": "Browse interactive demos to see what we can build.",
+    "defaultSubtitle": "Interactive sample site you can explore.",
+    "empty": "No published demos yet. Check back soon.",
+    "openDemo": "Open demo",
+    "template": {
+      "tour": "Travel",
+      "car": "Car rental",
+      "zodiac": "Horoscope",
+      "bakery": "Food blog",
+      "bedding": "E-commerce",
+      "fortes": "Architecture"
+    }
+  },
   "portfolio": {
     "title": "Our Portfolio",
     "subtitle": "Recent Work",
@@ -301,6 +319,7 @@
       "services": "Services",
       "about": "About",
       "projects": "Projects",
+      "demos": "Demos",
       "faq": "FAQ"
     }
   },

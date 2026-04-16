@@ -5,6 +5,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { TOUR_DETAIL_DICTIONARY } from "./detailTranslations";
+import {
+  ItineraryDayDescription,
+  ItineraryDayHeading,
+} from "./ItineraryDayContent";
 
 export interface TourDetailConfig {
   title?: string;
@@ -24,11 +28,32 @@ export interface TourDetailConfig {
   features?: string[];
   language?: "en" | "id";
   primaryColor?: string;
+  accentColor?: string;
+  accentHoverColor?: string;
   logo?: string;
   backUrl?: string;
 }
 
 const DICTIONARY = TOUR_DETAIL_DICTIONARY;
+
+const FEATURE_BADGE_RULES: { needle: string; icon: string }[] = [
+  { needle: "high-speed wi-fi", icon: "wifi" },
+  { needle: "wifi", icon: "wifi" },
+  { needle: "private pool", icon: "pool" },
+  { needle: "pool", icon: "pool" },
+  { needle: "fine dining", icon: "restaurant" },
+  { needle: "dining", icon: "restaurant" },
+  { needle: "transfers", icon: "local_taxi" },
+  { needle: "transfer", icon: "local_taxi" },
+];
+
+function featureBadgeMaterialIcon(feature: string): string {
+  const f = feature.toLowerCase();
+  for (const { needle, icon } of FEATURE_BADGE_RULES) {
+    if (f.includes(needle)) return icon;
+  }
+  return "star";
+}
 
 export default function TourDetailTemplate({
   config,
@@ -68,41 +93,42 @@ export default function TourDetailTemplate({
     { day: 7, title: t.itinerary.day7.title, description: t.itinerary.day7.desc, tags: [t.itinerary.day7.tag1, t.itinerary.day7.tag2] },
   ];
   const features = config?.features || ["High-Speed Wi-Fi", "Private Pool", "Fine Dining", "Transfers"];
-  const primaryColor = config?.primaryColor || "#1173d4";
+  const primaryColor = config?.primaryColor || "#2747A0";
+  const accentColor = config?.accentColor ?? "#F47920";
+  const accentHoverColor = config?.accentHoverColor ?? "#DC6A18";
   const backUrl = config?.backUrl;
 
   const style = {
     "--tour-primary": primaryColor,
     "--tour-primary-hover": primaryColor,
+    "--tour-accent": accentColor,
+    "--tour-accent-hover": accentHoverColor,
   } as React.CSSProperties;
 
-  // Calculate translateY positions
+  const mealHints = t.itinerary.meals as Record<string, string>;
+
   const getPositions = () => {
     if (typeof window === "undefined") {
       return { collapsed: 0, expanded: 0 };
     }
     const viewportHeight = window.innerHeight;
-    const navbarHeight = 64; // h-16 = 64px
-    const imageHeight = viewportHeight * 0.45; // 45vh - the hero image height
-    const negativeMargin = 24; // -mt-6 = -24px
-    const collapsed = 0; // Default position (showing ~45vh of content)
-    // Move up so the top of the sheet is directly under the navbar
-    // Sheet starts at (imageHeight - negativeMargin), we want it at navbarHeight
+    const navbarHeight = 64;
+    const imageHeight = viewportHeight * 0.45;
+    const negativeMargin = 24;
+    const collapsed = 0;
     const expanded = -(imageHeight - negativeMargin - navbarHeight);
     return { collapsed, expanded };
   };
 
-  // Handle pointer events for dragging (works for both touch and mouse)
   useEffect(() => {
     const handle = dragHandleRef.current;
     const sheet = sheetRef.current;
     if (!handle || !sheet) return;
 
     let hasMoved = false;
-    
+
     const handlePointerDown = (e: PointerEvent) => {
-      if (e.pointerType === "mouse" && e.button !== 0) return; // Only left mouse button
-      // Don't enable dragging on desktop
+      if (e.pointerType === "mouse" && e.button !== 0) return;
       if (window.innerWidth >= 1024) return;
       hasMoved = false;
       handle.setPointerCapture(e.pointerId);
@@ -118,7 +144,6 @@ export default function TourDetailTemplate({
 
     const handlePointerMove = (e: PointerEvent) => {
       if (!isDraggingRef.current) return;
-      // Don't handle drag on desktop
       if (window.innerWidth >= 1024) return;
       const deltaY = Math.abs(startYRef.current - e.clientY);
       if (deltaY > 5) {
@@ -127,7 +152,7 @@ export default function TourDetailTemplate({
         e.stopPropagation();
       }
       currentYRef.current = e.clientY;
-      const moveDeltaY = startYRef.current - e.clientY; // Positive when dragging up
+      const moveDeltaY = startYRef.current - e.clientY;
       const { collapsed, expanded } = getPositions();
       const newTranslateY = Math.max(expanded, Math.min(collapsed, startTranslateYRef.current - moveDeltaY));
       
@@ -136,7 +161,6 @@ export default function TourDetailTemplate({
 
     const handlePointerUp = (e: PointerEvent) => {
       if (!isDraggingRef.current) return;
-      // Don't handle on desktop
       if (window.innerWidth >= 1024) {
         isDraggingRef.current = false;
         setIsDragging(false);
@@ -151,7 +175,6 @@ export default function TourDetailTemplate({
       
       sheet.style.cursor = "";
       
-      // If user didn't move much, treat as click and toggle
       if (!hasMoved) {
         setIsExpanded((prev) => !prev);
         return;
@@ -163,7 +186,6 @@ export default function TourDetailTemplate({
       const currentTranslateY = startTranslateYRef.current - (startYRef.current - currentYRef.current);
       const threshold = (collapsed + expanded) / 2;
       
-      // Snap to nearest position
       if (currentTranslateY < threshold) {
         sheet.style.transform = `translateY(${expanded}px)`;
         setIsExpanded(true);
@@ -186,12 +208,10 @@ export default function TourDetailTemplate({
     };
   }, [isExpanded]);
 
-  // Sync transform with isExpanded state (when not dragging) - only on mobile
   useEffect(() => {
     const sheet = sheetRef.current;
     if (!sheet || isDragging || isDraggingRef.current) return;
-    
-    // Only apply transform on mobile (lg breakpoint and below)
+
     if (window.innerWidth >= 1024) {
       sheet.style.transform = "";
       sheet.style.transition = "";
@@ -205,7 +225,6 @@ export default function TourDetailTemplate({
     sheet.style.position = "relative";
   }, [isExpanded, isDragging]);
 
-  // Prevent body scroll when dragging
   useEffect(() => {
     if (isDragging) {
       document.body.style.overflow = "hidden";
@@ -222,15 +241,14 @@ export default function TourDetailTemplate({
       style={style}
       className="bg-tour-background-light dark:bg-tour-background-dark font-tour-sans text-gray-800 dark:text-gray-100 antialiased overflow-hidden h-screen flex flex-col"
     >
-      {/* Navigation Bar */}
       <nav className="w-full z-50 bg-white/95 dark:bg-tour-background-dark/95 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 h-16 flex-none sticky top-0">
         <div className="max-w-[1920px] mx-auto px-4 h-full flex items-center justify-between">
           {backUrl ? (
-            <Link href={backUrl} className="p-2 -ml-2 text-gray-500 hover:text-tour-primary transition-colors">
+            <Link href={backUrl} className="p-2 -ml-2 text-gray-500 hover:text-tour-accent transition-colors">
               <span className="material-icons">arrow_back</span>
             </Link>
           ) : (
-            <button className="p-2 -ml-2 text-gray-500 hover:text-tour-primary transition-colors">
+            <button className="p-2 -ml-2 text-gray-500 hover:text-tour-accent transition-colors">
               <span className="material-icons">arrow_back</span>
             </button>
           )}
@@ -240,26 +258,23 @@ export default function TourDetailTemplate({
             ) : (
               <span className="text-lg font-bold tracking-tight text-tour-navy-dark dark:text-white">
                 {t.nav.voyage}
-                <span className="text-tour-primary">.</span>
+                <span className="text-tour-accent">.</span>
               </span>
             )}
           </div>
           <div className="flex items-center gap-2">
-            <button className="p-2 text-gray-500 hover:text-tour-primary transition-colors">
+            <button className="p-2 text-gray-500 hover:text-tour-accent transition-colors">
               <span className="material-icons">favorite_border</span>
             </button>
-            <button className="p-2 -mr-2 text-gray-500 hover:text-tour-primary transition-colors">
+            <button className="p-2 -mr-2 text-gray-500 hover:text-tour-accent transition-colors">
               <span className="material-icons">share</span>
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Main Content Area: Split Screen */}
       <main className="flex-1 flex flex-col lg:flex-row overflow-visible lg:overflow-hidden w-full max-w-[1920px] mx-auto">
-        {/* Left Pane: Visual Gallery (Scrollable) */}
         <section className="w-full lg:w-1/2 lg:h-full h-[45vh] flex-none relative bg-gray-900 lg:overflow-y-auto no-scrollbar group">
-          {/* Image 1: Hero */}
           <img
             alt={title}
             className="w-full h-full object-cover transition-transform duration-700"
@@ -271,7 +286,6 @@ export default function TourDetailTemplate({
               {t.nav.featured}
             </span>
           </div>
-          {/* Mobile Dots */}
           {images.length > 0 && (
             <div className="absolute bottom-4 right-4 flex gap-1 lg:hidden">
               {images.map((_, idx) => (
@@ -283,7 +297,6 @@ export default function TourDetailTemplate({
             </div>
           )}
 
-          {/* Desktop Only Images */}
           {images.length > 1 && (
             <div className="hidden lg:block">
               {images.slice(1).map((img, idx) => (
@@ -295,8 +308,7 @@ export default function TourDetailTemplate({
           )}
         </section>
 
-        {/* Right Pane: Content & Booking (Sticky/Scrollable) */}
-        <section 
+        <section
           ref={sheetRef}
           className="w-full lg:w-1/2 lg:h-full bg-tour-background-light dark:bg-tour-background-dark flex flex-col relative z-40 lg:z-10 lg:border-l border-gray-200 dark:border-gray-800 -mt-6 lg:mt-0 rounded-t-3xl lg:rounded-none shadow-xl lg:shadow-none overflow-hidden lg:overflow-y-auto lg:transform-none"
           style={{
@@ -308,8 +320,8 @@ export default function TourDetailTemplate({
             className="flex flex-col flex-1 lg:h-full lg:overflow-y-auto"
             style={{
               maxHeight: isExpanded ? "calc(100vh - 64px - 80px)" : undefined,
-              minHeight: 0, // Allow flex child to shrink
-              height: isExpanded ? "calc(100vh - 64px - 80px)" : undefined, // Explicit height when expanded for proper scrolling
+              minHeight: 0,
+              height: isExpanded ? "calc(100vh - 64px - 80px)" : undefined,
             }}
           >
             <div
@@ -318,26 +330,25 @@ export default function TourDetailTemplate({
             >
               <div className="w-12 h-1.5 bg-gray-300 dark:bg-gray-700 rounded-full pointer-events-none"></div>
             </div>
-            {/* Scrollable Content Container */}
             <div
               className="flex-1 overflow-y-auto px-6 pb-32 pt-2 lg:p-12 lg:pb-4"
               id="content-scroll"
               style={{
                 touchAction: isDragging ? "none" : "pan-y",
                 WebkitOverflowScrolling: "touch",
-                maxHeight: isExpanded ? "calc(100vh - 64px - 80px)" : undefined, // 64px navbar + 80px footer
+                maxHeight: isExpanded ? "calc(100vh - 64px - 80px)" : undefined,
               }}
             >
             <header className="mb-6 lg:mb-10">
               <div className="flex flex-col gap-2 mb-4">
-                <div className="flex items-center gap-1 text-xs font-semibold text-tour-primary uppercase tracking-wider mb-1">
+                <div className="flex items-center gap-1 text-xs font-semibold text-tour-accent uppercase tracking-wider mb-1">
                   <span className="material-icons text-sm">location_on</span>
                   {location}
                 </div>
                 <h1 className="text-3xl lg:text-5xl font-bold font-serif text-tour-navy-dark dark:text-white leading-tight">
                   {title}
                   <br />{" "}
-                  <span className="text-tour-primary font-light">
+                  <span className="text-tour-accent font-light">
                     {subtitle}
                   </span>
                 </h1>
@@ -367,41 +378,24 @@ export default function TourDetailTemplate({
               </div>
             </header>
 
-            {/* Features Badges */}
             {features.length > 0 && (
               <div className="mb-8 overflow-x-auto no-scrollbar -mx-6 px-6 lg:mx-0 lg:px-0">
                 <div className="flex gap-3 min-w-max">
-                  {features.map((feature, idx) => {
-                    const iconMap: Record<string, string> = {
-                      wifi: "wifi",
-                      "high-speed wi-fi": "wifi",
-                      pool: "pool",
-                      "private pool": "pool",
-                      dining: "restaurant",
-                      "fine dining": "restaurant",
-                      transfers: "local_taxi",
-                      transfer: "local_taxi",
-                    };
-                    const icon = Object.keys(iconMap).find((key) =>
-                      feature.toLowerCase().includes(key)
-                    ) || "star";
-                    return (
-                      <span
-                        key={idx}
-                        className="px-4 py-2.5 bg-blue-50 dark:bg-tour-surface-dark border border-blue-100 dark:border-gray-700 rounded-full text-xs font-semibold text-tour-navy-dark dark:text-blue-200 flex items-center gap-2 whitespace-nowrap"
-                      >
-                        <span className="material-icons text-tour-primary text-sm">
-                          {iconMap[icon] || "star"}
-                        </span>{" "}
-                        {feature}
+                  {features.map((feature, idx) => (
+                    <span
+                      key={idx}
+                      className="px-4 py-2.5 bg-blue-50 dark:bg-tour-surface-dark border border-blue-100 dark:border-gray-700 rounded-full text-xs font-semibold text-tour-navy-dark dark:text-blue-200 flex items-center gap-2 whitespace-nowrap"
+                    >
+                      <span className="material-icons text-tour-accent text-sm">
+                        {featureBadgeMaterialIcon(feature)}
                       </span>
-                    );
-                  })}
+                      {feature}
+                    </span>
+                  ))}
                 </div>
               </div>
             )}
 
-            {/* The Experience */}
             {description && (
               <div className="mb-10">
                 <h3 className="text-lg font-bold font-serif text-tour-navy-dark dark:text-white mb-3">
@@ -413,13 +407,12 @@ export default function TourDetailTemplate({
               </div>
             )}
 
-            {/* Daily Itinerary */}
             <div className="mb-12">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg font-bold font-serif text-tour-navy-dark dark:text-white">
                   {t.itinerary.title}
                 </h3>
-                <span className="text-xs font-medium text-tour-primary uppercase tracking-wider">
+                <span className="text-xs font-medium text-tour-accent uppercase tracking-wider">
                   {itinerary.length} Days
                 </span>
               </div>
@@ -430,7 +423,7 @@ export default function TourDetailTemplate({
                     <div
                       className={`absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-white dark:border-tour-background-dark shadow-sm z-10 ${
                         idx === 0
-                          ? "bg-tour-primary"
+                          ? "bg-tour-accent"
                           : "bg-gray-300 dark:bg-gray-600"
                       }`}
                       style={{ marginLeft: "-8px" }}
@@ -440,18 +433,38 @@ export default function TourDetailTemplate({
                         !showFullItinerary && idx === 2 ? "opacity-75" : ""
                       }`}
                     >
-                      <div className="flex justify-between items-start mb-2">
-                        <h4 className="text-base font-bold text-gray-900 dark:text-white">
-                          {day.title}
-                        </h4>
-                        <span className="material-icons text-gray-400 text-sm transform transition-transform group-hover:rotate-180">
+                      <div className="flex justify-between items-start gap-2 mb-1">
+                        <div className="min-w-0 flex-1">
+                          <ItineraryDayHeading
+                            title={day.title}
+                            dayNumber={day.day}
+                            dayLabel={t.itinerary.dayLabel}
+                            mealHints={mealHints}
+                          />
+                        </div>
+                        <span className="material-icons text-gray-400 text-sm shrink-0 transform transition-transform group-hover:rotate-180">
                           expand_more
                         </span>
                       </div>
                       {day.description && (
-                        <p className={`text-gray-500 dark:text-gray-400 text-xs leading-relaxed mb-3 ${!showFullItinerary && idx === 2 ? "line-clamp-2" : ""}`}>
-                          {day.description}
-                        </p>
+                        <div
+                          className={`relative mb-3 ${
+                            !showFullItinerary && idx === 2
+                              ? "max-h-[5.5rem] overflow-hidden"
+                              : ""
+                          }`}
+                        >
+                          <ItineraryDayDescription
+                            text={day.description}
+                            noteSectionLabel={t.itinerary.noteSection}
+                          />
+                          {!showFullItinerary && idx === 2 ? (
+                            <div
+                              className="pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-white via-white/95 to-transparent dark:from-tour-surface-darker dark:via-tour-surface-darker/95"
+                              aria-hidden
+                            />
+                          ) : null}
+                        </div>
                       )}
                       {day.tags && day.tags.length > 0 && (
                         <div className="flex gap-2">
@@ -470,7 +483,7 @@ export default function TourDetailTemplate({
                 ))}
                 {itinerary.length > 3 && (
                   <div className="relative pl-8">
-                    <button 
+                    <button
                       onClick={() => setShowFullItinerary(!showFullItinerary)}
                       className="w-full py-3 border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-xl text-sm font-semibold text-tour-navy-dark dark:text-white hover:bg-gray-50 dark:hover:bg-tour-surface-dark transition-colors flex items-center justify-center gap-2"
                     >
@@ -491,12 +504,10 @@ export default function TourDetailTemplate({
               </div>
             </div>
 
-            {/* Footer Spacer */}
             <div className="h-24 lg:hidden"></div>
             </div>
           </div>
 
-          {/* Desktop Footer - Sticky at bottom of scrollable container */}
           <div className="hidden lg:block sticky bottom-0 bg-white dark:bg-tour-surface-dark border-t border-gray-200 dark:border-gray-800 px-6 py-4 z-50 shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
             <div className="flex items-center gap-4">
               <div className="flex flex-col flex-1">
@@ -510,7 +521,7 @@ export default function TourDetailTemplate({
                   </span>
                 </div>
               </div>
-              <button className="bg-tour-primary hover:bg-tour-primary-hover text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-blue-900/20 active:scale-95 transition-all flex items-center gap-2">
+              <button className="bg-tour-accent hover:bg-tour-accent-hover text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-tour-accent/25 active:scale-95 transition-all flex items-center gap-2">
                 <span>{t.footer.bookNow}</span>
                 <span className="material-icons text-sm">arrow_forward</span>
               </button>
@@ -518,10 +529,7 @@ export default function TourDetailTemplate({
           </div>
         </section>
 
-        {/* Mobile Footer - Fixed at bottom of screen (outside transformed section) */}
-        <div 
-          className="fixed lg:hidden bottom-0 left-0 right-0 bg-white dark:bg-tour-surface-dark border-t border-gray-200 dark:border-gray-800 px-6 py-4 z-[60] shadow-[0_-4px_20px_rgba(0,0,0,0.08)]"
-        >
+        <div className="fixed lg:hidden bottom-0 left-0 right-0 bg-white dark:bg-tour-surface-dark border-t border-gray-200 dark:border-gray-800 px-6 py-4 z-[60] shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
           <div className="flex items-center gap-4">
             <div className="flex flex-col flex-1">
               <span className="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase">
@@ -534,7 +542,7 @@ export default function TourDetailTemplate({
                 </span>
               </div>
             </div>
-            <button className="bg-tour-primary hover:bg-tour-primary-hover text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-blue-900/20 active:scale-95 transition-all flex items-center gap-2">
+            <button className="bg-tour-accent hover:bg-tour-accent-hover text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-tour-accent/25 active:scale-95 transition-all flex items-center gap-2">
               <span>{t.footer.bookNow}</span>
               <span className="material-icons text-sm">arrow_forward</span>
             </button>

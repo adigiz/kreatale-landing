@@ -1,0 +1,336 @@
+/* fortes.vision — pipeline; scoped .fortes-demo-root */
+@media (min-width: 1001px) {
+  .fortes-demo-root .rendering-project-scroll-track {
+    height: calc(var(--fortes-pipeline-scroll-steps, 5) * 100vh);
+  }
+
+  .fortes-demo-root .rendering-project.rendering-project--pin {
+    position: sticky;
+    top: 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  .fortes-demo-root .rendering-project-scroll-track {
+    height: auto;
+  }
+
+  .fortes-demo-root .rendering-project.rendering-project--pin {
+    position: relative;
+    top: auto;
+  }
+}
+
+@keyframes fortes-clip-animation {
+  0% {
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  }
+  95% {
+    clip-path: polygon(0 0, 100% 100px, 100% 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+}
+
+@media (max-width: 1000px) {
+  .fortes-demo-root .rendering-project {
+    padding-top: 90px;
+  }
+}
+
+.fortes-demo-root .rendering-project__container {
+  max-width: 1440px;
+  width: 100%;
+  margin: auto;
+  padding: 0 16px;
+}
+
+.fortes-demo-root .rendering-project__title {
+  font-size: 40px;
+  line-height: 45px;
+  letter-spacing: -1.2px;
+  font-weight: 600;
+  margin-bottom: 22px;
+}
+
+@media (max-width: 1000px) {
+  .fortes-demo-root .rendering-project__title {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .fortes-demo-root .rendering-project__title {
+    max-width: 224px;
+    margin: 0 auto 16px;
+    font-size: 30px;
+    line-height: 94%;
+    letter-spacing: -0.9px;
+  }
+
+  .fortes-demo-root .rendering-project__title .split-anim {
+    overflow: visible;
+  }
+}
+
+.fortes-demo-root .rendering-project__text {
+  font-size: 14px;
+  line-height: 17.6px;
+  max-width: 286px;
+  letter-spacing: -0.4px;
+}
+
+@media (max-width: 1000px) {
+  .fortes-demo-root .rendering-project__text {
+    text-align: center;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .rendering-project__text {
+    color: #080808;
+    font-size: 10px;
+    line-height: 110%;
+    max-width: 175px;
+    letter-spacing: -0.1px;
+  }
+}
+
+.fortes-demo-root .rendering-project__slide-texts {
+  margin-top: 30px;
+  max-width: 489px;
+  position: relative;
+  min-height: 72px;
+}
+
+@media (max-width: 1000px) {
+  .fortes-demo-root .rendering-project__slide-texts {
+    display: none;
+  }
+}
+
+.fortes-demo-root .rendering-project__slide-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 110%;
+  color: var(--fortes-muted);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s var(--fortes-ease);
+}
+
+.fortes-demo-root .rendering-project__slide-text.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.fortes-demo-root .rendering-project__wrapper {
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  justify-content: space-between;
+  min-height: min(100vh, 944px);
+}
+
+@media (max-width: 1000px) {
+  .fortes-demo-root .rendering-project__wrapper {
+    flex-direction: column;
+    padding-left: 22px;
+    padding-right: 22px;
+    justify-content: flex-start;
+    min-height: auto;
+  }
+}
+
+.fortes-demo-root .rendering-project__left {
+  padding: clamp(72px, 12vh, 160px) 12px 0 44px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-height: 780px) {
+  .fortes-demo-root .rendering-project__left {
+    padding-top: 120px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .fortes-demo-root .rendering-project__left {
+    margin-bottom: 40px;
+    width: 100%;
+    padding: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .rendering-project__left {
+    margin-bottom: 26px;
+  }
+}
+
+.fortes-demo-root .rendering-project__center {
+  width: calc(50% + 32px);
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 1000px) {
+  .fortes-demo-root .rendering-project__center {
+    display: none;
+  }
+}
+
+.fortes-demo-root .rendering-project__images {
+  position: relative;
+  max-height: 944px;
+  height: min(100vh, 944px);
+}
+
+.fortes-demo-root .rendering-project__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform, clip-path;
+  transform: scale(1.2);
+  clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
+  z-index: 1;
+  transition: transform 850ms cubic-bezier(0.4, 0.05, 0.85, 1) 0ms !important;
+}
+
+.fortes-demo-root .rendering-project__image.active {
+  z-index: 2;
+  transform: scale(1);
+  animation: fortes-clip-animation 0.9s cubic-bezier(0.38, 0.05, 0.85, 1) forwards;
+}
+
+.fortes-demo-root .rendering-project__image.prev {
+  transform: scale(1.1);
+  transform-origin: bottom;
+  clip-path: none;
+}
+
+.fortes-demo-root .rendering-project__image img {
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.fortes-demo-root .rendering-project__nav-inject {
+  margin-top: auto;
+  margin-bottom: clamp(48px, 8vh, 107px);
+  margin-left: 12px;
+  max-width: 320px;
+  transition:
+    transform 900ms cubic-bezier(0.65, 0, 0.35, 1) 0ms,
+    opacity 900ms cubic-bezier(0.65, 0, 0.35, 1) 0ms;
+  transform: scale(1.35);
+  opacity: 1;
+  will-change: transform, opacity;
+}
+
+.fortes-demo-root .rendering-project__nav-inject.inactive {
+  transform: scale(1.15) rotate(56deg);
+  opacity: 0;
+}
+
+@media (max-height: 780px) {
+  .fortes-demo-root .rendering-project__nav-inject {
+    transform: scale(1.15);
+    margin-bottom: 70px;
+  }
+}
+
+.fortes-demo-root .rendering-project__nav-inject.step-2 {
+  transform: scale(1.35) rotate(-56deg);
+}
+
+@media (max-height: 780px) {
+  .fortes-demo-root .rendering-project__nav-inject.step-2 {
+    transform: scale(1.15) rotate(-56deg);
+  }
+}
+
+.fortes-demo-root .rendering-project__nav-inject.step-3 {
+  transform: scale(1.35) rotate(-124deg);
+}
+
+@media (max-height: 780px) {
+  .fortes-demo-root .rendering-project__nav-inject.step-3 {
+    transform: scale(1.15) rotate(-124deg);
+  }
+}
+
+.fortes-demo-root .rendering-project__nav-inject.step-4 {
+  transform: scale(1.35) rotate(-200deg);
+}
+
+@media (max-height: 780px) {
+  .fortes-demo-root .rendering-project__nav-inject.step-4 {
+    transform: scale(1.15) rotate(-200deg);
+  }
+}
+
+.fortes-demo-root .rendering-project__nav-inject.step-5 {
+  transform: scale(1.35) rotate(-267deg);
+}
+
+@media (max-height: 780px) {
+  .fortes-demo-root .rendering-project__nav-inject.step-5 {
+    transform: scale(1.15) rotate(-267deg);
+  }
+}
+
+.fortes-demo-root .rendering-project .rendering-project__nav-item {
+  cursor: pointer;
+}
+
+.fortes-demo-root .rendering-project .rendering-project__nav-item path {
+  fill: #ccc;
+  transition: fill 0.3s;
+}
+
+.fortes-demo-root .rendering-project .rendering-project__nav-item.active path {
+  fill: #080808;
+}
+
+.fortes-demo-root .rendering-project__swiper {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .fortes-demo-root .rendering-project__swiper {
+    display: block;
+    margin-top: 8px;
+  }
+
+  .fortes-demo-root .rendering-project__nav-inject {
+    display: none;
+  }
+}
+
+.fortes-demo-root .rendering-project__slide-image {
+  display: block;
+  width: 100%;
+  max-width: 310px;
+  margin: 0 auto;
+}
+
+.fortes-demo-root .rendering-project__slide-image img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  height: 410px;
+}
+
+.fortes-demo-root .rendering-project__swiper .swiper-pagination {
+  position: relative;
+  margin-top: 16px;
+}

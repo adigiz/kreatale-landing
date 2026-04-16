@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { getStaticPublishedDemoSites } from "@/lib/demos/static-demos";
 import { getPublishedProjects } from "@/lib/cms/queries/projects";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -73,6 +74,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         },
       },
     },
+    {
+      url: `${baseUrl}/${locale}/demos`,
+      lastModified: currentDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.85,
+      alternates: {
+        languages: {
+          en: `${baseUrl}/en/demos`,
+          id: `${baseUrl}/id/demos`,
+          "x-default": `${baseUrl}/en/demos`,
+        },
+      },
+    },
   ]);
 
   // Dynamic project pages from database (skip when DB unavailable at build time)
@@ -98,5 +112,22 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }))
   );
 
-  return [...staticPages, ...projectPages];
+  const publishedDemos = getStaticPublishedDemoSites();
+  const demoPages = locales.flatMap((locale) =>
+    publishedDemos.map(({ demoSite }) => ({
+      url: `${baseUrl}/${locale}/demos/${demoSite.slug}`,
+      lastModified: demoSite.updatedAt?.toISOString() || currentDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+      alternates: {
+        languages: {
+          en: `${baseUrl}/en/demos/${demoSite.slug}`,
+          id: `${baseUrl}/id/demos/${demoSite.slug}`,
+          "x-default": `${baseUrl}/en/demos/${demoSite.slug}`,
+        },
+      },
+    }))
+  );
+
+  return [...staticPages, ...projectPages, ...demoPages];
 }

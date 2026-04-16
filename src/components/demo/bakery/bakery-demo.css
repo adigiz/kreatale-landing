@@ -1,0 +1,16 @@
+.bakery-demo-root {
+  font-family: var(--font-bakery-body), system-ui, sans-serif;
+  color: #2b2b2b;
+  background: #faf7f2;
+}
+
+.bakery-demo-root .bakery-display {
+  font-family: var(--font-bakery-display), ui-serif, Georgia, serif;
+}
+
+.bakery-demo-root .bakery-section-title {
+  font-family: var(--font-bakery-display), ui-serif, Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}

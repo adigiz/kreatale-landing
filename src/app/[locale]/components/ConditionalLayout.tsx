@@ -16,7 +16,9 @@ export default function ConditionalLayout({
 }: ConditionalLayoutProps) {
   const pathname = usePathname();
   const isAdminRoute = pathname?.includes("/admin") || false;
-  const isDemoRoute = pathname?.includes("/demo") || false;
+  // Full-screen demo: /{locale}/demos/{slug}/... — not /{locale}/demos (listing)
+  const isDemoRoute =
+    Boolean(pathname && /\/[a-z]{2}\/demos\/.+/i.test(pathname));
   const isPreviewRoute = pathname?.includes("/preview") || false;
 
   return (

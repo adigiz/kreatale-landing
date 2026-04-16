@@ -55,6 +55,26 @@ const nextConfig: NextConfig = {
         hostname: "lh3.googleusercontent.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "bromabakery.com",
+        pathname: "/wp-content/**",
+      },
+      {
+        protocol: "https",
+        hostname: "sojao.shop",
+        pathname: "/cdn/shop/**",
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.shopify.com",
+        pathname: "/s/files/**",
+      },
+      {
+        protocol: "https",
+        hostname: "fortes.vision",
+        pathname: "/**",
+      },
     ],
     formats: ["image/avif", "image/webp"],
     // Optimized for mobile-first: smaller sizes for mobile devices

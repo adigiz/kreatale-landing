@@ -24,3 +24,19 @@ export function getDestinationSlug(dest: { slug?: string; name: string } | undef
   if (dest.slug != null && dest.slug !== "") return dest.slug;
   return slugify(dest.name);
 }
+
+export function getExperienceSlug(
+  item: { slug?: string; name: string } | undefined,
+): string {
+  if (!item) return "";
+  if (item.slug != null && item.slug !== "") return item.slug;
+  return slugify(item.name);
+}
+
+export function getTravelTipSlug(
+  tip: { slug?: string; title: string } | undefined,
+): string {
+  if (!tip) return "";
+  if (tip.slug != null && tip.slug !== "") return tip.slug;
+  return slugify(tip.title);
+}

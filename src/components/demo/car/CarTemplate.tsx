@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { getDestinationSlug, getPackageSlug } from "@/lib/demo-slug";
 import { CAR_DICTIONARY } from "./translations";
+import { CarDemoNavbar } from "./CarDemoNavbar";
+import { CarFleetCard } from "./CarFleetCard";
 
 export interface CarConfig {
   slug?: string; // Demo site slug for routing
@@ -20,10 +22,21 @@ export interface CarConfig {
   location?: string;
   destinations?: Array<{
     name: string;
+    slug?: string;
+    brandSlug?: string;
     region?: string;
     description?: string;
     image?: string;
     price?: string;
+    specs?: {
+      acceleration?: string;
+      topSpeed?: string;
+      power?: string;
+      transmission?: string;
+    };
+    features?: string[];
+    inclusions?: string[];
+    gallery?: string[];
   }>;
   packages?: Array<{
     slug?: string; // Car slug for detail page routing
@@ -53,7 +66,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
   const language = config.language || "en";
   const t = DICTIONARY[language];
 
-    const demoBase = config.slug ? `/${locale}/demo/${config.slug}` : "";
+    const demoBase = config.slug ? `/${locale}/demos/${config.slug}` : "";
 
   // Hero carousel slides - using first 3 destinations as hero slides
   const heroSlides = [
@@ -104,72 +117,15 @@ export function CarTemplate({ config }: { config: CarConfig }) {
         }
       `}</style>
 
-      {/* Navigation */}
-      <nav className="fixed w-full z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all duration-300 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex-shrink-0 flex items-center gap-2">
-              {config.logo ? (
-                <img src={config.logo} alt={t.alt.logo} className="h-8 w-auto" />
-              ) : (
-                <>
-                  <span
-                    className="material-icons text-2xl"
-                    style={{ color: primaryColor }}
-                  >
-                    speed
-                  </span>
-                  <span className="font-serif font-bold text-xl tracking-tight text-gray-900 dark:text-white">
-                    {config.websiteName || "Velocitá"}
-                  </span>
-                </>
-              )}
-            </div>
-            <div className="hidden md:flex space-x-10 items-center">
-              <a
-                className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                href="#"
-              >
-                {t.nav.fleet}
-              </a>
-              <a
-                className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                href="#"
-              >
-                {t.nav.brands}
-              </a>
-              <a
-                className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                href="#"
-              >
-                {t.nav.membership}
-              </a>
-              <a
-                className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                href="#"
-              >
-                {t.nav.journal}
-              </a>
-            </div>
-            <div className="flex items-center space-x-6">
-              <a
-                className="hidden md:block text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                href="#"
-              >
-                {t.nav.signIn}
-              </a>
-              <button
-                className="px-6 py-2.5 rounded-lg text-xs uppercase tracking-widest font-bold transition-all shadow-md hover:shadow-lg text-white"
-                style={{
-                  backgroundColor: primaryColor,
-                }}
-              >
-                {t.nav.bookNow}
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <CarDemoNavbar
+        demoBase={demoBase}
+        isHome
+        websiteName={config.websiteName}
+        logo={config.logo}
+        primaryColor={primaryColor}
+        language={language}
+        ctaLabel={t.nav.bookNow}
+      />
 
       {/* Hero Carousel */}
       <section className="relative h-screen min-h-[650px] overflow-hidden bg-black">
@@ -197,7 +153,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                 <span className="inline-block text-white/80 tracking-[0.3em] text-xs font-medium uppercase mb-6 border-b border-white/30 pb-2">
                   {slide.category}
                 </span>
-                <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-6 editorial-text drop-shadow-2xl">
+                <h1 className="text-5xl md:text-7xl lg:text-8xl text-white mb-6 editorial-text drop-shadow-2xl">
                   {slide.title} <br />
                   <span className="italic font-light text-white/90">
                     {slide.titleItalic}
@@ -206,14 +162,27 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                 <p className="text-lg md:text-xl text-white/80 mb-8 font-light max-w-xl mx-auto drop-shadow-md tracking-wide">
                   {slide.subtitle}
                 </p>
-                <button
-                  className="group relative px-8 py-3 overflow-hidden rounded-full bg-transparent border border-white/40 text-white shadow-lg transition-all hover:bg-white hover:text-black"
-                  style={{ borderColor: `${primaryColor}40` }}
-                >
-                  <span className="relative text-sm font-medium tracking-widest uppercase">
-                    {slide.ctaText}
-                  </span>
-                </button>
+                {index === 0 && demoBase ? (
+                  <Link
+                    href={`${demoBase}/fleet`}
+                    className="group relative inline-flex px-8 py-3 overflow-hidden rounded-full border border-white/40 bg-transparent text-white shadow-lg transition-all hover:bg-white hover:text-black"
+                    style={{ borderColor: `${primaryColor}40` }}
+                  >
+                    <span className="relative text-sm font-medium uppercase tracking-widest">
+                      {slide.ctaText}
+                    </span>
+                  </Link>
+                ) : (
+                  <button
+                    type="button"
+                    className="group relative px-8 py-3 overflow-hidden rounded-full border border-white/40 bg-transparent text-white shadow-lg transition-all hover:bg-white hover:text-black"
+                    style={{ borderColor: `${primaryColor}40` }}
+                  >
+                    <span className="relative text-sm font-medium uppercase tracking-widest">
+                      {slide.ctaText}
+                    </span>
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -236,128 +205,80 @@ export function CarTemplate({ config }: { config: CarConfig }) {
       </section>
 
       {/* Fleet Section */}
-      <section className="py-24 bg-gray-50 dark:bg-gray-900">
+      <section
+        id="fleet"
+        className="py-24 bg-gray-50 dark:bg-gray-900 scroll-mt-24"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-end mb-12">
             <div>
-              <h2 className="font-serif text-3xl md:text-4xl text-gray-900 dark:text-white mb-2">
+              <h2 className="text-3xl md:text-4xl text-gray-900 dark:text-white mb-2">
                 {t.fleet.title}
               </h2>
               <p className="text-gray-500 dark:text-gray-400">
                 {t.fleet.subtitle}
               </p>
             </div>
-            <a
+            <Link
+              href={demoBase ? `${demoBase}/fleet` : "#"}
               className="hidden md:flex items-center font-medium hover:opacity-80 transition-colors"
-              href="#"
               style={{ color: primaryColor }}
             >
               {t.fleet.viewCollection}{" "}
               <span className="material-icons ml-1 text-sm">arrow_forward</span>
-            </a>
+            </Link>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:auto-rows-fr lg:grid-cols-3 lg:gap-8">
             {config.destinations?.slice(0, 6).map((car, index) => {
               const destSlug = getDestinationSlug(car);
-              const detailHref = demoBase && destSlug ? `${demoBase}/package/${destSlug}` : "#";
+              const detailHref =
+                demoBase && destSlug ? `${demoBase}/package/${destSlug}` : "#";
+              const labels = {
+                available: t.fleet.available,
+                perDay: t.fleet.perDay,
+                viewDetails: t.fleet.viewDetails,
+                defaultRegion: t.specs.defaultRegion,
+              };
               return (
-              <div
-                key={index}
-                className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
-              >
-                <div className="relative h-64 overflow-hidden bg-gray-100 dark:bg-gray-700">
-                  <img
-                    alt={car.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    src={
-                      car.image ||
-                      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=400"
-                    }
-                  />
-                  <div className="absolute top-4 right-4 bg-white/90 dark:bg-black/80 backdrop-blur text-xs font-bold px-3 py-1 rounded uppercase tracking-wider text-gray-900 dark:text-white">
-                    {t.fleet.available}
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <div>
-                      <h3 className="font-serif text-xl font-bold text-gray-900 dark:text-white">
-                        {car.name}
-                      </h3>
-                      <p className="text-gray-500 dark:text-gray-400 text-sm">
-                        {car.region || t.specs.defaultRegion}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <span
-                        className="block font-bold text-lg"
-                        style={{ color: primaryColor }}
-                      >
-                        {config.currency || "$"}
-                        {car.price || "1,200"}
-                      </span>
-                      <span className="text-xs text-gray-400">
-                        {t.fleet.perDay}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="border-t border-gray-100 dark:border-gray-700 py-4 flex justify-between text-sm text-gray-600 dark:text-gray-300">
-                    <div className="flex items-center gap-1">
-                      <span className="material-icons text-gray-400 text-base">
-                        speed
-                      </span>{" "}
-                      620 {t.specs.power}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <span className="material-icons text-gray-400 text-base">
-                        timer
-                      </span>{" "}
-                      3.4{t.specs.acceleration}
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <span className="material-icons text-gray-400 text-base">
-                        settings
-                      </span>{" "}
-                      {t.specs.transmission}
-                    </div>
-                  </div>
-                  <Link
-                    href={detailHref}
-                    className="block w-full mt-2 py-3 border rounded-lg text-sm font-medium transition-colors text-center"
-                    style={{
-                      borderColor: primaryColor,
-                      color: primaryColor,
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.backgroundColor = primaryColor;
-                      e.currentTarget.style.color = "white";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.backgroundColor = "transparent";
-                      e.currentTarget.style.color = primaryColor;
-                    }}
-                  >
-                    {t.fleet.viewDetails}
-                  </Link>
-                </div>
-              </div>
-            );
+                <CarFleetCard
+                  key={`${car.name}-${index}`}
+                  vehicle={{
+                    name: car.name,
+                    slug: car.slug,
+                    region: car.region,
+                    image: car.image,
+                    price: car.price,
+                  }}
+                  detailHref={detailHref}
+                  currency={config.currency || "$"}
+                  primaryColor={primaryColor}
+                  labels={labels}
+                  variant={index === 0 ? "featured" : "default"}
+                />
+              );
             })}
           </div>
         </div>
       </section>
 
-      {/* Curated Brands Section */}
-      <section className="py-24 bg-white dark:bg-gray-800">
+      {/* Brands */}
+      <section
+        id="brands"
+        className="py-24 bg-white dark:bg-gray-800 scroll-mt-24"
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <span
-              className="font-medium tracking-widest text-xs uppercase"
-              style={{ color: primaryColor }}
+            {t.brands.label ? (
+              <span
+                className="font-medium tracking-widest text-xs uppercase"
+                style={{ color: primaryColor }}
+              >
+                {t.brands.label}
+              </span>
+            ) : null}
+            <h2
+              className={`text-4xl md:text-5xl text-gray-900 dark:text-white ${t.brands.label ? "mt-3" : ""}`}
             >
-              {t.brands.label}
-            </span>
-            <h2 className="font-serif text-4xl md:text-5xl text-gray-900 dark:text-white mt-3">
               {t.brands.title}
             </h2>
             <div className="w-16 h-0.5 bg-gray-200 dark:bg-gray-700 mx-auto mt-6"></div>
@@ -366,7 +287,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {config.packages?.slice(0, 4).map((brand, index) => {
+            {config.packages?.map((brand, index) => {
                 const brandSlug = getPackageSlug(brand);
                 return (
               <Link
@@ -391,7 +312,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                 </div>
                 <div className="w-full md:w-1/2 p-10 flex flex-col items-start justify-center">
                   <div className="mb-6 opacity-90">
-                    <span className="font-serif font-bold text-3xl md:text-4xl text-gray-900 dark:text-white tracking-tighter">
+                    <span className="font-bold text-3xl md:text-4xl text-gray-900 dark:text-white tracking-tighter">
                       {brand.title}
                     </span>
                   </div>
@@ -430,7 +351,10 @@ export function CarTemplate({ config }: { config: CarConfig }) {
               <img
                 alt={t.alt.interior}
                 className="relative z-10 w-full rounded-lg shadow-2xl"
-                src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800"
+                src={
+                  config.destinations?.[1]?.image ||
+                  "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800"
+                }
               />
             </div>
             <div className="w-full lg:w-1/2">
@@ -440,7 +364,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
               >
                 format_quote
               </span>
-              <blockquote className="font-serif text-3xl md:text-4xl leading-tight text-gray-900 dark:text-white mb-8">
+              <blockquote className="text-3xl md:text-4xl leading-tight text-gray-900 dark:text-white mb-8">
                 {t.testimonial.text}
               </blockquote>
               <div>
@@ -468,7 +392,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
         />
         <div className="absolute inset-0 bg-gray-900/60 dark:bg-gray-900/70"></div>
         <div className="relative z-10 px-4">
-          <h2 className="font-serif text-5xl md:text-6xl text-white mb-8">
+          <h2 className="text-5xl md:text-6xl text-white mb-8">
             {t.cta.title}
           </h2>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -497,7 +421,7 @@ export function CarTemplate({ config }: { config: CarConfig }) {
                 >
                   speed
                 </span>
-                <span className="font-serif font-bold text-xl text-gray-900 dark:text-white">
+                <span className="font-bold text-xl text-gray-900 dark:text-white">
                   {config.websiteName || "Velocitá"}
                 </span>
               </div>
@@ -643,11 +567,6 @@ export function CarTemplate({ config }: { config: CarConfig }) {
         </div>
       </footer>
 
-      {/* Material Icons Font */}
-      <link
-        href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet"
-      />
     </div>
   );
 }

@@ -35,6 +35,16 @@ export const TOUR_DETAIL_DICTIONARY = {
       viewFull: "View Full Itinerary",
       showLess: "Show Less",
       days: "Days",
+      dayLabel: "Day",
+      noteSection: "Schedule notes",
+      meals: {
+        MP: "Breakfast",
+        MS: "Lunch",
+        MM: "Dinner",
+        MD: "Dinner",
+        MO: "Overnight",
+        CB: "Coffee break",
+      },
       day1: {
         title: "Day 1: Arrival & Champagne",
         desc: "Private transfer from JTR Airport to your cliffside suite in Oia. Evening welcome reception with local wines.",
@@ -126,6 +136,16 @@ export const TOUR_DETAIL_DICTIONARY = {
       viewFull: "Lihat Rencana Perjalanan Lengkap",
       showLess: "Tampilkan Lebih Sedikit",
       days: "Hari",
+      dayLabel: "Hari",
+      noteSection: "Catatan jadwal",
+      meals: {
+        MP: "Makan pagi",
+        MS: "Makan siang",
+        MM: "Makan malam",
+        MD: "Makan malam",
+        MO: "Bermalam",
+        CB: "Coffee break",
+      },
       day1: {
         title: "Hari 1: Kedatangan & Sampanye Selamat Datang",
         desc: "Transfer pribadi dari Bandara JTR ke suite tepi tebing Anda di Oia. Resepsi selamat datang malam hari dengan anggur lokal dan pemandangan matahari terbenam dari teras pribadi.",

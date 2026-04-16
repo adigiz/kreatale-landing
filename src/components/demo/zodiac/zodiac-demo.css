@@ -1,0 +1,11 @@
+.zodiac-demo-root {
+  font-family: var(--font-zodiac-sans), system-ui, sans-serif;
+}
+
+.zodiac-demo-root .zd-headline {
+  font-family: var(--font-zodiac-serif), ui-serif, Georgia, serif;
+}
+
+.zodiac-demo-root .material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 200, "GRAD" 0, "opsz" 24;
+}

@@ -2,7 +2,7 @@ export const CAR_DETAIL_DICTIONARY = {
   en: {
     nav: {
       fleet: "The Fleet",
-      brands: "Curated Brands",
+      brands: "Brands",
       membership: "Membership",
       signIn: "Sign In",
       myBookings: "My Bookings",
@@ -34,6 +34,9 @@ export const CAR_DETAIL_DICTIONARY = {
       insurance: "Insurance",
       included: "Included",
       taxes: "Taxes & Fees",
+      subtotal: "Vehicle subtotal",
+      day: "day",
+      days: "days",
       total: "Est. Total",
       reserve: "Reserve Now",
       whatsapp: "Inquire via WhatsApp",
@@ -51,7 +54,7 @@ export const CAR_DETAIL_DICTIONARY = {
   id: {
     nav: {
       fleet: "Armada",
-      brands: "Merek Pilihan",
+      brands: "Merek",
       membership: "Keanggotaan",
       signIn: "Masuk",
       myBookings: "Pesanan Saya",
@@ -83,6 +86,9 @@ export const CAR_DETAIL_DICTIONARY = {
       insurance: "Asuransi",
       included: "Termasuk",
       taxes: "Pajak & Biaya",
+      subtotal: "Subtotal kendaraan",
+      day: "hari",
+      days: "hari",
       total: "Est. Total",
       reserve: "Pesan Sekarang",
       whatsapp: "Tanya via WhatsApp",

@@ -2,66 +2,82 @@ export const CAR_DICTIONARY = {
   en: {
     nav: {
       fleet: "The Fleet",
-      brands: "Curated Brands",
+      brands: "Brands",
       membership: "Membership",
-      journal: "Journal",
       signIn: "Sign In",
       bookNow: "Book Now",
     },
     hero: {
       slides: [
         {
-          category: "The Mountain Pass",
-          title: "Conquer the",
-          titleItalic: "Altitude",
+          category: "Los Angeles",
+          title: "Reserve the",
+          titleItalic: "Extraordinary",
           subtitle:
-            "Precision engineering meets raw nature. Elevate your journey.",
-          ctaText: "Explore Alpine Routes",
+            "Same-day and weekend availability on premium supercars and luxury SUVs—handover where you need it.",
+          ctaText: "Browse the Fleet",
         },
         {
-          category: "Urban Elegance",
-          title: "Design in",
-          titleItalic: "Motion",
+          category: "Transparent rental",
+          title: "Pricing you",
+          titleItalic: "Understand",
           subtitle:
-            "Sleek lines for the modern metropolis. Arrive in undeniable style.",
-          ctaText: "View City Collection",
+            "Daily rates, mileage allowances, and coverage options explained upfront—no guesswork at pickup.",
+          ctaText: "See Rates & Terms",
         },
         {
-          category: "Coastal Horizons",
-          title: "Chasing the",
-          titleItalic: "Sunset",
-          subtitle: "Open roads, ocean air, and the purr of a perfect engine.",
-          ctaText: "Discover Coastal Drives",
+          category: "White-glove service",
+          title: "We handle",
+          titleItalic: "the details",
+          subtitle:
+            "Concierge delivery, walkthrough, and 24/7 support so you focus on the drive—not the paperwork.",
+          ctaText: "Talk to Concierge",
         },
       ],
     },
     fleet: {
       title: "Handpicked Fleet",
-      subtitle: "Engineering masterpieces ready for your command.",
+      subtitle:
+        "Each vehicle is inspected, photographed, and ready for self-drive rental in Southern California.",
       viewCollection: "View Full Collection",
       available: "Available Now",
       viewDetails: "View Details",
       perDay: "/ day",
     },
+    fleetCollection: {
+      title: "Full collection",
+      subtitle:
+        "Every vehicle currently available to reserve. Tap a car for photos, inclusions, and booking.",
+      filterAll: "All types",
+    },
+    brandBrowse: {
+      marqueLabel: "Browse by marque",
+      subtitle:
+        "Compare models from this manufacturer—each listing shows the exact car, day rate, and what is included before you book.",
+      gridTitle: "Available models",
+      gridHint: "Open any vehicle for a full gallery, specifications, and reservation panel.",
+      vehicleSingular: "vehicle in stock",
+      vehiclePlural: "vehicles in stock",
+    },
     brands: {
-      label: "Manufacturers",
-      title: "Curated Brands",
+      label: "",
+      title: "Brands",
       description:
-        "We partner exclusively with the world's most prestigious automotive houses.",
+        "Explore vehicles grouped by manufacturer—each link shows every model we currently have on fleet.",
       viewDetails: "View Details",
     },
     testimonial: {
-      text: "The perfect fusion of machine and landscape. An unforgettable journey that redefined my expectations of travel.",
+      text: "Booking took minutes, handover was flawless, and the car was exactly as pictured. This is how luxury rental should feel.",
       author: "James Sterling",
-      role: "Member since 2019",
+      role: "Velocitá renter since 2022",
     },
     cta: {
-      title: "Command the Road",
-      button: "Inquire with a Specialist",
+      title: "Ready when you are",
+      button: "Check availability",
     },
     footer: {
       description:
-        "Redefining luxury travel through curated driving experiences and an unrivaled fleet of world-class vehicles.",
+        "Premium short-term vehicle rental in Los Angeles—premium fleet, clear pricing, and concierge support from reservation to return.",
       company: {
         title: "Company",
         links: ["About Us", "Careers", "Press", "Partners"],
@@ -81,7 +97,7 @@ export const CAR_DICTIONARY = {
         button: "Subscribe",
       },
       rights: "Luxury Rentals. All rights reserved.",
-      copyright: "© 2023",
+      copyright: "© 2026",
       social: {
         instagram: "Instagram",
         twitter: "Twitter",
@@ -95,6 +111,11 @@ export const CAR_DICTIONARY = {
       acceleration: "s",
       transmission: "Auto",
     },
+    breadcrumb: {
+      ariaLabel: "Breadcrumb",
+      fleet: "Fleet",
+      brands: "Brands",
+    },
     alt: {
       logo: "Logo",
       interior: "Interior cockpit of a luxury sports car",
@@ -104,66 +125,82 @@ export const CAR_DICTIONARY = {
   id: {
     nav: {
       fleet: "Armada",
-      brands: "Merek Pilihan",
+      brands: "Merek",
       membership: "Keanggotaan",
-      journal: "Jurnal",
       signIn: "Masuk",
       bookNow: "Pesan Sekarang",
     },
     hero: {
       slides: [
         {
-          category: "Lintasan Gunung",
-          title: "Taklukkan",
-          titleItalic: "Ketinggian",
+          category: "Los Angeles",
+          title: "Sewa yang",
+          titleItalic: "Istimewa",
           subtitle:
-            "Rekayasa presisi bertemu alam liar. Tingkatkan perjalanan Anda.",
-          ctaText: "Jelajahi Rute Alpen",
+            "Supercar dan SUV mewah untuk harian dan akhir pekan—serah terima di lokasi Anda.",
+          ctaText: "Lihat Armada",
         },
         {
-          category: "Elegan Urban",
-          title: "Desain dalam",
-          titleItalic: "Gerakan",
+          category: "Harga jelas",
+          title: "Tanpa",
+          titleItalic: "teka-teki",
           subtitle:
-            "Garis ramping untuk metropolis modern. Tiba dengan gaya tak terbantahkan.",
-          ctaText: "Lihat Koleksi Kota",
+            "Tarif harian, batas jarak, dan opsi asuransi dijelaskan di depan.",
+          ctaText: "Lihat Tarif",
         },
         {
-          category: "Cakrawala Pesisir",
-          title: "Mengejar",
-          titleItalic: "Matahari Terbenam",
-          subtitle: "Jalan terbuka, udara laut, dan deru mesin yang sempurna.",
-          ctaText: "Temukan Perjalanan Pesisir",
+          category: "Layanan concierge",
+          title: "Kami urus",
+          titleItalic: "detailnya",
+          subtitle:
+            "Pengantaran, pengenalan mobil, dan dukungan 24/7 untuk pengalaman tenang.",
+          ctaText: "Hubungi Concierge",
         },
       ],
     },
     fleet: {
       title: "Armada Pilihan",
-      subtitle: "Mahakarya teknik siap untuk perintah Anda.",
+      subtitle:
+        "Setiap unit diperiksa dan siap disewa untuk berkendara mandiri.",
       viewCollection: "Lihat Koleksi Lengkap",
       available: "Tersedia Sekarang",
       viewDetails: "Lihat Detail",
       perDay: "/ hari",
     },
+    fleetCollection: {
+      title: "Koleksi lengkap",
+      subtitle:
+        "Semua kendaraan yang saat ini bisa dipesan. Ketuk untuk detail dan pemesanan.",
+      filterAll: "Semua tipe",
+    },
+    brandBrowse: {
+      marqueLabel: "Jelajahi merek",
+      subtitle:
+        "Bandingkan model dari pabrikan ini—setiap listing menampilkan unit, tarif harian, dan yang termasuk sebelum Anda memesan.",
+      gridTitle: "Model tersedia",
+      gridHint: "Buka kendaraan untuk galeri, spesifikasi, dan panel reservasi.",
+      vehicleSingular: "unit tersedia",
+      vehiclePlural: "unit tersedia",
+    },
     brands: {
-      label: "Pabrikan",
-      title: "Merek Pilihan",
+      label: "",
+      title: "Merek",
       description:
-        "Kami bermitra secara eksklusif dengan rumah otomotif paling bergengsi di dunia.",
+        "Kendaraan dikelompokkan per pabrikan—setiap tautan menampilkan model yang tersedia.",
       viewDetails: "Lihat Detail",
     },
     testimonial: {
-      text: "Perpaduan sempurna antara mesin dan lanskap. Perjalanan tak terlupakan yang mendefinisikan ulang harapan perjalanan saya.",
+      text: "Pesan cepat, serah terima rapi, mobil persis seperti foto. Sewa mewah yang menyenangkan.",
       author: "James Sterling",
-      role: "Anggota sejak 2019",
+      role: "Penyewa Velocitá sejak 2022",
     },
     cta: {
-      title: "Kuasai Jalan",
-      button: "Tanya Spesialis",
+      title: "Siap melaju",
+      button: "Cek ketersediaan",
     },
     footer: {
       description:
-        "Mendefinisikan ulang perjalanan mewah melalui pengalaman berkendara yang dikuratori dan armada kendaraan kelas dunia yang tak tertandingi.",
+        "Sewa kendaraan premium jangka pendek—armada pilihan, harga transparan, dan dukungan concierge.",
       company: {
         title: "Perusahaan",
         links: ["Tentang Kami", "Karir", "Pers", "Mitra"],
@@ -183,7 +220,7 @@ export const CAR_DICTIONARY = {
         button: "Berlangganan",
       },
       rights: "Penyewaan Mewah. Hak cipta dilindungi undang-undang.",
-      copyright: "© 2023",
+      copyright: "© 2026",
       social: {
         instagram: "Instagram",
         twitter: "Twitter",
@@ -196,6 +233,11 @@ export const CAR_DICTIONARY = {
       power: "HP",
       acceleration: "s",
       transmission: "Otomatis",
+    },
+    breadcrumb: {
+      ariaLabel: "Jejak navigasi",
+      fleet: "Armada",
+      brands: "Merek",
     },
     alt: {
       logo: "Logo",

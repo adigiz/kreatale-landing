@@ -5,8 +5,8 @@ import {
   UseFormWatch,
   UseFormSetValue,
 } from "react-hook-form";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import ImagePicker from "../../ImagePicker";
 import { DemoFormValues } from "../../types";
@@ -21,6 +21,7 @@ interface HeroTabProps {
 
 export function HeroTab({ register, watch, setValue, config }: HeroTabProps) {
   const { heroFields } = config;
+  const templateId = watch("templateId");
 
   return (
     <div className="space-y-4">
@@ -32,6 +33,9 @@ export function HeroTab({ register, watch, setValue, config }: HeroTabProps) {
             {...register("heroTitle")}
             placeholder={heroFields.heroTitle.placeholder}
           />
+          <p className="text-xs text-muted-foreground">
+            Shown on the image side of the split hero.
+          </p>
         </div>
         <div className="space-y-2">
           <Label>{heroFields.heroSubtitle.label}</Label>
@@ -40,6 +44,24 @@ export function HeroTab({ register, watch, setValue, config }: HeroTabProps) {
             placeholder={heroFields.heroSubtitle.placeholder}
           />
         </div>
+        {templateId === "tour" && (
+          <>
+            <div className="space-y-2">
+              <Label>Main headline (line 1)</Label>
+              <Input
+                {...register("heroHeadline")}
+                placeholder="Leave empty to use template default (e.g. Redefining the)"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label>Main headline (line 2, italic)</Label>
+              <Input
+                {...register("heroHeadlineItalic")}
+                placeholder="Leave empty to use template default (e.g. Art of Travel.)"
+              />
+            </div>
+          </>
+        )}
         <div className="space-y-2">
           <Label>Hero Image</Label>
           <ImagePicker

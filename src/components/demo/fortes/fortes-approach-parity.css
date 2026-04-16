@@ -1,0 +1,480 @@
+/* fortes.vision — approach + read-more; scoped .fortes-demo-root */
+
+.fortes-demo-root .fortes-approach-stack {
+  position: relative;
+  z-index: 2;
+}
+
+.fortes-demo-root [data-aos="seo-overflow"] {
+  transition-duration: 850ms !important;
+  transition-timing-function: cubic-bezier(0.63, 0, 0.02, 1) !important;
+  overflow: hidden;
+  height: 184px;
+  padding-top: 184px;
+  display: block;
+}
+
+@media (max-width: 1400px) {
+  .fortes-demo-root [data-aos="seo-overflow"] {
+    height: 138px;
+    padding-top: 138px;
+  }
+}
+
+@media (max-width: 1290px) {
+  .fortes-demo-root [data-aos="seo-overflow"] {
+    height: 115px;
+    padding-top: 115px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .fortes-demo-root [data-aos="seo-overflow"] {
+    height: 92px;
+    padding-top: 92px;
+  }
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root [data-aos="seo-overflow"] {
+    height: 81px;
+    padding-top: 81px;
+  }
+}
+
+@media (max-width: 640px) {
+  .fortes-demo-root [data-aos="seo-overflow"] {
+    height: 64px;
+    padding-top: 64px;
+  }
+}
+
+@media (max-width: 522px) {
+  .fortes-demo-root [data-aos="seo-overflow"] {
+    height: 50px;
+    padding-top: 50px;
+  }
+}
+
+@media (max-width: 410px) {
+  .fortes-demo-root [data-aos="seo-overflow"] {
+    height: 45px;
+    padding-top: 45px;
+  }
+}
+
+.fortes-demo-root [data-aos="seo-overflow"].aos-animate {
+  padding-top: 4px;
+}
+
+.fortes-demo-root [data-aos="image-width"] {
+  transition: all 1050ms cubic-bezier(0.3, 0.05, 0.05, 1) 300ms !important;
+  transform: scale(1.5);
+  width: 0 !important;
+}
+
+.fortes-demo-root [data-aos="image-width"].aos-animate {
+  transform: scale(1);
+  width: 100% !important;
+}
+
+.fortes-demo-root [data-aos="show-up-seo"] {
+  transition-duration: 850ms !important;
+  transition-timing-function: cubic-bezier(0.3, 0, 0, 1) !important;
+  transform: translateY(100px);
+  opacity: 0;
+}
+
+.fortes-demo-root [data-aos="show-up-seo"].aos-animate {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.fortes-demo-root .our-approach-3d {
+  position: relative;
+  z-index: 2;
+  padding-bottom: 120px;
+}
+
+@media (max-width: 1290px) {
+  .fortes-demo-root .our-approach-3d {
+    padding-bottom: 80px;
+  }
+}
+
+.fortes-demo-root .our-approach-3d__container {
+  max-width: 1440px;
+  margin: auto;
+}
+
+.fortes-demo-root .our-approach-3d--heading-title {
+  font-size: 231px;
+  line-height: 167px;
+  letter-spacing: -7px;
+  font-weight: 600;
+  text-transform: uppercase;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+@media (max-width: 1400px) {
+  .fortes-demo-root .our-approach-3d--heading-title {
+    font-size: 173px;
+    line-height: 119px;
+  }
+}
+
+@media (max-width: 1290px) {
+  .fortes-demo-root .our-approach-3d--heading-title {
+    font-size: 145px;
+    line-height: 99.5px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .fortes-demo-root .our-approach-3d--heading-title {
+    font-size: 113px;
+    line-height: 75.4px;
+  }
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .our-approach-3d--heading-title {
+    font-size: 104px;
+    line-height: 68.62px;
+  }
+}
+
+@media (max-width: 640px) {
+  .fortes-demo-root .our-approach-3d--heading-title {
+    font-size: 82px;
+    line-height: 52px;
+    letter-spacing: -2px;
+  }
+}
+
+@media (max-width: 522px) {
+  .fortes-demo-root .our-approach-3d--heading-title {
+    font-size: 63px;
+    line-height: 40px;
+  }
+}
+
+@media (max-width: 410px) {
+  .fortes-demo-root .our-approach-3d--heading-title {
+    font-size: 56px;
+    line-height: 35px;
+  }
+}
+
+.fortes-demo-root .our-approach-3d--word-2 {
+  display: block;
+}
+
+.fortes-demo-root .our-approach-3d__heading-middle-image {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.fortes-demo-root .our-approach-3d__heading-middle-image .our-approach-3d--heading-title {
+  letter-spacing: -12px;
+}
+
+@media (max-width: 1400px) {
+  .fortes-demo-root .our-approach-3d__heading-middle-image .our-approach-3d--heading-title {
+    letter-spacing: -7px;
+  }
+}
+
+@media (max-width: 640px) {
+  .fortes-demo-root .our-approach-3d__heading-middle-image .our-approach-3d--heading-title {
+    letter-spacing: -2px;
+  }
+}
+
+.fortes-demo-root .our-approach-3d__image-wrap {
+  overflow: hidden;
+  max-width: 689px;
+  position: relative;
+  width: 100%;
+  height: 164px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .our-approach-3d__image-wrap {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.fortes-demo-root .our-approach-3d__image-heading.mob {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .our-approach-3d__image-heading.mob {
+    display: block;
+  }
+
+  .fortes-demo-root .our-approach-3d__image-heading.desctope {
+    display: none;
+  }
+}
+
+.fortes-demo-root .our-approach-3d__image-heading {
+  max-width: 689px;
+  width: 100%;
+  height: 164px;
+  object-fit: cover;
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .our-approach-3d__image-heading {
+    margin-top: 20px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .fortes-demo-root .our-approach-3d__image-heading {
+    height: 106px;
+  }
+}
+
+.fortes-demo-root .our-approach-3d__custom-heading {
+  padding: 0 49px 0 48px;
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .our-approach-3d__custom-heading {
+    padding: 0 22px 0 17px;
+  }
+}
+
+.fortes-demo-root .our-approach-3d__text-columns {
+  margin-top: 64px;
+  display: flex;
+  column-gap: 60px;
+  padding: 0 61px;
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .our-approach-3d__text-columns {
+    padding: 0 22px;
+    flex-direction: column;
+    row-gap: 20px;
+    margin-top: 20px;
+  }
+}
+
+.fortes-demo-root .our-approach-3d__colimn-left,
+.fortes-demo-root .our-approach-3d__column-right {
+  flex: 0 1 530px;
+  font-size: 14px;
+  line-height: 15.4px;
+  text-align: justify;
+  color: var(--fortes-fg);
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .our-approach-3d__colimn-left,
+  .fortes-demo-root .our-approach-3d__column-right {
+    flex-basis: 100%;
+  }
+}
+
+.fortes-demo-root .read-more {
+  padding-bottom: 205px;
+}
+
+@media (max-width: 1400px) {
+  .fortes-demo-root .read-more {
+    padding-bottom: 105px;
+  }
+}
+
+@media (max-width: 700px) {
+  .fortes-demo-root .read-more {
+    padding-bottom: 60px;
+  }
+}
+
+.fortes-demo-root .read-more__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 52px;
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .read-more__container {
+    padding: 0 22px;
+  }
+}
+
+.fortes-demo-root .read-more__wrapper {
+  display: flex;
+  gap: 108px;
+}
+
+@media (max-width: 1400px) {
+  .fortes-demo-root .read-more__wrapper {
+    justify-content: space-between;
+    gap: 48px;
+  }
+}
+
+@media (max-width: 700px) {
+  .fortes-demo-root .read-more__wrapper {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .fortes-demo-root .read-more__wrapper {
+    gap: 32px;
+  }
+}
+
+.fortes-demo-root .read-more__title {
+  font-size: 52px;
+  font-weight: 600;
+  line-height: 100%;
+  letter-spacing: -1.557px;
+  max-width: 668px;
+  width: 60%;
+  color: var(--fortes-fg);
+}
+
+.fortes-demo-root .read-more__title p {
+  margin: 0;
+}
+
+@media (max-width: 1300px) {
+  .fortes-demo-root .read-more__title {
+    max-width: 528px;
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .fortes-demo-root .read-more__title {
+    max-width: 392px;
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 950px) {
+  .fortes-demo-root .read-more__title {
+    max-width: 308px;
+    font-size: 26px;
+  }
+}
+
+@media (max-width: 700px) {
+  .fortes-demo-root .read-more__title {
+    width: 100%;
+  }
+}
+
+@media (max-width: 500px) {
+  .fortes-demo-root .read-more__title {
+    max-width: 259px;
+    font-size: 18px;
+    letter-spacing: -0.551px;
+  }
+}
+
+.fortes-demo-root .read-more__text-wrapper {
+  margin-top: 12px;
+  max-width: 483px;
+  padding-bottom: 2px;
+}
+
+@media (max-width: 950px) {
+  .fortes-demo-root .read-more__text-wrapper {
+    max-width: 383px;
+  }
+}
+
+@media (max-width: 700px) {
+  .fortes-demo-root .read-more__text-wrapper {
+    max-width: none;
+    margin-top: 0;
+  }
+}
+
+.fortes-demo-root .read-more__text {
+  color: #494949;
+  max-height: 118px;
+  overflow: hidden;
+  transition: max-height 1s;
+  letter-spacing: -0.3px;
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 500;
+}
+
+@media (max-width: 400px) {
+  .fortes-demo-root .read-more__text {
+    max-height: 184px;
+  }
+}
+
+.fortes-demo-root .read-more__text.open {
+  max-height: 3200px;
+}
+
+.fortes-demo-root .read-more__text p {
+  margin-bottom: 12px;
+}
+
+.fortes-demo-root .read-more__text p:last-child {
+  margin-bottom: 0;
+}
+
+.fortes-demo-root .read-more__text strong {
+  font-weight: 600;
+  color: #080808;
+}
+
+.fortes-demo-root .read-more__text p a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  color: inherit;
+  transition: color 0.3s;
+}
+
+.fortes-demo-root .read-more__text p a:hover {
+  color: #080808;
+}
+
+.fortes-demo-root .read-more__button {
+  color: #515050;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.32px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  margin-top: 28px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.3s;
+}
+
+@media (max-width: 500px) {
+  .fortes-demo-root .read-more__button {
+    margin-top: 20px;
+  }
+}
+
+.fortes-demo-root .read-more__button:hover {
+  color: #080808;
+}

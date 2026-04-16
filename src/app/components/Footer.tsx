@@ -83,6 +83,12 @@ export default function Footer() {
             {t("footer.navigation.projects")}
           </Link>
           <Link
+            href={createLocalizedPath("/demos")}
+            className="hover:text-white transition-colors duration-200"
+          >
+            {t("footer.navigation.demos")}
+          </Link>
+          <Link
             href={createLocalizedPath("/faq")}
             className="hover:text-white transition-colors duration-200"
           >

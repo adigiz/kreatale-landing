@@ -1,3 +1,4 @@
+import type { ComponentType } from "react";
 import { redirect } from "next/navigation";
 import {
   db,
@@ -142,15 +143,36 @@ export default async function PreviewPage({
     // So we rely on passed data.
     // TODO: If we want to support saved demo preview without data passed, we need to add demo-site to the fetch logic above.
 
-    // Dynamic import based on template type
-    let TemplateComponent;
+    type PreviewDemoTemplate = ComponentType<{ config?: unknown }>;
+
+    let TemplateComponent: PreviewDemoTemplate;
     if (templateId === "car") {
       const { CarTemplate } = await import("@/components/demo/car/CarTemplate");
-      TemplateComponent = CarTemplate;
+      TemplateComponent = CarTemplate as PreviewDemoTemplate;
+    } else if (templateId === "zodiac") {
+      const ZodiacTemplate = (
+        await import("@/components/demo/zodiac/ZodiacTemplate")
+      ).default;
+      TemplateComponent = ZodiacTemplate as PreviewDemoTemplate;
+    } else if (templateId === "bakery") {
+      const BakeryTemplate = (
+        await import("@/components/demo/bakery/BakeryTemplate")
+      ).default;
+      TemplateComponent = BakeryTemplate as PreviewDemoTemplate;
+    } else if (templateId === "bedding") {
+      const BeddingTemplate = (
+        await import("@/components/demo/bedding/BeddingTemplate")
+      ).default;
+      TemplateComponent = BeddingTemplate as PreviewDemoTemplate;
+    } else if (templateId === "fortes") {
+      const FortesTemplate = (
+        await import("@/components/demo/fortes/FortesTemplate")
+      ).default;
+      TemplateComponent = FortesTemplate as PreviewDemoTemplate;
     } else {
       const TourTemplate = (await import("@/components/demo/tour/TourTemplate"))
         .default;
-      TemplateComponent = TourTemplate;
+      TemplateComponent = TourTemplate as PreviewDemoTemplate;
     }
 
     return (

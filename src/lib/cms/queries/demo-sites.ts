@@ -1,7 +1,7 @@
 
 import { db } from "@/lib/cms/db";
 import { demoSites, users } from "@/lib/cms/db/schema";
-import { eq, desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 
 export async function getAllDemoSites() {
   try {
@@ -21,6 +21,29 @@ export async function getAllDemoSites() {
     return results;
   } catch (error) {
     console.error("Error fetching demo sites:", error);
+    return [];
+  }
+}
+
+export async function getPublishedDemoSites() {
+  try {
+    const results = await db
+      .select({
+        demoSite: demoSites,
+        author: {
+          id: users.id,
+          name: users.name,
+          email: users.email,
+        },
+      })
+      .from(demoSites)
+      .leftJoin(users, eq(demoSites.authorId, users.id))
+      .where(eq(demoSites.isPublished, true))
+      .orderBy(desc(demoSites.updatedAt));
+
+    return results;
+  } catch (error) {
+    console.error("Error fetching published demo sites:", error);
     return [];
   }
 }

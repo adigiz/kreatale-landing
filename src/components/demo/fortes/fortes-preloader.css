@@ -1,0 +1,151 @@
+/* fortes.vision — preloader (theme build/critical.css); scoped .fortes-preloader */
+
+.fortes-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 10000;
+  overflow: hidden;
+  transform: translateY(0);
+  pointer-events: all;
+  transition: none;
+  transform-origin: top;
+}
+
+.fortes-preloader--exiting {
+  transform: translateY(-100dvh);
+  pointer-events: none;
+  transition: all 1200ms cubic-bezier(0.7, 0, 0.3, 1) 0ms;
+}
+
+.fortes-preloader__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: top;
+  transform: translateY(0);
+  transition: none;
+  width: 100%;
+  height: 100dvh;
+}
+
+.fortes-preloader--exiting .fortes-preloader__wrap {
+  transform: translateY(100dvh);
+  transition: all 1200ms cubic-bezier(0.7, 0, 0.3, 1) 0ms;
+}
+
+.fortes-preloader__lottie {
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fortes-preloader__lottie--hidden {
+  animation: fortes-preloader-lottie 1.6s cubic-bezier(0.42, 0, 0.58, 1) forwards;
+}
+
+@keyframes fortes-preloader-lottie {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(0.8);
+  }
+  100% {
+    transform: scale(0.1);
+  }
+}
+
+.fortes-preloader__lottie-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 350px);
+  aspect-ratio: 350 / 250;
+  max-height: min(42vh, 280px);
+}
+
+.fortes-preloader__lottie-inner > div {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.fortes-preloader__logo-fallback {
+  display: block;
+  width: min(100%, 240px);
+  height: auto;
+  filter: brightness(0);
+}
+
+.fortes-preloader__count {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 3;
+  color: #080808;
+  font-family: NeueHaas, "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  align-items: baseline;
+}
+
+.fortes-preloader__count-number {
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.fortes-preloader__count p {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1;
+  color: rgba(8, 8, 8, 0.55);
+}
+
+.fortes-preloader__bg {
+  position: absolute;
+  width: 80%;
+  max-width: min(90vw, 900px);
+  aspect-ratio: 1 / 1;
+  bottom: 0;
+  right: 0;
+  transform: translate(70%, 70%);
+  transition: transform 2s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.fortes-preloader__bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transform: scale(1.6);
+}
+
+@media (max-width: 992px) {
+  .fortes-preloader__bg img {
+    transform: scale(2.3);
+    width: 200%;
+    height: 200%;
+  }
+}
+
+.fortes-preloader__bg.fortes-preloader__bg--active {
+  transform: translate(25%, 25%);
+}

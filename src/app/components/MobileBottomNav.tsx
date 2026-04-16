@@ -3,7 +3,13 @@
 import { Fragment } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { FolderKanban, BookOpen, Briefcase, HelpCircle } from "lucide-react";
+import {
+  FolderKanban,
+  BookOpen,
+  Briefcase,
+  HelpCircle,
+  LayoutTemplate,
+} from "lucide-react";
 import { useTranslations } from "next-intl";
 
 interface MobileBottomNavProps {
@@ -30,6 +36,14 @@ export default function MobileBottomNav({
         pathname?.startsWith(createLocalizedPath("/projects/")),
       onClick: onProjectsClick,
       isButton: true,
+    },
+    {
+      id: "demos",
+      icon: LayoutTemplate,
+      label: t("nav.demos"),
+      href: createLocalizedPath("/demos"),
+      isActive: pathname === createLocalizedPath("/demos"),
+      isButton: false,
     },
     {
       id: "blog",

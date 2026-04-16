@@ -6,12 +6,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useParams } from "next/navigation";
 import { DemoFormValues, demoSchema, DemoSite } from "./types";
 import { DUMMY_TOUR_CONFIG } from "@/lib/cms/dummy/tour";
+import { DUMMY_BAKERY_CONFIG } from "@/lib/cms/dummy/bakery";
+import { DUMMY_BEDDING_CONFIG } from "@/lib/cms/dummy/bedding";
 import { DUMMY_CAR_CONFIG } from "./utils/template-configs";
+import { DUMMY_FORTES_CONFIG } from "@/lib/cms/dummy/fortes";
+import { DUMMY_ZODIAC_CONFIG } from "@/lib/cms/dummy/zodiac";
 import { GeneralTab } from "./components/tabs/GeneralTab";
 import { BrandingTab } from "./components/tabs/BrandingTab";
 import { HeroTab } from "./components/tabs/HeroTab";
 import { CollectionSection } from "./components/CollectionSection";
 import { EntitySection } from "./components/EntitySection";
+import { TourExtraListsSection } from "./components/TourExtraListsSection";
 import { PreviewSystem } from "./components/PreviewSystem";
 import { TEMPLATE_CONFIGS } from "./utils/template-configs";
 import { Button } from "@/components/ui/button";
@@ -29,13 +34,15 @@ const TAB_FIELDS: Record<string, string[]> = {
   hero: [
     "heroTitle",
     "heroSubtitle",
+    "heroHeadline",
+    "heroHeadlineItalic",
     "heroImage",
     "price",
     "days",
     "location",
     "currency",
   ],
-  content: ["destinations", "packages"],
+  content: ["destinations", "packages", "experienceList", "travelTips"],
 };
 
 interface DemoSiteFormProps {
@@ -46,6 +53,10 @@ interface DemoSiteFormProps {
 const TEMPLATES = [
   { id: "tour", name: "Tour & Travel" },
   { id: "car", name: "Car Rental" },
+  { id: "bakery", name: "Bakery / food blog" },
+  { id: "bedding", name: "Bedding / home shop" },
+  { id: "zodiac", name: "Zodiac & horoscope" },
+  { id: "fortes", name: "Fortes-style arch viz" },
 ];
 
 export default function DemoSiteForm({
@@ -101,11 +112,16 @@ export default function DemoSiteForm({
     location: initialData?.config?.location || "",
     heroTitle: initialData?.config?.heroTitle || "",
     heroSubtitle: initialData?.config?.heroSubtitle || "",
+    heroHeadline: (initialData?.config as { heroHeadline?: string })?.heroHeadline || "",
+    heroHeadlineItalic:
+      (initialData?.config as { heroHeadlineItalic?: string })?.heroHeadlineItalic || "",
     heroImage: initialData?.config?.heroImage || "",
     price: initialData?.config?.price || "",
     days: initialData?.config?.days || "",
     destinations: initialData?.config?.destinations || [],
     packages: initialData?.config?.packages || [],
+    experienceList: initialData?.config?.experienceList || [],
+    travelTips: initialData?.config?.travelTips || [],
   };
 
   const {
@@ -173,6 +189,8 @@ export default function DemoSiteForm({
     if (templateId !== initialData?.templateId) {
       setValue("destinations", []);
       setValue("packages", []);
+      setValue("experienceList", []);
+      setValue("travelTips", []);
       setValue("heroImage", "");
       setValue("heroTitle", "");
       setValue("heroSubtitle", "");
@@ -273,6 +291,14 @@ export default function DemoSiteForm({
       dummyData = DUMMY_TOUR_CONFIG;
     } else if (templateId === "car") {
       dummyData = DUMMY_CAR_CONFIG;
+    } else if (templateId === "bakery") {
+      dummyData = DUMMY_BAKERY_CONFIG;
+    } else if (templateId === "bedding") {
+      dummyData = DUMMY_BEDDING_CONFIG;
+    } else if (templateId === "fortes") {
+      dummyData = DUMMY_FORTES_CONFIG;
+    } else if (templateId === "zodiac") {
+      dummyData = DUMMY_ZODIAC_CONFIG;
     }
 
     if (dummyData) {
@@ -486,6 +512,15 @@ export default function DemoSiteForm({
                     config={templateConfig}
                     errors={errors}
                   />
+
+                  {currentTemplateId === "tour" && (
+                    <TourExtraListsSection
+                      control={control}
+                      register={register}
+                      watch={watch}
+                      setValue={setValue}
+                    />
+                  )}
                 </TabsContent>
               </Tabs>
             </form>

@@ -4,6 +4,10 @@
 
 import { useState } from "react";
 import { CAR_DETAIL_DICTIONARY } from "./detailTranslations";
+import { CAR_DICTIONARY } from "./translations";
+import { CarDemoBreadcrumbs } from "./CarDemoBreadcrumbs";
+import { CarDemoNavbar } from "./CarDemoNavbar";
+import { parseMoneyAmount, rentalDayCount } from "./car-utils";
 
 export interface CarDetailConfig {
   // Car details
@@ -35,6 +39,10 @@ export interface CarDetailConfig {
 
   websiteName?: string;
   language?: "en" | "id";
+  /** e.g. `/en/demos/my-slug` — enables real nav links inside the demo */
+  demoBasePath?: string;
+  /** When set, breadcrumb shows Home → Fleet → Brand → Vehicle */
+  breadcrumbBrand?: { title: string; path: string };
 }
 
 const DICTIONARY = CAR_DETAIL_DICTIONARY;
@@ -46,6 +54,14 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
   const primaryColor = config.primaryColor || "#256af4";
   const language = config.language || "en";
   const t = DICTIONARY[language];
+  const tSite = CAR_DICTIONARY[language];
+  const base = config.demoBasePath || "";
+  const numberLocale = language === "id" ? "id-ID" : "en-US";
+  const dailyAmount = parseMoneyAmount(config.price);
+  const days = rentalDayCount(pickupDate, dropoffDate);
+  const subtotal = dailyAmount * days;
+  const fees = 165;
+  const total = subtotal + fees;
 
   return (
     <div className="bg-gray-50 dark:bg-gray-900 font-sans text-gray-800 dark:text-gray-200 antialiased">
@@ -58,64 +74,14 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
         }
       `}</style>
 
-      {/* Navigation */}
-      <nav className="fixed w-full z-50 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 transition-all duration-300 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            <div className="flex-shrink-0 flex items-center gap-2">
-              {config.logo ? (
-                <img src={config.logo} alt={t.alt.logo} className="h-8 w-auto" />
-              ) : (
-                <>
-                  <span
-                    className="material-icons text-2xl"
-                    style={{ color: primaryColor }}
-                  >
-                    speed
-                  </span>
-                  <span className="font-serif font-bold text-xl tracking-tight text-gray-900 dark:text-white">
-                    {config.websiteName || "Velocitá"}
-                  </span>
-                </>
-              )}
-            </div>
-            <div className="hidden md:flex space-x-10 items-center">
-              <a
-                className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                href="#"
-              >
-                {t.nav.fleet}
-              </a>
-              <a
-                className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                href="#"
-              >
-                {t.nav.brands}
-              </a>
-              <a
-                className="text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                href="#"
-              >
-                {t.nav.membership}
-              </a>
-            </div>
-            <div className="flex items-center space-x-6">
-              <a
-                className="hidden md:block text-xs uppercase tracking-widest font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors"
-                href="#"
-              >
-                {t.nav.signIn}
-              </a>
-              <button
-                className="px-6 py-2.5 rounded-lg text-xs uppercase tracking-widest font-bold transition-all shadow-md hover:shadow-lg text-white"
-                style={{ backgroundColor: primaryColor }}
-              >
-                {t.nav.myBookings}
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <CarDemoNavbar
+        demoBase={base}
+        websiteName={config.websiteName}
+        logo={config.logo}
+        primaryColor={primaryColor}
+        language={language}
+        ctaLabel={t.nav.myBookings}
+      />
 
       {/* Hero Section */}
       <section className="relative h-[85vh] min-h-[600px] overflow-hidden bg-black">
@@ -141,7 +107,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                       {config.category}
                     </span>
                   )}
-                  <h1 className="font-serif text-5xl md:text-7xl lg:text-8xl text-white mb-2 editorial-text drop-shadow-2xl">
+                  <h1 className="text-5xl md:text-7xl lg:text-8xl text-white mb-2 editorial-text drop-shadow-2xl">
                     {config.name}
                   </h1>
                   {config.description && (
@@ -155,7 +121,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                     {t.hero.dayRate}
                   </p>
                   <div className="flex items-baseline gap-2">
-                    <span className="font-serif text-4xl md:text-5xl font-medium">
+                    <span className="text-4xl md:text-5xl font-medium">
                       {config.currency || "$"}
                       {config.price}
                     </span>
@@ -173,13 +139,36 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
       {/* Main Content */}
       <div className="relative z-30 -mt-10 bg-gray-50 dark:bg-gray-900 rounded-t-3xl border-t border-white/10 shadow-[0_-10px_40px_rgba(0,0,0,0.2)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          {base ? (
+            <CarDemoBreadcrumbs
+              className="mb-10"
+              ariaLabel={tSite.breadcrumb.ariaLabel}
+              primaryColor={primaryColor}
+              items={[
+                {
+                  label: config.websiteName || "Velocitá",
+                  href: base,
+                },
+                { label: tSite.breadcrumb.fleet, href: `${base}/fleet` },
+                ...(config.breadcrumbBrand
+                  ? [
+                      {
+                        label: config.breadcrumbBrand.title,
+                        href: config.breadcrumbBrand.path,
+                      },
+                    ]
+                  : []),
+                { label: config.name },
+              ]}
+            />
+          ) : null}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             {/* Left Column - Details */}
             <div className="lg:col-span-8 space-y-16">
               {/* Specifications */}
               {config.specs && (
                 <section>
-                  <h3 className="font-serif text-2xl text-gray-900 dark:text-white mb-8 border-b border-gray-200 dark:border-gray-800 pb-4">
+                  <h3 className="text-2xl text-gray-900 dark:text-white mb-8 border-b border-gray-200 dark:border-gray-800 pb-4">
                     {t.specs.title}
                   </h3>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -194,7 +183,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                         <p className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">
                           {t.specs.acceleration}
                         </p>
-                        <p className="text-xl font-bold text-gray-900 dark:text-white font-serif">
+                        <p className="text-xl font-bold text-gray-900 dark:text-white">
                           {config.specs.acceleration}
                         </p>
                       </div>
@@ -210,7 +199,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                         <p className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">
                           {t.specs.topSpeed}
                         </p>
-                        <p className="text-xl font-bold text-gray-900 dark:text-white font-serif">
+                        <p className="text-xl font-bold text-gray-900 dark:text-white">
                           {config.specs.topSpeed}
                         </p>
                       </div>
@@ -226,7 +215,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                         <p className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">
                           {t.specs.power}
                         </p>
-                        <p className="text-xl font-bold text-gray-900 dark:text-white font-serif">
+                        <p className="text-xl font-bold text-gray-900 dark:text-white">
                           {config.specs.power}
                         </p>
                       </div>
@@ -242,7 +231,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                         <p className="text-xs uppercase tracking-widest text-gray-500 dark:text-gray-400 mb-1">
                           {t.specs.trans}
                         </p>
-                        <p className="text-xl font-bold text-gray-900 dark:text-white font-serif">
+                        <p className="text-xl font-bold text-gray-900 dark:text-white">
                           {config.specs.transmission}
                         </p>
                       </div>
@@ -257,7 +246,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                   <div className="grid md:grid-cols-2 gap-12">
                     {config.features && (
                       <div>
-                        <h3 className="font-serif text-xl text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                        <h3 className="text-xl text-gray-900 dark:text-white mb-6 flex items-center gap-2">
                           <span
                             className="material-icons text-lg"
                             style={{ color: primaryColor }}
@@ -284,7 +273,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                     )}
                     {config.inclusions && (
                       <div>
-                        <h3 className="font-serif text-xl text-gray-900 dark:text-white mb-6 flex items-center gap-2">
+                        <h3 className="text-xl text-gray-900 dark:text-white mb-6 flex items-center gap-2">
                           <span
                             className="material-icons text-lg"
                             style={{ color: primaryColor }}
@@ -315,7 +304,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
               {/* Gallery */}
               {config.gallery && config.gallery.length > 0 && (
                 <section>
-                  <h3 className="font-serif text-2xl text-gray-900 dark:text-white mb-6">
+                  <h3 className="text-2xl text-gray-900 dark:text-white mb-6">
                     {t.gallery.title}
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -341,7 +330,7 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
               <div className="sticky top-28 space-y-6">
                 <div className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-xl border border-gray-100 dark:border-gray-800">
                   <div className="mb-6">
-                    <h3 className="font-serif text-2xl text-gray-900 dark:text-white">
+                    <h3 className="text-2xl text-gray-900 dark:text-white">
                       {t.booking.title}
                     </h3>
                     <p className="text-sm text-gray-500 mt-2">
@@ -376,7 +365,17 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                         <span>{t.booking.dailyRate}</span>
                         <span>
                           {config.currency || "$"}
-                          {config.price}
+                          {dailyAmount.toLocaleString(numberLocale)}
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
+                        <span>
+                          {t.booking.subtotal} ({days}{" "}
+                          {days === 1 ? t.booking.day : t.booking.days})
+                        </span>
+                        <span>
+                          {config.currency || "$"}
+                          {subtotal.toLocaleString(numberLocale)}
                         </span>
                       </div>
                       <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
@@ -385,7 +384,10 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                       </div>
                       <div className="flex justify-between text-sm text-gray-600 dark:text-gray-300">
                         <span>{t.booking.taxes}</span>
-                        <span>{config.currency || "$"}165</span>
+                        <span>
+                          {config.currency || "$"}
+                          {fees.toLocaleString(numberLocale)}
+                        </span>
                       </div>
                     </div>
                     <div className="flex justify-between items-center pb-2">
@@ -393,11 +395,11 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
                         {t.booking.total}
                       </span>
                       <span
-                        className="font-serif text-2xl font-bold"
+                        className="text-2xl font-bold"
                         style={{ color: primaryColor }}
                       >
                         {config.currency || "$"}
-                        {parseInt(config.price) + 165}
+                        {total.toLocaleString(numberLocale)}
                       </span>
                     </div>
                     <button
@@ -464,11 +466,6 @@ export function CarDetailPage({ config }: { config: CarDetailConfig }) {
         </div>
       </div>
 
-      {/* Material Icons Font */}
-      <link
-        href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet"
-      />
     </div>
   );
 }

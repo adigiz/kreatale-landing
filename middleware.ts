@@ -15,7 +15,15 @@ export default async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
   const segments = pathname.split("/").filter(Boolean);
 
-  // Rewrite demo URLs without locale: /dealer-mobil/... -> /en/demo/dealer-mobil/...
+  // Legacy /{locale}/demo/... → /{locale}/demos/... (permanent redirect)
+  const legacyDemo = pathname.match(/^\/(en|id)\/demo\/(.+)$/);
+  if (legacyDemo) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/${legacyDemo[1]}/demos/${legacyDemo[2]}`;
+    return NextResponse.redirect(url, 308);
+  }
+
+  // Rewrite demo URLs without locale: /dealer-mobil/... -> /en/demos/dealer-mobil/...
   // So shared links like https://kreatale.com/dealer-mobil/package/ferrari work
   const firstSegment = segments[0];
   if (
@@ -23,6 +31,7 @@ export default async function middleware(request: NextRequest) {
     !LOCALES.includes(firstSegment as "en" | "id") &&
     firstSegment !== "admin" &&
     firstSegment !== "demo" &&
+    firstSegment !== "demos" &&
     firstSegment !== "about" &&
     firstSegment !== "blog" &&
     firstSegment !== "projects" &&
@@ -31,7 +40,7 @@ export default async function middleware(request: NextRequest) {
     firstSegment !== "terms" &&
     firstSegment !== "preview"
   ) {
-    const demoPath = `/en/demo/${segments.join("/")}`;
+    const demoPath = `/en/demos/${segments.join("/")}`;
     const url = request.nextUrl.clone();
     url.pathname = demoPath;
     return NextResponse.rewrite(url);

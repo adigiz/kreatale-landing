@@ -111,7 +111,7 @@ export default async function DemosPage({
                       <td className="p-4">
                         {site.isPublished ? (
                           <Link
-                            href={`/${locale}/demo/${site.slug}`}
+                            href={`/${locale}/demos/${site.slug}`}
                             target="_blank"
                             className="flex items-center gap-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
                           >

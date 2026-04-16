@@ -4,6 +4,7 @@
     "services": "Layanan",
     "about": "Tentang",
     "projects": "Proyek",
+    "demos": "Demo",
     "faq": "FAQ",
     "contact": "Kontak"
   },
@@ -172,6 +173,23 @@
       { "value": "100%", "label": "Kepuasan Klien" }
     ]
   },
+  "demos": {
+    "metaTitle": "Situs Demo",
+    "metaDescription": "Contoh situs; buka di tab baru.",
+    "pageTitle": "Situs Demo",
+    "pageDescription": "Telusuri demo interaktif yang bisa Anda klik. Setiap contoh dibuka di tab baru agar Anda bisa menjelajah tanpa meninggalkan halaman ini.",
+    "defaultSubtitle": "Contoh situs interaktif yang bisa Anda jelajahi.",
+    "empty": "Belum ada demo yang dipublikasikan. Periksa lagi nanti.",
+    "openDemo": "Buka demo",
+    "template": {
+      "tour": "Wisata",
+      "car": "Rental mobil",
+      "zodiac": "Horoskop",
+      "bakery": "Blog makanan",
+      "bedding": "E-commerce",
+      "fortes": "Arsitektur"
+    }
+  },
   "portfolio": {
     "title": "Portfolio Kami",
     "subtitle": "Pekerjaan Terbaru",
@@ -301,6 +319,7 @@
       "services": "Layanan",
       "about": "Tentang",
       "projects": "Proyek",
+      "demos": "Demo",
       "faq": "FAQ"
     }
   },

@@ -1,0 +1,472 @@
+/* Ported from fortes.vision critical.css — hero scroll block. Scoped under .fortes-hero-root */
+
+
+.fortes-hero-root {
+  position: relative;
+}
+
+.fortes-hero-root .scroll {
+  color: #FFF;
+  /* Matches fortes.vision critical.css — white shell under blurred preview. */
+  background: #fff;
+  position: relative;
+  position: fixed;
+  height: 100vh;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  z-index: 60;
+  transition: all 1.4s;
+}
+.fortes-hero-root .scroll.free {
+  position: relative;
+}
+.fortes-hero-root .scroll.hidden {
+  transform: translateY(-300px);
+  opacity: 0 !important;
+}
+.fortes-hero-root .scroll__block {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: all 1.9s;
+}
+.fortes-hero-root .scroll__block.active {
+  opacity: 1;
+}
+.fortes-hero-root .scroll__video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  position: relative;
+  z-index: 2;
+}
+.fortes-hero-root .scroll__img-preview {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  position: relative;
+  z-index: 1;
+  position: absolute;
+  inset: 0;
+}
+.fortes-hero-root .scroll__content {
+  position: absolute;
+  z-index: 20;
+  transition: all 1.3s;
+}
+.fortes-hero-root .scroll__title {
+  font-size: 70px;
+  font-weight: 600;
+  letter-spacing: -2.1px;
+  text-transform: capitalize;
+  overflow: hidden;
+  position: relative;
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 0ms;
+}
+.fortes-hero-root .scroll__title.opacity {
+  opacity: 0;
+}
+.fortes-hero-root .scroll__title span {
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 0ms;
+  transform: translateY(100%);
+  display: block;
+}
+.fortes-hero-root .scroll__title:nth-child(2) span {
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 100ms;
+}
+.fortes-hero-root .scroll__title:nth-child(3) span {
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 200ms;
+}
+.fortes-hero-root .scroll__title.active span {
+  transform: translateY(0);
+}
+@media screen and (max-width: 690px) {
+  .fortes-hero-root .scroll__title {
+    font-size: 50px;
+    letter-spacing: -1.5px;
+  }
+}
+.fortes-hero-root .scroll__text {
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 0ms;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 114%;
+  max-width: 266px;
+  margin-top: 32px;
+}
+.fortes-hero-root .scroll__text .count-1 {
+  transition-delay: 400ms;
+}
+.fortes-hero-root .scroll__text .count-2 {
+  transition-delay: 500ms;
+}
+.fortes-hero-root .scroll__text .count-3 {
+  transition-delay: 600ms;
+}
+.fortes-hero-root .scroll__text .count-4 {
+  transition-delay: 700ms;
+}
+.fortes-hero-root .scroll__text.active .split-anim__inner {
+  transform: translateY(0);
+}
+.fortes-hero-root .scroll__block--first .scroll__content {
+  bottom: 152px;
+  right: 147px;
+}
+@media screen and (max-width: 690px) {
+  .fortes-hero-root .scroll__block--first .scroll__content {
+    right: auto;
+    left: 22px;
+    bottom: 162px;
+  }
+}
+.fortes-hero-root .scroll__block--second .scroll__content {
+  bottom: 152px;
+  right: 350px;
+}
+@media screen and (max-width: 690px) {
+  .fortes-hero-root .scroll__block--second .scroll__content {
+    left: 22px;
+    right: auto;
+    bottom: 162px;
+  }
+}
+.fortes-hero-root .scroll__block--third {
+  position: relative;
+}
+.fortes-hero-root .scroll__block--third.static {
+  opacity: 1 !important;
+}
+.fortes-hero-root .scroll__block--third .scroll__content {
+  bottom: 152px;
+  right: 350px;
+}
+@media screen and (max-width: 690px) {
+  .fortes-hero-root .scroll__block--third .scroll__content {
+    left: 22px;
+    right: auto;
+    bottom: 162px;
+  }
+}
+.fortes-hero-root .scroll__preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+}
+.fortes-hero-root .scroll__preview:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(16, 16, 16, 0.14);
+  pointer-events: none;
+}
+.fortes-hero-root .scroll__preview-video {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  z-index: 2;
+}
+.fortes-hero-root .scroll__img {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+.fortes-hero-root .scroll__inner {
+  position: absolute;
+  left: 24px;
+  bottom: 59dvh;
+  z-index: 2;
+  transition: all 0.8s;
+}
+.fortes-hero-root .scroll__inner.visible .scroll__preview-wrap:nth-child(1) .scroll__preview-title {
+  transform: translateY(0);
+}
+.fortes-hero-root .scroll__inner.visible .scroll__preview-wrap:nth-child(1) .scroll__preview-title::before {
+  transform: translateY(0);
+}
+.fortes-hero-root .scroll__inner.visible .scroll__preview-wrap:nth-child(1) .scroll__preview-text {
+  transform: translateY(-9px);
+}
+.fortes-hero-root .scroll__inner.visible .scroll__preview-wrap:nth-child(2) .scroll__preview-title {
+  transform: translateY(0);
+}
+.fortes-hero-root .scroll__inner.visible .scroll__preview-wrap:nth-child(2) .scroll__preview-title::before {
+  transform: translateY(0);
+}
+.fortes-hero-root .scroll__inner.visible .scroll__preview-wrap:nth-child(2) .scroll__preview-text {
+  transform: translateY(-9px);
+}
+@media screen and (max-width: 768px) {
+  .fortes-hero-root .scroll__inner {
+    left: 32px;
+  }
+}
+@media screen and (max-width: 389px) {
+  .fortes-hero-root .scroll__inner {
+    left: 22px;
+  }
+}
+.fortes-hero-root .scroll__preview-wrap {
+  display: flex;
+  gap: 9px;
+  align-items: end;
+  position: relative;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-top: 4px;
+}
+.fortes-hero-root .scroll__preview-wrap:nth-child(1) .scroll__preview-title {
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 200ms;
+}
+.fortes-hero-root .scroll__preview-wrap:nth-child(1) .scroll__preview-text {
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 400ms;
+}
+.fortes-hero-root .scroll__preview-wrap:nth-child(2) .scroll__preview-title {
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 0ms;
+}
+.fortes-hero-root .scroll__preview-wrap:nth-child(2) .scroll__preview-text {
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 300ms;
+}
+.fortes-hero-root .scroll__preview-wrap:nth-child(1) {
+  transform: translateY(22px) translateX(256px);
+}
+@media screen and (max-width: 690px) {
+  .fortes-hero-root .scroll__preview-wrap:nth-child(1) {
+    transform: translateY(6px) translateX(108px);
+  }
+}
+.fortes-hero-root .scroll__preview-wrap:nth-child(2) .scroll__preview-title:before {
+  content: "(1)";
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 0ms;
+}
+@media screen and (max-width: 389px) {
+  .fortes-hero-root .scroll__preview-wrap {
+    gap: 5px;
+  }
+}
+.fortes-hero-root .scroll__preview-title {
+  position: relative;
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -2.1px;
+  line-height: 100%;
+  text-transform: lowercase;
+  transform: translateY(100%);
+  padding-bottom: 5px;
+}
+.fortes-hero-root .scroll__preview-title:before {
+  position: absolute;
+  top: -15px;
+  left: -17px;
+  content: "(2)";
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: -1px;
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 100ms;
+  transform: translateY(50px);
+}
+@media screen and (max-width: 559px) {
+  .fortes-hero-root .scroll__preview-title:before {
+    top: -13px;
+  }
+}
+@media screen and (max-width: 389px) {
+  .fortes-hero-root .scroll__preview-title {
+    font-size: 28px;
+  }
+}
+.fortes-hero-root .scroll__preview-text {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.48px;
+  text-transform: lowercase;
+  line-height: 100%;
+  transform: translateY(100%);
+}
+.fortes-hero-root .scroll__bottom {
+  position: absolute;
+  right: 60px;
+  max-width: 492px;
+  width: 100%;
+  bottom: 15dvh;
+  transition: all 0.8s;
+}
+.fortes-hero-root .scroll__bottom .brl {
+  display: block !important;
+}
+.fortes-hero-root .scroll__bottom.visible .scroll__bottom-title {
+  transform: translateY(0);
+}
+.fortes-hero-root .scroll__bottom.visible .split-anim__inner {
+  transform: translateY(0);
+}
+@media screen and (max-width: 768px) {
+  .fortes-hero-root .scroll__bottom {
+    right: 32px;
+  }
+}
+@media screen and (max-width: 690px) {
+  .fortes-hero-root .scroll__bottom {
+    right: auto;
+    left: 80px;
+    max-width: 300px;
+  }
+}
+@media screen and (max-width: 389px) {
+  .fortes-hero-root .scroll__bottom {
+    max-width: 250px;
+    left: 60px;
+  }
+}
+.fortes-hero-root .scroll__bottom-title {
+  position: relative;
+  color: #FFF;
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 114%;
+  max-width: 491px;
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 0ms;
+  letter-spacing: -2.1px;
+}
+@media screen and (max-width: 690px) {
+  .fortes-hero-root .scroll__bottom-title {
+    font-size: 18px;
+    letter-spacing: -1px;
+  }
+}
+.fortes-hero-root .scroll__bottom-text {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 120%;
+  letter-spacing: -0.52px;
+  margin-top: 20px;
+  max-width: 412px;
+}
+.fortes-hero-root .scroll__bottom-text .split-anim__inner {
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 200ms !important;
+}
+@media screen and (max-width: 690px) {
+  .fortes-hero-root .scroll__bottom-text {
+    font-size: 10px;
+    margin-top: 12px;
+  }
+}
+.fortes-hero-root .scroll__container {
+  position: absolute;
+  max-width: 1320px;
+  width: 100%;
+  transform: translateX(-50%);
+  left: 50%;
+  height: 100%;
+  top: 0;
+  bottom: 0;
+  z-index: 3;
+}
+.fortes-hero-root .scroll__bottom-svg {
+  bottom: -25px;
+  left: -91px;
+  position: absolute;
+  max-width: 114px;
+}
+.fortes-hero-root .scroll__bottom-svg path {
+  stroke: #fff;
+}
+@media screen and (max-width: 690px) {
+  .fortes-hero-root .scroll__bottom-svg {
+    width: 82px;
+    bottom: -14px;
+    left: -65px;
+  }
+}
+.fortes-hero-root .scroll__hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 32px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 114%;
+  text-align: center;
+  gap: 9px;
+}
+.fortes-hero-root .scroll__hint svg {
+  display: inline-block;
+  animation: floatUpDown 2s ease-in-out infinite;
+}
+.fortes-hero-root .scroll .split-anim {
+  overflow: hidden;
+  box-sizing: border-box;
+  display: inline-flex;
+}
+.fortes-hero-root .scroll .split-anim__inner {
+  display: inline-flex;
+  will-change: transform;
+  transition-duration: 650ms !important;
+  transition-timing-function: cubic-bezier(0.63, 0, 0.02, 1) !important;
+  transform: translateY(100%);
+}
+
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.fortes-hero-root .scroll__outer {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+/* Theme `.button` (Get Estimate) — from same critical.css */
+.fortes-hero-root .button {
+  background: #ffe27f;
+  border-radius: 100px;
+  font-size: 17px;
+  line-height: 36px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 34px;
+  padding: 0 20px;
+  font-weight: 600;
+  width: fit-content;
+  position: relative;
+  border: none;
+  color: #080808;
+  font-family: inherit;
+}
+.fortes-hero-root .button:hover {
+  background: #1f1f1f;
+  color: #f6f6f6;
+}

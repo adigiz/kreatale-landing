@@ -1,0 +1,600 @@
+/* fortes.vision — contact + footer; scoped .fortes-demo-root */
+.fortes-demo-root [data-aos="show-contact"] {
+  transition-duration: 650ms !important;
+  transition-timing-function: cubic-bezier(0.63, 0, 0.02, 1) !important;
+  width: 0 !important;
+}
+
+.fortes-demo-root [data-aos="show-contact"]::placeholder {
+  transition: all 650ms cubic-bezier(0.63, 0, 0.02, 1) 0ms !important;
+  color: transparent !important;
+}
+
+.fortes-demo-root [data-aos="show-contact"].aos-animate {
+  width: 100% !important;
+}
+
+.fortes-demo-root [data-aos="show-contact"].aos-animate::placeholder {
+  color: #515050 !important;
+}
+
+.fortes-demo-root [data-aos="footer-img"] {
+  transform: scale(1.25);
+  opacity: 0;
+  transition-duration: 1050ms !important;
+  transition-timing-function: cubic-bezier(0.3, 0, 0, 1) !important;
+  filter: blur(20px);
+  will-change: transform, opacity, filter;
+}
+
+.fortes-demo-root [data-aos="footer-img"].aos-animate {
+  transform: scaleX(1);
+  opacity: 1;
+  filter: blur(0);
+}
+
+.fortes-demo-root [data-aos="footer-overflow"] {
+  transition-duration: 650ms !important;
+  transition-timing-function: cubic-bezier(0.63, 0, 0.02, 1) !important;
+  transition-property: padding-top;
+  overflow: hidden;
+  display: block;
+}
+
+.fortes-demo-root [data-aos="footer-overflow"].footer__location-title,
+.fortes-demo-root [data-aos="footer-overflow"].footer__contact-us-title,
+.fortes-demo-root [data-aos="footer-overflow"].footer__column-services-title,
+.fortes-demo-root [data-aos="footer-overflow"].footer__column-menu-title {
+  height: 13px;
+  padding-top: 13px;
+}
+
+.fortes-demo-root [data-aos="footer-overflow"].footer__link {
+  height: 18px;
+  padding-top: 17px;
+}
+
+.fortes-demo-root [data-aos="footer-overflow"].footer__contact-us-phone a,
+.fortes-demo-root [data-aos="footer-overflow"].footer__contact-us-email a {
+  transition-duration: 650ms !important;
+  transition-timing-function: cubic-bezier(0.63, 0, 0.02, 1) !important;
+  transition-property: padding-top;
+  transition-delay: 600ms;
+  height: 54px;
+  padding-top: 54px;
+  display: block;
+}
+
+.fortes-demo-root [data-aos="footer-overflow"].aos-animate {
+  padding-top: 0;
+}
+
+.fortes-demo-root [data-aos="footer-overflow"].aos-animate.footer__contact-us-phone a,
+.fortes-demo-root [data-aos="footer-overflow"].aos-animate.footer__contact-us-email a,
+.fortes-demo-root [data-aos="footer-overflow"].aos-animate.footer__location-title,
+.fortes-demo-root [data-aos="footer-overflow"].aos-animate.footer__column-services-title,
+.fortes-demo-root [data-aos="footer-overflow"].aos-animate.footer__column-menu-title,
+.fortes-demo-root [data-aos="footer-overflow"].aos-animate.footer__link {
+  padding-top: 0;
+}
+
+.fortes-demo-root .contact-create {
+  padding-bottom: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.fortes-demo-root .contact-create__container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 52px;
+  overflow: visible;
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .contact-create__container {
+    padding: 0 22px;
+  }
+}
+
+.fortes-demo-root .contact-create__wrapper {
+  padding: 45px 0;
+  display: flex;
+  align-items: end;
+  gap: 67px;
+  justify-content: space-between;
+}
+
+@media (max-width: 992px) {
+  .fortes-demo-root .contact-create__wrapper {
+    flex-direction: column;
+    gap: 50px;
+    align-items: flex-start;
+  }
+}
+
+.fortes-demo-root .contact-create__title {
+  color: #080808;
+  font-size: 114px;
+  font-weight: 500;
+  line-height: 94%;
+  letter-spacing: -5.1px;
+  width: 50%;
+  max-width: 607px;
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.fortes-demo-root .contact-create__title > span:first-child {
+  display: block;
+}
+
+@media (max-width: 1290px) {
+  .fortes-demo-root .contact-create__title {
+    font-size: 100px;
+    letter-spacing: -3px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .fortes-demo-root .contact-create__title {
+    font-size: 93px;
+  }
+}
+
+@media (max-width: 992px) {
+  .fortes-demo-root .contact-create__title {
+    width: 62%;
+  }
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .contact-create__title {
+    font-size: 65px;
+    max-width: 350px;
+    width: 100%;
+  }
+}
+
+.fortes-demo-root .contact-create__title.aos-animate .split-anim__inner {
+  transform: translateY(-13px);
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .contact-create__title.aos-animate .split-anim__inner {
+    transform: translateY(-7px);
+  }
+}
+
+.fortes-demo-root .contact-create__note-text {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  text-align: right;
+  font-size: 12px;
+  color: #515050;
+  max-width: 290px;
+}
+
+.fortes-demo-root .contact-create__note-text div {
+  height: 7px;
+}
+
+@media (max-width: 900px) {
+  .fortes-demo-root .contact-create__note-text {
+    max-width: 293px;
+  }
+}
+
+@media (max-width: 767px) {
+  .fortes-demo-root .contact-create__note-text {
+    left: 0;
+    bottom: -55px;
+    text-align: left;
+    max-width: none;
+  }
+}
+
+.fortes-demo-root .contact-create__form {
+  width: 50%;
+  max-width: 621px;
+  display: flex;
+  flex-direction: column;
+  gap: 27px;
+  position: relative;
+}
+
+@media (max-width: 992px) {
+  .fortes-demo-root .contact-create__form {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.fortes-demo-root .contact-create__form textarea {
+  height: 85px;
+  resize: none;
+  overflow: hidden;
+}
+
+.fortes-demo-root .contact-create__form textarea,
+.fortes-demo-root .contact-create__form input {
+  padding-left: 0;
+  padding-right: 0;
+  width: 100%;
+  padding-bottom: 5px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #080808;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
+  color: #515050;
+  font-family: NeueHaas, "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  background: transparent;
+}
+
+.fortes-demo-root .contact-create__form textarea::placeholder,
+.fortes-demo-root .contact-create__form input::placeholder {
+  color: #515050;
+  white-space: nowrap;
+}
+
+.fortes-demo-root .contact-create__form .submit_btn {
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 90%;
+  text-decoration: underline;
+  text-underline-offset: 10px;
+  margin-top: 36px;
+  width: fit-content;
+  font-family: NeueHaas, "Helvetica Neue", Helvetica, Arial, system-ui, sans-serif;
+  text-decoration-thickness: 2px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #080808;
+}
+
+@media (max-width: 992px) {
+  .fortes-demo-root .contact-create__form .submit_btn {
+    margin: 23px auto 0;
+    font-size: 45px;
+  }
+}
+
+.fortes-demo-root .contact-create__form .submit_btn:hover {
+  opacity: 0.75;
+}
+
+.fortes-demo-root .contact-create__note-text span {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.fortes-demo-root .footer__image-wrap {
+  overflow: hidden;
+  position: relative;
+}
+
+.fortes-demo-root .footer__image {
+  height: 468px;
+  position: relative;
+}
+
+@media (max-width: 480px) {
+  .fortes-demo-root .footer__image {
+    height: 300px;
+  }
+}
+
+.fortes-demo-root .footer__image-img {
+  width: 100%;
+  height: 468px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .fortes-demo-root .footer__image-img {
+    height: 300px;
+  }
+}
+
+.fortes-demo-root .footer {
+  padding-bottom: 16px;
+  background-color: #080808;
+  position: relative;
+  z-index: 1;
+  margin-top: -1px;
+}
+
+.fortes-demo-root .footer__container {
+  max-width: 1440px;
+  margin: auto;
+}
+
+.fortes-demo-root .footer__content {
+  padding: 27px 22px 130px;
+  display: flex;
+  column-gap: 69px;
+}
+
+@media (max-width: 1150px) {
+  .fortes-demo-root .footer__content {
+    column-gap: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .fortes-demo-root .footer__content {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .fortes-demo-root .footer__content {
+    padding: 22px 22px 129px;
+  }
+}
+
+.fortes-demo-root .footer__columns-wrapper {
+  display: flex;
+  column-gap: 69px;
+}
+
+@media (max-width: 1150px) {
+  .fortes-demo-root .footer__columns-wrapper {
+    column-gap: 20px;
+  }
+}
+
+@media (max-width: 992px) {
+  .fortes-demo-root .footer__columns-wrapper {
+    justify-content: space-around;
+    margin-bottom: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fortes-demo-root .footer__columns-wrapper {
+    flex-direction: column;
+  }
+}
+
+.fortes-demo-root .footer__column-menu-title,
+.fortes-demo-root .footer__column-services-title,
+.fortes-demo-root .footer__contact-us-title,
+.fortes-demo-root .footer__location-title {
+  font-size: 13px;
+  line-height: 12.6px;
+  color: #c2c2c2;
+}
+
+.fortes-demo-root .footer__location-title {
+  flex: 0 1 65px;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fortes-demo-root .footer__column-menu-list li:not(:last-child),
+.fortes-demo-root .footer__column-services-list li:not(:last-child) {
+  margin-bottom: 18px;
+}
+
+.fortes-demo-root .footer__column-menu-list,
+.fortes-demo-root .footer__column-services-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fortes-demo-root .footer__column-menu-list li a,
+.fortes-demo-root .footer__column-services-list li a {
+  font-size: 17px;
+  line-height: 16.2px;
+  color: #c2c2c2;
+  text-decoration: none;
+}
+
+.fortes-demo-root .footer__column-menu-list li a:hover,
+.fortes-demo-root .footer__column-services-list li a:hover {
+  color: #fff;
+}
+
+.fortes-demo-root .footer__column-menu,
+.fortes-demo-root .footer__column-services {
+  display: flex;
+  align-items: start;
+  gap: 16px;
+}
+
+@media (max-width: 480px) {
+  .fortes-demo-root .footer__column-services {
+    column-gap: 23px;
+  }
+
+  .fortes-demo-root .footer__column-menu {
+    margin-bottom: 80px;
+    column-gap: 41px;
+  }
+}
+
+.fortes-demo-root .footer__info {
+  margin-left: auto;
+}
+
+@media (max-width: 992px) {
+  .fortes-demo-root .footer__info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: inherit;
+  }
+}
+
+@media (max-width: 480px) {
+  .fortes-demo-root .footer__info {
+    align-items: flex-start;
+  }
+}
+
+.fortes-demo-root .footer__contact-us,
+.fortes-demo-root .footer__location {
+  display: flex;
+  align-items: start;
+  gap: 16px;
+}
+
+.fortes-demo-root .footer__contact-us-email {
+  margin-bottom: 39px;
+}
+
+@media (max-width: 480px) {
+  .fortes-demo-root .footer__contact-us-email {
+    margin-bottom: 22px;
+  }
+}
+
+.fortes-demo-root .footer__contact-us-email a,
+.fortes-demo-root .footer__contact-us-phone a {
+  font-size: 58px;
+  line-height: 48px;
+  letter-spacing: -1.5px;
+  color: #c2c2c2;
+  text-decoration: none;
+}
+
+@media (max-width: 1150px) {
+  .fortes-demo-root .footer__contact-us-email a,
+  .fortes-demo-root .footer__contact-us-phone a {
+    font-size: 45px;
+    line-height: 40.5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fortes-demo-root .footer__contact-us-email a,
+  .fortes-demo-root .footer__contact-us-phone a {
+    font-size: 35.04px;
+    line-height: 31.536px;
+  }
+}
+
+@media (max-width: 400px) {
+  .fortes-demo-root .footer__contact-us-email a,
+  .fortes-demo-root .footer__contact-us-phone a {
+    font-size: 28px;
+    line-height: 20.536px;
+  }
+}
+
+.fortes-demo-root .footer__contact-us-email a:hover,
+.fortes-demo-root .footer__contact-us-phone a:hover {
+  color: #fff;
+}
+
+.fortes-demo-root .footer__location-address {
+  max-width: 390px;
+  color: #c2c2c2;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+}
+
+.fortes-demo-root .footer__address {
+  margin: 0;
+  white-space: pre-line;
+}
+
+.fortes-demo-root .footer__location {
+  margin-top: 40px;
+}
+
+.fortes-demo-root .footer__socials-wrapper {
+  margin-top: 40px;
+  display: flex;
+  align-items: start;
+  gap: 16px;
+}
+
+.fortes-demo-root .footer__socials {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.fortes-demo-root .footer__socials-link {
+  display: block;
+}
+
+.fortes-demo-root .footer__socials-link .icon {
+  display: block;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.fortes-demo-root .footer__logo {
+  padding: 0 22px 22px;
+}
+
+@media (max-width: 1150px) {
+  .fortes-demo-root .footer__logo {
+    padding: 0 20px 22px;
+  }
+}
+
+.fortes-demo-root .footer__logo-img {
+  width: 173px;
+  height: auto;
+  max-width: 100%;
+  display: block;
+  margin: 0 auto;
+  filter: brightness(0) invert(1);
+  opacity: 0;
+  transition: opacity 850ms cubic-bezier(0.2, 0, 0.75, 1) 0ms !important;
+}
+
+.fortes-demo-root .footer__logo-img.footer__logo-img--visible {
+  opacity: 1;
+}
+
+.fortes-demo-root .footer .split-anim-title .brl,
+.fortes-demo-root .footer .split-text .brl {
+  display: block !important;
+}
+
+.fortes-demo-root .split-anim-title.contact-create__title .count-2 {
+  transition-delay: 100ms !important;
+}
+.fortes-demo-root .split-anim-title.contact-create__title .count-3 {
+  transition-delay: 200ms !important;
+}
+.fortes-demo-root .split-anim-title.contact-create__title .count-4 {
+  transition-delay: 300ms !important;
+}
+.fortes-demo-root .split-anim-title.contact-create__title .count-5 {
+  transition-delay: 400ms !important;
+}
+.fortes-demo-root .split-anim-title.contact-create__title .count-6 {
+  transition-delay: 500ms !important;
+}
+.fortes-demo-root .split-anim-title.contact-create__title .count-7 {
+  transition-delay: 600ms !important;
+}
+.fortes-demo-root .split-anim-title.contact-create__title .count-8 {
+  transition-delay: 700ms !important;
+}
+.fortes-demo-root .split-anim-title.contact-create__title .count-9 {
+  transition-delay: 800ms !important;
+}
+.fortes-demo-root .split-anim-title.contact-create__title .count-10 {
+  transition-delay: 900ms !important;
+}
