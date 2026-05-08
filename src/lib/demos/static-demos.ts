@@ -5,6 +5,7 @@ import { DUMMY_ZODIAC_CONFIG } from "@/lib/cms/dummy/zodiac";
 import { DUMMY_BAKERY_CONFIG } from "@/lib/cms/dummy/bakery";
 import { DUMMY_BEDDING_CONFIG } from "@/lib/cms/dummy/bedding";
 import { DUMMY_FORTES_CONFIG } from "@/lib/cms/dummy/fortes";
+import { DUMMY_MAXIMA_CONFIG } from "@/lib/cms/dummy/maxima";
 
 /** Fixed timestamps for sitemap / listing (no DB). */
 const STATIC_TS = new Date("2026-01-01T00:00:00.000Z");
@@ -12,7 +13,7 @@ const STATIC_TS = new Date("2026-01-01T00:00:00.000Z");
 function asDemoSite(
   id: string,
   slug: string,
-  templateId: "tour" | "car" | "zodiac" | "bakery" | "bedding" | "fortes",
+  templateId: "tour" | "car" | "zodiac" | "bakery" | "bedding" | "fortes" | "maxima",
   config: unknown,
 ): DemoSite {
   return {
@@ -63,6 +64,12 @@ const STATIC_DEMO_SITES: DemoSite[] = [
     DUMMY_FORTES_CONFIG.slug,
     "fortes",
     DUMMY_FORTES_CONFIG,
+  ),
+  asDemoSite(
+    "00000000-0000-4000-8000-000000000007",
+    DUMMY_MAXIMA_CONFIG.slug,
+    "maxima",
+    DUMMY_MAXIMA_CONFIG,
   ),
 ];
 

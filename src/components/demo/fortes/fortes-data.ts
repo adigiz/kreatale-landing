@@ -1,4 +1,4 @@
-import { FORTES_ORIGIN } from "./fortes-constants";
+import { FORTES_DEMO_CONTACT_EMAIL, FORTES_ORIGIN } from "./fortes-constants";
 
 const U = (path: string) => `${FORTES_ORIGIN}${path}`;
 
@@ -445,7 +445,7 @@ export const FORTES_FOOTER = {
     { href: U("/3d-virtual-tour-services/"), label: "3D Virtual Tour Services" },
     { href: U("/architectural-animation-services/"), label: "3D Architectural Animation Services" },
   ] as const,
-  email: "info@fortes.vision",
+  email: FORTES_DEMO_CONTACT_EMAIL,
   phoneDisplay: "+1 (929) 547 74 73",
   phoneTel: "+19295477473",
   address: `Primary Office |\nUS, New York NY 10016, 347 5th Ave Suite 1402-374 ||\n\nBranch Office |\nUS, Delaware DE 19901, 8 The Green, |\nSuite Rin the City of Dover`,

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import CountryMap from "./CountryMap";
 import Link from "next/link";
 import type { AboutStats } from "@/lib/aboutData";
@@ -38,13 +37,7 @@ export default function About({ aboutStats, countries }: AboutProps) {
       className="min-h-screen flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16 py-10 bg-white gap-8"
     >
       {/* Left: Text + Stats */}
-      <motion.div
-        className="h-full lg:w-1/2 mb-10 lg:mb-0 lg:px-20"
-        initial={{ opacity: 0, x: -60 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-      >
+      <div className="h-full lg:w-1/2 mb-10 lg:mb-0 lg:px-20">
         <p className="font-bold text-gray-400 uppercase text-sm mb-2">
           {t("about.subtitle")}
         </p>
@@ -67,7 +60,7 @@ export default function About({ aboutStats, countries }: AboutProps) {
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
       <div className="flex-1 px-4 py-6 my-6 rounded-2xl dark:border-gray-800 dark:bg-gray-900 sm:px-6">
         <div
           id="mapOne"

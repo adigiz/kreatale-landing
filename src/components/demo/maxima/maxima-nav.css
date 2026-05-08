@@ -1,0 +1,415 @@
+/* Maxima header — production scales `rem` via fluid `html` font-size; we mirror that on `.maxima-nav-shell` + `em` units. */
+
+.maxima-nav-shell {
+  position: fixed;
+  top: 1.25em;
+  left: 0;
+  z-index: 200;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  overflow: visible;
+  pointer-events: none;
+  /* maximatherapy.com root: html { font-size: … vw } */
+  font-size: 1.0582vw;
+}
+
+@media (max-width: 1024px) {
+  .maxima-nav-shell {
+    font-size: 3.2vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .maxima-nav-shell {
+    font-size: 4.26667vw;
+  }
+}
+
+@media (min-aspect-ratio: 1) and (max-height: 850px) {
+  .maxima-nav-shell {
+    font-size: 0.925926vw;
+  }
+}
+
+.maxima-nav-ghost {
+  position: absolute;
+  top: -1.25em;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.maxima-nav-rail {
+  position: relative;
+  margin-inline: auto;
+  display: flex;
+  width: 100%;
+  max-width: 100rem;
+  align-items: flex-start;
+  padding-inline: 1.25em;
+}
+
+@media (min-width: 64rem) {
+  .maxima-nav-rail {
+    padding-inline: 3.125em;
+  }
+}
+
+.maxima-nav-main {
+  overflow: visible;
+}
+
+.maxima-nav-sub-nav {
+  overflow: visible;
+}
+
+/* Logo SVG sizing (was Tailwind rem on markup; now tracks shell `em`) */
+.maxima-nav-shell .maxima-nav-logo-svg {
+  display: block;
+  width: auto;
+  height: 1.9375em;
+  margin-top: -0.05em;
+}
+
+@media (min-width: 64rem) {
+  .maxima-nav-shell .maxima-nav-logo-svg {
+    width: 11.625em;
+    height: 2.625em;
+  }
+}
+
+.maxima-nav-shell .maxima-nav-logo-svg--stack {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* corners-big / corners-medium */
+.maxima-nav-corners-big {
+  border-radius: 2.1875em;
+}
+
+.maxima-nav-corners-medium {
+  border-radius: 0.9375em;
+}
+
+/* .btn — ~17.5px type; pill height/padding tightened vs old 3.625em (~63px) bar. */
+.maxima-nav-btn {
+  cursor: pointer;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  line-height: 1.2;
+  font-size: 15px;
+  font-family: var(--font-maxima-nav-sans, ui-sans-serif, system-ui, sans-serif);
+  border-radius: 0;
+  height: 44px;
+  line-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+@media (min-width: 64rem) {
+  .maxima-nav-btn {
+    font-size: 17.5px;
+    height: 50px;
+    line-height: 50px;
+  }
+}
+
+.maxima-nav-pill-programs {
+  padding-left: 1.15em;
+  padding-right: 0.55em;
+}
+
+.maxima-nav-pill-about {
+  padding-left: 0.55em;
+  padding-right: 0.55em;
+}
+
+.maxima-nav-pill-areas {
+  padding-left: 0.55em;
+  padding-right: 1.15em;
+}
+
+@media (min-width: 64rem) {
+  .maxima-nav-pill-programs {
+    padding-left: 1.25em;
+    padding-right: 0.6em;
+  }
+
+  .maxima-nav-pill-about {
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+  }
+
+  .maxima-nav-pill-areas {
+    padding-left: 0.6em;
+    padding-right: 1.25em;
+  }
+}
+
+.maxima-nav-btn-round {
+  cursor: pointer;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  line-height: 120%;
+  font-size: 15px;
+  font-family: var(--font-maxima-nav-sans, ui-sans-serif, system-ui, sans-serif);
+  border-radius: 50%;
+  background-color: var(--color-white);
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: flex;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  box-sizing: border-box;
+}
+
+@media (min-width: 64rem) {
+  .maxima-nav-btn-round {
+    font-size: 17.5px;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+.maxima-nav-height-item {
+  height: 2em;
+}
+
+@media (min-width: 64rem) {
+  .maxima-nav-height-item {
+    height: 3.25em;
+  }
+}
+
+.maxima-nav-item-title {
+  letter-spacing: 0;
+  text-transform: uppercase;
+  margin-bottom: -0.1em;
+  font-family: "Robuck Rounded", var(--font-maxima-nav-sans, ui-sans-serif, system-ui, sans-serif);
+  font-weight: 400;
+  font-size: 2.5em;
+  line-height: 80%;
+  color: var(--color-red);
+}
+
+@media (min-width: 64rem) {
+  .maxima-nav-item-title {
+    font-size: 4.0625em;
+  }
+}
+
+.maxima-nav-item-title + .maxima-nav-tag {
+  margin-left: 1em;
+}
+
+.maxima-nav-tag {
+  text-transform: uppercase;
+  background-color: var(--color-blue);
+  letter-spacing: -0.02em;
+  font-family: var(--font-maxima-nav-sans, ui-sans-serif, system-ui, sans-serif);
+  padding-inline: 0.4375em;
+  border-radius: 0.3125em;
+  padding-top: 0.4375em;
+  padding-bottom: 0.275em;
+  font-weight: 500;
+  line-height: 120%;
+  color: var(--color-white);
+  font-size: 0.875em;
+}
+
+@media (min-width: 64rem) {
+  .maxima-nav-tag {
+    font-size: 1.0625em;
+  }
+}
+
+.maxima-nav-chevron-wrap {
+  display: inline-flex;
+  margin-left: 0.35em;
+  transition: transform 0.4s ease-in-out, rotate 0.4s ease-in-out;
+}
+
+.maxima-nav-chevron-wrap--open {
+  transform: rotate(180deg);
+}
+
+.maxima-nav-chevron-svg {
+  height: 0.5625em;
+  width: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maxima-nav-chevron-wrap {
+    transition: none;
+  }
+}
+
+.maxima-nav-mail-svg {
+  width: 1.4375em;
+  height: auto;
+}
+
+.maxima-nav-mega-scale {
+  position: absolute;
+  pointer-events: none;
+}
+
+.maxima-nav-mega-scale--programs {
+  left: -24.375em;
+  top: -23.375em;
+}
+
+.maxima-nav-mega-scale--about {
+  left: -6.25em;
+  top: -22.738125em;
+}
+
+@media (max-width: 63.99rem) {
+  .maxima-nav-mega-scale {
+    transform: scale(0.42);
+    transform-origin: bottom right;
+  }
+}
+
+.maxima-nav-mega-panel {
+  width: 79.4375em;
+  height: 49.3125em;
+  padding: 3.125em;
+  transform-origin: bottom right;
+  will-change: transform;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maxima-nav-mega-panel {
+    width: 79.4375rem;
+    height: 49.3125rem;
+    padding: 3.125rem;
+    border-radius: 2.1875rem;
+    transform: rotate(90deg);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.2s ease;
+  }
+
+  .maxima-nav-mega-panel--open {
+    transform: rotate(0deg);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.maxima-nav-preview-stack {
+  position: absolute;
+  left: calc(100% + 2.375em);
+  top: 50%;
+  height: 15.375em;
+  width: 14em;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.maxima-nav-preview-frame {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 14em;
+  height: 15.375em;
+  overflow: hidden;
+  transform: scale(0);
+  transform-origin: center center;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.maxima-nav-preview-frame--active {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maxima-nav-preview-frame {
+    transition: opacity 0.12s ease;
+    transform: none;
+    opacity: 0;
+  }
+
+  .maxima-nav-preview-frame--active {
+    opacity: 1;
+  }
+}
+
+.maxima-nav-mega-row {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease;
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .maxima-nav-mega-row:hover {
+    transform: translateX(0.25em);
+  }
+}
+
+.maxima-nav-cta-primary.maxima-nav-btn {
+  padding-left: 1.25em;
+  padding-right: 1.25em;
+  margin-right: 0.25em;
+}
+
+@media (min-width: 64rem) {
+  .maxima-nav-cta-primary.maxima-nav-btn {
+    margin-left: 0.25em;
+    margin-right: 0.5em;
+    padding-left: 1.35em;
+    padding-right: 1.35em;
+  }
+}
+
+.maxima-nav-cta-primary {
+  position: relative;
+  color: var(--color-white);
+  border-radius: 9999px;
+}
+
+.maxima-nav-cta-primary > svg {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height: auto;
+  width: calc(14.893 / 13 * 100%);
+  max-width: 10.5em;
+  transform: translate(-50%, -50%);
+}
+
+.maxima-nav-cta-primary > svg path {
+  fill: var(--color-red);
+}
+
+.maxima-nav-cta-primary .maxima-nav-cta-circle {
+  fill: var(--color-white);
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.maxima-nav-cta-primary:hover .maxima-nav-cta-circle {
+  opacity: 0.35;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maxima-nav-cta-primary:hover .maxima-nav-cta-circle {
+    opacity: 0;
+  }
+}
+
+.maxima-nav-pill {
+  margin-right: 0.25em;
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 8px 40px rgba(0, 0, 0, 0.04);
+}

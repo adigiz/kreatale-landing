@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
@@ -44,16 +43,8 @@ export default function Service() {
               "/training.png",
             ];
             return (
-              <motion.div
+              <div
                 key={serviceKey}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.6,
-                  delay: idx * 0.2,
-                  ease: "easeOut",
-                }}
                 className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-16"
               >
                 <div className="relative w-full lg:w-1/2 aspect-[4/3] rounded-2xl overflow-hidden shadow-md">
@@ -80,7 +71,7 @@ export default function Service() {
                     </button>
                   </Link>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

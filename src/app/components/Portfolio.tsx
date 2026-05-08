@@ -2,7 +2,6 @@
 
 import { Marquee } from "@/components/ui/marquee";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { PortfolioProject } from "@/lib/types";
 import { useTranslations } from "next-intl";
@@ -33,19 +32,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
       href={project.link}
       className="block h-full mx-1 sm:mx-2"
     >
-      <motion.div
-        className="h-full w-[55vw] sm:w-[35vw] md:w-[28vw] lg:w-[24vw] bg-gray-100 rounded-3xl flex flex-col overflow-hidden cursor-pointer shrink-0"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        whileHover={{
-          scale: 1.02,
-          transition: { duration: 0.2 },
-        }}
-        transition={{
-          duration: 0.4,
-          delay: index * 0.05,
-        }}
-      >
+      <div className="h-full w-[55vw] sm:w-[35vw] md:w-[28vw] lg:w-[24vw] bg-gray-100 rounded-3xl flex flex-col overflow-hidden cursor-pointer shrink-0 transition-transform duration-200 hover:scale-[1.02]">
         <div className="h-full flex flex-col">
           <div className="relative aspect-[4/3]">
             <Image
@@ -90,7 +77,7 @@ export default function Portfolio({ projects }: PortfolioProps) {
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </Link>
   );
 

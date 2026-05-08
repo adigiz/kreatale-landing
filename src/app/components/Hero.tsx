@@ -1,10 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import Image from "next/image";
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 
 // Importing logos from public folder
 const MARQUEE_LOGOS = [
@@ -44,12 +43,7 @@ export default function Hero() {
 
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center justify-center text-center px-4 sm:px-6 max-w-5xl mx-auto gap-8 mb-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="flex flex-col items-center gap-6"
-        >
+        <div className="flex flex-col items-center gap-6">
           <h1 className="text-[50px] sm:text-[60px] md:text-[80px] leading-[1.1] font-bold tracking-tight text-gray-900">
             {t.rich("hero.title", {
               cursive: (chunks) => (
@@ -62,13 +56,9 @@ export default function Hero() {
           <p className="text-xl sm:text-2xl text-gray-600 max-w-2xl font-light leading-relaxed">
             {t("hero.subtitle")}
           </p>
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
+        <div>
           <Link
             href="#contact"
             className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-white transition-all duration-300 bg-primary rounded-full hover:brightness-110 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
@@ -88,16 +78,11 @@ export default function Hero() {
               />
             </svg>
           </Link>
-        </motion.div>
+        </div>
       </div>
 
       {/* Marquee Section */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="relative w-full py-8 mt-auto border-t border-gray-100/50 bg-white/30 backdrop-blur-sm"
-      >
+      <div className="relative w-full py-8 mt-auto border-t border-gray-100/50 bg-white/30 backdrop-blur-sm">
         <p className="text-center text-sm font-medium text-gray-500 uppercase tracking-[0.2em] mb-8">
           Trusted by innovative companies
         </p>
@@ -120,7 +105,7 @@ export default function Hero() {
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

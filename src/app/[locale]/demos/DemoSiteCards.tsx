@@ -61,6 +61,7 @@ export default function DemoSiteCards({ items, locale }: DemoSiteCardsProps) {
     if (id === "bakery") return t("template.bakery");
     if (id === "bedding") return t("template.bedding");
     if (id === "fortes") return t("template.fortes");
+    if (id === "maxima") return t("template.maxima");
     return id;
   };
 

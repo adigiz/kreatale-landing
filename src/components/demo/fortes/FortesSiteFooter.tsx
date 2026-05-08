@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-import { FORTES_MEDIA } from "./fortes-constants";
+import { FORTES_DEMO_KREATALE_LOGO_SVG, FORTES_MEDIA } from "./fortes-constants";
 import { FORTES_FOOTER } from "./fortes-data";
 
 export function FortesSiteFooter() {
@@ -161,8 +161,8 @@ export function FortesSiteFooter() {
 
           <div className="footer__logo" ref={logoWrapRef}>
             <Image
-              src={FORTES_MEDIA.logoSvg}
-              alt="FORTES.VISION"
+              src={FORTES_DEMO_KREATALE_LOGO_SVG}
+              alt="Kreatale"
               width={173}
               height={24}
               className={`footer__logo-img${logoVisible ? " footer__logo-img--visible" : ""}`}

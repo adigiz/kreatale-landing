@@ -54,29 +54,17 @@ export default function Testimonials() {
       className="flex flex-col py-8 sm:py-12 lg:py-16 px-4 sm:px-8 lg:px-16 bg-white min-h-screen overflow-hidden"
     >
       {/* Heading */}
-      <motion.div
-        className="lg:px-20"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
+      <div className="lg:px-20">
         <p className="font-bold text-gray-400 uppercase text-xs sm:text-sm mb-2">
           {t("testimonials.subtitle")}
         </p>
         <h2 className="text-black text-2xl sm:text-3xl lg:text-4xl font-bold mb-4 sm:mb-6">
           {t("testimonials.title")}
         </h2>
-      </motion.div>
+      </div>
 
       <div className="flex-1 h-full mx-auto grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 items-center lg:px-20">
-        <motion.div
-          className="h-full overflow-hidden flex flex-col lg:col-span-3"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-        >
+        <div className="h-full overflow-hidden flex flex-col lg:col-span-3">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={index}
@@ -151,16 +139,10 @@ export default function Testimonials() {
               </button>
             </div>
           </div>
-        </motion.div>
+        </div>
 
         {/* Estimation Box */}
-        <motion.div
-          className="h-full lg:col-span-1 bg-blue-600 text-white p-6 sm:p-8 lg:p-12 xl:p-16 rounded-xl flex flex-col items-center justify-center gap-6 lg:gap-8 xl:gap-10 min-h-[300px] lg:min-h-0"
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.4 }}
-        >
+        <div className="h-full lg:col-span-1 bg-blue-600 text-white p-6 sm:p-8 lg:p-12 xl:p-16 rounded-xl flex flex-col items-center justify-center gap-6 lg:gap-8 xl:gap-10 min-h-[300px] lg:min-h-0">
           <Image
             src="/calculator.png"
             alt="Calculator Icon"
@@ -179,7 +161,7 @@ export default function Testimonials() {
               {t("estimation.title")}
             </button>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       <EstimationModal

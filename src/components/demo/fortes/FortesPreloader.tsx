@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Lottie from "lottie-react";
 
-import { FORTES_MEDIA, FORTES_PUBLIC } from "./fortes-constants";
+import { FORTES_DEMO_KREATALE_LOGO_SVG, FORTES_MEDIA, FORTES_PUBLIC } from "./fortes-constants";
 
 import "./fortes-preloader.css";
 
@@ -105,8 +105,8 @@ export function FortesPreloader({ onDone }: { onDone: () => void }) {
               <Lottie animationData={lottieData} loop={false} className="h-full w-full" />
             ) : (
               <img
-                src={FORTES_PUBLIC.logoSvg}
-                alt="Fortes Vision"
+                src={FORTES_DEMO_KREATALE_LOGO_SVG}
+                alt="Kreatale"
                 className="fortes-preloader__logo-fallback mx-auto"
                 width={240}
                 height={32}

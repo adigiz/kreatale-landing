@@ -169,6 +169,11 @@ export default async function PreviewPage({
         await import("@/components/demo/fortes/FortesTemplate")
       ).default;
       TemplateComponent = FortesTemplate as PreviewDemoTemplate;
+    } else if (templateId === "maxima") {
+      const MaximaTemplate = (
+        await import("@/components/demo/maxima/MaximaTemplate")
+      ).default;
+      TemplateComponent = MaximaTemplate as PreviewDemoTemplate;
     } else {
       const TourTemplate = (await import("@/components/demo/tour/TourTemplate"))
         .default;

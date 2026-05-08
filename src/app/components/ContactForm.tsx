@@ -1,15 +1,20 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Send, Loader2, ChevronDown } from "lucide-react";
-import HCaptcha from "@hcaptcha/react-hcaptcha";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const HCaptchaWidget = dynamic(() => import("@hcaptcha/react-hcaptcha"), {
+  ssr: false,
+});
 
 export default function ContactForm() {
   const t = useTranslations();
-  const captchaRef = useRef<HCaptcha>(null);
+  const captchaContainerRef = useRef<HTMLDivElement>(null);
+  const [shouldLoadCaptcha, setShouldLoadCaptcha] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,6 +28,25 @@ export default function ContactForm() {
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
+
+  useEffect(() => {
+    if (shouldLoadCaptcha || !captchaContainerRef.current) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setShouldLoadCaptcha(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "300px 0px" }
+    );
+
+    observer.observe(captchaContainerRef.current);
+    return () => observer.disconnect();
+  }, [shouldLoadCaptcha]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -85,12 +109,10 @@ export default function ContactForm() {
         message: "",
       });
       setCaptchaToken(null);
-      captchaRef.current?.resetCaptcha();
     } catch (error) {
       console.error("Error submitting form:", error);
       setSubmitStatus("error");
       setCaptchaToken(null);
-      captchaRef.current?.resetCaptcha();
     } finally {
       setIsSubmitting(false);
     }
@@ -102,13 +124,7 @@ export default function ContactForm() {
       className="flex flex-col py-6 sm:py-8 lg:py-10 px-6 lg:px-16 bg-gray-50 min-h-screen overflow-hidden"
     >
       {/* Heading */}
-      <motion.div
-        className="lg:px-20 mb-4 sm:mb-6"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
+      <div className="lg:px-20 mb-4 sm:mb-6">
         <p className="font-bold text-gray-400 uppercase text-xs sm:text-sm mb-1">
           {t("contact.subtitle")}
         </p>
@@ -118,18 +134,12 @@ export default function ContactForm() {
         <p className="text-gray-600 text-sm sm:text-base max-w-2xl">
           {t("contact.description")}
         </p>
-      </motion.div>
+      </div>
 
       {/* Form and Image Container */}
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-stretch lg:px-20">
         {/* Form Section */}
-        <motion.div
-          initial={{ opacity: 0, x: -30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
-          className="w-full lg:w-1/2 bg-white rounded-xl p-4 sm:p-6 lg:p-8 flex flex-col"
-        >
+        <div className="w-full lg:w-1/2 bg-white rounded-xl p-4 sm:p-6 lg:p-8 flex flex-col">
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Name and Email Row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -283,13 +293,16 @@ export default function ContactForm() {
             </div>
 
             {/* hCaptcha */}
-            <div className="scale-90 origin-left">
-              <HCaptcha
-                sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || ""}
-                onVerify={handleCaptchaVerify}
-                onExpire={handleCaptchaExpire}
-                ref={captchaRef}
-              />
+            <div ref={captchaContainerRef} className="scale-90 origin-left">
+              {shouldLoadCaptcha ? (
+                <HCaptchaWidget
+                  sitekey={process.env.NEXT_PUBLIC_HCAPTCHA_SITE_KEY || ""}
+                  onVerify={handleCaptchaVerify}
+                  onExpire={handleCaptchaExpire}
+                />
+              ) : (
+                <div className="h-[78px] w-full max-w-[304px] rounded-md border border-gray-200 bg-gray-100" />
+              )}
               {!captchaToken && submitStatus === "error" && (
                 <p className="mt-1 text-xs text-red-600">
                   {t("contact.form.captchaRequired")}
@@ -339,16 +352,10 @@ export default function ContactForm() {
               </motion.div>
             )}
           </form>
-        </motion.div>
+        </div>
 
         {/* Image Section */}
-        <motion.div
-          initial={{ opacity: 0, x: 30 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
-          className="w-full lg:w-1/2 flex items-stretch"
-        >
+        <div className="w-full lg:w-1/2 flex items-stretch">
           <div className="relative w-full h-full rounded-xl overflow-hidden">
             <Image
               src="/contact.webp"
@@ -359,7 +366,7 @@ export default function ContactForm() {
               priority={false}
             />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

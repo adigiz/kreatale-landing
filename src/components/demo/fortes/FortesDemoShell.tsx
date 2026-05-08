@@ -10,7 +10,12 @@ import Lenis from "lenis";
 import { toast } from "sonner";
 
 import type { FortesConfig } from "./fortes-config";
-import { FORTES_MEDIA, FORTES_ORIGIN } from "./fortes-constants";
+import {
+  FORTES_DEMO_CONTACT_EMAIL,
+  FORTES_DEMO_KREATALE_LOGO_SVG,
+  FORTES_MEDIA,
+  FORTES_ORIGIN,
+} from "./fortes-constants";
 import { TRUSTED_LOGOS } from "./fortes-data";
 import { FortesApproachSection } from "./FortesApproachSection";
 import { FortesContactCreate } from "./FortesContactCreate";
@@ -37,7 +42,6 @@ const HEADER_LINKS = [
 const STICKY_HEADER_OFFSET_PX = 96;
 
 export default function FortesDemoShell({ config }: { config?: FortesConfig }) {
-  const siteName = config?.websiteName?.trim() || "FORTES.VISION";
   const heroTitle =
     config?.heroTitle?.trim() ||
     "Award-Winning | 3d Rendering and Architectural Visualization Studio";
@@ -191,7 +195,7 @@ export default function FortesDemoShell({ config }: { config?: FortesConfig }) {
   }, [onScroll, showPreloader]);
 
   const copyEmail = () => {
-    const email = "info@fortes.vision";
+    const email = FORTES_DEMO_CONTACT_EMAIL;
     void navigator.clipboard.writeText(email).then(
       () => toast.success("Copied"),
       () => toast.info(email),
@@ -246,8 +250,8 @@ export default function FortesDemoShell({ config }: { config?: FortesConfig }) {
             onClick={() => setMenuOpen(false)}
           >
             <Image
-              src={FORTES_MEDIA.logoSvg}
-              alt={siteName}
+              src={FORTES_DEMO_KREATALE_LOGO_SVG}
+              alt="Kreatale"
               fill
               className={`object-contain object-left transition-all duration-500 ${
                 headerChromeDark ? "opacity-100" : "brightness-0 invert"
@@ -271,7 +275,7 @@ export default function FortesDemoShell({ config }: { config?: FortesConfig }) {
               onClick={copyEmail}
               className="fortes-header__email"
             >
-              info@fortes.vision
+              {FORTES_DEMO_CONTACT_EMAIL}
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
                 <path
                   d="M3.90625 7.16113C3.90625 5.31971 3.90625 4.399 4.47831 3.82694C5.05036 3.25488 5.97107 3.25488 7.8125 3.25488H9.76562C11.607 3.25488 12.5277 3.25488 13.0998 3.82694C13.6719 4.399 13.6719 5.31971 13.6719 7.16113V10.4163C13.6719 12.2577 13.6719 13.1784 13.0998 13.7505C12.5277 14.3226 11.607 14.3226 9.76562 14.3226H7.8125C5.97107 14.3226 5.05036 14.3226 4.47831 13.7505C3.90625 13.1784 3.90625 12.2577 3.90625 10.4163V7.16113Z"
@@ -328,7 +332,7 @@ export default function FortesDemoShell({ config }: { config?: FortesConfig }) {
               </a>
             ))}
             <button type="button" className="py-5 text-left" onClick={copyEmail}>
-              info@fortes.vision
+              {FORTES_DEMO_CONTACT_EMAIL}
             </button>
             <button type="button" className="fortes-btn mt-4 mb-8 w-fit" onClick={estimateDemo}>
               Get Estimate

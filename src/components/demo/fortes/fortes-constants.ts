@@ -1,5 +1,11 @@
 export const FORTES_ORIGIN = "https://fortes.vision";
 
+/** Kreatale primary wordmark with Fortes yellow dot (`--fortes-yellow`); demo-only, keeps `/logos/*` unchanged. */
+export const FORTES_DEMO_KREATALE_LOGO_SVG = "/fortes/kreatale-logo-fortes-yellow.svg" as const;
+
+/** Shown in Fortes-layout demo header/footer instead of info@fortes.vision. */
+export const FORTES_DEMO_CONTACT_EMAIL = "contact@kreatale.com" as const;
+
 /** Same-origin copies under `/public/fortes/` (preloader Lottie + logo). */
 export const FORTES_PUBLIC = {
   preloaderLottie: "/fortes/preloader-logo.json",

@@ -1,0 +1,76 @@
+/* Sourced from maximatherapy.com root bundle (Tailwind v4 theme) — scoped for demo parity. */
+/* Mega nav titles (.nav-item) — same face as production; host under /public/maxima/fonts. */
+@font-face {
+  font-family: "Robuck Rounded";
+  src: url("/maxima/fonts/RobuckRounded.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* UI sans — ABC Diatype Rounded Plus (licensed). Place the variable woff2 from Dinamo in public/maxima/fonts/ or rename to match. */
+@font-face {
+  font-family: "ABC Diatype Rounded Plus";
+  src: url("/maxima/fonts/ABCDiatypeRoundedPlus-Variable.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+.maxima-demo-root {
+  --color-beige: #f3efe0;
+  --color-black: #000;
+  --color-blue: #2668fd;
+  --color-blue-dim: #2668fdb3;
+  --color-blue-moss: #eef9f8;
+  --color-blue-pale: #b9ecea;
+  --color-blue-sky: #cff2f1;
+  --color-gray-100: oklch(96.7% 0.003 264.542);
+  --color-gray-200: oklch(92.8% 0.006 264.531);
+  --color-gray-300: oklch(87.2% 0.01 258.338);
+  --color-gray-600: oklch(44.6% 0.03 256.802);
+  --color-gray-700: oklch(37.3% 0.034 259.733);
+  --color-green: #00b351;
+  --color-green-dark: #005c00;
+  --color-green-pale: #a7eb98;
+  --color-light-gray: #f1f1f1;
+  --color-mauve: #503fd0;
+  --color-orange: #f80;
+  --color-pink: #f780d4;
+  --color-pink-pale: #f5cbff;
+  --color-purple: #6b3088;
+  --color-red: #fd4401;
+  --color-red-dark: #ae0c36;
+  --color-salmon: #ffcccd;
+  --color-salmon-pale: #ffa8e5;
+  --color-turquoise: #2cd1d0;
+  --color-white: #fff;
+  --color-yellow: #fdcb40;
+  --color-yellow-pale: #fff2b7;
+  --color-program1-primary: var(--color-yellow);
+  --color-program2-secondary: var(--color-green-pale);
+  --color-program3-secondary: var(--color-pink-pale);
+  --color-program4-secondary: var(--color-blue-pale);
+  --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-maxima-nav-sans: "ABC Diatype Rounded Plus", var(--font-sans);
+  background-color: var(--color-beige);
+  color: var(--color-black);
+  /* Mega titles: Robuck Rounded @font-face above. */
+  font-family: var(--font-maxima-nav-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.maxima-demo-root *,
+.maxima-demo-root *::before,
+.maxima-demo-root *::after {
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .maxima-demo-root * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

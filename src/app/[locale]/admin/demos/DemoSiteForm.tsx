@@ -10,6 +10,7 @@ import { DUMMY_BAKERY_CONFIG } from "@/lib/cms/dummy/bakery";
 import { DUMMY_BEDDING_CONFIG } from "@/lib/cms/dummy/bedding";
 import { DUMMY_CAR_CONFIG } from "./utils/template-configs";
 import { DUMMY_FORTES_CONFIG } from "@/lib/cms/dummy/fortes";
+import { DUMMY_MAXIMA_CONFIG } from "@/lib/cms/dummy/maxima";
 import { DUMMY_ZODIAC_CONFIG } from "@/lib/cms/dummy/zodiac";
 import { GeneralTab } from "./components/tabs/GeneralTab";
 import { BrandingTab } from "./components/tabs/BrandingTab";
@@ -57,6 +58,7 @@ const TEMPLATES = [
   { id: "bedding", name: "Bedding / home shop" },
   { id: "zodiac", name: "Zodiac & horoscope" },
   { id: "fortes", name: "Fortes-style arch viz" },
+  { id: "maxima", name: "Maxima-style therapy" },
 ];
 
 export default function DemoSiteForm({
@@ -297,6 +299,8 @@ export default function DemoSiteForm({
       dummyData = DUMMY_BEDDING_CONFIG;
     } else if (templateId === "fortes") {
       dummyData = DUMMY_FORTES_CONFIG;
+    } else if (templateId === "maxima") {
+      dummyData = DUMMY_MAXIMA_CONFIG;
     } else if (templateId === "zodiac") {
       dummyData = DUMMY_ZODIAC_CONFIG;
     }

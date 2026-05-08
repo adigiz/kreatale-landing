@@ -9,6 +9,8 @@ import BeddingTemplate from "@/components/demo/bedding/BeddingTemplate";
 import type { BeddingConfig } from "@/components/demo/bedding/bedding-config";
 import FortesTemplate from "@/components/demo/fortes/FortesTemplate";
 import type { FortesConfig } from "@/components/demo/fortes/fortes-config";
+import MaximaTemplate from "@/components/demo/maxima/MaximaTemplate";
+import type { MaximaConfig } from "@/components/demo/maxima/maxima-config";
 import { getStaticDemoBySlug } from "@/lib/demos/static-demos";
 import { notFound } from "next/navigation";
 
@@ -60,6 +62,12 @@ export default async function DemoPage({
   if (demoSite.templateId === "fortes") {
     return (
       <FortesTemplate config={demoSite.config as unknown as FortesConfig} />
+    );
+  }
+
+  if (demoSite.templateId === "maxima") {
+    return (
+      <MaximaTemplate config={demoSite.config as unknown as MaximaConfig} />
     );
   }
 

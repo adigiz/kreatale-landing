@@ -188,6 +188,36 @@ export const TEMPLATE_CONFIGS: Record<string, TemplateConfig> = {
       day: { label: "Order", placeholder: "1" },
     },
   },
+  maxima: {
+    id: "maxima",
+    name: "Maxima-style therapy",
+    heroFields: {
+      heroTitle: { label: "Hero title", placeholder: "Personalized support headline..." },
+      heroSubtitle: { label: "Hero subtitle", placeholder: "Short supporting line..." },
+      price: { label: "Unused", placeholder: "—" },
+      currency: { label: "Unused", placeholder: "—" },
+      days: { label: "Unused", placeholder: "—" },
+      location: { label: "Unused", placeholder: "—" },
+    },
+    collectionTitle: "Unused for this template",
+    collectionItemLabel: "Item",
+    collectionFields: {
+      name: { label: "Name", placeholder: "—" },
+      description: { label: "Description", placeholder: "—" },
+    },
+    entityTitle: "Unused",
+    entityItemLabel: "Item",
+    entityFields: {
+      title: { label: "Title", placeholder: "—" },
+      slug: { label: "Slug", placeholder: "—" },
+    },
+    nestedTitle: "Unused",
+    nestedItemLabel: "Block",
+    nestedFields: {
+      title: { label: "Title", placeholder: "—" },
+      description: { label: "Description", placeholder: "—" },
+    },
+  },
   fortes: {
     id: "fortes",
     name: "Fortes-style arch viz",

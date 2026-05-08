@@ -56,7 +56,9 @@ export default async function DemosPage({
   const tNav = await getTranslations({ locale, namespace: "nav" });
   const tDemos = await getTranslations({ locale, namespace: "demos" });
 
-  const rows = getStaticPublishedDemoSites();
+  const rows = getStaticPublishedDemoSites().filter(
+    ({ demoSite }) => demoSite.templateId !== "maxima"
+  );
 
   const items: DemoCardItem[] = rows.map(({ demoSite }) => {
     const config = demoSite.config as DemoConfig;

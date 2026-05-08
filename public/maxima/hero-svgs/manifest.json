@@ -1,0 +1,21 @@
+{
+  "layout": "https://maximatherapy.com/assets/layout-wYxH71HP.js",
+  "svgs": {
+    "0-to-3": "public/maxima/hero-svgs/0-to-3.svg",
+    "3-to-18": "public/maxima/hero-svgs/3-to-18.svg",
+    "18-to-65": "public/maxima/hero-svgs/18-to-65.svg",
+    "65-and-plus": "public/maxima/hero-svgs/65-and-plus.svg"
+  },
+  "lottie": [
+    "public/maxima/lottie/0Program2/bike.json",
+    "public/maxima/lottie/0Program3/illu.json",
+    "public/maxima/lottie/0Program4/guy.json",
+    "public/maxima/lottie/0Program4/lady-face.json",
+    "public/maxima/lottie/0Program4/lighthouse.json",
+    "public/maxima/lottie/program-0-to-3/kid_flower_nopants.json",
+    "public/maxima/lottie/program-0-to-3/kid_flower_pants.json",
+    "public/maxima/lottie/program-0-to-3/train.json",
+    "public/maxima/lottie/program-18-to-65/program3-hero.json",
+    "public/maxima/lottie/program-3-to-18/program2-hero.json"
+  ]
+}

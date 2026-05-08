@@ -1,0 +1,136 @@
+/* Intro curtain — fluid `em` base mirrors maximatherapy.com `html { font-size: … vw }` (root-C62cwV5F.css). */
+.maxima-hero-curtain-scaler {
+  font-size: 1.0582vw;
+}
+
+@media (max-width: 1024px) {
+  .maxima-hero-curtain-scaler {
+    font-size: 3.2vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .maxima-hero-curtain-scaler {
+    font-size: 4.26667vw;
+  }
+}
+
+@media (min-aspect-ratio: 1) and (max-height: 850px) {
+  .maxima-hero-curtain-scaler {
+    font-size: 0.925926vw;
+  }
+}
+
+/* Program-C1Fj9AJ9.css: `curtain-title` / `curtain-desc` */
+.maxima-hero-curtain-title {
+  font-family: "Robuck Rounded", var(--font-maxima-nav-sans);
+  font-weight: 400;
+  font-size: 14.0625em;
+  line-height: 0.8;
+  letter-spacing: -0.02em;
+  color: var(--color-red);
+}
+
+@media (max-width: 1024px) {
+  .maxima-hero-curtain-title {
+    font-size: 4.0625em;
+  }
+}
+
+.maxima-hero-curtain-desc {
+  font-family: var(--font-maxima-nav-sans);
+  font-weight: 700;
+  font-size: 1.375em;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-blue);
+  max-width: 42em;
+}
+
+@media (max-width: 1024px) {
+  .maxima-hero-curtain-desc {
+    font-size: 1.25em;
+  }
+}
+
+/* Custom cursors — layout-k78QJj4t.css (`cursor-grab-70` / `cursor-grabbing-70`). */
+.maxima-hero-cursor-grab {
+  cursor:
+    url("/maxima/cursor/cursor-grab-70.svg") 15.4 17.5,
+    grab;
+}
+
+.maxima-hero-cursor-grabbing {
+  cursor:
+    url("/maxima/cursor/cursor-grabbing-70.svg") 14.7 15.4,
+    grabbing;
+}
+
+/* Carousel controls — production `program-hero-carousel-controls` (SSR). */
+.maxima-hero-carousel-controls {
+  position: absolute;
+  bottom: calc(10svh + 11.5625rem);
+  left: 50%;
+  z-index: 30;
+  display: flex;
+  width: 8.1875rem;
+  max-width: min(100vw - 1.5rem, 59rem);
+  align-items: center;
+  justify-content: space-between;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+@media (min-width: 64rem) {
+  .maxima-hero-carousel-controls {
+    bottom: calc(10svh + 3.5625rem);
+    width: 59rem;
+  }
+}
+
+.maxima-hero-arrow {
+  pointer-events: auto;
+  display: flex;
+  width: 3.5625rem;
+  height: 3.5625rem;
+  flex-shrink: 0;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 9999px;
+  background-color: var(--color-white);
+  color: var(--color-blue);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition: opacity 0.2s ease, transform 0.15s ease;
+}
+
+@media (min-width: 64rem) {
+  .maxima-hero-arrow {
+    width: 3.75rem;
+    height: 3.75rem;
+  }
+}
+
+.maxima-hero-arrow:hover {
+  opacity: 0.92;
+}
+
+.maxima-hero-arrow:active {
+  transform: scale(0.97);
+}
+
+.maxima-hero-arrow svg {
+  width: 1.5rem;
+  height: auto;
+}
+
+@media (min-width: 64rem) {
+  .maxima-hero-arrow svg {
+    width: 1.75rem;
+  }
+}
+
+.maxima-hero-arrow--prev svg {
+  transform: rotate(180deg);
+}
