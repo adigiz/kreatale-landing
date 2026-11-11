@@ -41,25 +41,3 @@ export function transformCmsPostToBlogPost(
     category: post.category || undefined,
   };
 }
-
-export function formatBlogDate(dateString: string): string {
-  try {
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  } catch {
-    return dateString;
-  }
-}
-
-export function getBlogPostUrl(slug: string, locale: string = "en"): string {
-  return `/${locale}/blog/${slug}`;
-}
-
-export function getBlogListingUrl(locale: string = "en"): string {
-  return `/${locale}/blog`;
-}
-

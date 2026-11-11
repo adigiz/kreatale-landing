@@ -22,20 +22,20 @@ export const SEO = {
     },
   },
   work: {
-    path: "/work",
+    path: "/projects",
     en: {
-      title: "Work",
+      title: "Projects",
       description:
         "Websites, online stores and apps we've designed and built for gaming cafés, clinics, jewellers, startups and more, in Australia, Europe, Japan, the US and Indonesia.",
     },
     id: {
-      title: "Karya",
+      title: "Proyek",
       description:
         "Website, toko online, dan aplikasi yang kami rancang dan bangun untuk kafe gaming, klinik, toko perhiasan, startup, dan lainnya, di Australia, Eropa, Jepang, AS, dan Indonesia.",
     },
   },
   gala: {
-    path: "/work/gala-esports",
+    path: "/projects/gala-esports",
     en: {
       title: "Gala Esports case study",
       description:

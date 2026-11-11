@@ -8,7 +8,7 @@
  *   - copies assets/img and assets/js to public/redesign/
  *   - extracts the page <style>, the <body> markup and the final inline <script>
  *   - rewrites asset paths (assets/... -> /redesign/...) and page links
- *     (work.html -> /__L__/work, where __L__ is replaced with the locale at render time)
+ *     (work.html -> /__L__/projects, where __L__ is replaced with the locale at render time)
  *   - writes src/redesign/generated/<page>.ts
  * Re-run it after editing the prototype.
  */
@@ -22,8 +22,8 @@ const PUB = path.join(ROOT, 'public/redesign');
 
 const PAGES = {
   index: '',
-  work: '/work',
-  'case-gala-esports': '/work/gala-esports',
+  work: '/projects',
+  'case-gala-esports': '/projects/gala-esports',
   services: '/services',
   about: '/about',
   contact: '/contact',

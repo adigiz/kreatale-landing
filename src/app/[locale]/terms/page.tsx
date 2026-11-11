@@ -1,6 +1,7 @@
 import RedesignPage from "@/redesign/RedesignPage";
 import { legalPage, type LegalSection } from "@/redesign/pages";
 import legal from "@/redesign/generated/legal";
+import text from "@/redesign/legal.json";
 
 type LegalDoc = { title: string; lastUpdated: string; sections: Record<string, LegalSection> };
 
@@ -10,10 +11,9 @@ export default async function TermsPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const messages = (await import(`../../../messages/${locale}.json`)).default;
   return (
     <RedesignPage
-      page={legalPage(legal, messages.terms as LegalDoc)}
+      page={legalPage(legal, text.terms as LegalDoc)}
       locale={locale}
       id="terms"
     />

@@ -1,5 +1,4 @@
 import { MetadataRoute } from "next";
-import { getPublishedProjects } from "@/lib/cms/queries/projects";
 import { getPublishedPosts } from "@/lib/cms/queries/posts";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -20,13 +19,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   });
   const staticPages = [
     page("", "weekly", 1),
-    page("/work", "weekly", 0.9),
-    page("/work/gala-esports", "monthly", 0.8),
+    page("/projects", "weekly", 0.9),
+    page("/projects/gala-esports", "monthly", 0.8),
     page("/services", "monthly", 0.8),
     page("/about", "monthly", 0.8),
     page("/contact", "monthly", 0.8),
     page("/faq", "monthly", 0.7),
-    page("/projects", "weekly", 0.7),
     page("/privacy", "yearly", 0.3),
     page("/terms", "yearly", 0.3),
     // the blog is the one part written in both languages
@@ -58,19 +56,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  // Dynamic project pages from database (skip when DB unavailable at build time)
-  let dbProjects: Awaited<ReturnType<typeof getPublishedProjects>> = [];
-  try {
-    dbProjects = await getPublishedProjects();
-  } catch (err) {
-    console.warn("Sitemap: could not fetch projects (e.g. build without DB):", err);
-  }
-  const projectPages = dbProjects.map((project) => ({
-    url: `${baseUrl}/en/projects/${project.slug}`,
-    lastModified: project.updatedAt?.toISOString() || currentDate,
-    changeFrequency: "monthly" as const,
-    priority: 0.8,
-  }));
-
-  return [...staticPages, ...blogPages, ...projectPages];
+  return [...staticPages, ...blogPages];
 }

@@ -1,24 +1,8 @@
-import {
-  Geist,
-  Geist_Mono,
-  Instrument_Serif,
-  Plus_Jakarta_Sans,
-  Playfair_Display,
-} from "next/font/google";
+import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { pageMetadata, SEO } from "@/redesign/metadata";
 import "../globals.css";
-
-// Fonts the redesign doesn't use (old /projects pages and admin only) aren't preloaded,
-// so public pages don't download them.
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-  adjustFontFallback: true,
-});
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
@@ -28,26 +12,10 @@ const geistMono = Geist_Mono({
   adjustFontFallback: true,
 });
 
-const instrumentSerif = Instrument_Serif({
-  variable: "--font-instrument-serif",
-  weight: "400",
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
   subsets: ["latin"],
   display: "swap",
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
 });
 
 const locales = ["en", "id"];
@@ -134,11 +102,10 @@ export default async function LocaleLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} ${jakarta.variable} ${playfair.variable} font-sans antialiased`}
+        className={`${geistMono.variable} ${jakarta.variable} font-sans antialiased`}
       >
         {/* The redesigned pages bring their own header and footer and need no client-side
-            translations. The old site's chrome and messages live in projects/layout.tsx, and
-            toasts in the admin layout, so public pages don't download them. */}
+            translations. Toasts live in the admin layout, so public pages don't download them. */}
         {children}
       </body>
     </html>

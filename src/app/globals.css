@@ -1,32 +1,15 @@
+/* Tailwind and the shadcn/ui tokens for the admin. The public pages style themselves
+   (see src/redesign); they only pick up the reset below. */
 @import "tailwindcss";
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
-
-/* Basic performance optimizations */
-* {
-  box-sizing: border-box;
-}
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-jakarta);
   --font-mono: var(--font-geist-mono);
-  --font-cursive: var(--font-instrument-serif);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -47,60 +30,6 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --breakpoint-2xsm: 375px;
-  --breakpoint-xsm: 425px;
-  --animate-marquee: marquee var(--duration) infinite linear;
-  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
-
-  /* Tour Template Theme (Dwidayatour: blue primary + orange accent; overridable on shell) */
-  --color-tour-primary: var(--tour-primary, #2747a0);
-  --color-tour-primary-hover: var(--tour-primary-hover, #1c3578);
-  --color-tour-accent: var(--tour-accent, #f47920);
-  --color-tour-accent-hover: var(--tour-accent-hover, #dc6a18);
-  --color-tour-navy-dark: #023366;
-  --color-tour-navy-light: #243c7b;
-  --color-tour-background-light: #ffffff;
-  --color-tour-background-dark: #101922;
-  --color-tour-surface-dark: #1a2632;
-  --color-tour-surface-darker: #15202b;
-  --font-tour-sans: var(--font-jakarta);
-  --font-tour-serif: var(--font-playfair);
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(calc(-100% - var(--gap)));
-  }
-}
-
-@keyframes marquee-reverse {
-  from {
-    transform: translateX(calc(-100% - var(--gap)));
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-@keyframes marquee-vertical {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(calc(-100% - var(--gap)));
-  }
-}
-
-@keyframes marquee-vertical-reverse {
-  from {
-    transform: translateY(calc(-100% - var(--gap)));
-  }
-  to {
-    transform: translateY(0);
-  }
 }
 
 :root {
@@ -123,19 +52,6 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
 }
 
 .dark {
@@ -157,66 +73,6 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
-
-@layer utilities {
-  .animate-marquee {
-    animation: marquee var(--duration, 40s) infinite linear !important;
-  }
-  .animate-marquee-reverse {
-    animation: marquee-reverse var(--duration, 40s) infinite linear !important;
-  }
-  .animate-marquee-vertical {
-    animation: marquee-vertical var(--duration, 40s) linear infinite !important;
-  }
-  .animate-marquee-vertical-reverse {
-    animation: marquee-vertical-reverse var(--duration, 40s) linear infinite !important;
-  }
-  .marquee-pause-on-hover:hover .marquee-item {
-    animation-play-state: paused !important;
-  }
-  .mask-gradient {
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 10%,
-      black 90%,
-      transparent
-    );
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 10%,
-      black 90%,
-      transparent
-    );
-  }
-
-  @keyframes marquee-seamless {
-    0% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(-50%);
-    }
-  }
-
-  .animate-marquee-seamless {
-    animation: marquee-seamless 30s linear infinite;
-  }
 }
 
 @layer base {
@@ -226,8 +82,4 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-
-html {
-  scroll-behavior: smooth;
 }

@@ -1,7 +1,4 @@
 import type { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
-
-const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const nextConfig: NextConfig = {
   output: "standalone",
@@ -107,6 +104,23 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // /work became /projects (the URL search engines already know). The old per-project
+      // pages are gone; Gala Esports has its case study, the rest go to the list.
+      { source: "/:locale(en|id)/work", destination: "/en/projects", permanent: true },
+      { source: "/:locale(en|id)/work/gala-esports", destination: "/en/projects/gala-esports", permanent: true },
+      { source: "/:path(work|projects)", destination: "/en/projects", permanent: true },
+      // pages typed without a locale (/about, /blog/some-post) go to the English version
+      {
+        source: "/:page(about|blog|contact|faq|services|privacy|terms|projects)/:rest*",
+        destination: "/en/:page/:rest*",
+        permanent: true,
+      },
+      {
+        // skips the case study and the page's generated share image
+        source: "/:locale(en|id)/projects/:slug((?!gala-esports$|opengraph-image|twitter-image)[^/]+)",
+        destination: "/en/projects",
+        permanent: true,
+      },
       { source: "/id", destination: "/en", permanent: true },
       {
         source: "/id/:path((?!blog(?:/|$)|preview(?:/|$)|admin(?:/|$)|api(?:/|$)).+)",
@@ -117,4 +131,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withNextIntl(nextConfig);
+export default nextConfig;
