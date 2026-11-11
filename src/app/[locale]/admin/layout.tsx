@@ -5,6 +5,7 @@ import { getEffectivePermissions } from "@/lib/cms/permissions.server";
 import AuthGuard from "./AuthGuard";
 import Sidebar from "./components/Sidebar";
 import AdminProviders from "./components/AdminProviders";
+import { Toaster } from "@/components/ui/sonner";
 import type { Metadata } from "next";
 
 // Force dynamic rendering for admin routes (they require authentication)
@@ -87,12 +88,15 @@ export default async function AdminLayout({
 
   // Use AuthGuard client component to check pathname and conditionally render
   return (
-    <AuthGuard
-      authenticatedContent={
-        <AuthenticatedLayout locale={locale}>{children}</AuthenticatedLayout>
-      }
-    >
-      {children}
-    </AuthGuard>
+    <>
+      <AuthGuard
+        authenticatedContent={
+          <AuthenticatedLayout locale={locale}>{children}</AuthenticatedLayout>
+        }
+      >
+        {children}
+      </AuthGuard>
+      <Toaster />
+    </>
   );
 }

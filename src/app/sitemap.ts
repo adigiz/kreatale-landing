@@ -1,93 +1,62 @@
 import { MetadataRoute } from "next";
-import { getStaticPublishedDemoSites } from "@/lib/demos/static-demos";
 import { getPublishedProjects } from "@/lib/cms/queries/projects";
+import { getPublishedPosts } from "@/lib/cms/queries/posts";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = "https://kreatale.com";
   const currentDate = new Date().toISOString();
   const locales = ["en", "id"]; // Available locales
 
-  // Static pages for each locale with alternate languages
-  const staticPages = locales.flatMap((locale) => [
-    {
-      url: `${baseUrl}/${locale}`,
+  // The site pages are English only (/id redirects to /en), so each is listed once
+  const page = (
+    path: string,
+    changeFrequency: "weekly" | "monthly" | "yearly",
+    priority: number,
+  ) => ({
+    url: `${baseUrl}/en${path}`,
+    lastModified: currentDate,
+    changeFrequency,
+    priority,
+  });
+  const staticPages = [
+    page("", "weekly", 1),
+    page("/work", "weekly", 0.9),
+    page("/work/gala-esports", "monthly", 0.8),
+    page("/services", "monthly", 0.8),
+    page("/about", "monthly", 0.8),
+    page("/contact", "monthly", 0.8),
+    page("/faq", "monthly", 0.7),
+    page("/projects", "weekly", 0.7),
+    page("/privacy", "yearly", 0.3),
+    page("/terms", "yearly", 0.3),
+    // the blog is the one part written in both languages
+    ...locales.map((locale) => ({
+      url: `${baseUrl}/${locale}/blog`,
       lastModified: currentDate,
       changeFrequency: "weekly" as const,
-      priority: 1,
-      alternates: {
-        languages: {
-          en: `${baseUrl}/en`,
-          id: `${baseUrl}/id`,
-          "x-default": `${baseUrl}/en`,
-        },
-      },
-    },
-    {
-      url: `${baseUrl}/${locale}/about`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
       priority: 0.8,
       alternates: {
-        languages: {
-          en: `${baseUrl}/en/about`,
-          id: `${baseUrl}/id/about`,
-          "x-default": `${baseUrl}/en/about`,
-        },
+        languages: { en: `${baseUrl}/en/blog`, id: `${baseUrl}/id/blog`, "x-default": `${baseUrl}/en/blog` },
       },
-    },
-    {
-      url: `${baseUrl}/${locale}/services`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-      alternates: {
-        languages: {
-          en: `${baseUrl}/en/services`,
-          id: `${baseUrl}/id/services`,
-          "x-default": `${baseUrl}/en/services`,
-        },
-      },
-    },
-    {
-      url: `${baseUrl}/${locale}/faq`,
-      lastModified: currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.7,
-      alternates: {
-        languages: {
-          en: `${baseUrl}/en/faq`,
-          id: `${baseUrl}/id/faq`,
-          "x-default": `${baseUrl}/en/faq`,
-        },
-      },
-    },
-    {
-      url: `${baseUrl}/${locale}/projects`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.9,
-      alternates: {
-        languages: {
-          en: `${baseUrl}/en/projects`,
-          id: `${baseUrl}/id/projects`,
-          "x-default": `${baseUrl}/en/projects`,
-        },
-      },
-    },
-    {
-      url: `${baseUrl}/${locale}/demos`,
-      lastModified: currentDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.85,
-      alternates: {
-        languages: {
-          en: `${baseUrl}/en/demos`,
-          id: `${baseUrl}/id/demos`,
-          "x-default": `${baseUrl}/en/demos`,
-        },
-      },
-    },
-  ]);
+    })),
+  ];
+
+  // Blog posts are written per language, so each one is listed under its own locale
+  const blogPages: MetadataRoute.Sitemap = [];
+  for (const locale of locales) {
+    try {
+      for (const { post } of await getPublishedPosts(locale)) {
+        blogPages.push({
+          url: `${baseUrl}/${locale}/blog/${post.slug}`,
+          lastModified: post.updatedAt?.toISOString() || currentDate,
+          changeFrequency: "monthly",
+          priority: 0.6,
+        });
+      }
+    } catch (err) {
+      console.warn("Sitemap: could not fetch posts (e.g. build without DB):", err);
+    }
+  }
 
   // Dynamic project pages from database (skip when DB unavailable at build time)
   let dbProjects: Awaited<ReturnType<typeof getPublishedProjects>> = [];
@@ -96,38 +65,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   } catch (err) {
     console.warn("Sitemap: could not fetch projects (e.g. build without DB):", err);
   }
-  const projectPages = locales.flatMap((locale) =>
-    dbProjects.map((project) => ({
-      url: `${baseUrl}/${locale}/projects/${project.slug}`,
-      lastModified: project.updatedAt?.toISOString() || currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.8,
-      alternates: {
-        languages: {
-          en: `${baseUrl}/en/projects/${project.slug}`,
-          id: `${baseUrl}/id/projects/${project.slug}`,
-          "x-default": `${baseUrl}/en/projects/${project.slug}`,
-        },
-      },
-    }))
-  );
+  const projectPages = dbProjects.map((project) => ({
+    url: `${baseUrl}/en/projects/${project.slug}`,
+    lastModified: project.updatedAt?.toISOString() || currentDate,
+    changeFrequency: "monthly" as const,
+    priority: 0.8,
+  }));
 
-  const publishedDemos = getStaticPublishedDemoSites();
-  const demoPages = locales.flatMap((locale) =>
-    publishedDemos.map(({ demoSite }) => ({
-      url: `${baseUrl}/${locale}/demos/${demoSite.slug}`,
-      lastModified: demoSite.updatedAt?.toISOString() || currentDate,
-      changeFrequency: "monthly" as const,
-      priority: 0.75,
-      alternates: {
-        languages: {
-          en: `${baseUrl}/en/demos/${demoSite.slug}`,
-          id: `${baseUrl}/id/demos/${demoSite.slug}`,
-          "x-default": `${baseUrl}/en/demos/${demoSite.slug}`,
-        },
-      },
-    }))
-  );
-
-  return [...staticPages, ...projectPages, ...demoPages];
+  return [...staticPages, ...blogPages, ...projectPages];
 }

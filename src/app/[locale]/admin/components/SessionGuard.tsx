@@ -17,8 +17,8 @@ export default function SessionGuard({
   useEffect(() => {
     const error = (session?.user as { error?: string } | undefined)?.error;
 
-    if (error === "UserNotFound") {
-      // User was deleted from the DB -- force sign out
+    if (error === "UserNotFound" || error === "SessionExpired") {
+      // User deleted, password changed, or the session hit its time limit -- force sign out
       signOut({ callbackUrl: "/en/admin/login", redirect: true });
     }
   }, [session]);

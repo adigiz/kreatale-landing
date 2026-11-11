@@ -8,7 +8,6 @@ import {
   BookOpen,
   Briefcase,
   HelpCircle,
-  LayoutTemplate,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -36,14 +35,6 @@ export default function MobileBottomNav({
         pathname?.startsWith(createLocalizedPath("/projects/")),
       onClick: onProjectsClick,
       isButton: true,
-    },
-    {
-      id: "demos",
-      icon: LayoutTemplate,
-      label: t("nav.demos"),
-      href: createLocalizedPath("/demos"),
-      isActive: pathname === createLocalizedPath("/demos"),
-      isButton: false,
     },
     {
       id: "blog",

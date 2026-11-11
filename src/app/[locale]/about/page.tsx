@@ -1,15 +1,11 @@
-import { getPublishedProjects } from "@/lib/cms/queries/projects";
-import { getAboutStats } from "@/lib/aboutData";
-import AboutContent from "./AboutContent";
+import RedesignPage from "@/redesign/RedesignPage";
+import about from "@/redesign/generated/about";
 
-export default async function AboutPage() {
-  const dbProjects = await getPublishedProjects();
-
-  // Build a simple record for aboutData helpers
-  const projectRecord = Object.fromEntries(
-    dbProjects.map((p) => [p.slug, { country: p.country || "" }])
-  );
-  const aboutStats = getAboutStats(projectRecord);
-
-  return <AboutContent aboutStats={aboutStats} />;
+export default async function AboutPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  return <RedesignPage page={about} locale={locale} id="about" />;
 }

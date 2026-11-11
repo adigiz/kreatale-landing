@@ -165,17 +165,6 @@ export default function DesktopNav({
         </AnimatePresence>
       </div>
 
-      <Link
-        href={createLocalizedPath("/demos")}
-        className={`transition-colors duration-200 ${
-          pathname === createLocalizedPath("/demos")
-            ? "text-blue-600 font-semibold"
-            : "hover:text-blue-600"
-        }`}
-      >
-        {t("nav.demos")}
-      </Link>
-
       {/* Other Navigation Links */}
       <Link
         href={createLocalizedPath("/blog")}

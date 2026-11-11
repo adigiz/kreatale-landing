@@ -8,6 +8,7 @@ import {
 } from "@/lib/cms/queries/posts";
 import { PERMISSIONS } from "@/lib/cms/permissions";
 import { z } from "zod";
+import { BLOG_CATEGORY_IDS } from "@/lib/blogCategories";
 
 const updatePostSchema = z.object({
   title: z.string().min(1).optional(),
@@ -15,6 +16,12 @@ const updatePostSchema = z.object({
   content: z.string().optional(),
   excerpt: z.string().optional(),
   featuredImage: z.string().optional(),
+  // "" from the editor's "No category" option clears it; leaving it out keeps it
+  category: z
+    .union([z.enum(BLOG_CATEGORY_IDS), z.literal("")])
+    .nullable()
+    .optional()
+    .transform((v) => (v === undefined ? undefined : v || null)),
   locale: z.string().optional(),
   status: z.enum(["draft", "published", "archived"]).optional(),
 });
@@ -72,8 +79,9 @@ export async function PATCH(
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
 
-    // Revalidate blog pages when post status changes
-    if (data.status !== undefined) {
+    // Revalidate blog pages when the status changes or a published post is edited
+    // (e.g. a new category should show on the blog straight away)
+    if (data.status !== undefined || post.status === "published") {
       // Revalidate blog listing pages for all locales
       revalidatePath("/en/blog");
       revalidatePath("/id/blog");

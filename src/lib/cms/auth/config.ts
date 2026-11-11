@@ -1,7 +1,8 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { db, users } from "../db";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
+import { createHash } from "node:crypto";
 import bcrypt from "bcryptjs";
 import { canAccessAdmin, type UserRole } from "../permissions";
 import { getEffectivePermissions } from "../permissions.server";
@@ -10,6 +11,36 @@ import { getServerSession } from "next-auth";
 
 /** How often (in seconds) to re-validate the JWT against the DB */
 const ACCESS_TOKEN_MAX_AGE = 15 * 60; // 15 minutes
+/** Signed out after this long without opening the admin. */
+const IDLE_TIMEOUT = 12 * 60 * 60; // 12 hours
+/** Signed out this long after logging in, however active. */
+const ABSOLUTE_TIMEOUT = 7 * 24 * 60 * 60; // 7 days
+
+/**
+ * A short fingerprint of the stored password hash. When the password changes the fingerprint
+ * changes, so other signed-in sessions end at their next check (within 15 minutes).
+ */
+const passwordStamp = (hash: string) => createHash("sha256").update(hash).digest("base64url").slice(0, 16);
+
+/**
+ * Brute-force guard: after 5 failed attempts on one email, or 20 from one IP, logins are
+ * refused for 15 minutes. Kept in memory, which suits the single standalone server.
+ */
+const FAIL_WINDOW = 15 * 60 * 1000;
+const failures = new Map<string, { n: number; until: number }>();
+const isLocked = (key: string, max: number) => {
+  const f = failures.get(key);
+  if (!f || f.until < Date.now()) return false;
+  return f.n >= max;
+};
+const recordFailure = (key: string) => {
+  const f = failures.get(key);
+  if (!f || f.until < Date.now()) failures.set(key, { n: 1, until: Date.now() + FAIL_WINDOW });
+  else f.n++;
+  if (failures.size > 5000) for (const [k, v] of failures) if (v.until < Date.now()) failures.delete(k);
+};
+// compared against when the email isn't found, so both cases take the same time
+const DUMMY_HASH = bcrypt.hashSync("no-such-user", 10);
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -19,35 +50,41 @@ export const authOptions: NextAuthOptions = {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials, req) {
         if (!credentials?.email || !credentials?.password) {
           return null;
+        }
+        const email = String(credentials.email).trim().toLowerCase();
+        const fwd = req?.headers?.["x-forwarded-for"];
+        const ip = (Array.isArray(fwd) ? fwd[0] : fwd || "").split(",")[0].trim() || "unknown";
+        if (isLocked(`e:${email}`, 5) || isLocked(`i:${ip}`, 20)) {
+          throw new Error("Too many attempts. Try again in 15 minutes.");
         }
 
         const [user] = await db
           .select()
           .from(users)
-          .where(eq(users.email, credentials.email as string))
+          .where(sql`lower(${users.email}) = ${email}`)
           .limit(1);
-
-        if (!user) {
-          return null;
-        }
 
         const isValid = await bcrypt.compare(
           credentials.password as string,
-          user.passwordHash
+          user?.passwordHash || DUMMY_HASH
         );
 
-        if (!isValid) {
+        if (!user || !isValid) {
+          recordFailure(`e:${email}`);
+          recordFailure(`i:${ip}`);
           return null;
         }
+        failures.delete(`e:${email}`);
 
         return {
           id: user.id,
           email: user.email,
           name: user.name,
           role: user.role,
+          pw: passwordStamp(user.passwordHash),
         };
       },
     }),
@@ -59,7 +96,16 @@ export const authOptions: NextAuthOptions = {
         token.id = (user as { id: string }).id;
         token.role = (user as { role: string }).role;
         token.name = (user as { name: string | null }).name;
+        token.pw = (user as { pw?: string }).pw;
+        token.loginAt = Date.now();
         token.accessTokenExpires = Date.now() + ACCESS_TOKEN_MAX_AGE * 1000;
+        return token;
+      }
+
+      // Already ended, or past the absolute limit: stays ended until the user logs in again
+      if (token.error) return token;
+      if (typeof token.loginAt !== "number" || Date.now() - token.loginAt > ABSOLUTE_TIMEOUT * 1000) {
+        token.error = "SessionExpired";
         return token;
       }
 
@@ -79,6 +125,7 @@ export const authOptions: NextAuthOptions = {
             email: users.email,
             name: users.name,
             role: users.role,
+            passwordHash: users.passwordHash,
           })
           .from(users)
           .where(eq(users.id, token.id as string))
@@ -90,12 +137,17 @@ export const authOptions: NextAuthOptions = {
           return token;
         }
 
+        // Password changed since this session logged in
+        if (token.pw !== passwordStamp(freshUser.passwordHash)) {
+          token.error = "SessionExpired";
+          return token;
+        }
+
         // Update token with fresh data from DB
         token.role = freshUser.role;
         token.name = freshUser.name;
         token.email = freshUser.email;
         token.accessTokenExpires = Date.now() + ACCESS_TOKEN_MAX_AGE * 1000;
-        delete token.error;
       } catch {
         // DB error -- keep existing token data, try again next time
         // Set a shorter retry window (1 minute)
@@ -129,7 +181,11 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: "jwt",
-    maxAge: 30 * 24 * 60 * 60, // 30 days (overall session / refresh window)
+    // With JWT sessions NextAuth re-issues the cookie on every session check (updateAge only
+    // applies to database sessions), so the cookie always runs IDLE_TIMEOUT from the last page
+    // load or tab focus. The admin doesn't poll, so a session left alone ends after 12 hours.
+    // ABSOLUTE_TIMEOUT caps any session at 7 days however active.
+    maxAge: IDLE_TIMEOUT,
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
@@ -137,7 +193,10 @@ export const authOptions: NextAuthOptions = {
 // Helper function to get session
 export async function getSession() {
   try {
-    return await getServerSession(authOptions);
+    const session = await getServerSession(authOptions);
+    // an expired, revoked or deleted-user session counts as signed out
+    if ((session?.user as { error?: string } | undefined)?.error) return null;
+    return session;
   } catch {
     return null;
   }

@@ -6,7 +6,11 @@ import SessionGuard from "./SessionGuard";
 /**
  * Client-side providers for the admin panel.
  * Wraps children with NextAuth SessionProvider and SessionGuard
- * for automatic session monitoring and token rotation handling.
+ * for automatic session monitoring.
+ *
+ * No background polling: with JWT sessions every session check re-issues the cookie with a
+ * fresh expiry, so polling kept an open, unattended admin tab signed in forever. The session
+ * is still checked on every page load and when the tab regains focus, which is real activity.
  */
 export default function AdminProviders({
   children,
@@ -14,11 +18,7 @@ export default function AdminProviders({
   children: React.ReactNode;
 }) {
   return (
-    <SessionProvider
-      // Re-fetch session every 5 minutes to pick up rotated tokens
-      refetchInterval={5 * 60}
-      refetchOnWindowFocus={true}
-    >
+    <SessionProvider refetchInterval={0} refetchOnWindowFocus={true}>
       <SessionGuard>{children}</SessionGuard>
     </SessionProvider>
   );

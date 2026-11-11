@@ -1,5 +1,10 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import { getPublishedProjects } from "@/lib/cms/queries/projects";
+import { dbProjectsToSortedEntries } from "@/lib/utils";
 
 const baseUrl = "https://kreatale.com";
 
@@ -20,7 +25,6 @@ export async function generateMetadata({
 
   const languages: Record<string, string> = {
     en: `${baseUrl}/en/projects`,
-    id: `${baseUrl}/id/projects`,
     "x-default": `${baseUrl}/en/projects`,
   };
 
@@ -70,10 +74,32 @@ export async function generateMetadata({
   };
 }
 
-export default function ProjectsLayout({
+/** /projects still uses the old site's design: its header, footer and translated copy. */
+export default async function ProjectsLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
-  return <>{children}</>;
+  const { locale } = await params;
+  let messages = {};
+  try {
+    messages = (await import(`../../../messages/${locale}.json`)).default;
+  } catch (error) {
+    console.error("Error loading messages:", error);
+  }
+  let projects: ReturnType<typeof dbProjectsToSortedEntries> = [];
+  try {
+    projects = dbProjectsToSortedEntries(await getPublishedProjects());
+  } catch (error) {
+    console.error("Error loading projects for the header:", error);
+  }
+  return (
+    <NextIntlClientProvider locale={locale} messages={messages}>
+      <Header projects={projects} />
+      {children}
+      <Footer />
+    </NextIntlClientProvider>
+  );
 }

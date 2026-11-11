@@ -14,6 +14,7 @@
     "create-admin": "tsx scripts/create-admin.ts",
     "update-sales-role": "tsx scripts/update-sales-role.ts",
     "seed-roles": "tsx scripts/seed-roles.ts",
+    "blog:draft": "tsx scripts/save-blog-draft.ts",
     "scraper:dev": "npm run dev --prefix apps/scrapper-service"
   },
   "dependencies": {
@@ -34,7 +35,7 @@
     "@tiptap/react": "^3.12.0",
     "@tiptap/starter-kit": "^3.12.0",
     "@types/leaflet": "^1.9.21",
-    "@vercel/blob": "^2.0.0",
+    "@vercel/blob": "^2.9.0",
     "aos": "^2.3.4",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
@@ -47,11 +48,9 @@
     "framer-motion": "^12.10.5",
     "gsap": "^3.12.7",
     "leaflet": "^1.9.4",
-    "lenis": "^1.3.21",
-    "lottie-react": "^2.4.1",
     "lucide-react": "^0.576.0",
-    "next": "^15.5.7",
-    "next-auth": "^4.24.13",
+    "next": "^15.5.29",
+    "next-auth": "^4.24.15",
     "next-intl": "^4.3.5",
     "next-themes": "^0.4.6",
     "postgres": "^3.4.7",
@@ -63,7 +62,6 @@
     "react-leaflet": "^5.0.0",
     "server-only": "^0.0.1",
     "sonner": "^2.0.7",
-    "swiper": "^12.1.3",
     "tailwind-merge": "^3.3.0",
     "zod": "^4.1.13"
   },
@@ -76,7 +74,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.3.2",
+    "eslint-config-next": "^15.5.29",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
     "tw-animate-css": "^1.3.0",
@@ -90,6 +88,9 @@
     "@react-jvectormap/world": {
       "react": "^16.8.0 || ^17 || ^18 || ^19",
       "react-dom": "^16.8.0 || ^17 || ^18 || ^19"
+    },
+    "@vercel/cli-config": {
+      "zod": "^4.6.7"
     }
   }
 }

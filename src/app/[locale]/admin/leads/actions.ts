@@ -3,12 +3,19 @@
 import { db } from "@/lib/cms/db/client";
 import { locations, categories, leads, leadStatusEnum } from "@/lib/cms/db/schema";
 import { eq, desc, asc, and, count, isNotNull } from "drizzle-orm";
+import { requirePermission } from "@/lib/cms/auth/config";
+import { PERMISSIONS } from "@/lib/cms/permissions";
+
+// Every export here is a server action, which Next exposes as a public POST endpoint.
+// Each one checks the caller is signed in with the right permission before touching data.
 
 export async function getLocations() {
+  await requirePermission(PERMISSIONS.LEADS_READ);
   return await db.select().from(locations).orderBy(locations.name);
 }
 
 export async function getCategories() {
+  await requirePermission(PERMISSIONS.LEADS_READ);
   return await db.select().from(categories).orderBy(categories.name);
 }
 
@@ -21,6 +28,7 @@ export async function getFilterOptions(filters?: {
   state?: string;
   city?: string;
 }) {
+  await requirePermission(PERMISSIONS.LEADS_READ);
   // Base queries
   const countriesQuery = db
     .selectDistinct({ value: leads.country })
@@ -125,6 +133,7 @@ export async function getLeads(filters?: {
   state?: string;
   country?: string;
 }) {
+  await requirePermission(PERMISSIONS.LEADS_READ);
   const conditions = [];
   const page = filters?.page || 1;
   const pageSize = filters?.pageSize || 10;
@@ -214,6 +223,7 @@ export async function getLeads(filters?: {
 }
 
 export async function getLeadStats() {
+  await requirePermission(PERMISSIONS.LEADS_READ);
   const [totalLeads] = await db.select({ count: count() }).from(leads);
   const [newLeads] = await db.select({ count: count() }).from(leads).where(eq(leads.status, "new"));
   const [contactedLeads] = await db.select({ count: count() }).from(leads).where(eq(leads.status, "contacted"));
@@ -228,6 +238,7 @@ export async function getLeadStats() {
 }
 
 export async function updateLeadStatus(leadId: string, status: string) {
+  await requirePermission(PERMISSIONS.LEADS_UPDATE);
   await db
     .update(leads)
     .set({ status: status as LeadStatus, updatedAt: new Date() })
@@ -235,6 +246,7 @@ export async function updateLeadStatus(leadId: string, status: string) {
 }
 
 export async function updateLeadNotes(leadId: string, notes: string) {
+  await requirePermission(PERMISSIONS.LEADS_UPDATE);
   await db
     .update(leads)
     .set({ notes, updatedAt: new Date() })
@@ -259,6 +271,7 @@ export async function createLead(data: {
   locationId?: string;
   categoryId?: string;
 }) {
+  await requirePermission(PERMISSIONS.LEADS_CREATE);
   try {
     const [newLead] = await db
       .insert(leads)
@@ -310,6 +323,7 @@ export async function updateLead(
     categoryId?: string;
   }
 ) {
+  await requirePermission(PERMISSIONS.LEADS_UPDATE);
   try {
     await db
       .update(leads)
@@ -348,6 +362,7 @@ export async function triggerScrape(
   categoryId: string,
   coordinates?: { lat: number; lng: number; zoom: number }
 ) {
+  await requirePermission(PERMISSIONS.LEADS_CREATE);
   try {
     const response = await fetch(`${SCRAPER_URL}/scrape`, {
       method: "POST",
@@ -381,6 +396,7 @@ export async function triggerMapScrape(
   zoom: number,
   categoryId: string
 ) {
+  await requirePermission(PERMISSIONS.LEADS_CREATE);
   try {
     const response = await fetch(`${SCRAPER_URL}/scrape`, {
       method: "POST",
@@ -407,6 +423,7 @@ export async function triggerMapScrape(
 }
 
 export async function getScraperStatus() {
+  await requirePermission(PERMISSIONS.LEADS_READ);
   try {
     const response = await fetch(`${SCRAPER_URL}/status`, {
       next: { revalidate: 0 }, // Disable cache

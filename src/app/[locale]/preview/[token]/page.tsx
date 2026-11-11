@@ -1,4 +1,3 @@
-import type { ComponentType } from "react";
 import { redirect } from "next/navigation";
 import {
   db,
@@ -10,7 +9,10 @@ import {
 } from "@/lib/cms/db";
 import { eq, and, gt } from "drizzle-orm";
 import Image from "next/image";
-import type { DemoSite } from "@/app/[locale]/admin/demos/types";
+import RedesignPage from "@/redesign/RedesignPage";
+import { blogPostPage } from "@/redesign/blog";
+import postTemplate from "@/redesign/generated/blog-post";
+import blogTemplate from "@/redesign/generated/blog";
 
 export default async function PreviewPage({
   params,
@@ -87,118 +89,28 @@ export default async function PreviewPage({
 
   // Render preview based on content type
   if (previewToken.contentType === "post") {
+    // same layout as the published article; the editor shows it in a device-sized frame
     const post = content as Post;
-    return (
-      <div className="min-h-screen bg-white">
-        {device && device !== "desktop" && (
-          <div className="sticky top-0 z-10 bg-gray-100 border-b border-gray-200 px-4 py-2 text-sm text-gray-600 text-center">
-            {deviceConfig.name} Preview ({deviceConfig.maxWidth})
-          </div>
-        )}
-        <div
-          className="mx-auto"
-          style={{
-            maxWidth: deviceConfig.maxWidth,
-            margin: device && device !== "desktop" ? "0 auto" : undefined,
-          }}
-        >
-          <article className="px-4 py-12">
-            {post.featuredImage && (
-              <div className="mb-8">
-                <Image
-                  src={post.featuredImage}
-                  alt={post.title}
-                  width={1200}
-                  height={600}
-                  className="w-full h-auto rounded-lg"
-                />
-              </div>
-            )}
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              {post.title}
-            </h1>
-            {post.excerpt && (
-              <p className="text-xl text-gray-600 mb-8">{post.excerpt}</p>
-            )}
-            <div
-              className="prose prose-lg max-w-none"
-              dangerouslySetInnerHTML={{ __html: post.content }}
-            />
-          </article>
-        </div>
-      </div>
+    const page = blogPostPage(
+      postTemplate,
+      {
+        id: post.id,
+        createdAt: post.createdAt.toISOString(),
+        updatedAt: post.updatedAt.toISOString(),
+        title: post.title,
+        slug: post.slug,
+        content: post.content,
+        excerpt: post.excerpt || undefined,
+        featuredImage: post.featuredImage || undefined,
+        publishedDate: (post.publishedAt || post.createdAt).toISOString(),
+        category: post.category || undefined,
+      },
+      [],
+      blogTemplate.covers,
+      blogTemplate.featuredCover || "",
+      post.locale || locale,
     );
-  }
-
-  // Demo Site preview
-  if (previewToken.contentType === "demo-site") {
-    // We prefer the 'data' from the token (unsaved changes)
-    const data = previewToken.data as unknown as DemoSite;
-    const config = data?.config || {};
-    const templateId = data?.templateId || "tour";
-
-    // If no data in token but contentId exists (saved demo)
-    // We would need to handle this case if we fetched 'content' earlier for demo-site
-    // But currently we don't fetch content for demo-site in the block above
-    // So we rely on passed data.
-    // TODO: If we want to support saved demo preview without data passed, we need to add demo-site to the fetch logic above.
-
-    type PreviewDemoTemplate = ComponentType<{ config?: unknown }>;
-
-    let TemplateComponent: PreviewDemoTemplate;
-    if (templateId === "car") {
-      const { CarTemplate } = await import("@/components/demo/car/CarTemplate");
-      TemplateComponent = CarTemplate as PreviewDemoTemplate;
-    } else if (templateId === "zodiac") {
-      const ZodiacTemplate = (
-        await import("@/components/demo/zodiac/ZodiacTemplate")
-      ).default;
-      TemplateComponent = ZodiacTemplate as PreviewDemoTemplate;
-    } else if (templateId === "bakery") {
-      const BakeryTemplate = (
-        await import("@/components/demo/bakery/BakeryTemplate")
-      ).default;
-      TemplateComponent = BakeryTemplate as PreviewDemoTemplate;
-    } else if (templateId === "bedding") {
-      const BeddingTemplate = (
-        await import("@/components/demo/bedding/BeddingTemplate")
-      ).default;
-      TemplateComponent = BeddingTemplate as PreviewDemoTemplate;
-    } else if (templateId === "fortes") {
-      const FortesTemplate = (
-        await import("@/components/demo/fortes/FortesTemplate")
-      ).default;
-      TemplateComponent = FortesTemplate as PreviewDemoTemplate;
-    } else if (templateId === "maxima") {
-      const MaximaTemplate = (
-        await import("@/components/demo/maxima/MaximaTemplate")
-      ).default;
-      TemplateComponent = MaximaTemplate as PreviewDemoTemplate;
-    } else {
-      const TourTemplate = (await import("@/components/demo/tour/TourTemplate"))
-        .default;
-      TemplateComponent = TourTemplate as PreviewDemoTemplate;
-    }
-
-    return (
-      <div className="min-h-screen bg-white">
-        {device && device !== "desktop" && (
-          <div className="sticky top-0 z-50 bg-gray-100 border-b border-gray-200 px-4 py-2 text-sm text-gray-600 text-center">
-            {deviceConfig.name} Preview ({deviceConfig.maxWidth})
-          </div>
-        )}
-        <div
-          className="mx-auto bg-white min-h-screen shadow-2xl overflow-hidden origin-top"
-          style={{
-            maxWidth: deviceConfig.maxWidth,
-            margin: device && device !== "desktop" ? "0 auto" : undefined,
-            // Scale for better mobile view if needed, but iframe handles it
-          }}
-        >
-          <TemplateComponent config={config} />
-        </div>
-      </div>
-    );
+    return <RedesignPage page={page} locale={locale} id="post-preview" />;
   }
 
   // Project preview

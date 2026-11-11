@@ -19,6 +19,12 @@ declare module "next-auth/jwt" {
   interface JWT {
     id: string;
     role: string;
+    /** fingerprint of the password hash at login; a mismatch ends the session */
+    pw?: string;
+    /** when the user logged in (ms), for the absolute session limit */
+    loginAt?: number;
+    accessTokenExpires?: number;
+    error?: string;
   }
 }
 

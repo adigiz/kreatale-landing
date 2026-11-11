@@ -1,4 +1,3 @@
-import { NextIntlClientProvider } from "next-intl";
 import {
   Geist,
   Geist_Mono,
@@ -8,17 +7,16 @@ import {
 } from "next/font/google";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { pageMetadata, SEO } from "@/redesign/metadata";
 import "../globals.css";
-import ConditionalLayout from "./components/ConditionalLayout";
-import { Toaster } from "@/components/ui/sonner";
-import { getPublishedProjects } from "@/lib/cms/queries/projects";
-import { dbProjectsToSortedEntries } from "@/lib/utils";
 
+// Fonts the redesign doesn't use (old /projects pages and admin only) aren't preloaded,
+// so public pages don't download them.
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
-  preload: true,
+  preload: false,
   adjustFontFallback: true,
 });
 
@@ -36,6 +34,7 @@ const instrumentSerif = Instrument_Serif({
   style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
+  preload: false,
 });
 
 const jakarta = Plus_Jakarta_Sans({
@@ -48,6 +47,7 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   display: "swap",
+  preload: false,
 });
 
 const locales = ["en", "id"];
@@ -63,50 +63,12 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>;
 }): Promise<Metadata> {
   const { locale } = await params;
-
-  const isEnglish = locale === "en";
-  const title = isEnglish
-    ? "Kreatale | Web Development & Digital Solutions Agency"
-    : "Kreatale | Agen Pengembangan Web & Solusi Digital";
-  const description = isEnglish
-    ? "Kreatale is a web development agency that builds fast, modern, and scalable websites & apps. We help businesses grow with custom solutions, clean design, and top-tier code."
-    : "Kreatale adalah agensi pengembangan web yang membangun website & aplikasi yang cepat, modern, dan scalable. Kami membantu bisnis tumbuh dengan solusi custom, desain bersih, dan kode berkualitas tinggi.";
-
-  // Generate hreflang URLs for current path
-  // For base layout, we'll use the home page paths
-  const languages: Record<string, string> = {
-    en: `${baseUrl}/en`,
-    id: `${baseUrl}/id`,
-    "x-default": `${baseUrl}/en`,
-  };
-
+  // Defaults for every page; each page sets its own title/description via pageMetadata().
+  const home = pageMetadata("home", locale);
   return {
-    title: {
-      default: title,
-      template: "%s | Kreatale",
-    },
-    description,
-    keywords: isEnglish
-      ? [
-          "web development agency",
-          "website design",
-          "custom web apps",
-          "Next.js development",
-          "React development",
-          "UI/UX design",
-          "digital solutions",
-          "Indonesia web development",
-        ]
-      : [
-          "agensi pengembangan web",
-          "desain website",
-          "aplikasi web custom",
-          "pengembangan Next.js",
-          "pengembangan React",
-          "desain UI/UX",
-          "solusi digital",
-          "pengembangan web Indonesia",
-        ],
+    ...home,
+    metadataBase: new URL(baseUrl),
+    title: { default: SEO.home[locale === "id" ? "id" : "en"].title, template: "%s | Kreatale" },
     authors: [{ name: "Kreatale" }],
     robots: {
       index: true,
@@ -118,32 +80,6 @@ export async function generateMetadata({
         "max-image-preview": "large",
         "max-snippet": -1,
       },
-    },
-    openGraph: {
-      title,
-      description,
-      url: `${baseUrl}/${locale}`,
-      siteName: "Kreatale",
-      images: [
-        {
-          url: "/og-image.png",
-          width: 1200,
-          height: 630,
-          alt: "Kreatale - Web Development Agency",
-        },
-      ],
-      locale: isEnglish ? "en_US" : "id_ID",
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: ["/og-image.png"],
-    },
-    alternates: {
-      canonical: `${baseUrl}/${locale}`,
-      languages,
     },
   };
 }
@@ -161,28 +97,19 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  let messages = {};
-  try {
-    messages = (await import(`../../messages/${locale}.json`)).default;
-  } catch (error) {
-    console.error("Error loading messages:", error);
-    messages = {};
-  }
-
-  // Fetch published projects for Header navigation
-  const dbProjects = await getPublishedProjects();
-  const projects = dbProjectsToSortedEntries(dbProjects);
-
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Kreatale",
     url: baseUrl,
     logo: `${baseUrl}/kreatale-logo-primary.svg`,
-    description:
-      locale === "en"
-        ? "Web development agency that builds fast, modern, and scalable websites & apps"
-        : "Agensi pengembangan web yang membangun website & aplikasi yang cepat, modern, dan scalable",
+    description: SEO.home[locale === "id" ? "id" : "en"].description,
+    email: "info@kreatale.com",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Jakarta",
+      addressCountry: "ID",
+    },
     sameAs: [
       "https://www.instagram.com/kreatale",
       "https://www.tiktok.com/@kreatale",
@@ -190,26 +117,15 @@ export default async function LocaleLayout({
     ],
     contactPoint: {
       "@type": "ContactPoint",
-      contactType: "Customer Service",
+      contactType: "customer service",
+      email: "info@kreatale.com",
       availableLanguage: ["en", "id"],
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "5.0",
-      ratingCount: "2",
-      reviewCount: "2",
     },
   };
 
   return (
     <html lang={locale}>
       <head>
-        <link
-          rel="preload"
-          href="/banner.jpg"
-          as="image"
-          fetchPriority="high"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -220,10 +136,10 @@ export default async function LocaleLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} ${jakarta.variable} ${playfair.variable} font-sans antialiased`}
       >
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <ConditionalLayout projects={projects}>{children}</ConditionalLayout>
-          <Toaster />
-        </NextIntlClientProvider>
+        {/* The redesigned pages bring their own header and footer and need no client-side
+            translations. The old site's chrome and messages live in projects/layout.tsx, and
+            toasts in the admin layout, so public pages don't download them. */}
+        {children}
       </body>
     </html>
   );

@@ -65,6 +65,8 @@ export const posts = pgTable("posts", {
   content: text("content").notNull(),
   excerpt: text("excerpt"),
   featuredImage: text("featured_image"),
+  // one of BLOG_CATEGORIES in src/lib/blogCategories.ts; null = uncategorised
+  category: varchar("category", { length: 50 }),
   authorId: uuid("author_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
@@ -117,7 +119,7 @@ export const media = pgTable("media", {
 export const previewTokens = pgTable("preview_tokens", {
   id: uuid("id").defaultRandom().primaryKey(),
   token: varchar("token", { length: 255 }).notNull().unique(),
-  contentType: varchar("content_type", { length: 50 }).notNull(), // 'post' or 'project' or 'demo-site'
+  contentType: varchar("content_type", { length: 50 }).notNull(), // 'post' or 'project' ('demo-site' was used by the removed demo sites)
   contentId: uuid("content_id"), // Nullable if new
   data: jsonb("data"), // Store unsaved content for preview
   expiresAt: timestamp("expires_at").notNull(),
@@ -214,18 +216,6 @@ export const mediaRelations = relations(media, ({ one }) => ({
   }),
 }));
 
-// Demo Sites table (Dynamic Landing Pages)
-export const demoSites = pgTable("demo_sites", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  slug: varchar("slug", { length: 255 }).notNull().unique(), // e.g., "luxury-escapes"
-  templateId: varchar("template_id", { length: 100 }).notNull(), // e.g., "tour", "car-rental"
-  config: jsonb("config").notNull().default("{}"), // Stores flexible content
-  isPublished: boolean("is_published").default(false).notNull(),
-  authorId: uuid("author_id").references(() => users.id, { onDelete: "set null" }), // Nullable for now
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull(),
-});
-
 // Type exports for TypeScript
 export type User = typeof users.$inferSelect;
 export type NewUser = typeof users.$inferInsert;
@@ -247,6 +237,4 @@ export type Location = typeof locations.$inferSelect;
 export type NewLocation = typeof locations.$inferInsert;
 export type Category = typeof categories.$inferSelect;
 export type NewCategory = typeof categories.$inferInsert;
-export type DemoSite = typeof demoSites.$inferSelect;
-export type NewDemoSite = typeof demoSites.$inferInsert;
 

@@ -18,7 +18,8 @@ export default function LoginForm() {
   const callbackUrl =
     typeof rawCallback === "string" &&
     rawCallback.startsWith("/") &&
-    !rawCallback.startsWith("//")
+    !rawCallback.startsWith("//") &&
+    !rawCallback.includes("\\") // browsers read "/\evil.com" as "//evil.com"
       ? rawCallback
       : defaultCallback;
   const [email, setEmail] = useState("");
@@ -39,7 +40,11 @@ export default function LoginForm() {
       });
 
       if (result?.error) {
-        setError("Invalid email or password");
+        setError(
+          result.error.startsWith("Too many attempts")
+            ? result.error
+            : "Invalid email or password",
+        );
         setLoading(false);
       } else {
         router.push(callbackUrl);

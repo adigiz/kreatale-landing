@@ -43,13 +43,6 @@ export const PERMISSIONS = {
   USERS_UPDATE: "users:update",
   USERS_DELETE: "users:delete",
 
-  // Demo Sites permissions
-  DEMO_SITES_CREATE: "demo_sites:create",
-  DEMO_SITES_READ: "demo_sites:read",
-  DEMO_SITES_UPDATE: "demo_sites:update",
-  DEMO_SITES_DELETE: "demo_sites:delete",
-  DEMO_SITES_PUBLISH: "demo_sites:publish",
-
   // Admin permissions
   ADMIN_ACCESS: "admin:access",
 } as const;
@@ -114,16 +107,6 @@ export const PERMISSION_GROUPS: Record<string, { label: string; permissions: { k
       { key: PERMISSIONS.USERS_DELETE, label: "Delete" },
     ],
   },
-  demo_sites: {
-    label: "Demo Sites",
-    permissions: [
-      { key: PERMISSIONS.DEMO_SITES_CREATE, label: "Create" },
-      { key: PERMISSIONS.DEMO_SITES_READ, label: "Read" },
-      { key: PERMISSIONS.DEMO_SITES_UPDATE, label: "Update" },
-      { key: PERMISSIONS.DEMO_SITES_DELETE, label: "Delete" },
-      { key: PERMISSIONS.DEMO_SITES_PUBLISH, label: "Publish" },
-    ],
-  },
   admin: {
     label: "Admin",
     permissions: [
@@ -161,11 +144,6 @@ export const ROLE_PERMISSIONS: Record<string, string[]> = {
     PERMISSIONS.LEADS_DELETE,
     PERMISSIONS.USERS_READ,
     PERMISSIONS.ADMIN_ACCESS,
-    PERMISSIONS.DEMO_SITES_CREATE,
-    PERMISSIONS.DEMO_SITES_READ,
-    PERMISSIONS.DEMO_SITES_UPDATE,
-    PERMISSIONS.DEMO_SITES_DELETE,
-    PERMISSIONS.DEMO_SITES_PUBLISH,
   ],
   editor: [
     PERMISSIONS.POSTS_CREATE,
@@ -184,11 +162,6 @@ export const ROLE_PERMISSIONS: Record<string, string[]> = {
     PERMISSIONS.CONTACTS_READ,
     PERMISSIONS.LEADS_READ,
     PERMISSIONS.ADMIN_ACCESS,
-    PERMISSIONS.DEMO_SITES_CREATE,
-    PERMISSIONS.DEMO_SITES_READ,
-    PERMISSIONS.DEMO_SITES_UPDATE,
-    PERMISSIONS.DEMO_SITES_DELETE,
-    PERMISSIONS.DEMO_SITES_PUBLISH,
   ],
   author: [
     PERMISSIONS.POSTS_CREATE,
@@ -202,10 +175,6 @@ export const ROLE_PERMISSIONS: Record<string, string[]> = {
     PERMISSIONS.MEDIA_CREATE,
     PERMISSIONS.MEDIA_READ,
     PERMISSIONS.ADMIN_ACCESS,
-    PERMISSIONS.DEMO_SITES_CREATE,
-    PERMISSIONS.DEMO_SITES_READ,
-    PERMISSIONS.DEMO_SITES_UPDATE,
-    PERMISSIONS.DEMO_SITES_DELETE,
   ],
   sales: [
     PERMISSIONS.CONTACTS_READ,
@@ -215,17 +184,12 @@ export const ROLE_PERMISSIONS: Record<string, string[]> = {
     PERMISSIONS.LEADS_UPDATE,
     PERMISSIONS.LEADS_DELETE,
     PERMISSIONS.ADMIN_ACCESS,
-    PERMISSIONS.MEDIA_CREATE, // required for demo image upload (ImagePicker)
-    PERMISSIONS.DEMO_SITES_CREATE,
-    PERMISSIONS.DEMO_SITES_READ,
-    PERMISSIONS.DEMO_SITES_UPDATE,
-    PERMISSIONS.DEMO_SITES_DELETE,
+    PERMISSIONS.MEDIA_CREATE, // media uploads (ImagePicker)
   ],
   viewer: [
     PERMISSIONS.POSTS_READ,
     PERMISSIONS.PROJECTS_READ,
     PERMISSIONS.MEDIA_READ,
-    PERMISSIONS.DEMO_SITES_READ,
   ],
 };
 

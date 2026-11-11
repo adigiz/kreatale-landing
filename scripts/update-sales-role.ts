@@ -1,6 +1,6 @@
 /**
  * Ensures the "sales" role in the database has MEDIA_CREATE permission
- * (required for demo image upload). Run after deploying permission changes
+ * (lets sales upload media). Run after deploying permission changes
  * so DB-backed roles stay in sync.
  *
  * Usage: npm run update-sales-role
@@ -37,10 +37,6 @@ async function main() {
       PERMISSIONS.LEADS_DELETE,
       PERMISSIONS.ADMIN_ACCESS,
       PERMISSIONS.MEDIA_CREATE,
-      PERMISSIONS.DEMO_SITES_CREATE,
-      PERMISSIONS.DEMO_SITES_READ,
-      PERMISSIONS.DEMO_SITES_UPDATE,
-      PERMISSIONS.DEMO_SITES_DELETE,
     ];
     await db.insert(roles).values({
       name: SALES_ROLE_NAME,

@@ -8,42 +8,17 @@ const intlMiddleware = createMiddleware({
   localePrefix: "always",
 });
 
-const LOCALES = ["en", "id"] as const;
-
 export default async function middleware(request: NextRequest) {
   // Get pathname
   const pathname = request.nextUrl.pathname;
   const segments = pathname.split("/").filter(Boolean);
 
-  // Legacy /{locale}/demo/... → /{locale}/demos/... (permanent redirect)
-  const legacyDemo = pathname.match(/^\/(en|id)\/demo\/(.+)$/);
-  if (legacyDemo) {
+  // Site pages without a locale (/work, /blog/some-post, …) -> /en/...
+  const SITE_PAGES = ["about", "blog", "work", "contact", "faq", "services", "projects", "privacy", "terms"];
+  if (segments[0] && SITE_PAGES.includes(segments[0])) {
     const url = request.nextUrl.clone();
-    url.pathname = `/${legacyDemo[1]}/demos/${legacyDemo[2]}`;
+    url.pathname = `/en${pathname}`;
     return NextResponse.redirect(url, 308);
-  }
-
-  // Rewrite demo URLs without locale: /dealer-mobil/... -> /en/demos/dealer-mobil/...
-  // So shared links like https://kreatale.com/dealer-mobil/package/ferrari work
-  const firstSegment = segments[0];
-  if (
-    firstSegment &&
-    !LOCALES.includes(firstSegment as "en" | "id") &&
-    firstSegment !== "admin" &&
-    firstSegment !== "demo" &&
-    firstSegment !== "demos" &&
-    firstSegment !== "about" &&
-    firstSegment !== "blog" &&
-    firstSegment !== "projects" &&
-    firstSegment !== "services" &&
-    firstSegment !== "privacy" &&
-    firstSegment !== "terms" &&
-    firstSegment !== "preview"
-  ) {
-    const demoPath = `/en/demos/${segments.join("/")}`;
-    const url = request.nextUrl.clone();
-    url.pathname = demoPath;
-    return NextResponse.rewrite(url);
   }
 
   // Auth Check: Redirect from login to dashboard if already logged in

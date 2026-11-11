@@ -11,6 +11,7 @@ export interface BlogPost {
   featuredImage?: string;
   publishedDate?: string;
   author?: string;
+  category?: string;
 }
 
 // Transform CMS post to BlogPost format
@@ -37,6 +38,7 @@ export function transformCmsPostToBlogPost(
     featuredImage: post.featuredImage || undefined,
     publishedDate: post.publishedAt?.toISOString() || post.createdAt.toISOString(),
     author: author?.name || author?.email || undefined,
+    category: post.category || undefined,
   };
 }
 

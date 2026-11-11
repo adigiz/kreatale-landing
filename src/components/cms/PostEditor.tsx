@@ -16,6 +16,7 @@ import {
   X,
 } from "lucide-react";
 import type { Post } from "@/lib/cms/db";
+import { BLOG_CATEGORIES } from "@/lib/blogCategories";
 import { Button } from "@/components/ui/button";
 
 interface PostEditorProps {
@@ -51,6 +52,7 @@ export default function PostEditor({
     content: initialPost?.content || "",
     excerpt: initialPost?.excerpt || "",
     featuredImage: initialPost?.featuredImage || "",
+    category: initialPost?.category || "",
     locale: initialPost?.locale || "en",
     status:
       initialPost?.status || ("draft" as "draft" | "published" | "archived"),
@@ -64,6 +66,7 @@ export default function PostEditor({
         content: initialPost.content,
         excerpt: initialPost.excerpt || "",
         featuredImage: initialPost.featuredImage || "",
+        category: initialPost.category || "",
         locale: initialPost.locale,
         status: initialPost.status as "draft" | "published" | "archived",
       });
@@ -554,6 +557,33 @@ export default function PostEditor({
                       className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     />
                   </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label
+                    htmlFor="post-category"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    Category
+                  </label>
+                  <select
+                    id="post-category"
+                    value={formData.category}
+                    onChange={(e) =>
+                      setFormData({ ...formData, category: e.target.value })
+                    }
+                    className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  >
+                    <option value="">No category</option>
+                    {BLOG_CATEGORIES.map((c) => (
+                      <option key={c.id} value={c.id}>
+                        {c.label}
+                      </option>
+                    ))}
+                  </select>
+                  <p className="text-xs text-muted-foreground">
+                    Shown on the blog card and used by the blog filters.
+                  </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">

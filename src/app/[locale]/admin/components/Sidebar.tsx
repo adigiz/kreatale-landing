@@ -16,7 +16,6 @@ import {
   Target,
   FolderKanban,
   Shield,
-  Presentation,
   type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -112,12 +111,6 @@ export default function Sidebar({
       icon: Home,
       label: "Dashboard",
       requiredPermission: "admin:access",
-    },
-    {
-      href: `/${locale}/admin/demos`,
-      icon: Presentation,
-      label: "Demos",
-      requiredPermission: "admin:access", // Assuming admin access is enough for now
     },
     {
       href: `/${locale}/admin/posts`,

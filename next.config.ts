@@ -85,6 +85,36 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   compress: true,
+  // Put title and description in <head> for every visitor, not streamed into the body
+  // (Next 15 only does this for known bots by default, and some crawlers and audits miss it).
+  htmlLimitedBots: /.*/,
+  // The site is English. Indonesian lives on only in the blog (/id/blog), so every other
+  // /id page goes to its English version. Admin, preview and API routes are left alone.
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          // other sites can't frame the site (the CMS preview frames it from the same origin)
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
+        ],
+      },
+    ];
+  },
+  async redirects() {
+    return [
+      { source: "/id", destination: "/en", permanent: true },
+      {
+        source: "/id/:path((?!blog(?:/|$)|preview(?:/|$)|admin(?:/|$)|api(?:/|$)).+)",
+        destination: "/en/:path",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

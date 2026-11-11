@@ -8,6 +8,7 @@ import {
 } from "@/lib/cms/queries/posts";
 import { PERMISSIONS } from "@/lib/cms/permissions";
 import { z } from "zod";
+import { BLOG_CATEGORY_IDS } from "@/lib/blogCategories";
 
 const postSchema = z.object({
   title: z.string().min(1),
@@ -15,6 +16,12 @@ const postSchema = z.object({
   content: z.string(),
   excerpt: z.string().optional(),
   featuredImage: z.string().optional(),
+  // "" from the editor's "No category" option means none
+  category: z
+    .union([z.enum(BLOG_CATEGORY_IDS), z.literal("")])
+    .nullable()
+    .optional()
+    .transform((v) => v || null),
   locale: z.string().default("en"),
   status: z.enum(["draft", "published", "archived"]).default("draft"),
 });
