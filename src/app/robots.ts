@@ -13,8 +13,8 @@ export default function robots(): MetadataRoute.Robots {
           "/en/admin/", // Disallow admin routes for English locale
           "/id/admin/", // Disallow admin routes for Indonesian locale
           "/api/",
-          "/_next/",
-          "/static/",
+          // /_next/ is not blocked: it serves the CSS, scripts, fonts and optimised images
+          // search engines need to render the pages
           "/sw.js",
           "/manifest.json",
         ],
