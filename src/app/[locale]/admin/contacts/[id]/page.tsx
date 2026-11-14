@@ -1,7 +1,15 @@
 import { getSession } from "@/lib/cms/auth/config";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Mail, Phone, Building, MessageSquare } from "lucide-react";
+import {
+  ArrowLeft,
+  Mail,
+  Phone,
+  Building,
+  MessageSquare,
+  Compass,
+} from "lucide-react";
+import type { EnquirySource } from "@/lib/notify";
 import { getContactById } from "@/lib/cms/queries/contacts";
 import { Button } from "@/components/ui/button";
 import MarkReadButton from "../MarkReadButton";
@@ -23,6 +31,7 @@ export default async function ContactDetailPage({
   if (!contact) {
     redirect(`/${locale}/admin/contacts`);
   }
+  const source = contact.source as EnquirySource | null;
 
   return (
     <div className="space-y-6">
@@ -108,6 +117,32 @@ export default async function ContactDetailPage({
               </span>
             </div>
           </div>
+
+          {source && (source.referrer || source.landingPage || source.utm) && (
+            <div className="flex items-start gap-3">
+              <Compass className="w-5 h-5 text-muted-foreground mt-0.5" />
+              <div className="min-w-0">
+                <p className="text-sm font-medium text-muted-foreground">
+                  Where they came from
+                </p>
+                <p className="text-foreground break-words">
+                  {source.referrer || "Direct visit or no referrer"}
+                </p>
+                {source.landingPage && (
+                  <p className="text-sm text-muted-foreground break-words">
+                    First page: {source.landingPage}
+                  </p>
+                )}
+                {source.utm && (
+                  <p className="text-sm text-muted-foreground break-words">
+                    {Object.entries(source.utm)
+                      .map(([k, v]) => `${k}: ${v}`)
+                      .join(" · ")}
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="border-t pt-6">
@@ -125,4 +160,3 @@ export default async function ContactDetailPage({
     </div>
   );
 }
-

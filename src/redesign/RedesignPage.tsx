@@ -28,7 +28,10 @@ const localFonts = (s: string) =>
     .replaceAll('"Plus Jakarta Sans"', "var(--font-jakarta)")
     .replaceAll('"Geist Mono"', "var(--font-geist-mono)")
     // SVG text names the font in an attribute, which can't hold var()
-    .replaceAll('font-family="Plus Jakarta Sans, sans-serif"', 'style="font-family: var(--font-jakarta), sans-serif"');
+    .replaceAll(
+      'font-family="Plus Jakarta Sans, sans-serif"',
+      'style="font-family: var(--font-jakarta), sans-serif"',
+    );
 
 /**
  * Images after the page's first section load only when scrolled near (the hero's stay eager,
@@ -39,7 +42,12 @@ const lazyBelowHero = (html: string) => {
   if (cut < 0) return html;
   return (
     html.slice(0, cut) +
-    html.slice(cut).replace(/<img (?![^>]*\bloading=)/g, '<img loading="lazy" decoding="async" ')
+    html
+      .slice(cut)
+      .replace(
+        /<img (?![^>]*\bloading=)/g,
+        '<img loading="lazy" decoding="async" ',
+      )
   );
 };
 
@@ -66,7 +74,10 @@ export default function RedesignPage({
   // Runs after hydration: drop images that failed to load (e.g. a host that blocks embedding),
   // so the card's fallback underneath shows instead of a broken-image box.
   const dropBroken = `document.querySelectorAll('.kreatale-redesign img:not([data-src])').forEach(function(img){ var bad=function(){ img.remove(); }; if (img.complete && !img.naturalWidth) bad(); else img.addEventListener('error', bad); });`;
-  const boot = `${dropBroken}\n(function wait(){ if(!(${ready})) return setTimeout(wait, 30);\n${withLocale(page.script)}\n})();`;
+  // Remembers where this visit started (first page, the site that sent them, UTM tags) for the
+  // rest of the tab's session, so the contact form can say where an enquiry came from.
+  const firstTouch = `try{ if(!sessionStorage.getItem('kt_src')){ var q=new URLSearchParams(location.search), utm={}; ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','gclid','fbclid'].forEach(function(k){ var v=q.get(k); if(v) utm[k]=v; }); var ref=document.referrer; try{ if(ref && new URL(ref).host===location.host) ref=''; }catch(e){} sessionStorage.setItem('kt_src', JSON.stringify({ landingPage: location.pathname + location.search, referrer: ref, utm: utm })); } }catch(e){}`;
+  const boot = `${firstTouch}\n${dropBroken}\n(function wait(){ if(!(${ready})) return setTimeout(wait, 30);\n${withLocale(page.script)}\n})();`;
 
   return (
     <>
@@ -76,7 +87,9 @@ export default function RedesignPage({
       />
       <div
         className="kreatale-redesign"
-        dangerouslySetInnerHTML={{ __html: lazyBelowHero(localFonts(withLocale(page.html))) }}
+        dangerouslySetInnerHTML={{
+          __html: lazyBelowHero(localFonts(withLocale(page.html))),
+        }}
       />
       {page.libs.map((l) => (
         <Script key={l} src={`/redesign/js/${l}`} strategy="afterInteractive" />

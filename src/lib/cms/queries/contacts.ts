@@ -2,10 +2,7 @@ import { db, contacts, type NewContact } from "../db";
 import { eq, desc, like, or } from "drizzle-orm";
 
 export async function getAllContacts() {
-  return await db
-    .select()
-    .from(contacts)
-    .orderBy(desc(contacts.createdAt));
+  return await db.select().from(contacts).orderBy(desc(contacts.createdAt));
 }
 
 export async function getContactById(id: string) {
@@ -27,8 +24,30 @@ export async function getUnreadContacts() {
 }
 
 export async function createContact(data: NewContact) {
-  const [contact] = await db.insert(contacts).values(data).returning();
-  return contact;
+  try {
+    const [contact] = await db
+      .insert(contacts)
+      .values(data)
+      .returning({ id: contacts.id, createdAt: contacts.createdAt });
+    return contact;
+  } catch (err) {
+    // If the `source` column hasn't been added to the database yet (migration
+    // drizzle/0001_contact_source.sql), save the enquiry without it rather than lose it.
+    const code =
+      (err as { code?: string; cause?: { code?: string } })?.cause?.code ??
+      (err as { code?: string })?.code;
+    if (code !== "42703" || data.source === undefined) throw err;
+    console.warn(
+      "contacts.source column missing; saving enquiry without its source",
+    );
+    const { source: _source, ...rest } = data;
+    void _source;
+    const [contact] = await db
+      .insert(contacts)
+      .values(rest)
+      .returning({ id: contacts.id, createdAt: contacts.createdAt });
+    return contact;
+  }
 }
 
 export async function markContactAsRead(id: string) {
@@ -62,9 +81,8 @@ export async function searchContacts(query: string) {
         like(contacts.name, `%${query}%`),
         like(contacts.email, `%${query}%`),
         like(contacts.company, `%${query}%`),
-        like(contacts.message, `%${query}%`)
-      )
+        like(contacts.message, `%${query}%`),
+      ),
     )
     .orderBy(desc(contacts.createdAt));
 }
-

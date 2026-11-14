@@ -136,6 +136,8 @@ export const contacts = pgTable("contacts", {
   inquiry: varchar("inquiry", { length: 100 }).notNull(),
   message: text("message").notNull(),
   read: text("read").default("false").notNull(), // 'true' or 'false' as string
+  // where the visitor came from: { landingPage, referrer, formPage, utm }
+  source: jsonb("source"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

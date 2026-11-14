@@ -13,12 +13,6 @@ export const PERMISSIONS = {
   POSTS_DELETE: "posts:delete",
   POSTS_PUBLISH: "posts:publish",
 
-  // Projects permissions
-  PROJECTS_CREATE: "projects:create",
-  PROJECTS_READ: "projects:read",
-  PROJECTS_UPDATE: "projects:update",
-  PROJECTS_DELETE: "projects:delete",
-  PROJECTS_PUBLISH: "projects:publish",
 
   // Media permissions
   MEDIA_CREATE: "media:create",
@@ -60,16 +54,6 @@ export const PERMISSION_GROUPS: Record<string, { label: string; permissions: { k
       { key: PERMISSIONS.POSTS_UPDATE, label: "Update" },
       { key: PERMISSIONS.POSTS_DELETE, label: "Delete" },
       { key: PERMISSIONS.POSTS_PUBLISH, label: "Publish" },
-    ],
-  },
-  projects: {
-    label: "Projects",
-    permissions: [
-      { key: PERMISSIONS.PROJECTS_CREATE, label: "Create" },
-      { key: PERMISSIONS.PROJECTS_READ, label: "Read" },
-      { key: PERMISSIONS.PROJECTS_UPDATE, label: "Update" },
-      { key: PERMISSIONS.PROJECTS_DELETE, label: "Delete" },
-      { key: PERMISSIONS.PROJECTS_PUBLISH, label: "Publish" },
     ],
   },
   media: {
@@ -126,11 +110,6 @@ export const ROLE_PERMISSIONS: Record<string, string[]> = {
     PERMISSIONS.POSTS_UPDATE,
     PERMISSIONS.POSTS_DELETE,
     PERMISSIONS.POSTS_PUBLISH,
-    PERMISSIONS.PROJECTS_CREATE,
-    PERMISSIONS.PROJECTS_READ,
-    PERMISSIONS.PROJECTS_UPDATE,
-    PERMISSIONS.PROJECTS_DELETE,
-    PERMISSIONS.PROJECTS_PUBLISH,
     PERMISSIONS.MEDIA_CREATE,
     PERMISSIONS.MEDIA_READ,
     PERMISSIONS.MEDIA_UPDATE,
@@ -151,11 +130,6 @@ export const ROLE_PERMISSIONS: Record<string, string[]> = {
     PERMISSIONS.POSTS_UPDATE,
     PERMISSIONS.POSTS_DELETE,
     PERMISSIONS.POSTS_PUBLISH,
-    PERMISSIONS.PROJECTS_CREATE,
-    PERMISSIONS.PROJECTS_READ,
-    PERMISSIONS.PROJECTS_UPDATE,
-    PERMISSIONS.PROJECTS_DELETE,
-    PERMISSIONS.PROJECTS_PUBLISH,
     PERMISSIONS.MEDIA_CREATE,
     PERMISSIONS.MEDIA_READ,
     PERMISSIONS.MEDIA_UPDATE,
@@ -168,10 +142,6 @@ export const ROLE_PERMISSIONS: Record<string, string[]> = {
     PERMISSIONS.POSTS_READ,
     PERMISSIONS.POSTS_UPDATE,
     PERMISSIONS.POSTS_DELETE,
-    PERMISSIONS.PROJECTS_CREATE,
-    PERMISSIONS.PROJECTS_READ,
-    PERMISSIONS.PROJECTS_UPDATE,
-    PERMISSIONS.PROJECTS_DELETE,
     PERMISSIONS.MEDIA_CREATE,
     PERMISSIONS.MEDIA_READ,
     PERMISSIONS.ADMIN_ACCESS,
@@ -188,7 +158,6 @@ export const ROLE_PERMISSIONS: Record<string, string[]> = {
   ],
   viewer: [
     PERMISSIONS.POSTS_READ,
-    PERMISSIONS.PROJECTS_READ,
     PERMISSIONS.MEDIA_READ,
   ],
 };

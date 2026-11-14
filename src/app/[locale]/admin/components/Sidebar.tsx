@@ -14,7 +14,6 @@ import {
   ChevronLeft,
   ChevronRight,
   Target,
-  FolderKanban,
   Shield,
   type LucideIcon,
 } from "lucide-react";
@@ -117,12 +116,6 @@ export default function Sidebar({
       icon: FileText,
       label: "Posts",
       requiredPermission: "posts:read",
-    },
-    {
-      href: `/${locale}/admin/projects`,
-      icon: FolderKanban,
-      label: "Projects",
-      requiredPermission: "projects:read",
     },
     {
       href: `/${locale}/admin/contacts`,

@@ -13,6 +13,30 @@ import { ArrowUp, ArrowDown, ArrowUpDown } from "lucide-react";
 import { SortField, SortOrder } from "../actions";
 import { LeadFormDialog } from "./LeadFormDialog";
 
+// Country calling codes for turning a local number (0812...) into an international one.
+// Anything not listed is treated as Indonesian, where most scraped leads are.
+const CALLING_CODES: Record<string, string> = {
+  indonesia: "62",
+  australia: "61",
+  "united states": "1",
+  usa: "1",
+  netherlands: "31",
+  japan: "81",
+  singapore: "65",
+  malaysia: "60",
+  "united kingdom": "44",
+  kuwait: "965",
+};
+
+function waNumber(phone: string, country: string | null) {
+  const digits = phone.replace(/\D/g, "");
+  if (phone.trim().startsWith("+")) return digits; // already international
+  const code = CALLING_CODES[(country || "").trim().toLowerCase()] ?? "62";
+  if (digits.startsWith("0")) return code + digits.slice(1);
+  if (digits.startsWith(code)) return digits;
+  return code + digits;
+}
+
 interface Lead {
   id: string;
   businessName: string;
@@ -200,7 +224,7 @@ export function LeadsTable({
                     <div className="flex flex-col gap-1">
                       {lead.phone && (
                         <a
-                          href={`https://wa.me/${lead.phone.replace(/\D/g, "").replace(/^0/, "62")}?text=${encodeURIComponent(
+                          href={`https://wa.me/${waNumber(lead.phone, lead.country)}?text=${encodeURIComponent(
                             (
                               waTemplate ||
                               "Halo, saya melihat *{{businessName}}* di Google Maps..."
