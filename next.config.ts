@@ -105,9 +105,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       // /work became /projects (the URL search engines already know). The old per-project
-      // pages are gone; Gala Esports has its case study, the rest go to the list.
-      { source: "/:locale(en|id)/work", destination: "/en/projects", permanent: true },
-      { source: "/:locale(en|id)/work/gala-esports", destination: "/en/projects/gala-esports", permanent: true },
+      // pages are gone, and the Gala Esports case study is hidden for now, so they all go to the list.
+      { source: "/:locale(en|id)/work/:rest*", destination: "/en/projects", permanent: true },
       { source: "/:path(work|projects)", destination: "/en/projects", permanent: true },
       // pages typed without a locale (/about, /blog/some-post) go to the English version
       {
@@ -115,8 +114,11 @@ const nextConfig: NextConfig = {
         destination: "/en/:page/:rest*",
         permanent: true,
       },
+      // The Gala Esports case study is hidden for now. Not permanent, so the page
+      // (src/redesign/generated/case-gala-esports.ts) can come back at the same URL.
+      { source: "/:locale(en|id)/projects/gala-esports", destination: "/en/projects", permanent: false },
       {
-        // skips the case study and the page's generated share image
+        // the old per-project pages; skips the page's generated share images
         source: "/:locale(en|id)/projects/:slug((?!gala-esports$|opengraph-image|twitter-image)[^/]+)",
         destination: "/en/projects",
         permanent: true,
