@@ -1,133 +1,79 @@
-import { NextRequest, NextResponse } from "next/server";
-import { notifyNewEnquiry, type EnquirySource } from "@/lib/notify";
+import { NextRequest, NextResponse, after } from "next/server";
+import { notifyNewEnquiry } from "@/lib/notify";
+import { cleanSource } from "@/lib/enquiry-source";
+import { verifyHcaptcha } from "@/lib/captcha";
+import { rateLimit, clientIp, HOUR, DAY } from "@/lib/rate-limit";
 
-// Keeps only short strings from what the browser sent about where the visitor came from.
-function cleanSource(raw: unknown): EnquirySource | undefined {
-  if (!raw || typeof raw !== "object") return undefined;
-  const r = raw as Record<string, unknown>;
-  const str = (v: unknown, max = 300) =>
-    typeof v === "string" && v.trim() ? v.trim().slice(0, max) : undefined;
-  const utm: Record<string, string> = {};
-  if (r.utm && typeof r.utm === "object") {
-    for (const k of [
-      "utm_source",
-      "utm_medium",
-      "utm_campaign",
-      "utm_term",
-      "utm_content",
-      "gclid",
-      "fbclid",
-    ]) {
-      const v = str((r.utm as Record<string, unknown>)[k], 120);
-      if (v) utm[k] = v;
-    }
-  }
-  const out: EnquirySource = {
-    landingPage: str(r.landingPage),
-    referrer: str(r.referrer),
-    formPage: str(r.formPage),
-    utm: Object.keys(utm).length ? utm : undefined,
-  };
-  return Object.values(out).some(Boolean) ? out : undefined;
-}
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const text = (v: unknown, max: number) => (typeof v === "string" ? v.trim().slice(0, max) : "");
+const fail = (error: string, status: number) => NextResponse.json({ error }, { status });
 
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
-    const { name, email, company, phone, inquiry, message, captchaToken } =
-      body;
+    const body = await request.json().catch(() => null);
+    if (!body || typeof body !== "object") return fail("Invalid request", 400);
+
+    // Honeypot: a field people never see. Bots that fill it get a normal-looking success
+    // and nothing is saved or sent.
+    if (text(body.website, 200)) {
+      return NextResponse.json({ message: "Message sent successfully" }, { status: 200 });
+    }
+
+    const name = text(body.name, 120);
+    const email = text(body.email, 200).toLowerCase();
+    const company = text(body.company, 160) || null;
+    const phone = text(body.phone, 40) || null;
+    const inquiry = text(body.inquiry, 100);
+    const message = text(body.message, 5000);
     const source = cleanSource(body.source);
 
-    // Validate required fields
-    if (!name || !email || !inquiry || !message) {
-      return NextResponse.json(
-        { error: "Required fields are missing" },
-        { status: 400 },
-      );
+    if (!name || !email || !inquiry || !message) return fail("Required fields are missing", 400);
+    if (!EMAIL_RE.test(email)) return fail("Invalid email format", 400);
+
+    const ip = clientIp(request);
+    if (!rateLimit(`contact:ip:${ip}`, 5, HOUR) || !rateLimit(`contact:email:${email}`, 3, DAY)) {
+      return fail("Too many messages. Please email info@kreatale.com instead.", 429);
     }
 
-    // Validate captcha token
-    if (!captchaToken) {
-      return NextResponse.json(
-        { error: "Please complete the captcha verification" },
-        { status: 400 },
-      );
-    }
+    const captcha = await verifyHcaptcha(body.captchaToken);
+    if (captcha === "missing") return fail("Please complete the captcha verification", 400);
+    if (captcha === "misconfigured") return fail("Server configuration error", 500);
+    if (captcha !== "ok") return fail("Captcha verification failed", 400);
 
-    // Verify hCaptcha token
-    const hcaptchaSecret = process.env.HCAPTCHA_SECRET_KEY;
-    if (!hcaptchaSecret) {
-      console.error("HCAPTCHA_SECRET_KEY is not set");
-      return NextResponse.json(
-        { error: "Server configuration error" },
-        { status: 500 },
-      );
-    }
-
-    const verifyResponse = await fetch("https://hcaptcha.com/siteverify", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        secret: hcaptchaSecret,
-        response: captchaToken,
-      }),
-    });
-
-    const verifyData = await verifyResponse.json();
-
-    if (!verifyData.success) {
-      return NextResponse.json(
-        { error: "Captcha verification failed" },
-        { status: 400 },
-      );
-    }
-
-    // Validate email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: "Invalid email format" },
-        { status: 400 },
-      );
-    }
-
-    // Save contact form submission to database
     const { createContact } = await import("@/lib/cms/queries/contacts");
-
     const saved = await createContact({
-      name,
-      email,
-      company: company || null,
-      phone: phone || null,
-      inquiry,
-      message,
-      read: "false",
-      source,
-    });
-
-    // The enquiry is saved; the alert is best effort and never fails the request.
-    await notifyNewEnquiry({
-      id: saved.id,
       name,
       email,
       company,
       phone,
       inquiry,
       message,
+      read: "false",
       source,
     });
 
-    return NextResponse.json(
-      { message: "Message sent successfully" },
-      { status: 200 },
-    );
+    // The enquiry is saved. Everything below is best effort and never fails the request.
+    let dealId: string | null = null;
+    try {
+      const { createDealFromContact } = await import("@/lib/cms/queries/deals");
+      dealId = (await createDealFromContact({ id: saved.id, name, email, company, phone, inquiry, message })).dealId;
+    } catch (err) {
+      console.error("Could not create a deal for the enquiry:", err);
+    }
+
+    // after the response is sent: confirmation to the visitor, alert to the team
+    after(async () => {
+      if (dealId) {
+        const { sendAutoReply } = await import("@/lib/emails/auto-reply");
+        await sendAutoReply({ dealId, name, email });
+      }
+      await notifyNewEnquiry({ id: saved.id, dealId, name, email, company, phone, inquiry, message, source });
+    });
+
+    return NextResponse.json({ message: "Message sent successfully" }, { status: 200 });
   } catch (error) {
     console.error("Error processing contact form:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 },
-    );
+    return fail("Internal server error", 500);
   }
 }

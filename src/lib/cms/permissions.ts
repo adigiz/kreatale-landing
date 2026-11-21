@@ -25,11 +25,18 @@ export const PERMISSIONS = {
   CONTACTS_UPDATE: "contacts:update",
   CONTACTS_DELETE: "contacts:delete",
 
-  // Leads permissions
-  LEADS_CREATE: "leads:create",
-  LEADS_READ: "leads:read",
-  LEADS_UPDATE: "leads:update",
-  LEADS_DELETE: "leads:delete",
+  // Sales pipeline (deals). Seeing and editing money values is its own permission.
+  DEALS_READ: "deals:read",
+  DEALS_UPDATE: "deals:update",
+  DEALS_DELETE: "deals:delete",
+  DEALS_VALUE: "deals:value",
+
+  // Reply templates used from the pipeline
+  TEMPLATES_MANAGE: "templates:manage",
+
+  // Website audits (run for prospects, view results)
+  AUDITS_READ: "audits:read",
+  AUDITS_CREATE: "audits:create",
 
   // User management permissions
   USERS_CREATE: "users:create",
@@ -73,13 +80,24 @@ export const PERMISSION_GROUPS: Record<string, { label: string; permissions: { k
       { key: PERMISSIONS.CONTACTS_DELETE, label: "Delete" },
     ],
   },
-  leads: {
-    label: "Leads",
+  deals: {
+    label: "Pipeline",
     permissions: [
-      { key: PERMISSIONS.LEADS_CREATE, label: "Create" },
-      { key: PERMISSIONS.LEADS_READ, label: "Read" },
-      { key: PERMISSIONS.LEADS_UPDATE, label: "Update" },
-      { key: PERMISSIONS.LEADS_DELETE, label: "Delete" },
+      { key: PERMISSIONS.DEALS_READ, label: "Read" },
+      { key: PERMISSIONS.DEALS_UPDATE, label: "Update" },
+      { key: PERMISSIONS.DEALS_DELETE, label: "Delete" },
+      { key: PERMISSIONS.DEALS_VALUE, label: "See values" },
+    ],
+  },
+  templates: {
+    label: "Templates",
+    permissions: [{ key: PERMISSIONS.TEMPLATES_MANAGE, label: "Manage" }],
+  },
+  audits: {
+    label: "Audits",
+    permissions: [
+      { key: PERMISSIONS.AUDITS_READ, label: "Read" },
+      { key: PERMISSIONS.AUDITS_CREATE, label: "Create" },
     ],
   },
   users: {
@@ -117,10 +135,13 @@ export const ROLE_PERMISSIONS: Record<string, string[]> = {
     PERMISSIONS.CONTACTS_READ,
     PERMISSIONS.CONTACTS_UPDATE,
     PERMISSIONS.CONTACTS_DELETE,
-    PERMISSIONS.LEADS_CREATE,
-    PERMISSIONS.LEADS_READ,
-    PERMISSIONS.LEADS_UPDATE,
-    PERMISSIONS.LEADS_DELETE,
+    PERMISSIONS.DEALS_READ,
+    PERMISSIONS.DEALS_UPDATE,
+    PERMISSIONS.DEALS_DELETE,
+    PERMISSIONS.DEALS_VALUE,
+    PERMISSIONS.TEMPLATES_MANAGE,
+    PERMISSIONS.AUDITS_READ,
+    PERMISSIONS.AUDITS_CREATE,
     PERMISSIONS.USERS_READ,
     PERMISSIONS.ADMIN_ACCESS,
   ],
@@ -134,7 +155,7 @@ export const ROLE_PERMISSIONS: Record<string, string[]> = {
     PERMISSIONS.MEDIA_READ,
     PERMISSIONS.MEDIA_UPDATE,
     PERMISSIONS.CONTACTS_READ,
-    PERMISSIONS.LEADS_READ,
+    PERMISSIONS.DEALS_READ,
     PERMISSIONS.ADMIN_ACCESS,
   ],
   author: [
@@ -149,10 +170,11 @@ export const ROLE_PERMISSIONS: Record<string, string[]> = {
   sales: [
     PERMISSIONS.CONTACTS_READ,
     PERMISSIONS.CONTACTS_UPDATE,
-    PERMISSIONS.LEADS_CREATE,
-    PERMISSIONS.LEADS_READ,
-    PERMISSIONS.LEADS_UPDATE,
-    PERMISSIONS.LEADS_DELETE,
+    PERMISSIONS.DEALS_READ,
+    PERMISSIONS.DEALS_UPDATE,
+    PERMISSIONS.TEMPLATES_MANAGE,
+    PERMISSIONS.AUDITS_READ,
+    PERMISSIONS.AUDITS_CREATE,
     PERMISSIONS.ADMIN_ACCESS,
     PERMISSIONS.MEDIA_CREATE, // media uploads (ImagePicker)
   ],

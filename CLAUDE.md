@@ -19,10 +19,11 @@ Character and illustration images are generated with Alibaba Model Studio (Qwen-
 - Output goes to `public/illustrations/characters/`.
 - To change what gets generated, edit the prompts in the `jobs` list in the script.
 - After generating, open the images to check them against the brief: Kreatale Blue `#0061FF`, black, white and greys, flat, bold and friendly, no text, and nothing copied from Two26's illustrations. Regenerate any that miss, then show the user before using them on the site.
+- **Check every generated image and video frame before it goes on the site.** Image and video models often draw extra or missing hands, arms, legs or fingers, merged limbs, and ghost or semi-transparent body parts. Make a numbered contact sheet of all frames (e.g. `ffmpeg ... tile=`), look at it, and count the limbs on each character in every frame. Drop or regenerate any bad frames, and never ship a walk cycle you haven't checked frame by frame.
 - If you get a model-not-supported or permission error, the key is probably a token-plan or text-only key. Tell the user they need a standard pay-as-you-go Model Studio API key, and don't retry in a loop.
 
 ## Stack
-Next.js (App Router, `src/app/[locale]`), Tailwind, and GSAP in node_modules. Brand tokens are in `src/app/globals.css` (`--primary: #0061FF`). Project data is in `src/lib/projectsData.json`.
+Next.js (App Router, `src/app/[locale]`), Tailwind, and GSAP in node_modules. Brand tokens are in `src/app/globals.css` (`--primary: #0061FF`). Projects are shown on the static projects page (`work.html` in the prototype, served at `/projects`).
 
 ## Blog and marketing
 - `.claude/agents/seo-marketing.md`: SEO audits, keywords, page copy.

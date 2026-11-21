@@ -27,6 +27,7 @@ const PAGES = {
   services: '/services',
   about: '/about',
   contact: '/contact',
+  'website-audit': '/website-audit',
   blog: '/blog',
   'blog-post': '/blog', // sample article; real articles live at /blog/[slug]
   faq: '/faq',

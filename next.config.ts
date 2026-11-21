@@ -110,7 +110,7 @@ const nextConfig: NextConfig = {
       { source: "/:path(work|projects)", destination: "/en/projects", permanent: true },
       // pages typed without a locale (/about, /blog/some-post) go to the English version
       {
-        source: "/:page(about|blog|contact|faq|services|privacy|terms|projects)/:rest*",
+        source: "/:page(about|blog|contact|faq|services|privacy|terms|projects|website-audit)/:rest*",
         destination: "/en/:page/:rest*",
         permanent: true,
       },

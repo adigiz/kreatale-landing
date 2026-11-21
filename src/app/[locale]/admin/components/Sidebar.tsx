@@ -15,6 +15,11 @@ import {
   ChevronRight,
   Target,
   Shield,
+  Gauge,
+  MessageSquareText,
+  ImageIcon,
+  Menu,
+  X,
   type LucideIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -70,6 +75,9 @@ export default function Sidebar({
 }: SidebarProps) {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  // phones: the sidebar is a slide-in menu, closed after each navigation
+  const [mobileOpen, setMobileOpen] = useState(false);
+  useEffect(() => setMobileOpen(false), [pathname]);
   const [showSignOutDialog, setShowSignOutDialog] = useState(false);
   const [signingOut, setSigningOut] = useState(false);
 
@@ -103,44 +111,19 @@ export default function Sidebar({
 
   const sidebarWidth = isCollapsed ? "w-16" : "w-64";
   const mainMargin = isCollapsed ? "ml-16" : "ml-64";
+  // desktop-only collapse; the phone menu always shows labels
+  const collapsed = isCollapsed && !mobileOpen;
 
   const allNavItems: NavItem[] = [
-    {
-      href: `/${locale}/admin`,
-      icon: Home,
-      label: "Dashboard",
-      requiredPermission: "admin:access",
-    },
-    {
-      href: `/${locale}/admin/posts`,
-      icon: FileText,
-      label: "Posts",
-      requiredPermission: "posts:read",
-    },
-    {
-      href: `/${locale}/admin/contacts`,
-      icon: Mail,
-      label: "Inquiry",
-      requiredPermission: "contacts:read",
-    },
-    {
-      href: `/${locale}/admin/leads`,
-      icon: Target,
-      label: "Leads",
-      requiredPermission: "leads:read",
-    },
-    {
-      href: `/${locale}/admin/users`,
-      icon: Users,
-      label: "Users",
-      requiredPermission: "users:read",
-    },
-    {
-      href: `/${locale}/admin/roles`,
-      icon: Shield,
-      label: "Roles",
-      roles: ["super_admin", "admin"],
-    },
+    { href: `/${locale}/admin`, icon: Home, label: "Today", requiredPermission: "admin:access" },
+    { href: `/${locale}/admin/pipeline`, icon: Target, label: "Pipeline", requiredPermission: "deals:read" },
+    { href: `/${locale}/admin/audits`, icon: Gauge, label: "Audits", requiredPermission: "audits:read" },
+    { href: `/${locale}/admin/templates`, icon: MessageSquareText, label: "Templates", requiredPermission: "templates:manage" },
+    { href: `/${locale}/admin/contacts`, icon: Mail, label: "Inbox", requiredPermission: "contacts:read" },
+    { href: `/${locale}/admin/posts`, icon: FileText, label: "Posts", requiredPermission: "posts:read" },
+    { href: `/${locale}/admin/media`, icon: ImageIcon, label: "Media", requiredPermission: "media:read" },
+    { href: `/${locale}/admin/users`, icon: Users, label: "Users", requiredPermission: "users:read" },
+    { href: `/${locale}/admin/roles`, icon: Shield, label: "Roles", roles: ["super_admin", "admin"] },
   ];
 
   // Filter nav items based on user permissions
@@ -157,12 +140,17 @@ export default function Sidebar({
   return (
     <SidebarContext.Provider value={{ isCollapsed, sidebarWidth, mainMargin }}>
       {/* Sidebar - Fixed */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-30 bg-black/40 md:hidden" onClick={() => setMobileOpen(false)} aria-hidden="true" />
+      )}
       <aside
-        className={`fixed left-0 top-0 ${sidebarWidth} h-screen bg-card border-r border-border flex flex-col overflow-y-auto transition-all duration-300`}
+        className={`fixed left-0 top-0 z-40 h-screen w-64 ${isCollapsed ? "md:w-16" : "md:w-64"} ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0 bg-card border-r border-border flex flex-col overflow-y-auto transition-all duration-300`}
       >
         <div className="p-4">
           <div className="flex items-center justify-between mb-2">
-            <div className={isCollapsed ? "mx-auto" : ""}>
+            <div className={collapsed ? "mx-auto" : ""}>
               <Image
                 src="/kreatale-logo-primary.svg"
                 alt="Kreatale"
@@ -171,20 +159,24 @@ export default function Sidebar({
                 className="shrink-0"
               />
             </div>
+            <Button variant="ghost" size="icon" onClick={() => setMobileOpen(false)} className="ml-auto md:hidden" aria-label="Close menu">
+              <X className="size-4" />
+            </Button>
             <Button
               variant="ghost"
               size="icon"
               onClick={toggleCollapse}
-              className={isCollapsed ? "mx-auto" : "ml-auto"}
+              className={`hidden md:inline-flex ${collapsed ? "mx-auto" : "ml-auto"}`}
+              aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
             >
-              {isCollapsed ? (
+              {collapsed ? (
                 <ChevronRight className="size-4" />
               ) : (
                 <ChevronLeft className="size-4" />
               )}
             </Button>
           </div>
-          {!isCollapsed && (
+          {!collapsed && (
             <div className="flex items-center gap-3 mt-4">
               <Avatar name={userName} email={userEmail} size="md" />
               <div className="flex-1 min-w-0">
@@ -197,7 +189,7 @@ export default function Sidebar({
               </div>
             </div>
           )}
-          {isCollapsed && (
+          {collapsed && (
             <div className="flex justify-center mt-4">
               <Avatar name={userName} email={userEmail} size="md" />
             </div>
@@ -206,7 +198,10 @@ export default function Sidebar({
         <nav className="flex-1 px-2">
           {navItems.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.href;
+            // a section stays highlighted on its sub-pages (e.g. a deal inside Pipeline)
+            const isActive =
+              pathname === item.href ||
+              (item.href !== `/${locale}/admin` && pathname.startsWith(item.href + "/"));
             return (
               <Link
                 key={item.href}
@@ -215,11 +210,11 @@ export default function Sidebar({
                   isActive
                     ? "bg-accent text-accent-foreground"
                     : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                } ${isCollapsed ? "justify-center" : ""}`}
-                title={isCollapsed ? item.label : undefined}
+                } ${collapsed ? "justify-center" : ""}`}
+                title={collapsed ? item.label : undefined}
               >
                 <Icon className="size-4 shrink-0" />
-                {!isCollapsed && <span>{item.label}</span>}
+                {!collapsed && <span>{item.label}</span>}
               </Link>
             );
           })}
@@ -228,13 +223,13 @@ export default function Sidebar({
           <Button
             variant="ghost"
             className={`w-full ${
-              isCollapsed ? "justify-center" : "justify-start"
+              collapsed ? "justify-center" : "justify-start"
             }`}
             onClick={() => setShowSignOutDialog(true)}
-            title={isCollapsed ? "Sign Out" : undefined}
+            title={collapsed ? "Sign Out" : undefined}
           >
             <LogOut className="size-4" />
-            {!isCollapsed && <span>Sign Out</span>}
+            {!collapsed && <span>Sign Out</span>}
           </Button>
         </div>
 
@@ -269,8 +264,14 @@ export default function Sidebar({
 
       {/* Main content - Scrollable */}
       <main
-        className={`flex-1 ${mainMargin} p-6 overflow-y-auto min-h-screen transition-all duration-300`}
+        className={`flex-1 ${isCollapsed ? "md:ml-16" : "md:ml-64"} p-4 md:p-6 overflow-y-auto min-h-screen transition-all duration-300`}
       >
+        <div className="sticky top-0 z-20 -mx-4 -mt-4 mb-4 flex items-center gap-3 border-b bg-background/95 px-4 py-3 backdrop-blur md:hidden">
+          <Button variant="ghost" size="icon" onClick={() => setMobileOpen(true)} aria-label="Open menu">
+            <Menu className="size-5" />
+          </Button>
+          <Image src="/kreatale-logo-primary.svg" alt="Kreatale" width={28} height={28} />
+        </div>
         {children}
       </main>
     </SidebarContext.Provider>

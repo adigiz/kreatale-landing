@@ -23,7 +23,7 @@ Search the topic with WebSearch and read the top 3–5 results. Write down what 
 ## 2. Gather real material, or pick another topic
 Every post must include **at least two specifics from Kreatale's real work**, taken only from:
 - `docs/marketing/studio-knowledge.md`
-- `src/lib/projectsData.json` (the project sections hold real detail)
+- the live projects page (`/en/projects`). The Gala Esports case study is hidden for now, so don't link to it.
 - the live site
 
 Examples of specifics: what a named project needed, a decision made on it and why, a lesson from it. If you can't find genuine material for a topic, choose a different topic. Never pad, and never invent.
@@ -41,7 +41,7 @@ Examples of specifics: what a named project needed, a decision made on it and wh
 - **Voice:** plain and direct, like a senior developer explaining something to a client over coffee. Short sentences. Concrete nouns. Say "we" for Kreatale and "you" for the reader. It's fine to have an opinion and to say "it depends", as long as you say on what.
 - **Indonesian:** write it natively; don't translate English. Use natural business Indonesian a Jakarta business owner would use: not stiff textbook *baku*, not slang. Use familiar English loanwords where Indonesians actually use them (website, online, SEO, checkout).
 - **Ending:** one short paragraph pointing to the relevant service or case study, and the contact page. No "In conclusion".
-- **Internal links:** link 1–3 relevant Kreatale pages, such as `/<locale>/services`, `/<locale>/projects/<slug>` and `/<locale>/contact`.
+- **Internal links:** link 1–3 relevant Kreatale pages, such as `/<locale>/services`, `/en/projects` and `/<locale>/contact`.
 
 ## 5. Review
 Send the draft to the `content-reviewer` subagent, along with the file path and the list of sources. Fix everything it flags. Run at most two review rounds. If it still fails, save the file with a `REVIEW NOTES` comment at the top, do **not** run the save script, and tell the user why.

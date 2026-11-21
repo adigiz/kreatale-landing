@@ -12,10 +12,8 @@
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
     "create-admin": "tsx scripts/create-admin.ts",
-    "update-sales-role": "tsx scripts/update-sales-role.ts",
     "seed-roles": "tsx scripts/seed-roles.ts",
-    "blog:draft": "tsx scripts/save-blog-draft.ts",
-    "scraper:dev": "npm run dev --prefix apps/scrapper-service"
+    "blog:draft": "tsx scripts/save-blog-draft.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
@@ -25,7 +23,6 @@
     "@tiptap/extension-link": "^3.12.0",
     "@tiptap/react": "^3.12.0",
     "@tiptap/starter-kit": "^3.12.0",
-    "@types/leaflet": "^1.9.21",
     "@vercel/blob": "^2.9.0",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
@@ -35,7 +32,6 @@
     "drizzle-kit": "^0.31.7",
     "drizzle-orm": "^0.44.7",
     "gsap": "^3.12.7",
-    "leaflet": "^1.9.4",
     "lucide-react": "^0.576.0",
     "next": "^15.5.29",
     "next-auth": "^4.24.15",
@@ -44,7 +40,6 @@
     "radix-ui": "^1.4.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-leaflet": "^5.0.0",
     "server-only": "^0.0.1",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.0",

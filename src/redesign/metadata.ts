@@ -86,6 +86,19 @@ export const SEO = {
         "Ceritakan rencana Anda. Kami membalas dalam satu hari kerja dengan pertanyaan, ide, dan langkah selanjutnya, lewat WhatsApp atau info@kreatale.com.",
     },
   },
+  websiteAudit: {
+    path: "/website-audit",
+    en: {
+      title: "Free website check: speed, SEO and accessibility",
+      description:
+        "Check your website for free. See how fast it loads on a phone, whether Google can read it, and a plain-English list of what to fix first. About a minute.",
+    },
+    id: {
+      title: "Cek website gratis: kecepatan, SEO, dan aksesibilitas",
+      description:
+        "Cek website Anda gratis. Lihat seberapa cepat terbuka di ponsel, apakah Google bisa membacanya, dan daftar perbaikan yang perlu didahulukan. Sekitar satu menit.",
+    },
+  },
   blog: {
     path: "/blog",
     en: {

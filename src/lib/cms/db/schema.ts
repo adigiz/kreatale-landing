@@ -8,6 +8,8 @@ import {
   varchar,
   integer,
   boolean,
+  date,
+  char,
 } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 
@@ -25,16 +27,6 @@ export const contentStatusEnum = pgEnum("content_status", [
   "draft",
   "published",
   "archived",
-]);
-
-export const leadStatusEnum = pgEnum("lead_status", [
-  "new",
-  "contacted",
-  "replied",
-  "qualified",
-  "converted",
-  "lost",
-  "ignored",
 ]);
 
 // Users table
@@ -141,52 +133,84 @@ export const contacts = pgTable("contacts", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
-// Locations table
-export const locations = pgTable("locations", {
+// Sales pipeline (drizzle/0002_pipeline.sql). Stage, service, source and activity type are
+// varchar with CHECK constraints in SQL; the allowed values live in src/lib/pipeline/constants.ts.
+export const deals = pgTable("deals", {
   id: uuid("id").defaultRandom().primaryKey(),
-  name: varchar("name", { length: 255 }).notNull(), // e.g., "Samarinda"
-  slug: varchar("slug", { length: 255 }).notNull().unique(), // e.g., "samarinda"
-  country: varchar("country", { length: 100 }), // Optional
-  state: varchar("state", { length: 100 }), // e.g., "East Kalimantan"
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-});
-
-// Categories table
-export const categories = pgTable("categories", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  name: varchar("name", { length: 255 }).notNull(), // e.g., "Coffee Shop"
-  slug: varchar("slug", { length: 255 }).notNull().unique(), // e.g., "coffee-shop"
-  searchTerm: varchar("search_term", { length: 255 }).notNull(), // Default query term
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-});
-
-// Leads table
-export const leads = pgTable("leads", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  businessName: varchar("business_name", { length: 255 }).notNull(),
-  address: text("address"),
-  phone: varchar("phone", { length: 50 }),
+  contactId: uuid("contact_id").references(() => contacts.id, { onDelete: "set null" }),
+  name: varchar("name", { length: 160 }).notNull(),
+  email: varchar("email", { length: 200 }),
+  company: varchar("company", { length: 160 }),
+  phone: varchar("phone", { length: 40 }),
   website: text("website"),
-  rating: varchar("rating", { length: 10 }),
-  reviewCount: integer("review_count").default(0),
-  googleMapsUrl: text("google_maps_url"),
-  status: leadStatusEnum("status").default("new").notNull(),
-  isNewListing: boolean("is_new_listing").default(false),
-  notes: text("notes"),
-  
-  // Detailed Location Info
-  city: varchar("city", { length: 255 }),
-  district: varchar("district", { length: 255 }),
-  state: varchar("state", { length: 255 }),
-  postalCode: varchar("postal_code", { length: 20 }),
-  country: varchar("country", { length: 255 }),
-  
-  // Relations
-  locationId: uuid("location_id").references(() => locations.id),
-  categoryId: uuid("category_id").references(() => categories.id),
-  
-  createdAt: timestamp("created_at").defaultNow().notNull(),
-  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  service: varchar("service", { length: 40 }).notNull().default("not-sure"),
+  stage: varchar("stage", { length: 20 }).notNull().default("new"),
+  lostReason: varchar("lost_reason", { length: 60 }),
+  lostNote: text("lost_note"),
+  valueAmount: integer("value_amount"),
+  currency: char("currency", { length: 3 }).notNull().default("USD"),
+  ownerId: uuid("owner_id").references(() => users.id, { onDelete: "set null" }),
+  source: varchar("source", { length: 20 }).notNull().default("manual"),
+  nextFollowUpAt: date("next_follow_up_at"),
+  firstRepliedAt: timestamp("first_replied_at", { withTimezone: true }),
+  stageChangedAt: timestamp("stage_changed_at", { withTimezone: true }).defaultNow().notNull(),
+  wonAt: timestamp("won_at", { withTimezone: true }),
+  closedAt: timestamp("closed_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
+export const dealActivities = pgTable("deal_activities", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  dealId: uuid("deal_id").notNull().references(() => deals.id, { onDelete: "cascade" }),
+  userId: uuid("user_id").references(() => users.id, { onDelete: "set null" }),
+  type: varchar("type", { length: 20 }).notNull(),
+  body: text("body"),
+  meta: jsonb("meta"),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
+export const audits = pgTable("audits", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  token: varchar("token", { length: 32 }).notNull().unique(),
+  url: text("url").notNull(),
+  host: varchar("host", { length: 255 }).notNull(),
+  status: varchar("status", { length: 10 }).notNull().default("queued"),
+  origin: varchar("origin", { length: 10 }).notNull().default("admin"),
+  requesterEmail: varchar("requester_email", { length: 200 }),
+  requesterName: varchar("requester_name", { length: 160 }),
+  dealId: uuid("deal_id").references(() => deals.id, { onDelete: "set null" }),
+  createdBy: uuid("created_by").references(() => users.id, { onDelete: "set null" }),
+  preparedFor: varchar("prepared_for", { length: 160 }),
+  scores: jsonb("scores"),
+  vitals: jsonb("vitals"),
+  checks: jsonb("checks"),
+  fixes: jsonb("fixes"),
+  overall: integer("overall"),
+  error: text("error"),
+  ipHash: varchar("ip_hash", { length: 64 }),
+  attempts: integer("attempts").notNull().default(0),
+  views: integer("views").notNull().default(0),
+  firstViewedAt: timestamp("first_viewed_at", { withTimezone: true }),
+  lastViewedAt: timestamp("last_viewed_at", { withTimezone: true }),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  startedAt: timestamp("started_at", { withTimezone: true }),
+  completedAt: timestamp("completed_at", { withTimezone: true }),
+});
+
+export type Audit = typeof audits.$inferSelect;
+export type NewAudit = typeof audits.$inferInsert;
+
+export const replyTemplates = pgTable("reply_templates", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  name: varchar("name", { length: 120 }).notNull(),
+  channel: varchar("channel", { length: 10 }).notNull(),
+  subject: varchar("subject", { length: 200 }),
+  body: text("body").notNull(),
+  stageHint: varchar("stage_hint", { length: 20 }),
+  sort: integer("sort").notNull().default(0),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
 // Relations
@@ -233,10 +257,9 @@ export type PreviewToken = typeof previewTokens.$inferSelect;
 export type NewPreviewToken = typeof previewTokens.$inferInsert;
 export type Contact = typeof contacts.$inferSelect;
 export type NewContact = typeof contacts.$inferInsert;
-export type Lead = typeof leads.$inferSelect;
-export type NewLead = typeof leads.$inferInsert;
-export type Location = typeof locations.$inferSelect;
-export type NewLocation = typeof locations.$inferInsert;
-export type Category = typeof categories.$inferSelect;
-export type NewCategory = typeof categories.$inferInsert;
-
+export type Deal = typeof deals.$inferSelect;
+export type NewDeal = typeof deals.$inferInsert;
+export type DealActivity = typeof dealActivities.$inferSelect;
+export type NewDealActivity = typeof dealActivities.$inferInsert;
+export type ReplyTemplate = typeof replyTemplates.$inferSelect;
+export type NewReplyTemplate = typeof replyTemplates.$inferInsert;

@@ -6,5 +6,3 @@ README.md
 .git
 drafts
 
-# Ignore scraper service to prevent it from being included in main app build context
-apps/scrapper-service
