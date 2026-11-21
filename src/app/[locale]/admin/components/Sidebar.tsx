@@ -146,7 +146,7 @@ export default function Sidebar({
       <aside
         className={`fixed left-0 top-0 z-40 h-screen w-64 ${isCollapsed ? "md:w-16" : "md:w-64"} ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 bg-card border-r border-border flex flex-col overflow-y-auto transition-all duration-300`}
+        } md:translate-x-0 bg-card border-r border-[var(--line)] flex flex-col overflow-y-auto transition-all duration-300`}
       >
         <div className="p-4">
           <div className="flex items-center justify-between mb-2">
@@ -154,8 +154,8 @@ export default function Sidebar({
               <Image
                 src="/kreatale-logo-primary.svg"
                 alt="Kreatale"
-                width={32}
-                height={32}
+                width={44}
+                height={44}
                 className="shrink-0"
               />
             </div>
@@ -177,13 +177,13 @@ export default function Sidebar({
             </Button>
           </div>
           {!collapsed && (
-            <div className="flex items-center gap-3 mt-4">
+            <div className="mt-5 flex items-center gap-3 rounded-2xl bg-background p-2.5">
               <Avatar name={userName} email={userEmail} size="md" />
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-foreground truncate">
+                <p className="text-sm font-bold text-foreground truncate">
                   {userName || userEmail}
                 </p>
-                <p className="text-xs text-muted-foreground capitalize">
+                <p className="label-mono text-muted-foreground">
                   {role.replace("_", " ")}
                 </p>
               </div>
@@ -195,7 +195,7 @@ export default function Sidebar({
             </div>
           )}
         </div>
-        <nav className="flex-1 px-2">
+        <nav className="flex-1 space-y-1 px-3">
           {navItems.map((item) => {
             const Icon = item.icon;
             // a section stays highlighted on its sub-pages (e.g. a deal inside Pipeline)
@@ -206,11 +206,11 @@ export default function Sidebar({
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-2 px-3 py-2 text-sm rounded-md transition-colors ${
+                className={`flex items-center gap-2.5 px-3.5 py-2 text-sm font-semibold rounded-full transition-colors ${
                   isActive
-                    ? "bg-accent text-accent-foreground"
-                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                } ${collapsed ? "justify-center" : ""}`}
+                    ? "bg-foreground text-background"
+                    : "text-foreground/70 hover:bg-background hover:text-foreground"
+                } ${collapsed ? "justify-center px-0" : ""}`}
                 title={collapsed ? item.label : undefined}
               >
                 <Icon className="size-4 shrink-0" />
@@ -219,7 +219,7 @@ export default function Sidebar({
             );
           })}
         </nav>
-        <div className="mt-auto p-4 border-t border-border">
+        <div className="mt-auto p-4 border-t border-[var(--line)]">
           <Button
             variant="ghost"
             className={`w-full ${
@@ -264,9 +264,9 @@ export default function Sidebar({
 
       {/* Main content - Scrollable */}
       <main
-        className={`flex-1 ${isCollapsed ? "md:ml-16" : "md:ml-64"} p-4 md:p-6 overflow-y-auto min-h-screen transition-all duration-300`}
+        className={`admin-main flex-1 ${isCollapsed ? "md:ml-16" : "md:ml-64"} p-4 md:p-8 overflow-y-auto min-h-screen transition-all duration-300`}
       >
-        <div className="sticky top-0 z-20 -mx-4 -mt-4 mb-4 flex items-center gap-3 border-b bg-background/95 px-4 py-3 backdrop-blur md:hidden">
+        <div className="sticky top-0 z-20 -mx-4 -mt-4 mb-5 flex items-center gap-3 border-b border-[var(--line)] bg-card/95 px-4 py-3 backdrop-blur md:hidden">
           <Button variant="ghost" size="icon" onClick={() => setMobileOpen(true)} aria-label="Open menu">
             <Menu className="size-5" />
           </Button>

@@ -33,25 +33,30 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
+  /* the redesign's palette: light blue paper, black ink, Kreatale Blue */
+  --ink: #0a0a0a;
+  --paper: #f3f6ff;
+  --radius: 1rem;
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --card: #ffffff;
+  --card-foreground: var(--ink);
+  --popover: #ffffff;
+  --popover-foreground: var(--ink);
   --primary: #0061ff;
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --primary-foreground: #ffffff;
+  --secondary: #e5ecff;
+  --secondary-foreground: var(--ink);
+  --muted: #e9eefb;
+  --muted-foreground: #565f6e;
+  --accent: #e5ecff;
+  --accent-foreground: var(--ink);
+  --destructive: #dc2626;
+  --line: #dbe2f1; /* card edges */
+  --field-line: #c3cce0; /* form fields */
+  --border: #e2e8f5;
+  --input: var(--field-line);
+  --ring: #0061ff;
 }
 
 .dark {
@@ -81,5 +86,65 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* ===== Admin look, in the spirit of the public redesign =====
+   Calm working surfaces (white cards with a soft line on light blue paper) and the
+   site's character in the accents: heavy page titles, pill buttons, mono labels, and
+   the black outline + blue offset shadow kept for the one main action on a page
+   (`.shadow-brand`). In the utilities layer with compound selectors so these beat
+   the single-class `border`. */
+@layer utilities {
+  .border.bg-card {
+    border-color: var(--line);
+  }
+  input.border:not([type="checkbox"]):not([type="radio"]),
+  select.border,
+  textarea.border,
+  [data-slot="select-trigger"] {
+    border-width: 1px;
+    border-color: var(--field-line);
+    background-color: #ffffff;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input.border:not([type="checkbox"]):not([type="radio"]):hover,
+  select.border:hover,
+  textarea.border:hover {
+    border-color: #9aa6bf;
+  }
+  input.border:focus-visible,
+  select.border:focus-visible,
+  textarea.border:focus-visible {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgb(0 97 255 / 0.18);
+  }
+  .admin-main h1 {
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+  }
+  .admin-main h1.text-2xl {
+    font-size: clamp(26px, 2.4vw, 34px);
+  }
+  .admin-main h2 {
+    letter-spacing: -0.01em;
+  }
+  .admin-main h2.font-semibold {
+    font-weight: 700;
+  }
+  /* the site's signature, for the main action on a page only */
+  .shadow-brand,
+  .shadow-brand.border {
+    border: 2px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--primary);
+  }
+  .label-mono {
+    font-family: var(--font-geist-mono), ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-weight: 500;
   }
 }

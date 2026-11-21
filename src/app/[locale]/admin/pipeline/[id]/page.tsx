@@ -96,7 +96,7 @@ export default async function DealPage({ params }: { params: Promise<{ locale: s
           </section>
 
           {canEdit && (
-            <section className="rounded-lg border bg-card p-4">
+            <section className="shadow-brand rounded-lg border bg-card p-4">
               <h2 className="mb-3 text-sm font-semibold">Reply</h2>
               <ReplyPanel
                 dealId={d.id}

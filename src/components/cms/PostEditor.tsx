@@ -42,7 +42,7 @@ export default function PostEditor({
     "desktop"
   );
   const [isPreviewFullscreen, setIsPreviewFullscreen] = useState(false);
-  const [splitRatio, setSplitRatio] = useState(20); // Percentage for form section (20:80 split)
+  const [splitRatio, setSplitRatio] = useState(38); // Percentage for form section (38:62 split)
   const [isResizing, setIsResizing] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
   const [createdDraftId, setCreatedDraftId] = useState<string | null>(null); // Store draft ID for new posts
@@ -438,11 +438,12 @@ export default function PostEditor({
             className="overflow-y-auto"
             style={{
               width: showPreview ? `${splitRatio}%` : "100%",
+              minWidth: showPreview ? 340 : undefined,
               transition: isResizing ? "none" : "width 0.2s ease",
               minHeight: "100vh",
             }}
           >
-            <form id="post-form" onSubmit={handleSubmit} className="space-y-4">
+            <form id="post-form" onSubmit={handleSubmit} className="space-y-4 pr-4">
               <div className="rounded-lg border bg-card p-4 space-y-4">
                 <div className="space-y-2">
                   <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">

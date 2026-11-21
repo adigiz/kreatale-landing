@@ -30,7 +30,7 @@ const SAMPLE = {
   senderFirstName: "You",
 };
 
-const field = "h-9 w-full rounded-md border bg-background px-2.5 text-sm";
+const field = "h-10 w-full rounded-xl border bg-background px-3 text-sm";
 
 export default function TemplateEditor({ template, trigger }: { template?: TemplateRow; trigger: React.ReactNode }) {
   const router = useRouter();

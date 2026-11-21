@@ -21,7 +21,7 @@ export type DealFormValues = {
   note?: string;
 };
 
-const field = "h-9 w-full rounded-md border bg-background px-2.5 text-sm";
+const field = "h-10 w-full rounded-xl border bg-background px-3 text-sm";
 const label = "block text-xs font-medium text-muted-foreground mb-1";
 
 export default function DealForm({

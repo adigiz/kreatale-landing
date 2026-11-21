@@ -154,7 +154,7 @@ export default async function TodayPage({ params }: { params: Promise<{ locale: 
 
       <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
         <section className="rounded-lg border bg-card p-4">
-          <h2 className="text-sm font-semibold">Where enquiries come from</h2>
+          <h2 className="text-base font-bold">Where enquiries come from</h2>
           <p className="mb-3 text-xs text-muted-foreground">Last 90 days, from the page they first landed on and the site that sent them.</p>
           {channelRows.length === 0 ? (
             <p className="text-sm text-muted-foreground">No enquiries in the last 90 days.</p>
@@ -173,7 +173,7 @@ export default async function TodayPage({ params }: { params: Promise<{ locale: 
           )}
         </section>
         <section className="rounded-lg border bg-card p-4">
-          <h2 className="text-sm font-semibold">Blog posts that led to enquiries</h2>
+          <h2 className="text-base font-bold">Blog posts that led to enquiries</h2>
           <p className="mb-3 text-xs text-muted-foreground">Last 90 days. Write more like these.</p>
           {posts30.size === 0 ? (
             <p className="text-sm text-muted-foreground">None yet. Enquiries that start on a blog post will show here.</p>
@@ -206,8 +206,8 @@ function Panel({ title, href, empty, children }: { title: string; href: string; 
   return (
     <section className="rounded-lg border bg-card p-4">
       <div className="mb-2 flex items-center justify-between">
-        <h2 className="text-sm font-semibold">{title}</h2>
-        <Link href={href} className="text-xs text-primary hover:underline">See all</Link>
+        <h2 className="text-base font-bold">{title}</h2>
+        <Link href={href} className="text-xs font-bold text-primary hover:underline">See all →</Link>
       </div>
       {children.length === 0 ? <p className="py-3 text-sm text-muted-foreground">{empty}</p> : <ul className="divide-y">{children}</ul>}
     </section>
@@ -231,8 +231,8 @@ function ItemLink({ href, title, sub, children }: { href: string; title: string;
 function Tile({ label, value, sub, href }: { label: string; value: string; sub?: string; href?: string }) {
   const body = (
     <>
-      <div className="text-xs font-medium text-muted-foreground">{label}</div>
-      <div className="mt-1 text-2xl font-semibold tabular-nums">{value}</div>
+      <div className="label-mono text-muted-foreground">{label}</div>
+      <div className="mt-2 text-3xl font-extrabold tracking-tight tabular-nums">{value}</div>
       {sub && <div className="mt-1 truncate text-xs text-muted-foreground" title={sub}>{sub}</div>}
     </>
   );

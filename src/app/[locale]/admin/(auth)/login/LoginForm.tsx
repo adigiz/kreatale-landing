@@ -57,24 +57,19 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-4">
-      <div className="max-w-md w-full space-y-6 rounded-lg border bg-card p-6 shadow-sm">
-        <div className="flex justify-center">
-          <Image
-            src="/kreatale-logo-primary.svg"
-            alt="Kreatale"
-            width={40}
-            height={40}
-            className="shrink-0"
-          />
-        </div>
-        <div className="space-y-2 text-center">
-          <h2 className="text-2xl font-semibold text-foreground">
-            Admin Login
-          </h2>
-          <p className="text-sm text-muted-foreground">
-            Sign in to access the CMS
-          </p>
+    <div className="min-h-screen flex flex-col items-center justify-center gap-8 bg-background px-4 py-12">
+      <Link href={`/${locale}`} aria-label="Kreatale home">
+        <Image src="/kreatale-logo-primary.svg" alt="Kreatale" width={56} height={56} className="shrink-0" />
+      </Link>
+      <h1 className="text-center text-[clamp(56px,11vw,120px)] font-extrabold uppercase leading-[0.86] tracking-[-0.055em] text-primary">
+        Back
+        <br />
+        to work.
+      </h1>
+      <div className="shadow-brand max-w-md w-full space-y-6 rounded-[26px] border bg-card p-7">
+        <div className="space-y-1">
+          <p className="label-mono text-muted-foreground">Kreatale admin</p>
+          <h2 className="text-2xl font-extrabold tracking-tight text-foreground">Sign in</h2>
         </div>
         <form className="space-y-4" onSubmit={handleSubmit}>
           {error && (
@@ -86,7 +81,7 @@ export default function LoginForm() {
             <div className="space-y-2">
               <label
                 htmlFor="email"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-sm font-bold leading-none"
               >
                 Email address
               </label>
@@ -98,13 +93,13 @@ export default function LoginForm() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="flex h-12 w-full rounded-xl border px-4 text-base transition-colors"
               />
             </div>
             <div className="space-y-2">
               <label
                 htmlFor="password"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-sm font-bold leading-none"
               >
                 Password
               </label>
@@ -116,23 +111,21 @@ export default function LoginForm() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="flex h-12 w-full rounded-xl border px-4 text-base transition-colors"
               />
             </div>
           </div>
 
           <div>
-            <Button type="submit" disabled={loading} className="w-full">
+            <Button type="submit" disabled={loading} size="lg" className="w-full">
               {loading ? "Signing in..." : "Sign in"}
             </Button>
           </div>
         </form>
-        <div className="text-center">
-          <Button variant="link" asChild>
-            <Link href={`/${locale}`}>← Back to website</Link>
-          </Button>
-        </div>
       </div>
+      <Link href={`/${locale}`} className="text-sm font-semibold text-foreground hover:text-primary">
+        ← Back to website
+      </Link>
     </div>
   );
 }

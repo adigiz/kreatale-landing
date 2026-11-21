@@ -29,18 +29,8 @@ function getInitials(name?: string | null, email?: string): string {
 
 // Generate a consistent color based on name/email
 function getColorFromString(str: string): string {
-  const colors = [
-    "bg-blue-500",
-    "bg-green-500",
-    "bg-yellow-500",
-    "bg-purple-500",
-    "bg-pink-500",
-    "bg-indigo-500",
-    "bg-red-500",
-    "bg-teal-500",
-    "bg-orange-500",
-    "bg-cyan-500",
-  ];
+  // the brand pair only: Kreatale Blue and black
+  const colors = ["bg-[#0061FF]", "bg-[#0A0A0A]"];
 
   let hash = 0;
   for (let i = 0; i < str.length; i++) {

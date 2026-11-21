@@ -7,7 +7,7 @@ import { Copy, RotateCw, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { createAuditAction, deleteAuditAction, rerunAuditAction } from "./actions";
 
-const field = "h-9 w-full rounded-md border bg-background px-2.5 text-sm";
+const field = "h-10 w-full rounded-xl border bg-background px-3 text-sm";
 
 export function NewAuditForm({
   defaultUrl,
@@ -36,7 +36,7 @@ export function NewAuditForm({
   };
 
   return (
-    <form onSubmit={submit} className="grid gap-3 rounded-xl border bg-card p-4 md:grid-cols-[2fr_1.3fr_1.3fr_auto] md:items-end">
+    <form onSubmit={submit} className="shadow-brand grid gap-3 rounded-2xl border bg-card p-5 md:grid-cols-[2fr_1.3fr_1.3fr_auto] md:items-end">
       <label className="space-y-1 text-sm">
         <span className="font-medium">Website</span>
         <input className={field} value={v.url} onChange={set("url")} placeholder="example.com" required inputMode="url" autoComplete="off" />
@@ -56,7 +56,7 @@ export function NewAuditForm({
           ))}
         </select>
       </label>
-      <Button type="submit" disabled={pending} className="h-9">
+      <Button type="submit" disabled={pending}>
         {pending ? "Starting…" : "Run audit"}
       </Button>
     </form>

@@ -115,7 +115,7 @@ export default async function PipelinePage({
             return (
               <section key={s} className="flex min-h-40 flex-col rounded-lg border bg-muted/30">
                 <header className="flex items-center justify-between border-b px-3 py-2">
-                  <span className="text-sm font-semibold">{STAGE_LABELS[s]} <span className="text-muted-foreground font-normal">{items.length}</span></span>
+                  <span className="label-mono flex items-center gap-2">{STAGE_LABELS[s]} <span className="rounded-full bg-foreground px-1.5 py-px text-[10px] text-background">{items.length}</span></span>
                   {total && <span className="text-xs text-muted-foreground">{total}</span>}
                 </header>
                 <div className="flex flex-col gap-2 p-2">
@@ -131,7 +131,7 @@ export default async function PipelinePage({
             {(["won", "lost"] as Stage[]).map((s) => (
               <section key={s} className="rounded-lg border">
                 <header className="flex items-center justify-between border-b px-3 py-2">
-                  <span className="text-sm font-semibold">{STAGE_LABELS[s]} <span className="text-muted-foreground font-normal">{byStage(s).length}</span></span>
+                  <span className="label-mono flex items-center gap-2">{STAGE_LABELS[s]} <span className="rounded-full bg-foreground px-1.5 py-px text-[10px] text-background">{byStage(s).length}</span></span>
                   <Link href={qs({ view: "list", stage: s })} className="text-xs text-primary hover:underline">See all</Link>
                 </header>
                 <ul className="divide-y">
