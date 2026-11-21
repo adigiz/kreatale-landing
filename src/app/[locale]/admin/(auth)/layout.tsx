@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 // Prevent search engines from indexing admin login page
 export const metadata: Metadata = {
-  title: "Admin Login | Kreatale",
+  title: "Admin login",
   description: "Admin login page for Kreatale CMS",
   robots: {
     index: false,
