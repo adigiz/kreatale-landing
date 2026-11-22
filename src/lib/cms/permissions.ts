@@ -38,6 +38,10 @@ export const PERMISSIONS = {
   AUDITS_READ: "audits:read",
   AUDITS_CREATE: "audits:create",
 
+  // Morpheus accounts (see and manage users of morpheus.kreatale.com)
+  MORPHEUS_READ: "morpheus:read",
+  MORPHEUS_MANAGE: "morpheus:manage",
+
   // User management permissions
   USERS_CREATE: "users:create",
   USERS_READ: "users:read",
@@ -100,6 +104,13 @@ export const PERMISSION_GROUPS: Record<string, { label: string; permissions: { k
       { key: PERMISSIONS.AUDITS_CREATE, label: "Create" },
     ],
   },
+  morpheus: {
+    label: "Morpheus",
+    permissions: [
+      { key: PERMISSIONS.MORPHEUS_READ, label: "See accounts" },
+      { key: PERMISSIONS.MORPHEUS_MANAGE, label: "Block and delete" },
+    ],
+  },
   users: {
     label: "Users",
     permissions: [
@@ -142,6 +153,8 @@ export const ROLE_PERMISSIONS: Record<string, string[]> = {
     PERMISSIONS.TEMPLATES_MANAGE,
     PERMISSIONS.AUDITS_READ,
     PERMISSIONS.AUDITS_CREATE,
+    PERMISSIONS.MORPHEUS_READ,
+    PERMISSIONS.MORPHEUS_MANAGE,
     PERMISSIONS.USERS_READ,
     PERMISSIONS.ADMIN_ACCESS,
   ],

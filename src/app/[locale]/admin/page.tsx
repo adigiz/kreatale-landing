@@ -17,6 +17,7 @@ import { OPEN_STAGES, STAGE_LABELS, REPLY_DUE_HOURS, PIPELINE_TZ, type Stage } f
 import { channelOf, landingBlogPost } from "@/lib/pipeline/sources";
 import type { EnquirySource } from "@/lib/notify";
 import { Button } from "@/components/ui/button";
+import { morpheusConfigured, morpheusStats } from "@/lib/morpheus";
 import { ago, money, serviceLabel, followUpLabel, TONE_STYLES } from "./pipeline/ui";
 
 /** Midnight on the 1st of this month in the pipeline's timezone, as a Date. */
@@ -39,12 +40,15 @@ export default async function TodayPage({ params }: { params: Promise<{ locale: 
   const session = await getSession();
   if (!session?.user) redirect(`/${locale}/admin/login`);
   const role = session.user.role as string;
-  const [canDeals, canValue, canContacts, canAudits] = await Promise.all([
+  const [canDeals, canValue, canContacts, canAudits, canMorpheus] = await Promise.all([
     sessionHasPermission(role, "deals:read"),
     sessionHasPermission(role, "deals:value"),
     sessionHasPermission(role, "contacts:read"),
     sessionHasPermission(role, "audits:create"),
+    sessionHasPermission(role, "morpheus:read"),
   ]);
+  // Morpheus is a separate app: a slow or missing API never blocks the dashboard
+  const morpheus = canMorpheus && morpheusConfigured() ? await morpheusStats().catch(() => null) : null;
 
   const firstName = (session.user.name || "").split(" ")[0];
   const base = `/${locale}/admin`;
@@ -151,6 +155,17 @@ export default async function TodayPage({ params }: { params: Promise<{ locale: 
         <Tile label="Median first reply" value={median == null ? "–" : median < 1 ? `${Math.round(median * 60)} min` : `${median.toFixed(median < 10 ? 1 : 0)} h`} sub="Last 30 days · promise is 1 business day" />
         <Tile label="Enquiries, 30 days" value={String(enquiries30)} sub={`${recentContacts.length} in 90 days`} href={canContacts ? `${base}/contacts` : undefined} />
       </div>
+
+      {morpheus && (
+        <Link href={`${base}/morpheus`} className="flex flex-wrap items-center gap-x-6 gap-y-1 rounded-lg border bg-card px-4 py-3 text-sm hover:bg-background">
+          <span className="label-mono text-muted-foreground">Morpheus, 7 days</span>
+          <span><b className="tabular-nums">{morpheus.signups7d}</b> sign-ups</span>
+          <span><b className="tabular-nums">{morpheus.uploads7d}</b> uploads</span>
+          <span><b className="tabular-nums">{morpheus.exports7d}</b> exports</span>
+          <span className="text-muted-foreground">{morpheus.users} accounts in total</span>
+          <ArrowRight className="ml-auto size-4" />
+        </Link>
+      )}
 
       <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
         <section className="rounded-lg border bg-card p-4">

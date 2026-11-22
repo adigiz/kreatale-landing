@@ -19,6 +19,7 @@ import {
   MessageSquareText,
   ImageIcon,
   Menu,
+  Boxes,
   X,
   type LucideIcon,
 } from "lucide-react";
@@ -121,6 +122,7 @@ export default function Sidebar({
     { href: `/${locale}/admin/templates`, icon: MessageSquareText, label: "Templates", requiredPermission: "templates:manage" },
     { href: `/${locale}/admin/contacts`, icon: Mail, label: "Inbox", requiredPermission: "contacts:read" },
     { href: `/${locale}/admin/posts`, icon: FileText, label: "Posts", requiredPermission: "posts:read" },
+    { href: `/${locale}/admin/morpheus`, icon: Boxes, label: "Morpheus", requiredPermission: "morpheus:read" },
     { href: `/${locale}/admin/media`, icon: ImageIcon, label: "Media", requiredPermission: "media:read" },
     { href: `/${locale}/admin/users`, icon: Users, label: "Users", requiredPermission: "users:read" },
     { href: `/${locale}/admin/roles`, icon: Shield, label: "Roles", roles: ["super_admin", "admin"] },
